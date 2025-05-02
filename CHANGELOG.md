@@ -1,3 +1,13 @@
+# 1.0.0 (2025-05-02)
+
+
+### Features
+
+* add ES, CRLF vs LF ([d346351](https://github.com/KM0Lab-git-admin/km0lab-core/commit/d3463517ece4b2a489da48590222df1abcb34c30))
+* readme-yellow css ([dfe557f](https://github.com/KM0Lab-git-admin/km0lab-core/commit/dfe557f197aded593a88a7609a1a738d4cac5e4d))
+* update styles for landing page ([05e6e23](https://github.com/KM0Lab-git-admin/km0lab-core/commit/05e6e23f5d1a6ce6e0b2141669164a5151ab389a))
+* yellow CSS ([bf7759a](https://github.com/KM0Lab-git-admin/km0lab-core/commit/bf7759aef3b556516fd420c92d46c6bdd575fa5c))
+
 ## [3.64.1](https://github.com/ixartz/Next-js-Boilerplate/compare/v3.64.0...v3.64.1) (2025-03-13)
 
 
