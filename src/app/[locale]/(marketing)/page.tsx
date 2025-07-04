@@ -38,7 +38,7 @@ export default async function Index(props: IIndexProps) {
         >
           @Ixartz on Twitter
         </a>
-        {` for updates and more information about the boilerplatee.`}
+        {` for updates and more information about the boilerplate.`}
       </p>
       <h2 className="mt-5 text-2xl font-bold">
         {t('boilerplate_title')}
