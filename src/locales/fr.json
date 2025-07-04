@@ -34,8 +34,14 @@
   "About": {
     "meta_title": "A propos",
     "meta_description": "A propos description",
+    "about_title": "À propos",
+    "about_subtitle": "Sous-titre de la page À propos",
+    "our_mission": "Notre mission",
     "about_paragraph": "Bienvenue sur notre page À propos ! Nous sommes une équipe de passionnés et dévoués à la création de logiciels.",
-    "translation_powered_by": "Traduction propulsée par"
+    "translation_powered_by": "Traduction propulsée par",
+    "hero_image_alt": "Image de présentation",
+    "crowdin_link_aria": "Accéder à Crowdin",
+    "crowdin_logo_aria": "Logo Crowdin"
   },
   "Portfolio": {
     "meta_title": "Portfolio",
