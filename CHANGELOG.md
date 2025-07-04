@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/KM0Lab-git-admin/km0lab-core/compare/v1.0.0...v1.1.0) (2025-07-04)
+
+
+### Features
+
+* agrega color gris  en BaseTemplate ([2ca0767](https://github.com/KM0Lab-git-admin/km0lab-core/commit/2ca0767d6dafdb4f4b3018a5e5a57ffb7d2f37fb))
+* cambia color del nombre en BaseTemplate ([ea3dae5](https://github.com/KM0Lab-git-admin/km0lab-core/commit/ea3dae5dad70235b6727e131f97939e21ff2ea91))
+
 # 1.0.0 (2025-05-02)
 
 
