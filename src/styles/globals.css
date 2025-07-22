@@ -1,0 +1,658 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* === KM0 LAB BRAND COLORS (ACTUALIZADOS SEGÚN FIGMA) === */
+  /* Primary Blue - Corregido según Figma */
+  --km0-blue: #174094;
+  --km0-blue-100: #174094;  /* Blue 100 - Color base */
+  --km0-blue-75: rgba(23, 64, 148, 0.75);   /* Blue 75 */
+  --km0-blue-50: rgba(23, 64, 148, 0.5);    /* Blue 50 */
+  --km0-blue-25: rgba(31, 85, 194, 0.25);   /* Blue 25 - Ajustado según Figma */
+  
+  /* Generando escala completa basada en el color oficial */
+  --km0-blue-950: #0a1530;
+  --km0-blue-900: #0f2040;
+  --km0-blue-800: #132a50;
+  --km0-blue-700: #174094; /* Color base oficial */
+  --km0-blue-600: #2B5AA0; /* Versión más clara */
+  --km0-blue-500: #4674B8;
+  --km0-blue-400: #6B8FD0;
+  --km0-blue-300: #90A9E8;
+  --km0-blue-200: #B5C3F0;
+  --km0-blue-100: #DADEF8;
+  --km0-blue-50: #F0F4FD;
+
+  /* Secondary Beige - Según Figma */
+  --km0-beige: #FFECD2;
+  --km0-beige-100: #FFECD2;  /* Beige 100 - Color base */
+  --km0-beige-75: rgba(255, 236, 210, 0.75);   /* Beige 75 */
+  --km0-beige-50: rgba(255, 236, 210, 0.5);    /* Beige 50 */
+  --km0-beige-25: rgba(255, 236, 210, 0.25);   /* Beige 25 */
+  
+  /* Escala completa de beige */
+  --km0-beige-900: #8B6914;
+  --km0-beige-800: #A67C19;
+  --km0-beige-700: #C18F1E;
+  --km0-beige-600: #DCA223;
+  --km0-beige-500: #F7B528;
+  --km0-beige-400: #F9C853;
+  --km0-beige-300: #FBDB7E;
+  --km0-beige-200: #FDEEA9;
+  --km0-beige-100: #FFECD2; /* Color base oficial */
+  --km0-beige-50: #FFF6E9;
+
+  /* Tertiary Orange/Yellow - Según Figma */
+  --km0-yellow: #F5C542;
+  --km0-yellow-100: #F5C542;  /* Orange/Yellow 100 - Color base */
+  --km0-yellow-75: rgba(245, 197, 66, 0.75);   /* Orange 75 */
+  --km0-yellow-50: rgba(245, 197, 66, 0.5);    /* Orange 50 */
+  --km0-yellow-25: rgba(245, 197, 66, 0.25);   /* Orange 25 */
+  
+  /* Escala completa de yellow */
+  --km0-yellow-900: #8B6914;
+  --km0-yellow-800: #A67C19;
+  --km0-yellow-700: #C18F1E;
+  --km0-yellow-600: #DCA223;
+  --km0-yellow-500: #F5C542; /* Color base oficial */
+  --km0-yellow-400: #F7D168;
+  --km0-yellow-300: #F9DD8E;
+  --km0-yellow-200: #FBE9B4;
+  --km0-yellow-100: #FDF5DA;
+  --km0-yellow-50: #FEFAF0;
+
+  /* Quaternary Orange/Red - Según Figma */
+  --km0-coral: #FF664D;
+  --km0-coral-100: #FF664D;  /* Orange 100 - Color base actualizado */
+  --km0-coral-75: rgba(255, 102, 77, 0.75);    /* Orange 75 */
+  --km0-coral-50: rgba(255, 102, 77, 0.5);     /* Orange 50 */
+  --km0-coral-25: rgba(255, 102, 77, 0.25);    /* Orange 25 */
+  
+  /* Escala completa de coral actualizada */
+  --km0-coral-900: #8B1A00;
+  --km0-coral-800: #A62000;
+  --km0-coral-700: #C12600;
+  --km0-coral-600: #DC2C00;
+  --km0-coral-500: #F73200;
+  --km0-coral-400: #FF664D; /* Color base oficial */
+  --km0-coral-300: #FF8570;
+  --km0-coral-200: #FFA394;
+  --km0-coral-100: #FFC2B7;
+  --km0-coral-50: #FFE0DB;
+
+  /* === GRAYSCALE NEUTRAL - Según Figma === */
+  --neutral-900: #3D3D3D;  /* Grey 900 */
+  --neutral-700: #4F4F4F;  /* Grey 700 */
+  --neutral-500: #6D6D6D;  /* Grey 500 */
+  --neutral-300: #B0B0B0;  /* Grey 300 */
+  --neutral-200: #D1D1D1;  /* Grey 200 */
+  --neutral-100: #E7E7E7;  /* Grey 100 */
+
+  /* === CARD GRAYSCALE - Según Figma (Tonos cálidos) === */
+  --card-neutral-900: #020201;  /* Grey 900 */
+  --card-neutral-800: #191815;  /* Grey 800 */
+  --card-neutral-700: #383731;  /* Grey 700 */
+  --card-neutral-600: #5C5A4F;  /* Grey 600 */
+  --card-neutral-500: #817F72;  /* Grey 500 */
+  --card-neutral-400: #A8A69A;  /* Grey 400 */
+  --card-neutral-300: #D0CEC6;  /* Grey 300 */
+  --card-neutral-100: #FAF8F5;  /* Grey 100 */
+
+  /* === GAMING COLORS === */
+  /* XP & Rewards */
+  --gaming-gold: #FFD700;
+  --gaming-gold-50: #fffef0;
+  --gaming-gold-100: #fffbd1;
+  --gaming-gold-200: #fff6a3;
+  --gaming-gold-300: #ffeb6b;
+  --gaming-gold-400: #ffdc32;
+  --gaming-gold-500: #FFD700;
+  --gaming-gold-600: #e6a600;
+  --gaming-gold-700: #bf7d02;
+  --gaming-gold-800: #9c5f08;
+  --gaming-gold-900: #7c4a0b;
+
+  /* Achievement Orange */
+  --gaming-orange: #FF8A00;
+  --gaming-orange-50: #fff8f0;
+  --gaming-orange-100: #ffeed1;
+  --gaming-orange-200: #ffd9a3;
+  --gaming-orange-300: #ffbd6b;
+  --gaming-orange-400: #ff9832;
+  --gaming-orange-500: #FF8A00;
+  --gaming-orange-600: #e66a00;
+  --gaming-orange-700: #bf4d02;
+  --gaming-orange-800: #9c3608;
+  --gaming-orange-900: #7c240b;
+
+  /* Streak Fire Red */
+  --gaming-fire: #FF4444;
+  --gaming-fire-50: #fff5f5;
+  --gaming-fire-100: #ffe8e8;
+  --gaming-fire-200: #ffd5d5;
+  --gaming-fire-300: #ffb3b3;
+  --gaming-fire-400: #ff8080;
+  --gaming-fire-500: #FF4444;
+  --gaming-fire-600: #ed2828;
+  --gaming-fire-700: #c81e1e;
+  --gaming-fire-800: #a51d1d;
+  --gaming-fire-900: #871f1f;
+
+  /* Success Green */
+  --gaming-success: #00CC66;
+  --gaming-success-50: #f0fdf7;
+  --gaming-success-100: #dcfce7;
+  --gaming-success-200: #bbf7d0;
+  --gaming-success-300: #86efac;
+  --gaming-success-400: #4ade80;
+  --gaming-success-500: #00CC66;
+  --gaming-success-600: #00a855;
+  --gaming-success-700: #008a47;
+  --gaming-success-800: #026d3a;
+  --gaming-success-900: #065a32;
+
+  /* === KM0 LAB TYPOGRAPHY === */
+  --font-family-brand: 'Antique Olive Std', 'Arial Black', system-ui, -apple-system, sans-serif;
+  --font-family-ui: 'Suisse Intl', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-body: 'Oakes Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-mono: 'Roboto Mono', 'JetBrains Mono', Consolas, 'Courier New', monospace;
+
+  /* Font Sizes - Basado en la jerarquía de KM0 LAB */
+  --font-size-xs: 0.75rem;    /* 12px - Caption */
+  --font-size-sm: 0.875rem;   /* 14px - Detail */
+  --font-size-base: 1rem;     /* 16px - Paragraph 2 */
+  --font-size-lg: 1.125rem;   /* 18px - Paragraph 1 */
+  --font-size-xl: 1.25rem;    /* 20px - Heading 6 */
+  --font-size-2xl: 1.5rem;    /* 24px - Heading 5 */
+  --font-size-3xl: 1.75rem;   /* 28px - Heading 4 */
+  --font-size-4xl: 2rem;      /* 32px - Heading 3 */
+  --font-size-5xl: 2.5rem;    /* 40px - Heading 2 */
+  --font-size-6xl: 3rem;      /* 48px - Heading 1 */
+  --font-size-7xl: 5rem;      /* 80px - Heading 0 */
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* Line Heights */
+  --line-height-tight: 1.1;
+  --line-height-snug: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+
+  /* === SPACING SYSTEM === */
+  --space-xs: 0.25rem;   /* 4px */
+  --space-sm: 0.5rem;    /* 8px */
+  --space-md: 0.75rem;   /* 12px */
+  --space-lg: 1rem;      /* 16px */
+  --space-xl: 1.5rem;    /* 24px */
+  --space-2xl: 2rem;     /* 32px */
+  --space-3xl: 3rem;     /* 48px */
+  --space-4xl: 4rem;     /* 64px */
+
+  /* === BORDER RADIUS === */
+  --radius-none: 0;
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.375rem;  /* 6px */
+  --radius-lg: 0.5rem;    /* 8px */
+  --radius-xl: 0.75rem;   /* 12px */
+  --radius-2xl: 1rem;     /* 16px */
+  --radius-3xl: 1.5rem;   /* 24px */
+  --radius-full: 9999px;
+
+  /* === SHADOWS === */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-gaming: 0 0 20px rgba(255, 215, 0, 0.3);
+  --shadow-achievement: 0 0 30px rgba(255, 138, 0, 0.4);
+  --shadow-km0: 0 4px 20px rgba(23, 64, 148, 0.15); /* Actualizado con azul correcto */
+
+  /* === SEMANTIC COLORS === */
+  --background: #ffffff;
+  --foreground: var(--card-neutral-900);  /* Usando card grayscale para mejor lectura */
+  --card: #ffffff;
+  --card-foreground: var(--card-neutral-900);
+  --popover: #ffffff;
+  --popover-foreground: var(--card-neutral-900);
+  --primary: var(--km0-blue);  /* Azul oficial corregido */
+  --primary-foreground: #ffffff;
+  --secondary: var(--km0-beige);  /* Beige oficial */
+  --secondary-foreground: var(--km0-blue);
+  --muted: var(--card-neutral-100);  /* Usando card grayscale */
+  --muted-foreground: var(--card-neutral-500);
+  --accent: var(--km0-coral-50);
+  --accent-foreground: var(--km0-coral);
+  --destructive: var(--gaming-fire-500);
+  --destructive-foreground: #ffffff;
+  --success: var(--gaming-success-500);
+  --success-foreground: #ffffff;
+  --warning: var(--km0-yellow);  /* Usando amarillo oficial */
+  --warning-foreground: var(--card-neutral-900);
+  --border: var(--card-neutral-300);  /* Borde más cálido */
+  --input: #ffffff;
+  --input-background: var(--card-neutral-100);
+  --ring: var(--km0-blue);
+
+  /* === GAMING SPECIFIC === */
+  --xp-bar-bg: var(--gaming-gold-100);
+  --xp-bar-fill: var(--gaming-gold-500);
+  --level-badge: var(--gaming-gold-500);
+  --streak-color: var(--gaming-fire-500);
+  --points-color: var(--gaming-gold-500);
+  --achievement-color: var(--gaming-orange-500);
+  --quest-active: var(--gaming-success-500);
+  --notification-badge: var(--km0-coral);
+
+  /* Default radius */
+  --radius: var(--radius-lg);
+}
+
+/* === DARK MODE === */
+.dark {
+  --background: var(--card-neutral-900);
+  --foreground: var(--card-neutral-100);
+  --card: var(--card-neutral-800);
+  --card-foreground: var(--card-neutral-100);
+  --popover: var(--card-neutral-800);
+  --popover-foreground: var(--card-neutral-100);
+  --primary: var(--km0-blue-400);
+  --primary-foreground: var(--card-neutral-900);
+  --secondary: var(--card-neutral-700);
+  --secondary-foreground: var(--card-neutral-100);
+  --muted: var(--card-neutral-700);
+  --muted-foreground: var(--card-neutral-400);
+  --accent: var(--km0-coral-800);
+  --accent-foreground: var(--km0-coral-100);
+  --destructive: var(--gaming-fire-400);
+  --destructive-foreground: var(--card-neutral-900);
+  --success: var(--gaming-success-400);
+  --success-foreground: var(--card-neutral-900);
+  --warning: var(--km0-yellow-400);
+  --warning-foreground: var(--card-neutral-900);
+  --border: var(--card-neutral-600);
+  --input: var(--card-neutral-700);
+  --input-background: var(--card-neutral-800);
+  --ring: var(--km0-blue-400);
+
+  /* Gaming colors for dark mode */
+  --xp-bar-bg: var(--gaming-gold-900);
+  --xp-bar-fill: var(--gaming-gold-400);
+  --level-badge: var(--gaming-gold-400);
+  --streak-color: var(--gaming-fire-400);
+  --points-color: var(--gaming-gold-400);
+  --achievement-color: var(--gaming-orange-400);
+  --quest-active: var(--gaming-success-400);
+  --notification-badge: var(--km0-coral-400);
+}
+
+/* === TAILWIND THEME MAPPING === */
+@theme inline {
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-ring: var(--ring);
+
+  /* KM0 LAB Brand colors - Actualizados */
+  --color-km0-blue: var(--km0-blue);
+  --color-km0-blue-50: var(--km0-blue-50);
+  --color-km0-blue-100: var(--km0-blue-100);
+  --color-km0-blue-200: var(--km0-blue-200);
+  --color-km0-blue-300: var(--km0-blue-300);
+  --color-km0-blue-400: var(--km0-blue-400);
+  --color-km0-blue-500: var(--km0-blue-500);
+  --color-km0-blue-600: var(--km0-blue-600);
+  --color-km0-blue-700: var(--km0-blue-700);
+  --color-km0-blue-800: var(--km0-blue-800);
+  --color-km0-blue-900: var(--km0-blue-900);
+  --color-km0-blue-950: var(--km0-blue-950);
+  --color-km0-blue-75: var(--km0-blue-75);
+  --color-km0-blue-25: var(--km0-blue-25);
+
+  /* KM0 Beige colors */
+  --color-km0-beige: var(--km0-beige);
+  --color-km0-beige-50: var(--km0-beige-50);
+  --color-km0-beige-100: var(--km0-beige-100);
+  --color-km0-beige-200: var(--km0-beige-200);
+  --color-km0-beige-300: var(--km0-beige-300);
+  --color-km0-beige-400: var(--km0-beige-400);
+  --color-km0-beige-500: var(--km0-beige-500);
+  --color-km0-beige-600: var(--km0-beige-600);
+  --color-km0-beige-700: var(--km0-beige-700);
+  --color-km0-beige-800: var(--km0-beige-800);
+  --color-km0-beige-900: var(--km0-beige-900);
+  --color-km0-beige-75: var(--km0-beige-75);
+  --color-km0-beige-50: var(--km0-beige-50);
+  --color-km0-beige-25: var(--km0-beige-25);
+
+  /* KM0 Yellow colors */
+  --color-km0-yellow: var(--km0-yellow);
+  --color-km0-yellow-50: var(--km0-yellow-50);
+  --color-km0-yellow-100: var(--km0-yellow-100);
+  --color-km0-yellow-200: var(--km0-yellow-200);
+  --color-km0-yellow-300: var(--km0-yellow-300);
+  --color-km0-yellow-400: var(--km0-yellow-400);
+  --color-km0-yellow-500: var(--km0-yellow-500);
+  --color-km0-yellow-600: var(--km0-yellow-600);
+  --color-km0-yellow-700: var(--km0-yellow-700);
+  --color-km0-yellow-800: var(--km0-yellow-800);
+  --color-km0-yellow-900: var(--km0-yellow-900);
+  --color-km0-yellow-75: var(--km0-yellow-75);
+  --color-km0-yellow-25: var(--km0-yellow-25);
+
+  /* KM0 Coral colors - Actualizados */
+  --color-km0-coral: var(--km0-coral);
+  --color-km0-coral-50: var(--km0-coral-50);
+  --color-km0-coral-100: var(--km0-coral-100);
+  --color-km0-coral-200: var(--km0-coral-200);
+  --color-km0-coral-300: var(--km0-coral-300);
+  --color-km0-coral-400: var(--km0-coral-400);
+  --color-km0-coral-500: var(--km0-coral-500);
+  --color-km0-coral-600: var(--km0-coral-600);
+  --color-km0-coral-700: var(--km0-coral-700);
+  --color-km0-coral-800: var(--km0-coral-800);
+  --color-km0-coral-900: var(--km0-coral-900);
+  --color-km0-coral-75: var(--km0-coral-75);
+  --color-km0-coral-25: var(--km0-coral-25);
+
+  /* Neutral colors */
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-100: var(--neutral-100);
+
+  /* Card neutral colors */
+  --color-card-neutral-900: var(--card-neutral-900);
+  --color-card-neutral-800: var(--card-neutral-800);
+  --color-card-neutral-700: var(--card-neutral-700);
+  --color-card-neutral-600: var(--card-neutral-600);
+  --color-card-neutral-500: var(--card-neutral-500);
+  --color-card-neutral-400: var(--card-neutral-400);
+  --color-card-neutral-300: var(--card-neutral-300);
+  --color-card-neutral-100: var(--card-neutral-100);
+
+  /* Gaming colors */
+  --color-gaming-gold: var(--gaming-gold);
+  --color-gaming-orange: var(--gaming-orange);
+  --color-gaming-fire: var(--gaming-fire);
+  --color-gaming-success: var(--gaming-success);
+  --color-xp-bar-bg: var(--xp-bar-bg);
+  --color-xp-bar-fill: var(--xp-bar-fill);
+  --color-level-badge: var(--level-badge);
+  --color-streak: var(--streak-color);
+  --color-points: var(--points-color);
+  --color-achievement: var(--achievement-color);
+  --color-quest-active: var(--quest-active);
+  --color-notification-badge: var(--notification-badge);
+
+  /* Typography */
+  --font-size: var(--font-size-base);
+  --text-xs: var(--font-size-xs);
+  --text-sm: var(--font-size-sm);
+  --text-base: var(--font-size-base);
+  --text-lg: var(--font-size-lg);
+  --text-xl: var(--font-size-xl);
+  --text-2xl: var(--font-size-2xl);
+  --text-3xl: var(--font-size-3xl);
+  --text-4xl: var(--font-size-4xl);
+  --text-5xl: var(--font-size-5xl);
+  --text-6xl: var(--font-size-6xl);
+  --text-7xl: var(--font-size-7xl);
+
+  /* Border radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+  --radius-full: var(--radius-full);
+
+  /* Shadows */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-gaming: var(--shadow-gaming);
+  --shadow-achievement: var(--shadow-achievement);
+  --shadow-km0: var(--shadow-km0);
+}
+
+/* === BASE STYLES === */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-family-ui);
+  }
+
+  /* KM0 LAB Typography Classes */
+  .font-brand {
+    font-family: var(--font-family-brand);
+  }
+
+  .font-ui {
+    font-family: var(--font-family-ui);
+  }
+
+  .font-body {
+    font-family: var(--font-family-body);
+  }
+
+  .font-mono {
+    font-family: var(--font-family-mono);
+  }
+}
+
+/* === KM0 LAB TYPOGRAPHY SYSTEM === */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    /* Heading 0 - 80px */
+    .heading-0 {
+      font-size: var(--text-7xl);
+      font-weight: var(--font-weight-black);
+      line-height: var(--line-height-tight);
+      font-family: var(--font-family-brand);
+    }
+
+    /* Heading 1 - 48px */
+    h1 {
+      font-size: var(--text-6xl);
+      font-weight: var(--font-weight-black);
+      line-height: var(--line-height-tight);
+      font-family: var(--font-family-brand);
+    }
+
+    /* Heading 2 - 40px */
+    h2 {
+      font-size: var(--text-5xl);
+      font-weight: var(--font-weight-black);
+      line-height: var(--line-height-tight);
+      font-family: var(--font-family-brand);
+    }
+
+    /* Heading 3 - 32px */
+    h3 {
+      font-size: var(--text-4xl);
+      font-weight: var(--font-weight-black);
+      line-height: var(--line-height-tight);
+      font-family: var(--font-family-brand);
+    }
+
+    /* Heading 4 - 28px */
+    h4 {
+      font-size: var(--text-3xl);
+      font-weight: var(--font-weight-black);
+      line-height: var(--line-height-tight);
+      font-family: var(--font-family-brand);
+    }
+
+    /* Heading 5 - 24px */
+    h5 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-black);
+      line-height: var(--line-height-tight);
+      font-family: var(--font-family-brand);
+    }
+
+    /* Heading 6 - 20px */
+    h6 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-black);
+      line-height: var(--line-height-tight);
+      font-family: var(--font-family-brand);
+    }
+
+    /* Paragraph 1 - 18px */
+    .paragraph-1 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-normal);
+      line-height: var(--line-height-normal);
+      font-family: var(--font-family-body);
+    }
+
+    /* Paragraph 2 - 16px */
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: var(--line-height-normal);
+      font-family: var(--font-family-ui);
+    }
+
+    /* Detail - 14px */
+    .detail {
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-normal);
+      line-height: var(--line-height-normal);
+      font-family: var(--font-family-body);
+    }
+
+    /* Caption - 12px */
+    .caption {
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-normal);
+      line-height: var(--line-height-tight);
+      font-family: var(--font-family-body);
+    }
+
+    label {
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-normal);
+      font-family: var(--font-family-ui);
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-normal);
+      font-family: var(--font-family-ui);
+    }
+
+    input, textarea {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: var(--line-height-normal);
+      font-family: var(--font-family-ui);
+    }
+
+    small {
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-normal);
+      line-height: var(--line-height-normal);
+      font-family: var(--font-family-ui);
+    }
+  }
+}
+
+/* === KM0 LAB UTILITIES === */
+@layer utilities {
+  .text-gradient-km0 {
+    background: linear-gradient(135deg, var(--km0-blue) 0%, var(--km0-coral) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--gaming-gold-400) 0%, var(--gaming-gold-600) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-fire {
+    background: linear-gradient(135deg, var(--gaming-fire-400) 0%, var(--gaming-fire-600) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .km0-card-shadow {
+    box-shadow: var(--shadow-km0);
+  }
+
+  .gaming-card-shadow {
+    box-shadow: var(--shadow-lg), var(--shadow-gaming);
+  }
+
+  .achievement-shadow {
+    box-shadow: var(--shadow-xl), var(--shadow-achievement);
+  }
+
+  .pulse-gaming {
+    animation: pulse-gaming 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-gaming {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+}
+
+/* === ROOT FONT SIZE === */
+html {
+  font-size: 16px; /* Base 16px for better accessibility */
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 15px; /* Slightly smaller on mobile */
+  }
+}
