@@ -78,5 +78,13 @@
     "dashboard_link": "Panel",
     "user_profile_link": "Gestionar tu cuenta",
     "sign_out": "Cerrar sesión"
+  },
+  "App": {
+    "meta_title": "Bienvenido a la aplicación",
+    "meta_description": "Página principal de la aplicación.",
+    "welcome_title": "¡Bienvenido a tu nueva aplicación!",
+    "welcome_message": "Esta es la página principal de tu aplicación. Desde aquí podrás acceder a todas las funcionalidades importantes. Personaliza este contenido para adaptarlo a las necesidades de tu proyecto.",
+    "quick_start": "Primeros pasos",
+    "help_resources": "Recursos de ayuda"
   }
 }
