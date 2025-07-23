@@ -1,9 +1,21 @@
 {
   "name": "next-js-boilerplate",
   "version": "1.1.0",
+  "description": "<p align=\"center\">   <a href=\"https://demo.nextjs-boilerplate.com\"><img height=\"300\" src=\"public/assets/images/nextjs-starter-banner.png?raw=true\" alt=\"Next js starter banner\"></a> </p>",
+  "homepage": "https://github.com/KM0Lab-git-admin/km0lab-core#readme",
+  "bugs": {
+    "url": "https://github.com/KM0Lab-git-admin/km0lab-core/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://KM0Lab-git-admin@github.com/KM0Lab-git-admin/km0lab-core.git"
+  },
+  "license": "ISC",
   "author": "Ixartz (https://github.com/ixartz)",
-  "engines": {
-    "node": ">=20"
+  "type": "module",
+  "main": "lint-staged.config.js",
+  "directories": {
+    "test": "tests"
   },
   "scripts": {
     "dev:spotlight": "spotlight-sidecar",
@@ -29,6 +41,11 @@
     "test-storybook:ci": "start-server-and-test serve-storybook http://127.0.0.1:6006 test-storybook",
     "prepare": "husky"
   },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  },
   "dependencies": {
     "@arcjet/next": "^1.0.0-beta.2",
     "@clerk/localizations": "^3.10.8",
@@ -37,6 +54,7 @@
     "@hookform/resolvers": "^4.1.2",
     "@logtail/pino": "^0.5.2",
     "@radix-ui/react-progress": "^1.1.7",
+    "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.12",
     "@sentry/nextjs": "^8.54.0",
@@ -113,16 +131,14 @@
     "semantic-release": "^24.2.3",
     "start-server-and-test": "^2.0.10",
     "storybook": "^8.6.2",
-    "tailwindcss": "^4.0.9",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5.7.3",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.7",
     "vitest-fail-on-console": "^0.7.1"
   },
-  "config": {
-    "commitizen": {
-      "path": "@commitlint/cz-commitlint"
-    }
+  "engines": {
+    "node": ">=20"
   },
   "release": {
     "branches": [

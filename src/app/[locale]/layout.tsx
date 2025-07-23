@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 };
 
 export function generateStaticParams() {
-  return routing.locales.map(locale => ({ locale }));
+  return ['es', 'en', 'fr'].map(locale => ({ locale }));
 }
 
 // Improve security with Arcjet

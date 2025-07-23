@@ -1,4 +1,5 @@
-// src/app/ux-ui/layout.tsx
+import '@/styles/globals.css';
+
 export default function UxUiLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-gray-50">
@@ -6,4 +7,8 @@ export default function UxUiLayout({ children }: { children: React.ReactNode }) 
       {children}
     </div>
   );
+}
+
+export function generateStaticParams() {
+  return [];
 }
