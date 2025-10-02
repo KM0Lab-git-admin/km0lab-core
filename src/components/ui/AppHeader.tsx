@@ -12,22 +12,20 @@ interface AppHeaderProps {
 export function AppHeader({ 
   logoSrc = "/assets/images/logo1.svg",
   logoAlt = "KM0 LAB Logo",
-  logoWidth = 144,
-  logoHeight = 32,
+  logoWidth = 280,
+  logoHeight = 70,
   className = ""
 }: AppHeaderProps) {
   return (
-    <div className={`max-w-header h-header inline-flex justify-center items-center gap-header ${className}`}>
-      <div className="p-logo-padding inline-flex flex-col justify-start items-start">
-        <Image
-          className="w-logo h-logo"
-          src={logoSrc}
-          alt={logoAlt}
-          width={logoWidth}
-          height={logoHeight}
-          priority
-        />
-      </div>
+    <div className={`w-96 h-16 flex justify-center items-center pt-3 ${className}`}>
+      <Image
+        className="w-70 h-17"
+        src={logoSrc}
+        alt={logoAlt}
+        width={logoWidth}
+        height={logoHeight}
+        priority
+      />
     </div>
   );
 }

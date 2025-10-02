@@ -7,6 +7,11 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'brand': ['Antique Olive Std', 'Antique Olive', 'Georgia', 'serif'],
+        'ui': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        'body': ['Oakes Grotesk', 'Oakes', 'Helvetica', 'Arial', 'sans-serif'],
+      },
       colors: {
         'km0-blue': {
           DEFAULT: '#174094',
@@ -181,6 +186,9 @@ export default {
       },
       height: {
         'logo': '2rem', // 32px - altura del logo
+      },
+      backgroundImage: {
+        'gradient-app': 'linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%)',
       },
     },
   },
