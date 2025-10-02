@@ -78,5 +78,37 @@
     "dashboard_link": "Tableau de bord",
     "user_profile_link": "Gérer votre compte",
     "sign_out": "Se déconnecter"
+  },
+  "Welcome": {
+    "skip": "Passer",
+    "prev": "Précédent",
+    "next": "Suivant",
+    "slides": {
+      "0": {
+        "title": "ACHÈTE À <i>300 M</i> DE CHEZ TOI SANS BOUGER",
+        "subtitle": "Titre Intro 1",
+        "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa"
+      },
+      "1": {
+        "title": "Découvre des produits locaux exclusifs",
+        "subtitle": "Titre Intro 2",
+        "description": "Explore une sélection unique de produits près de chez toi et soutiens les commerces locaux."
+      },
+      "2": {
+        "title": "Gagne des récompenses à chaque achat",
+        "subtitle": "Titre Intro 3",
+        "description": "Cumule des points et échange des récompenses exclusives en achetant dans ton quartier."
+      },
+      "3": {
+        "title": "Partage ton expérience avec la communauté",
+        "subtitle": "Titre Intro 4",
+        "description": "Laisse des avis et aide les autres à découvrir les meilleurs produits locaux."
+      },
+      "4": {
+        "title": "Commence maintenant et fais partie du changement !",
+        "subtitle": "Titre Intro 5",
+        "description": "Rejoins KM0 LAB et transforme ta façon d'acheter et de soutenir ta communauté."
+      }
+    }
   }
 }

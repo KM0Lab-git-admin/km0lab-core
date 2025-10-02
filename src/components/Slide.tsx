@@ -2,51 +2,48 @@ import Image, { StaticImageData } from 'next/image';
 import type { FC } from 'react';
 
 export interface SlideProps {
-  title: string;
+  title: React.ReactNode;
   subtitle: string;
   imageSrc: string | StaticImageData;
   xp?: number;
   logoSrc?: string;
 }
 
-const Slide: FC<SlideProps> = ({ title, subtitle, imageSrc, xp, logoSrc }) => (
+const Slide: FC<SlideProps> = ({ title: _title, subtitle, imageSrc, xp, logoSrc }) => (
   <div className="flex flex-col items-center justify-center h-full w-full px-2">
-    <div className="relative w-full max-w-xs mx-auto rounded-xl bg-km0-beige-100 shadow-lg p-4 flex flex-col items-center">
-      <h2 className="font-brand text-3xl md:text-4xl text-km0-blue-700 text-left w-full leading-tight mb-2">
-        {title}
-      </h2>
-      <div className="w-full flex-1 flex items-center justify-center my-2">
+    {/* Card with poster */}
+    <div className="relative w-full max-w-sm mx-auto rounded-2xl bg-km0-beige-100 border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.12)] p-3 overflow-hidden">
+      <div className="relative w-full aspect-[3/4] rounded-xl bg-km0-beige-100 overflow-hidden flex items-center justify-center">
         <Image
           src={imageSrc}
-          alt="Ilustración slide"
-          width={180}
-          height={180}
-          className="object-contain mx-auto"
+          alt="Poster slide"
+          fill
+          className="object-contain"
           priority
         />
       </div>
       {xp && (
-        <div className="absolute left-4 bottom-4">
-          <span className="bg-km0-coral-400 text-white text-sm font-semibold rounded-lg px-3 py-1 shadow">
+        <div className="absolute left-3 bottom-3 z-20">
+          <span className="bg-km0-coral-400 text-white text-xs font-semibold rounded-md px-2.5 py-1 shadow">
             + {xp} XP
           </span>
         </div>
       )}
       {logoSrc && (
-        <div className="absolute right-4 bottom-4">
+        <div className="absolute right-3 bottom-3 z-20">
           <Image
             src={logoSrc}
             alt="Logo KM0LAB"
-            width={60}
-            height={24}
+            width={56}
+            height={22}
             className="object-contain"
             priority
           />
         </div>
       )}
     </div>
-    <div className="mt-6 w-full text-center">
-      <h3 className="font-brand text-2xl md:text-3xl font-bold mb-2">{subtitle}</h3>
+    <div className="mt-5 w-full text-center">
+      <h3 className="text-neutral-900 text-3xl font-black">{subtitle}</h3>
     </div>
   </div>
 );

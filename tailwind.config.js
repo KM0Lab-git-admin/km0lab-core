@@ -112,6 +112,19 @@ export default {
           800: '#2D2D2D',
           900: '#1A1A1A',
         },
+        'km0-success': {
+          DEFAULT: '#C5F2C7',
+          50:  '#F0FDF4',
+          100: '#DCFCE7',
+          200: '#C5F2C7',
+          300: '#86EFAC',
+          400: '#4ADE80',
+          500: '#00CC66',
+          600: '#16A34A',
+          700: '#15803D',
+          800: '#166534',
+          900: '#14532D',
+        },
         'gaming-success': {
           DEFAULT: '#00CC66',
           50:  '#F0FDF4',
@@ -154,6 +167,20 @@ export default {
         'gaming-gold': {
           DEFAULT: '#FFD700',
         },
+      },
+      spacing: {
+        'header': '3rem', // 48px - altura del header
+        'header-gap': '3rem', // 48px - gap entre elementos
+        'logo-padding': '0.875rem', // 14px - padding del contenedor del logo
+      },
+      maxWidth: {
+        'header': '24rem', // 384px - ancho del header
+      },
+      width: {
+        'logo': '9rem', // 144px - ancho del logo
+      },
+      height: {
+        'logo': '2rem', // 32px - altura del logo
       },
     },
   },

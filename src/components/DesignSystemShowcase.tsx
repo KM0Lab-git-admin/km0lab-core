@@ -355,7 +355,7 @@ export default function TypographyShowcase() {
           <h3 className="font-brand text-2xl font-semibold mb-4 text-[#174094]">Colores del Sistema</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center space-y-2">
-              <div className="size-16 rounded-lg mx-auto border" style={{ backgroundColor: 'var(--km0-blue-700)', borderColor: 'var(--km0-blue-300)' }}></div>
+              <div className="size-16 rounded-lg mx-auto border bg-km0-blue-700 border-km0-blue-300"></div>
               <div className="caption text-neutral-700">
                 <div className="font-semibold text-blue-500">KM0 Blue 700</div>
                 <div className="text-neutral-500">#174094</div>
@@ -363,7 +363,7 @@ export default function TypographyShowcase() {
             </div>
             
             <div className="text-center space-y-2">
-              <div className="size-16 rounded-lg mx-auto border" style={{ backgroundColor: 'var(--km0-beige-100)', borderColor: 'var(--km0-beige-300)' }}></div>
+              <div className="size-16 rounded-lg mx-auto border bg-km0-beige-100 border-km0-beige-300"></div>
               <div className="caption text-neutral-700">
                 <div className="font-semibold">KM0 Beige 100</div>
                 <div className="text-neutral-500">#FFECD2</div>
@@ -371,7 +371,7 @@ export default function TypographyShowcase() {
             </div>
             
             <div className="text-center space-y-2">
-              <div className="size-16 rounded-lg mx-auto border" style={{ backgroundColor: 'var(--km0-coral-400)', borderColor: 'var(--km0-coral-300)' }}></div>
+              <div className="size-16 rounded-lg mx-auto border bg-km0-coral-400 border-km0-coral-300"></div>
               <div className="caption text-neutral-700">
                 <div className="font-semibold">KM0 Coral 400</div>
                 <div className="text-neutral-500">#FF664D</div>
@@ -379,7 +379,7 @@ export default function TypographyShowcase() {
             </div>
             
             <div className="text-center space-y-2">
-              <div className="size-16 rounded-lg mx-auto border" style={{ backgroundColor: 'var(--km0-yellow-500)', borderColor: 'var(--km0-yellow-300)' }}></div>
+              <div className="size-16 rounded-lg mx-auto border bg-km0-yellow-500 border-km0-yellow-300"></div>
               <div className="caption text-neutral-700">
                 <div className="font-semibold">KM0 Yellow 500</div>
                 <div className="text-neutral-500">#F5C542</div>

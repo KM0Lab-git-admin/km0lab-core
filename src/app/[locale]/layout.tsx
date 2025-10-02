@@ -87,7 +87,7 @@ export default async function RootLayout(props: {
 
   return (
     <html lang={locale}>
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning className="min-h-screen bg-gradient-app">
         <NextIntlClientProvider
           locale={locale}
           messages={messages}

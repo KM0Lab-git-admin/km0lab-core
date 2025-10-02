@@ -78,5 +78,37 @@
     "dashboard_link": "Dashboard",
     "user_profile_link": "Manage your account",
     "sign_out": "Sign out"
+  },
+  "Welcome": {
+    "skip": "Skip",
+    "prev": "Previous",
+    "next": "Next",
+    "slides": {
+      "0": {
+        "title": "SHOP <i>300 M</i> FROM HOME WITHOUT LEAVING HOME",
+        "subtitle": "Intro Title 1",
+        "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa"
+      },
+      "1": {
+        "title": "Discover exclusive local products",
+        "subtitle": "Intro Title 2",
+        "description": "Explore a unique selection of products near you and support local shops."
+      },
+      "2": {
+        "title": "Earn rewards with every purchase",
+        "subtitle": "Intro Title 3",
+        "description": "Collect points and redeem exclusive rewards while shopping in your neighborhood."
+      },
+      "3": {
+        "title": "Share your experience with the community",
+        "subtitle": "Intro Title 4",
+        "description": "Leave reviews and help others discover the best local products."
+      },
+      "4": {
+        "title": "Start now and be part of the change!",
+        "subtitle": "Intro Title 5",
+        "description": "Join KM0 LAB and transform the way you shop and support your community."
+      }
+    }
   }
 }

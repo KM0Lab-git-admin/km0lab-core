@@ -86,5 +86,37 @@
     "welcome_message": "Esta es la página principal de tu aplicación. Desde aquí podrás acceder a todas las funcionalidades importantes. Personaliza este contenido para adaptarlo a las necesidades de tu proyecto.",
     "quick_start": "Primeros pasos",
     "help_resources": "Recursos de ayuda"
+  },
+  "Welcome": {
+    "skip": "Saltar",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "slides": {
+      "0": {
+        "title": "COMPRA A <i>300 M</i> DE CASA SENSE MOURE'T DE CASA",
+        "subtitle": "Títol Intro 1",
+        "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa"
+      },
+      "1": {
+        "title": "Descubre productos locales exclusivos",
+        "subtitle": "Títol Intro 2",
+        "description": "Explora una selección única de productos cerca de ti y apoya a los comercios locales."
+      },
+      "2": {
+        "title": "Gana recompensas por cada compra",
+        "subtitle": "Títol Intro 3",
+        "description": "Acumula puntos y canjea recompensas exclusivas mientras compras en tu barrio."
+      },
+      "3": {
+        "title": "Comparte tu experiencia con la comunidad",
+        "subtitle": "Títol Intro 4",
+        "description": "Deja reseñas y ayuda a otros usuarios a descubrir los mejores productos locales."
+      },
+      "4": {
+        "title": "¡Empieza ahora y forma parte del cambio!",
+        "subtitle": "Títol Intro 5",
+        "description": "Únete a KM0 LAB y transforma la forma en que compras y apoyas a tu comunidad."
+      }
+    }
   }
 }

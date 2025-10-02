@@ -37,7 +37,7 @@ function ColorScale({
           <div key={color.shade} className="relative group">
             <div
               className="h-16 w-full rounded-lg border shadow-sm cursor-pointer transform transition-all hover:scale-105 hover:shadow-md"
-              style={{ backgroundColor: color.hex }}
+              style={{ backgroundColor: color.hexCSS }}
             />
             {index === primaryIndex && (
               <div className="absolute -top-1 -right-1">
@@ -92,16 +92,16 @@ function ComponentExample({
 export default function ColorPaletteGuide() {
   // === PALETA PRINCIPAL ===
   const km0BlueScale = [
-    { shade: "50", hex: "var(--km0-blue-50)", name: "Lightest", nameCSS: "km0-blue-50", hexCSS: "#F0F4FD" },
-    { shade: "100", hex: "var(--km0-blue-100)", name: "Very Light", nameCSS: "km0-blue-100", hexCSS: "#DADEF8" },
-    { shade: "200", hex: "var(--km0-blue-200)", name: "Light", nameCSS: "km0-blue-200", hexCSS: "#B5C3F0" },
-    { shade: "300", hex: "var(--km0-blue-300)", name: "Medium Light", nameCSS: "km0-blue-300", hexCSS: "#90A9E8" },
-    { shade: "400", hex: "var(--km0-blue-400)", name: "Medium", nameCSS: "km0-blue-400", hexCSS: "#6B8FD0" },
-    { shade: "500", hex: "var(--km0-blue-500)", name: "Medium Dark", nameCSS: "km0-blue-500", hexCSS: "#4674B8" },
-    { shade: "600", hex: "var(--km0-blue-600)", name: "Dark", nameCSS: "km0-blue-600", hexCSS: "#2B5AA0" },
-    { shade: "700", hex: "var(--km0-blue-700)", name: "Principal", nameCSS: "km0-blue-700", hexCSS: "#174094" },
-    { shade: "800", hex: "var(--km0-blue-800)", name: "Very Dark", nameCSS: "km0-blue-800", hexCSS: "#132A50" },
-    { shade: "900", hex: "var(--km0-blue-900)", name: "Darkest", nameCSS: "km0-blue-900", hexCSS: "#0F2040" },
+    { shade: "50", hex: "#F0F4FD", name: "Lightest", nameCSS: "km0-blue-50", hexCSS: "#F0F4FD" },
+    { shade: "100", hex: "#DADEF8", name: "Very Light", nameCSS: "km0-blue-100", hexCSS: "#DADEF8" },
+    { shade: "200", hex: "#B5C3F0", name: "Light", nameCSS: "km0-blue-200", hexCSS: "#B5C3F0" },
+    { shade: "300", hex: "#90A9E8", name: "Medium Light", nameCSS: "km0-blue-300", hexCSS: "#90A9E8" },
+    { shade: "400", hex: "#6B8FD0", name: "Medium", nameCSS: "km0-blue-400", hexCSS: "#6B8FD0" },
+    { shade: "500", hex: "#4674B8", name: "Medium Dark", nameCSS: "km0-blue-500", hexCSS: "#4674B8" },
+    { shade: "600", hex: "#2B5AA0", name: "Dark", nameCSS: "km0-blue-600", hexCSS: "#2B5AA0" },
+    { shade: "700", hex: "#174094", name: "Principal", nameCSS: "km0-blue-700", hexCSS: "#174094" },
+    { shade: "800", hex: "#132A50", name: "Very Dark", nameCSS: "km0-blue-800", hexCSS: "#132A50" },
+    { shade: "900", hex: "#0F2040", name: "Darkest", nameCSS: "km0-blue-900", hexCSS: "#0F2040" },
   ];
 
   const km0BeigeScale = [
