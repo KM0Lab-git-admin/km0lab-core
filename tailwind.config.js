@@ -16,7 +16,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        'brand': ['Antique Olive Std', 'Antique Olive', 'Georgia', 'serif'],
+        'brand': ['Antique Olive', 'Antique Olive Std', 'Georgia', 'serif'],
         'ui': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         'body': ['Oakes Grotesk', 'Oakes', 'Helvetica', 'Arial', 'sans-serif'],
       },

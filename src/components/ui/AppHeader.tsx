@@ -17,9 +17,9 @@ export function AppHeader({
   className = ""
 }: AppHeaderProps) {
   return (
-    <div className={`w-full h-auto flex justify-center items-center ${className}`}>
+    <div className={`w-full h-auto flex justify-center items-center py-1 ${className}`}>
       <Image
-        className="w-auto h-8 xs:h-10 sm:h-12 md:h-14"
+        className="w-auto h-10 xs:h-12 sm:h-14 md:h-16"
         src={logoSrc}
         alt={logoAlt}
         width={logoWidth}

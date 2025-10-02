@@ -5,7 +5,7 @@
 :root {
   /* === KM0 LAB TYPOGRAPHY SYSTEM === */
   /* Fuentes originales del diseño de Figma */
-  --font-family-brand: 'Antique Olive Std', 'Antique Olive', Georgia, serif;     /* Para headlines y brand */
+  --font-family-brand: 'Antique Olive', 'Antique Olive Std', Georgia, serif;     /* Para headlines y brand */
   --font-family-ui: 'Inter', system-ui, -apple-system, sans-serif;              /* Para interface y navigation */
   --font-family-body: 'Oakes Grotesk', 'Oakes', Helvetica, Arial, sans-serif;   /* Para body text */
 
