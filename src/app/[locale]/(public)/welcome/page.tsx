@@ -25,48 +25,55 @@ export default function WelcomePage() {
 
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="min-h-[100svh] flex items-center justify-center overflow-hidden px-3 xs:px-4 sm:px-6" data-testid="hero-container">
       <MobileFrame>
         {/* Header with Status Bar and Logo */}
         <AppHeader />
-        {/* Content */}
-        <div className="w-full flex flex-col items-center gap-3.5">
+        
+        {/* Hero Content */}
+        <div className="w-full flex flex-col items-center gap-2 xs:gap-3 sm:gap-4 flex-1">
           {isLoading ? (
             // Skeleton loader completo mientras carga
-            <div className="inline-flex flex-col items-center gap-3.5">
+            <div className="w-full flex flex-col items-center gap-2 xs:gap-3 sm:gap-4">
               {/* Image skeleton */}
-              <div className="w-80 h-96 rounded-[10px] border-[3px] border-neutral-200 bg-neutral-100 animate-pulse mx-auto" />
-
+              <div className="w-full aspect-[3/4] max-h-[50vh] rounded-[10px] border-[2px] xs:border-[3px] border-neutral-200 bg-neutral-100 animate-pulse" />
 
               {/* Title skeleton */}
-              <div className="w-64 h-9 bg-neutral-100 rounded animate-pulse" />
+              <div className="w-full h-8 xs:h-10 sm:h-12 bg-neutral-100 rounded animate-pulse" />
 
               {/* Description skeleton - 3 líneas */}
-              <div className="w-80 h-24 flex flex-col gap-2 justify-center mx-auto">
+              <div className="w-full min-h-16 xs:min-h-18 sm:min-h-20 flex flex-col gap-2 justify-center">
                 <div className="w-full h-4 bg-neutral-100 rounded animate-pulse" />
                 <div className="w-full h-4 bg-neutral-100 rounded animate-pulse" />
                 <div className="w-3/4 h-4 bg-neutral-100 rounded animate-pulse mx-auto" />
               </div>
             </div>
           ) : (
-            <div className="inline-flex flex-col items-center gap-3.5">
-              {/* Slide Image */}
+            <div className="w-full flex flex-col items-center gap-2 xs:gap-3 sm:gap-4">
+              {/* Hero Image */}
               <img
-                className="w-80 h-96 rounded-[10px] shadow-[2px_2px_2px_2px_rgba(163,163,163,0.10)] border-[3px] border-neutral-200 mx-auto"
+                className="w-full aspect-[3/4] max-h-[50vh] rounded-[10px] shadow-[2px_2px_2px_2px_rgba(163,163,163,0.10)] border-[2px] xs:border-[3px] border-neutral-200 object-contain"
                 src={slide.imageSrc}
                 alt={slide.title}
               />
 
-
               {/* Title */}
-              <div className="justify-center text-neutral-900 text-3xl text-center w-full font-brand">
+              <h1 
+                className="w-full text-center font-brand text-neutral-900 leading-tight sm:leading-snug text-balance break-words overflow-wrap-anywhere hyphens-auto px-1"
+                style={{ fontSize: 'clamp(14px, 5vw, 2.5rem)' }}
+                data-testid="hero-title"
+              >
                 {slide.title}
-              </div>
+              </h1>
 
               {/* Description */}
-              <div className="w-80 h-24 justify-start text-neutral-500 text-base font-normal leading-normal text-center mx-auto">
+              <p 
+                className="w-full text-center text-neutral-500 font-normal leading-snug sm:leading-relaxed text-balance break-words overflow-wrap-anywhere hyphens-auto px-2"
+                style={{ fontSize: 'clamp(14px, 3vw, 1.125rem)' }}
+                data-testid="hero-description"
+              >
                 {slide.description}
-              </div>
+              </p>
             </div>
           )}
         </div>

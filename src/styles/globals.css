@@ -313,4 +313,13 @@
   .bg-gradient-app {
     background: var(--gradient-app);
   }
+
+  /* Text utilities para cortes de línea seguros */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .overflow-wrap-anywhere {
+    overflow-wrap: anywhere;
+  }
 }

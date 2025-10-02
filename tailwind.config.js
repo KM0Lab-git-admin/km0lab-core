@@ -6,6 +6,14 @@ export default {
     './app/**/*.{js,ts,jsx,tsx,mdx}',        // si usas el nuevo router
   ],
   theme: {
+    screens: {
+      'xs': '360px',
+      'sm': '480px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       fontFamily: {
         'brand': ['Antique Olive Std', 'Antique Olive', 'Georgia', 'serif'],
