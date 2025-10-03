@@ -10,16 +10,16 @@ interface AppHeaderProps {
 }
 
 export function AppHeader({ 
-  logoSrc = "/assets/images/logo1.svg",
-  logoAlt = "KM0 LAB Logo",
-  logoWidth = 280,
-  logoHeight = 70,
+  logoSrc = "/assets/images/logo.png",
+  logoAlt = "KMØ LAB®",
+  logoWidth = 147,
+  logoHeight = 34,
   className = ""
 }: AppHeaderProps) {
   return (
-    <div className={`w-full h-auto flex justify-center items-center py-1 ${className}`}>
+    <div className={`w-full px-3.5 py-2 inline-flex flex-col justify-start items-center ${className}`}>
       <Image
-        className="w-auto h-10 xs:h-12 sm:h-14 md:h-16"
+        className="w-logo h-logo"
         src={logoSrc}
         alt={logoAlt}
         width={logoWidth}

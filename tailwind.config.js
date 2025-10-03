@@ -15,6 +15,18 @@ export default {
       '2xl': '1536px',
     },
     extend: {
+      minWidth: {
+        'slide': '20rem', // 320px - ancho mínimo del slide
+      },
+      minHeight: {
+        'slide': '17.125rem', // 274px - alto mínimo del slide
+      },
+      minWidth: {
+        'slide': '20rem', // 320px - ancho mínimo del slide
+      },
+      minHeight: {
+        'slide': '17.125rem', // 274px - alto mínimo del slide
+      },
       fontFamily: {
         'brand': ['Antique Olive', 'Antique Olive Std', 'Georgia', 'serif'],
         'ui': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
@@ -188,12 +200,17 @@ export default {
       },
       maxWidth: {
         'header': '24rem', // 384px - ancho del header
+        'slide': '20rem', // 320px - ancho máximo de la imagen del slide
       },
       width: {
-        'logo': '9rem', // 144px - ancho del logo
+        'logo': '9.1875rem', // 147px - ancho del logo
+        'slide': '20rem', // 320px - ancho fijo del slide
       },
       height: {
-        'logo': '2rem', // 32px - altura del logo
+        'logo': '2.125rem', // 34px - altura del logo
+      },
+      maxHeight: {
+        'slide': '17.125rem', // 274px - alto máximo de la imagen del slide
       },
       backgroundImage: {
         'gradient-app': 'linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%)',
