@@ -13,6 +13,12 @@ export default {
       'lg': '1024px',
       'xl': '1280px',
       '2xl': '1536px',
+      // Breakpoints que consideran altura también
+      'xs-h': { 'raw': '(min-width: 360px) and (min-height: 640px)' },
+      'sm-h': { 'raw': '(min-width: 480px) and (min-height: 720px)' },
+      'md-h': { 'raw': '(min-width: 768px) and (min-height: 800px)' },
+      'lg-h': { 'raw': '(min-width: 1024px) and (min-height: 900px)' },
+      'xl-h': { 'raw': '(min-width: 1280px) and (min-height: 1000px)' },
     },
     extend: {
       minWidth: {
@@ -210,7 +216,7 @@ export default {
         'logo': '2.125rem', // 34px - altura del logo
       },
       maxHeight: {
-        'slide': '17.125rem', // 274px - alto máximo de la imagen del slide
+        'slide': '14rem', // 224px - alto máximo de la imagen del slide (reducido para evitar scroll)
       },
       backgroundImage: {
         'gradient-app': 'linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%)',

@@ -5,11 +5,13 @@ import Slider from "@/components/ui/Slider/Slider";
 export default function Welcome2Page() {
   return (
     <SafeHydration>
-      <div>
+      <div className="w-full min-h-screen flex flex-col md:justify-center md:items-center">
         {/* AppHeader */}
         <AppHeader />
         {/* Slider */}
-        <Slider />
+        <div className="w-full md:max-w-4xl lg:max-w-5xl xl:max-w-6xl">
+          <Slider />
+        </div>
       </div>
     </SafeHydration>
   );

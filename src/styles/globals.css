@@ -26,6 +26,72 @@
   --font-size-7xl: 5rem;       /* 80px - Heading 0 (Display) */
 
   /* Font Weights */
+
+  /* Logo Sprite Styles */
+  .logo-1 {
+    /* Tamaño del recorte (el tamaño del primer logo) */
+    width: 570.27px;
+    height: 103.87px;
+
+    /* Mostramos el SVG como sprite */
+    background-image: url("/assets/images/Logos.svg");
+
+    /* MUY IMPORTANTE:
+       Hacemos que el fondo "valga" lo mismo que el viewBox del SVG,
+       así podemos usar las coordenadas tal cual en px. */
+    background-size: 1190.55px 841.89px;
+
+    /* Desplazamos el fondo para que se vea exactamente el primer logo */
+    background-position: -310.14px -183.48px;
+
+    background-repeat: no-repeat;
+  }
+
+  /* Escalado cómodo con una variable (opcional) */
+  .logo-1 {
+    --scale: 0.223171875; /* xs: 22.317% del tamaño original (15% más grande) */
+    width: calc(570.27px * var(--scale));
+    height: calc(103.87px * var(--scale));
+    background-size: calc(1190.55px * var(--scale)) calc(841.89px * var(--scale));
+    background-position: calc(-310.14px * var(--scale)) calc(-183.48px * var(--scale));
+  }
+
+  /* Responsive scaling - considera TANTO ancho como alto, usa el más restrictivo */
+  
+  /* Altura muy pequeña (xs) - siempre usa xs independientemente del ancho */
+  @media (max-height: 699px) {
+    .logo-1 {
+      --scale: 0.45720703125; /* xs: 45.72% - reducido 15% desde 53.79% */
+    }
+  }
+
+  /* Altura pequeña (sm) - requiere TANTO ancho sm+ COMO alto 700px+ */
+  @media (min-width: 480px) and (min-height: 700px) and (max-height: 799px) {
+    .logo-1 {
+      --scale: 0.3375; /* sm: 33.75% */
+    }
+  }
+
+  /* Altura media (md) - requiere TANTO ancho md+ COMO alto 800px+ */
+  @media (min-width: 768px) and (min-height: 800px) and (max-height: 899px) {
+    .logo-1 {
+      --scale: 0.4303125; /* md: 43.03% */
+    }
+  }
+
+  /* Altura grande (lg) - requiere TANTO ancho lg+ COMO alto 900px+ */
+  @media (min-width: 1024px) and (min-height: 900px) and (max-height: 999px) {
+    .logo-1 {
+      --scale: 0.57375; /* lg: 57.375% */
+    }
+  }
+
+  /* Altura muy grande (xl) - requiere TANTO ancho xl+ COMO alto 1000px+ */
+  @media (min-width: 1280px) and (min-height: 1000px) {
+    .logo-1 {
+      --scale: 0.6375; /* xl: 63.75% */
+    }
+  }
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
