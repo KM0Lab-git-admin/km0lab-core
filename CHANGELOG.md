@@ -1,3 +1,28 @@
+# [1.2.0](https://github.com/KM0Lab-git-admin/km0lab-core/compare/v1.1.0...v1.2.0) (2025-11-02)
+
+
+### Bug Fixes
+
+* correct boilerplate reference ([cff3dd9](https://github.com/KM0Lab-git-admin/km0lab-core/commit/cff3dd9dd2d024d1d5e4afbb75692e5e53f1950e))
+* **styles:** remove Google Fonts import; use next/font for Inter ([1b02c67](https://github.com/KM0Lab-git-admin/km0lab-core/commit/1b02c67cb1d35f64194fabe6c078b4252bba0a4f))
+* **welcome:** solucionar overflow y texto cortado en hero ([2108f3a](https://github.com/KM0Lab-git-admin/km0lab-core/commit/2108f3a734318a5c6521b9b1577e1d97eb71323d))
+
+
+### Features
+
+* add new components and app structure ([ac02c88](https://github.com/KM0Lab-git-admin/km0lab-core/commit/ac02c88ea27467a5b3c38e0d247a814279d362f5))
+* añade nuevos componentes UI y DesignSystemShowcase ([f284655](https://github.com/KM0Lab-git-admin/km0lab-core/commit/f2846553795a70eb18e3a6dc7f52b17b964bcbe4))
+* **app:** pantalla de bienvenida con carrusel mobile, react-slick y componentes UI ([5d08122](https://github.com/KM0Lab-git-admin/km0lab-core/commit/5d08122176644244a225406538ddbd8daeed1319))
+* cambios en CI ([d0895d7](https://github.com/KM0Lab-git-admin/km0lab-core/commit/d0895d7977c41ad32e08bfdb85fad26f4f4061c9))
+* **chatkit:** add deps and chat page ([8a83826](https://github.com/KM0Lab-git-admin/km0lab-core/commit/8a83826920f29feccfac9917d4493fb0f56e1151))
+* commit page.tsx ([af79206](https://github.com/KM0Lab-git-admin/km0lab-core/commit/af79206f638e97237b644da48c6656a3348bf348))
+* **i18n:** add missing French about translations ([68013d8](https://github.com/KM0Lab-git-admin/km0lab-core/commit/68013d85bb33813fd18bff3e51d7355540093522))
+* paleta de color CSS ([b54f5fd](https://github.com/KM0Lab-git-admin/km0lab-core/commit/b54f5fdbb669f68102d6bf91e30eee707815a681))
+* welcome page with reusable components and design system ([d104dbe](https://github.com/KM0Lab-git-admin/km0lab-core/commit/d104dbe8055537f69b03f6bae305940a8c66f2bb))
+* **welcome:** aÃ±ade navegaciÃ³n de slider con botones e indicadores ([eab9e57](https://github.com/KM0Lab-git-admin/km0lab-core/commit/eab9e572ac1e279c03fd004d66db1518bb3285de))
+* **welcome:** add welcome2 page with slider component ([97e937f](https://github.com/KM0Lab-git-admin/km0lab-core/commit/97e937fbe00c2fc79d27fdc4ee918bc6252fad3e))
+* **welcome:** implement height-aware responsive breakpoints for welcome2 ([b292275](https://github.com/KM0Lab-git-admin/km0lab-core/commit/b29227587d9c31ac0b2335d755ed01fe5069974f))
+
 # [1.1.0](https://github.com/KM0Lab-git-admin/km0lab-core/compare/v1.0.0...v1.1.0) (2025-07-04)
 
 
