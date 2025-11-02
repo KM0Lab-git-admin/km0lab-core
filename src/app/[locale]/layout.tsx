@@ -86,6 +86,8 @@ export default async function RootLayout(props: {
 
   // The `suppressHydrationWarning` attribute in <body> is used to prevent hydration errors caused by Sentry Overlay,
   // which dynamically adds a `style` attribute to the body tag.
+  // Permite locales dinámicos
+export const dynamicParams = true; // o elimina esta export si no la necesitas
 
   return (
     <html lang={locale} className={inter.variable}>
