@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/KM0Lab-git-admin/km0lab-core/compare/v1.2.0...v1.2.1) (2025-11-03)
+
+
+### Bug Fixes
+
+* **auth:** elimina importacion de css inexistente ([3a56b66](https://github.com/KM0Lab-git-admin/km0lab-core/commit/3a56b6685e1a04e2a358f74404f50dbca16fff28))
+
 # [1.2.0](https://github.com/KM0Lab-git-admin/km0lab-core/compare/v1.1.0...v1.2.0) (2025-11-02)
 
 
