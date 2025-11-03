@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/KM0Lab-git-admin/km0lab-core/compare/v1.2.1...v1.2.2) (2025-11-03)
+
+
+### Bug Fixes
+
+* **lint:** corrige errores de linting en SOLUCION_OVERFLOW.md y excluye archivos md del linting ([d072b93](https://github.com/KM0Lab-git-admin/km0lab-core/commit/d072b93f6811c493b0e702d0f5c073c550a06a3e))
+
 ## [1.2.1](https://github.com/KM0Lab-git-admin/km0lab-core/compare/v1.2.0...v1.2.1) (2025-11-03)
 
 
