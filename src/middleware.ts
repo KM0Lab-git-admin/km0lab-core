@@ -53,6 +53,12 @@ export default function middleware(
     return NextResponse.next();
   }
 
+  // Allow direct access to static assets without i18n middleware processing
+  // This ensures assets are served correctly without locale prefix
+  if (path.startsWith('/assets/')) {
+    return NextResponse.next();
+  }
+
   return intlMiddleware(request);
 }
 
