@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/KM0Lab-git-admin/km0lab-core/compare/v1.2.2...v1.3.0) (2025-11-04)
+
+
+### Features
+
+* **ui:** cambia color del tÃ­tulo a rojo y excluye assets del middleware i18n ([dc949bd](https://github.com/KM0Lab-git-admin/km0lab-core/commit/dc949bd7ae19022f36f489a737ed4d98e09bf0ff))
+
 ## [1.2.2](https://github.com/KM0Lab-git-admin/km0lab-core/compare/v1.2.1...v1.2.2) (2025-11-03)
 
 
