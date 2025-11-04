@@ -5,25 +5,25 @@
 :root {
   /* === KM0 LAB TYPOGRAPHY SYSTEM === */
   /* Fuentes originales del diseño de Figma */
-  --font-family-brand: 'Antique Olive', 'Antique Olive Std', Georgia, serif;     /* Para headlines y brand */
-  --font-family-ui: 'Inter', system-ui, -apple-system, sans-serif;              /* Para interface y navigation */
-  --font-family-body: 'Oakes Grotesk', 'Oakes', Helvetica, Arial, sans-serif;   /* Para body text */
+  --font-family-brand: 'Antique Olive', 'Antique Olive Std', Georgia, serif; /* Para headlines y brand */
+  --font-family-ui: 'Inter', system-ui, -apple-system, sans-serif; /* Para interface y navigation */
+  --font-family-body: 'Oakes Grotesk', 'Oakes', Helvetica, Arial, sans-serif; /* Para body text */
 
   /* === KM0 LAB BACKGROUND SYSTEM === */
   --gradient-app: linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%);
 
   /* Font Sizes - Escala armoniosa basada en ratio 1.25 */
-  --font-size-xs: 0.75rem;     /* 12px - Caption */
-  --font-size-sm: 0.875rem;    /* 14px - Detail */
-  --font-size-base: 1rem;      /* 16px - Paragraph 2 (base) */
-  --font-size-lg: 1.125rem;    /* 18px - Paragraph 1 */
-  --font-size-xl: 1.25rem;     /* 20px - Heading 6 */
-  --font-size-2xl: 1.5rem;     /* 24px - Heading 5 */
-  --font-size-3xl: 1.75rem;    /* 28px - Heading 4 */
-  --font-size-4xl: 2rem;       /* 32px - Heading 3 */
-  --font-size-5xl: 2.5rem;     /* 40px - Heading 2 */
-  --font-size-6xl: 3rem;       /* 48px - Heading 1 */
-  --font-size-7xl: 5rem;       /* 80px - Heading 0 (Display) */
+  --font-size-xs: 0.75rem; /* 12px - Caption */
+  --font-size-sm: 0.875rem; /* 14px - Detail */
+  --font-size-base: 1rem; /* 16px - Paragraph 2 (base) */
+  --font-size-lg: 1.125rem; /* 18px - Paragraph 1 */
+  --font-size-xl: 1.25rem; /* 20px - Heading 6 */
+  --font-size-2xl: 1.5rem; /* 24px - Heading 5 */
+  --font-size-3xl: 1.75rem; /* 28px - Heading 4 */
+  --font-size-4xl: 2rem; /* 32px - Heading 3 */
+  --font-size-5xl: 2.5rem; /* 40px - Heading 2 */
+  --font-size-6xl: 3rem; /* 48px - Heading 1 */
+  --font-size-7xl: 5rem; /* 80px - Heading 0 (Display) */
 
   /* Font Weights */
 
@@ -34,7 +34,7 @@
     height: 103.87px;
 
     /* Mostramos el SVG como sprite */
-    background-image: url("/assets/images/Logos.svg");
+    background-image: url('/assets/images/Logos.svg');
 
     /* MUY IMPORTANTE:
        Hacemos que el fondo "valga" lo mismo que el viewBox del SVG,
@@ -57,7 +57,7 @@
   }
 
   /* Responsive scaling - considera TANTO ancho como alto, usa el más restrictivo */
-  
+
   /* Altura muy pequeña (xs) - siempre usa xs independientemente del ancho */
   @media (max-height: 699px) {
     .logo-1 {
@@ -101,11 +101,11 @@
   --font-weight-black: 900;
 
   /* Line Heights - Optimizadas para legibilidad */
-  --line-height-tight: 1.1;      /* Para headings grandes */
-  --line-height-snug: 1.25;      /* Para headings medianos */
-  --line-height-normal: 1.5;     /* Para body text */
-  --line-height-relaxed: 1.625;  /* Para texto largo */
-  --line-height-loose: 2;        /* Para casos especiales */
+  --line-height-tight: 1.1; /* Para headings grandes */
+  --line-height-snug: 1.25; /* Para headings medianos */
+  --line-height-normal: 1.5; /* Para body text */
+  --line-height-relaxed: 1.625; /* Para texto largo */
+  --line-height-loose: 2; /* Para casos especiales */
 
   /* Letter Spacing */
   --letter-spacing-tight: -0.025em;
@@ -125,7 +125,7 @@
 
   body {
     font-family: var(--font-family-ui);
-    font-feature-settings: "cv03", "cv04", "cv11";
+    font-feature-settings: 'cv03', 'cv04', 'cv11';
     color: #1a1a1a;
   }
 
@@ -156,7 +156,7 @@
   }
 
   /* Heading 1 - 48px */
-  h1:not([class*="text-"]) {
+  h1:not([class*='text-']) {
     font-size: var(--font-size-6xl);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-tight);
@@ -165,7 +165,7 @@
   }
 
   /* Heading 2 - 40px */
-  h2:not([class*="text-"]) {
+  h2:not([class*='text-']) {
     font-size: var(--font-size-5xl);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-snug);
@@ -174,7 +174,7 @@
   }
 
   /* Heading 3 - 32px */
-  h3:not([class*="text-"]) {
+  h3:not([class*='text-']) {
     font-size: var(--font-size-4xl);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-snug);
@@ -182,7 +182,7 @@
   }
 
   /* Heading 4 - 28px */
-  h4:not([class*="text-"]) {
+  h4:not([class*='text-']) {
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-snug);
@@ -190,7 +190,7 @@
   }
 
   /* Heading 5 - 24px */
-  h5:not([class*="text-"]) {
+  h5:not([class*='text-']) {
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-semibold);
     line-height: var(--line-height-snug);
@@ -198,7 +198,7 @@
   }
 
   /* Heading 6 - 20px */
-  h6:not([class*="text-"]) {
+  h6:not([class*='text-']) {
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
     line-height: var(--line-height-snug);
@@ -214,7 +214,7 @@
   }
 
   /* Paragraph 2 - 16px (Default) */
-  p:not([class*="text-"]):not(.paragraph-1):not(.detail):not(.caption) {
+  p:not([class*='text-']):not(.paragraph-1):not(.detail):not(.caption) {
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-normal);
@@ -245,14 +245,15 @@
     font-family: var(--font-family-ui);
   }
 
-  button:not([class*="text-"]) {
+  button:not([class*='text-']) {
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
     line-height: var(--line-height-normal);
     font-family: var(--font-family-ui);
   }
 
-  input, textarea {
+  input,
+  textarea {
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-normal);
@@ -270,26 +271,58 @@
 /* === TYPOGRAPHY UTILITIES === */
 @layer utilities {
   /* Weight utilities */
-  .font-light { font-weight: var(--font-weight-light); }
-  .font-normal { font-weight: var(--font-weight-normal); }
-  .font-medium { font-weight: var(--font-weight-medium); }
-  .font-semibold { font-weight: var(--font-weight-semibold); }
-  .font-bold { font-weight: var(--font-weight-bold); }
-  .font-extrabold { font-weight: var(--font-weight-extrabold); }
-  .font-black { font-weight: var(--font-weight-black); }
+  .font-light {
+    font-weight: var(--font-weight-light);
+  }
+  .font-normal {
+    font-weight: var(--font-weight-normal);
+  }
+  .font-medium {
+    font-weight: var(--font-weight-medium);
+  }
+  .font-semibold {
+    font-weight: var(--font-weight-semibold);
+  }
+  .font-bold {
+    font-weight: var(--font-weight-bold);
+  }
+  .font-extrabold {
+    font-weight: var(--font-weight-extrabold);
+  }
+  .font-black {
+    font-weight: var(--font-weight-black);
+  }
 
   /* Line height utilities */
-  .leading-tight { line-height: var(--line-height-tight); }
-  .leading-snug { line-height: var(--line-height-snug); }
-  .leading-normal { line-height: var(--line-height-normal); }
-  .leading-relaxed { line-height: var(--line-height-relaxed); }
-  .leading-loose { line-height: var(--line-height-loose); }
+  .leading-tight {
+    line-height: var(--line-height-tight);
+  }
+  .leading-snug {
+    line-height: var(--line-height-snug);
+  }
+  .leading-normal {
+    line-height: var(--line-height-normal);
+  }
+  .leading-relaxed {
+    line-height: var(--line-height-relaxed);
+  }
+  .leading-loose {
+    line-height: var(--line-height-loose);
+  }
 
   /* Letter spacing utilities */
-  .tracking-tight { letter-spacing: var(--letter-spacing-tight); }
-  .tracking-normal { letter-spacing: var(--letter-spacing-normal); }
-  .tracking-wide { letter-spacing: var(--letter-spacing-wide); }
-  .tracking-wider { letter-spacing: var(--letter-spacing-wider); }
+  .tracking-tight {
+    letter-spacing: var(--letter-spacing-tight);
+  }
+  .tracking-normal {
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  .tracking-wide {
+    letter-spacing: var(--letter-spacing-wide);
+  }
+  .tracking-wider {
+    letter-spacing: var(--letter-spacing-wider);
+  }
 
   /* Text effects */
   .text-shadow-sm {
@@ -313,20 +346,28 @@
 @layer utilities {
   /* Card effects for gaming components */
   .km0-card-shadow {
-    box-shadow: 0 4px 12px rgba(23, 64, 148, 0.15), 0 2px 4px rgba(23, 64, 148, 0.1);
+    box-shadow:
+      0 4px 12px rgba(23, 64, 148, 0.15),
+      0 2px 4px rgba(23, 64, 148, 0.1);
   }
 
   .gaming-card-shadow {
-    box-shadow: 0 4px 12px rgba(255, 138, 0, 0.25), 0 2px 4px rgba(255, 138, 0, 0.15);
+    box-shadow:
+      0 4px 12px rgba(255, 138, 0, 0.25),
+      0 2px 4px rgba(255, 138, 0, 0.15);
   }
 
   .achievement-shadow {
-    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3), 0 4px 8px rgba(255, 215, 0, 0.2);
+    box-shadow:
+      0 8px 20px rgba(255, 215, 0, 0.3),
+      0 4px 8px rgba(255, 215, 0, 0.2);
   }
 
   /* Hover animations */
   .hover-lift {
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    transition:
+      transform 0.2s ease-out,
+      box-shadow 0.2s ease-out;
   }
 
   .hover-lift:hover {
@@ -343,7 +384,9 @@
       box-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
     }
     to {
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+      box-shadow:
+        0 0 20px rgba(255, 215, 0, 0.6),
+        0 0 30px rgba(255, 215, 0, 0.4);
     }
   }
 }
@@ -353,17 +396,17 @@
   html {
     font-size: 15px;
   }
-  
+
   .display-text,
   .heading-0 {
     font-size: 3.5rem; /* Smaller on mobile */
   }
-  
-  h1:not([class*="text-"]) {
+
+  h1:not([class*='text-']) {
     font-size: 2.25rem;
   }
-  
-  h2:not([class*="text-"]) {
+
+  h2:not([class*='text-']) {
     font-size: 2rem;
   }
 }
@@ -384,7 +427,7 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .overflow-wrap-anywhere {
     overflow-wrap: anywhere;
   }

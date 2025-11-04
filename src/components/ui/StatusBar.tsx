@@ -5,14 +5,14 @@ export const StatusBar = () => {
       <div className="w-96 h-12 relative overflow-hidden">
         {/* Notch */}
         <div className="w-40 h-8 left-[113px] top-[-2px] absolute bg-black"></div>
-        
+
         {/* Time */}
         <div className="w-14 h-5 left-[37px] top-[9px] absolute rounded-3xl">
           <div className="w-14 h-5 left-0 top-[1px] absolute text-center justify-start text-black text-base font-semibold leading-snug">
             9:41
           </div>
         </div>
-        
+
         {/* Signal/Battery indicators */}
         <div className="w-6 h-3 left-[342px] top-[15px] absolute opacity-30 bg-black rounded"></div>
         <div className="w-[1.40px] h-1 left-[368px] top-[20px] absolute opacity-40 bg-black"></div>

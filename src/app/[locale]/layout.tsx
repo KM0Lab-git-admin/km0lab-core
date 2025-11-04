@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import arcjet, { detectBot, request } from '@/libs/Arcjet';
 import { Env } from '@/libs/Env';
 import { routing } from '@/libs/i18nNavigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
+import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import '@/styles/globals.css';
 export const dynamicParams = true; // o elimina esta export si no la necesitas

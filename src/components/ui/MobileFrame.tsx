@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
 
-interface MobileFrameProps {
+type MobileFrameProps = {
   children: ReactNode;
   className?: string;
-}
+};
 
 export const MobileFrame = ({ children, className = '' }: MobileFrameProps) => {
   return (

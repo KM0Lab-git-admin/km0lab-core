@@ -1,13 +1,13 @@
 import type { FC } from 'react';
 
-interface SliderNavigationProps {
+type SliderNavigationProps = {
   totalSlides: number;
   currentSlide: number;
   onPrevious: () => void;
   onNext: () => void;
   onSlideSelect: (index: number) => void;
   className?: string;
-}
+};
 
 const SliderNavigation: FC<SliderNavigationProps> = ({
   totalSlides,

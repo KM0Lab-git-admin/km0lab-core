@@ -1,7 +1,7 @@
-interface XPBadgeProps {
+type XPBadgeProps = {
   points: number;
   className?: string;
-}
+};
 
 export const XPBadge = ({ points, className = '' }: XPBadgeProps) => {
   return (
@@ -12,7 +12,9 @@ export const XPBadge = ({ points, className = '' }: XPBadgeProps) => {
             <div className="w-4 h-4 left-[4px] top-[4px] absolute bg-zinc-300"></div>
           </div>
           <div className="text-center justify-center text-km0-success-200 text-base font-bold capitalize">
-            {points} XP
+            {points}
+            {' '}
+            XP
           </div>
         </div>
       </div>

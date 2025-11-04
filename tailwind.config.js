@@ -3,7 +3,7 @@ export default {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}', // si “Colour.tsx” vive aquí
-    './app/**/*.{js,ts,jsx,tsx,mdx}',        // si usas el nuevo router
+    './app/**/*.{js,ts,jsx,tsx,mdx}', // si usas el nuevo router
   ],
   theme: {
     screens: {
@@ -14,34 +14,34 @@ export default {
       'xl': '1280px',
       '2xl': '1536px',
       // Breakpoints que consideran altura también
-      'xs-h': { 'raw': '(min-width: 360px) and (min-height: 640px)' },
-      'sm-h': { 'raw': '(min-width: 480px) and (min-height: 720px)' },
-      'md-h': { 'raw': '(min-width: 768px) and (min-height: 800px)' },
-      'lg-h': { 'raw': '(min-width: 1024px) and (min-height: 900px)' },
-      'xl-h': { 'raw': '(min-width: 1280px) and (min-height: 1000px)' },
+      'xs-h': { raw: '(min-width: 360px) and (min-height: 640px)' },
+      'sm-h': { raw: '(min-width: 480px) and (min-height: 720px)' },
+      'md-h': { raw: '(min-width: 768px) and (min-height: 800px)' },
+      'lg-h': { raw: '(min-width: 1024px) and (min-height: 900px)' },
+      'xl-h': { raw: '(min-width: 1280px) and (min-height: 1000px)' },
     },
     extend: {
       minWidth: {
-        'slide': '20rem', // 320px - ancho mínimo del slide
+        slide: '20rem', // 320px - ancho mínimo del slide
       },
       minHeight: {
-        'slide': '17.125rem', // 274px - alto mínimo del slide
+        slide: '17.125rem', // 274px - alto mínimo del slide
       },
       minWidth: {
-        'slide': '20rem', // 320px - ancho mínimo del slide
+        slide: '20rem', // 320px - ancho mínimo del slide
       },
       minHeight: {
-        'slide': '17.125rem', // 274px - alto mínimo del slide
+        slide: '17.125rem', // 274px - alto mínimo del slide
       },
       fontFamily: {
-        'brand': ['Antique Olive', 'Antique Olive Std', 'Georgia', 'serif'],
-        'ui': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        'body': ['Oakes Grotesk', 'Oakes', 'Helvetica', 'Arial', 'sans-serif'],
+        brand: ['Antique Olive', 'Antique Olive Std', 'Georgia', 'serif'],
+        ui: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        body: ['Oakes Grotesk', 'Oakes', 'Helvetica', 'Arial', 'sans-serif'],
       },
       colors: {
         'km0-blue': {
           DEFAULT: '#174094',
-          50:  '#F0F4FD',
+          50: '#F0F4FD',
           100: '#DADEF8',
           200: '#B5C3F0',
           300: '#90A9E8',
@@ -54,7 +54,7 @@ export default {
         },
         'km0-beige': {
           DEFAULT: '#FFECD2',
-          50:  '#FFF9F0',
+          50: '#FFF9F0',
           100: '#FFECD2',
           200: '#FDEEA9',
           300: '#FBDB7E',
@@ -67,7 +67,7 @@ export default {
         },
         'km0-yellow': {
           DEFAULT: '#F5C542',
-          50:  '#FEFAF0',
+          50: '#FEFAF0',
           100: '#FDF5DA',
           200: '#FBE9B4',
           300: '#F9DD8E',
@@ -80,7 +80,7 @@ export default {
         },
         'km0-coral': {
           DEFAULT: '#FF664D',
-          50:  '#FFE0DB',
+          50: '#FFE0DB',
           100: '#FFC2B7',
           200: '#FFA394',
           300: '#FF8570',
@@ -93,7 +93,7 @@ export default {
         },
         'gaming-orange': {
           DEFAULT: '#FF8A00',
-          50:  '#FFF7ED',
+          50: '#FFF7ED',
           100: '#FFEDD5',
           200: '#FED7AA',
           300: '#FDBA74',
@@ -106,7 +106,7 @@ export default {
         },
         'orange-light': {
           DEFAULT: '#FFB347',
-          50:  '#FFF8F1',
+          50: '#FFF8F1',
           100: '#FEECDC',
           200: '#FDD5B9',
           300: '#FDBA8C',
@@ -119,7 +119,7 @@ export default {
         },
         'orange-dark': {
           DEFAULT: '#CC6600',
-          50:  '#FEF3F0',
+          50: '#FEF3F0',
           100: '#FDE4DF',
           200: '#FABFB7',
           300: '#F69E91',
@@ -132,7 +132,7 @@ export default {
         },
         'neutral': {
           DEFAULT: '#525252',
-          50:  '#FAFAFA',
+          50: '#FAFAFA',
           100: '#F5F5F5',
           200: '#E5E5E5',
           300: '#D4D4D4',
@@ -145,7 +145,7 @@ export default {
         },
         'km0-success': {
           DEFAULT: '#C5F2C7',
-          50:  '#F0FDF4',
+          50: '#F0FDF4',
           100: '#DCFCE7',
           200: '#C5F2C7',
           300: '#86EFAC',
@@ -158,7 +158,7 @@ export default {
         },
         'gaming-success': {
           DEFAULT: '#00CC66',
-          50:  '#F0FDF4',
+          50: '#F0FDF4',
           100: '#DCFCE7',
           200: '#BBF7D0',
           300: '#86EFAC',
@@ -171,7 +171,7 @@ export default {
         },
         'gaming-warning': {
           DEFAULT: '#F5C542',
-          50:  '#FEFAF0',
+          50: '#FEFAF0',
           100: '#FDF5DA',
           200: '#FBE9B4',
           300: '#F9DD8E',
@@ -184,7 +184,7 @@ export default {
         },
         'gaming-fire': {
           DEFAULT: '#FF4444',
-          50:  '#FEF2F2',
+          50: '#FEF2F2',
           100: '#FEE2E2',
           200: '#FECACA',
           300: '#FCA5A5',
@@ -205,18 +205,18 @@ export default {
         'logo-padding': '0.875rem', // 14px - padding del contenedor del logo
       },
       maxWidth: {
-        'header': '24rem', // 384px - ancho del header
-        'slide': '20rem', // 320px - ancho máximo de la imagen del slide
+        header: '24rem', // 384px - ancho del header
+        slide: '20rem', // 320px - ancho máximo de la imagen del slide
       },
       width: {
-        'logo': '9.1875rem', // 147px - ancho del logo
-        'slide': '20rem', // 320px - ancho fijo del slide
+        logo: '9.1875rem', // 147px - ancho del logo
+        slide: '20rem', // 320px - ancho fijo del slide
       },
       height: {
-        'logo': '2.125rem', // 34px - altura del logo
+        logo: '2.125rem', // 34px - altura del logo
       },
       maxHeight: {
-        'slide': '14rem', // 224px - alto máximo de la imagen del slide (reducido para evitar scroll)
+        slide: '14rem', // 224px - alto máximo de la imagen del slide (reducido para evitar scroll)
       },
       backgroundImage: {
         'gradient-app': 'linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%)',
@@ -224,4 +224,4 @@ export default {
     },
   },
   plugins: [],
-}; 
+};

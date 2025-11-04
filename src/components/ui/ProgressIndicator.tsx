@@ -1,11 +1,11 @@
-interface ProgressIndicatorProps {
+type ProgressIndicatorProps = {
   total: number;
   current: number;
   onPrevious?: () => void;
   onNext?: () => void;
   showChevrons?: boolean;
   className?: string;
-}
+};
 
 export const ProgressIndicator = ({
   total,
@@ -36,7 +36,8 @@ export const ProgressIndicator = ({
             className={`w-4 h-1 left-0 top-0 absolute rounded-sm ${
               idx === current ? 'bg-neutral-900' : 'bg-zinc-400'
             }`}
-          ></div>
+          >
+          </div>
         </div>
       ))}
 

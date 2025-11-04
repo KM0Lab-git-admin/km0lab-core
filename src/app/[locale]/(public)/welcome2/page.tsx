@@ -1,6 +1,6 @@
-import SafeHydration from "@/components/SafeHydration";
-import { AppHeader } from "@/components/ui/AppHeader";
-import Slider from "@/components/ui/Slider/Slider";
+import SafeHydration from '@/components/SafeHydration';
+import { AppHeader } from '@/components/ui/AppHeader';
+import Slider from '@/components/ui/Slider/Slider';
 
 export default function Welcome2Page() {
   return (
