@@ -1,5 +1,5 @@
-"use client";
-import { useEffect, useState } from "react";
+'use client';
+import { useEffect, useState } from 'react';
 
 /**
  * SafeHydration: Renderiza los hijos solo en el cliente para evitar hydration mismatch
@@ -20,4 +20,4 @@ const SafeHydration = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-export default SafeHydration; 
+export default SafeHydration;

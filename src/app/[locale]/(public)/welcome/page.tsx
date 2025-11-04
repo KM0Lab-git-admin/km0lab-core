@@ -1,12 +1,12 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
-import { MobileFrame } from "@/components/ui/MobileFrame";
-import { AppHeader } from "@/components/ui/AppHeader";
-import SliderNavigation from "@/components/ui/SliderNavigation";
+'use client';
+import { AppHeader } from '@/components/ui/AppHeader';
+import { MobileFrame } from '@/components/ui/MobileFrame';
+import SliderNavigation from '@/components/ui/SliderNavigation';
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
 
 export default function WelcomePage() {
-  const t = useTranslations("Welcome");
+  const t = useTranslations('Welcome');
   const [isLoading, setIsLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(2); // Empezamos en el slide 3 como en la imagen
   const totalSlides = 6;
@@ -21,11 +21,11 @@ export default function WelcomePage() {
   }, []);
 
   const handlePrevious = () => {
-    setCurrentSlide((prev) => (prev > 0 ? prev - 1 : totalSlides - 1));
+    setCurrentSlide(prev => (prev > 0 ? prev - 1 : totalSlides - 1));
   };
 
   const handleNext = () => {
-    setCurrentSlide((prev) => (prev < totalSlides - 1 ? prev + 1 : 0));
+    setCurrentSlide(prev => (prev < totalSlides - 1 ? prev + 1 : 0));
   };
 
   const handleSlideSelect = (index: number) => {
@@ -33,18 +33,17 @@ export default function WelcomePage() {
   };
 
   const slide = {
-    title: t("slides.0.subtitle"),
-    imageSrc: "/assets/images/welcome/slide1.png",
-    description: t("slides.0.description"),
+    title: t('slides.0.subtitle'),
+    imageSrc: '/assets/images/welcome/slide1.PNG',
+    description: t('slides.0.description'),
   };
-
 
   return (
     <div className="min-h-[100svh] flex items-start justify-center overflow-hidden px-2 xs:px-3 sm:px-4 pt-1 xs:pt-2 sm:pt-3" data-testid="hero-container">
       <MobileFrame>
         {/* Header with Status Bar and Logo */}
         <AppHeader />
-        
+
         {/* Hero Content */}
         <div className="w-full flex flex-col items-center gap-1.5 xs:gap-2.5 sm:gap-3.5 flex-1 min-h-0">
           {isLoading ? (
@@ -72,7 +71,7 @@ export default function WelcomePage() {
               />
 
               {/* Title */}
-              <h1 
+              <h1
                 className="w-full text-center font-brand text-neutral-900 leading-tight text-balance break-words overflow-wrap-anywhere hyphens-auto px-1"
                 style={{ fontSize: 'clamp(14px, 4.8vw, 1.8rem)' }}
                 data-testid="hero-title"
@@ -81,7 +80,7 @@ export default function WelcomePage() {
               </h1>
 
               {/* Description */}
-              <p 
+              <p
                 className="w-full text-center text-neutral-500 font-normal leading-snug text-balance break-words overflow-wrap-anywhere hyphens-auto px-2"
                 style={{ fontSize: 'clamp(13px, 3vw, 1.05rem)' }}
                 data-testid="hero-description"

@@ -1,5 +1,5 @@
-import { Card } from './ui/card';
 import { Badge } from './ui/badge';
+import { Card } from './ui/card';
 import { Separator } from './ui/separator';
 
 // Componente del header
@@ -10,7 +10,7 @@ function TypographyHeader() {
       <div className="bg-km0-blue-700 px-6 py-3 rounded-t-lg">
         <h1 className="font-brand text-white text-4xl leading-tight">Typography</h1>
       </div>
-      
+
       {/* Subtitle con fondo neutral principal */}
       <div className="bg-neutral-800 px-6 py-2 rounded-b-lg">
         <p className="font-ui text-white">Sistema tipográfico KM0 LAB</p>
@@ -20,22 +20,22 @@ function TypographyHeader() {
 }
 
 // Componente para mostrar cada ejemplo tipográfico
-interface TypographyExampleProps {
+type TypographyExampleProps = {
   text: string;
   description: string;
   fontInfo: string;
   className?: string;
   showUnderline?: boolean;
   showSemibold?: boolean;
-}
+};
 
-function TypographyExample({ 
-  text, 
-  description, 
-  fontInfo, 
-  className = "",
+function TypographyExample({
+  text,
+  description,
+  fontInfo,
+  className = '',
   showUnderline = false,
-  showSemibold = false 
+  showSemibold = false,
 }: TypographyExampleProps) {
   return (
     <div className="space-y-4">
@@ -61,7 +61,7 @@ function TypographyExample({
               </div>
             </div>
           )}
-          
+
           {showSemibold && (
             <div className="flex items-center justify-between">
               <div className={`text-neutral-900 font-semibold ${className}`}>
@@ -86,7 +86,7 @@ function TypographyExample({
           {fontInfo}
         </div>
       </div>
-      
+
       <Separator className="bg-neutral-200" />
     </div>
   );
@@ -96,76 +96,76 @@ function TypographyExample({
 export default function TypographyShowcase() {
   const typographyExamples = [
     {
-      text: "Heading 0",
-      description: "Display/Hero",
-      fontInfo: "Antique Olive Black 80px",
-      className: "display-text"
+      text: 'Heading 0',
+      description: 'Display/Hero',
+      fontInfo: 'Antique Olive Black 80px',
+      className: 'display-text',
     },
     {
-      text: "Heading 1",
-      description: "Main Headlines",
-      fontInfo: "Antique Olive Bold 48px",
-      className: "font-brand text-6xl font-bold leading-tight tracking-tight"
+      text: 'Heading 1',
+      description: 'Main Headlines',
+      fontInfo: 'Antique Olive Bold 48px',
+      className: 'font-brand text-6xl font-bold leading-tight tracking-tight',
     },
     {
-      text: "Heading 2",
-      description: "Section Headlines",
-      fontInfo: "Antique Olive Bold 40px",
-      className: "font-brand text-5xl font-bold leading-snug tracking-tight"
+      text: 'Heading 2',
+      description: 'Section Headlines',
+      fontInfo: 'Antique Olive Bold 40px',
+      className: 'font-brand text-5xl font-bold leading-snug tracking-tight',
     },
     {
-      text: "Heading 3",
-      description: "Subsection Headlines",
-      fontInfo: "Antique Olive Bold 32px",
-      className: "font-brand text-4xl font-bold leading-snug"
+      text: 'Heading 3',
+      description: 'Subsection Headlines',
+      fontInfo: 'Antique Olive Bold 32px',
+      className: 'font-brand text-4xl font-bold leading-snug',
     },
     {
-      text: "Heading 4",
-      description: "Component Headlines",
-      fontInfo: "Antique Olive Bold 28px",
-      className: "font-brand text-3xl font-bold leading-snug"
+      text: 'Heading 4',
+      description: 'Component Headlines',
+      fontInfo: 'Antique Olive Bold 28px',
+      className: 'font-brand text-3xl font-bold leading-snug',
     },
     {
-      text: "Heading 5",
-      description: "Card Headlines",
-      fontInfo: "Antique Olive Semibold 24px",
-      className: "font-brand text-2xl font-semibold leading-snug"
+      text: 'Heading 5',
+      description: 'Card Headlines',
+      fontInfo: 'Antique Olive Semibold 24px',
+      className: 'font-brand text-2xl font-semibold leading-snug',
     },
     {
-      text: "Heading 6",
-      description: "Small Headlines",
-      fontInfo: "Antique Olive Semibold 20px",
-      className: "font-brand text-xl font-semibold leading-snug"
+      text: 'Heading 6',
+      description: 'Small Headlines',
+      fontInfo: 'Antique Olive Semibold 20px',
+      className: 'font-brand text-xl font-semibold leading-snug',
     },
     {
-      text: "Paragraph 1",
-      description: "Large Body Text",
-      fontInfo: "Oakes Grotesk Regular 18px",
-      className: "paragraph-1"
+      text: 'Paragraph 1',
+      description: 'Large Body Text',
+      fontInfo: 'Oakes Grotesk Regular 18px',
+      className: 'paragraph-1',
     },
     {
-      text: "Paragraph 2",
-      description: "Standard Body Text",
-      fontInfo: "Inter Regular 16px",
-      className: "font-ui text-base font-normal leading-normal",
+      text: 'Paragraph 2',
+      description: 'Standard Body Text',
+      fontInfo: 'Inter Regular 16px',
+      className: 'font-ui text-base font-normal leading-normal',
       showUnderline: true,
-      showSemibold: true
+      showSemibold: true,
     },
     {
-      text: "Detail",
-      description: "Secondary Text",
-      fontInfo: "Oakes Grotesk Regular 14px",
-      className: "detail",
+      text: 'Detail',
+      description: 'Secondary Text',
+      fontInfo: 'Oakes Grotesk Regular 14px',
+      className: 'detail',
       showUnderline: true,
-      showSemibold: true
+      showSemibold: true,
     },
     {
-      text: "Caption",
-      description: "Small Text",
-      fontInfo: "Oakes Grotesk Regular 12px",
-      className: "caption",
-      showSemibold: true
-    }
+      text: 'Caption',
+      description: 'Small Text',
+      fontInfo: 'Oakes Grotesk Regular 12px',
+      className: 'caption',
+      showSemibold: true,
+    },
   ];
 
   return (
@@ -173,7 +173,7 @@ export default function TypographyShowcase() {
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Header del sistema */}
         <TypographyHeader />
-        
+
         {/* Font Family Overview */}
         <Card className="p-6 border-neutral-200">
           <h3 className="font-brand text-2xl font-semibold mb-6 text-km0-blue-700">Familias de Fuentes Originales</h3>
@@ -185,7 +185,7 @@ export default function TypographyShowcase() {
                 <div className="caption text-neutral-600 mt-1">Brand • Headlines • Títulos</div>
               </div>
             </div>
-            
+
             <div className="space-y-3">
               <div className="p-4 border border-neutral-200 rounded-lg bg-neutral-50">
                 <div className="font-ui text-2xl mb-2 text-neutral-700">Inter</div>
@@ -233,7 +233,7 @@ export default function TypographyShowcase() {
               <div className="caption text-neutral-500">Gradiente KM0</div>
               <div className="caption text-neutral-400">Blue → Coral</div>
             </div>
-            
+
             <div className="text-center space-y-2">
               <div className="text-gradient-gold font-brand text-3xl font-bold">
                 +150 XP
@@ -241,7 +241,7 @@ export default function TypographyShowcase() {
               <div className="caption text-neutral-500">Gradiente Gold</div>
               <div className="caption text-neutral-400">Para gaming</div>
             </div>
-            
+
             <div className="text-center space-y-2">
               <div className="text-gradient-fire font-brand text-3xl font-bold">
                 STREAK!
@@ -268,7 +268,7 @@ export default function TypographyShowcase() {
                 </div>
               </div>
             </div>
-            
+
             <div className="space-y-3">
               <div className="p-3 bg-white rounded-lg border border-neutral-200">
                 <h4 className="font-ui font-semibold text-neutral-700 mb-2">Inter</h4>
@@ -281,7 +281,7 @@ export default function TypographyShowcase() {
                 </div>
               </div>
             </div>
-            
+
             <div className="space-y-3">
               <div className="p-3 bg-white rounded-lg border border-neutral-200">
                 <h4 className="font-body font-semibold text-neutral-700 mb-2">Oakes Grotesk</h4>
@@ -331,7 +331,7 @@ export default function TypographyShowcase() {
                 <p className="detail text-neutral-600">Usa Antique Olive para crear una jerarquía visual distintiva en headlines y elementos de marca.</p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 bg-km0-coral-400 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -339,7 +339,7 @@ export default function TypographyShowcase() {
                 <p className="detail text-neutral-600">Oakes Grotesk ofrece excelente legibilidad para contenido largo y textos descriptivos.</p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 bg-km0-yellow-500 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -361,7 +361,7 @@ export default function TypographyShowcase() {
                 <div className="text-neutral-500">#174094</div>
               </div>
             </div>
-            
+
             <div className="text-center space-y-2">
               <div className="size-16 rounded-lg mx-auto border bg-km0-beige-100 border-km0-beige-300"></div>
               <div className="caption text-neutral-700">
@@ -369,7 +369,7 @@ export default function TypographyShowcase() {
                 <div className="text-neutral-500">#FFECD2</div>
               </div>
             </div>
-            
+
             <div className="text-center space-y-2">
               <div className="size-16 rounded-lg mx-auto border bg-km0-coral-400 border-km0-coral-300"></div>
               <div className="caption text-neutral-700">
@@ -377,7 +377,7 @@ export default function TypographyShowcase() {
                 <div className="text-neutral-500">#FF664D</div>
               </div>
             </div>
-            
+
             <div className="text-center space-y-2">
               <div className="size-16 rounded-lg mx-auto border bg-km0-yellow-500 border-km0-yellow-300"></div>
               <div className="caption text-neutral-700">
@@ -386,7 +386,7 @@ export default function TypographyShowcase() {
               </div>
             </div>
           </div>
-          
+
           <div className="mt-6 text-center">
             <p className="detail text-neutral-600">
               Todos los colores siguen las escalas completas (50-900) definidas en el sistema KM0 LAB

@@ -1,6 +1,6 @@
-"use client";
-import React from "react";
-import SliderCount from "@/components/ui/SliderCount/SliderCount";
+'use client';
+import SliderCount from '@/components/ui/SliderCount/SliderCount';
+import React from 'react';
 
 type SliderProps = {
   title?: string;
@@ -14,15 +14,15 @@ type SliderProps = {
 };
 
 const Slider: React.FC<SliderProps> = ({
-  title = "Títol Intro 1",
+  title = 'Títol Intro 1',
   description =
-    "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa",
-  imageAlt = "Slide image",
-  imageSrc = "/assets/images/welcome/slide1.png",
+  'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa',
+  imageAlt = 'Slide image',
+  imageSrc = '/assets/images/welcome/slide1.PNG',
   current = 3,
   total = 5,
-  skipText = "SALTAR",
-  onSkip
+  skipText = 'SALTAR',
+  onSkip,
 }) => {
   return (
     <div className="w-full px-4 pt-3 pb-4 sm:px-12 sm:pt-12 sm:pb-16 sm:max-w-2xl sm:mx-auto md-h:px-8 md-h:pt-4 md-h:pb-8 lg-h:px-12 lg-h:pt-6 lg-h:pb-10 md-h:flex md-h:flex-col md-h:justify-center md-h:items-center flex flex-col justify-center items-center gap-2.5 sm:gap-8 md-h:gap-4 lg-h:gap-6 h-full">
@@ -51,8 +51,8 @@ const Slider: React.FC<SliderProps> = ({
           className="size-4 sm:size-6 sm:hover:scale-110 sm:transition-transform md-h:size-6 lg-h:size-8 flex items-center justify-center"
           aria-label="Anterior"
         >
-          <img 
-            src="/assets/icons/Functional_Arrow.svg" 
+          <img
+            src="/assets/icons/Functional_Arrow.svg"
             alt="Anterior"
             className="w-4 h-4 sm:w-6 sm:h-6 md-h:w-6 md-h:h-6 lg-h:w-8 lg-h:h-8 rotate-180"
           />
@@ -71,16 +71,16 @@ const Slider: React.FC<SliderProps> = ({
           className="size-4 sm:size-6 sm:hover:scale-110 sm:transition-transform md-h:size-6 lg-h:size-8 flex items-center justify-center"
           aria-label="Siguiente"
         >
-          <img 
-            src="/assets/icons/Functional_Arrow.svg" 
+          <img
+            src="/assets/icons/Functional_Arrow.svg"
             alt="Siguiente"
             className="w-4 h-4 sm:w-6 sm:h-6 md-h:w-6 md-h:h-6 lg-h:w-8 lg-h:h-8"
           />
         </button>
       </div>
-      
+
       {/* Slider Count */}
-      <SliderCount 
+      <SliderCount
         current={current}
         total={total}
         skipText={skipText}
@@ -91,5 +91,3 @@ const Slider: React.FC<SliderProps> = ({
 };
 
 export default Slider;
-
-

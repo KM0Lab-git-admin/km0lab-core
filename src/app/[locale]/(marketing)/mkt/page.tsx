@@ -117,4 +117,4 @@ export default async function Index(props: IIndexProps) {
       <Sponsors />
     </>
   );
-}; 
+};

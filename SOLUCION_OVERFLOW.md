@@ -12,17 +12,17 @@
   - `max-h-[50vh]` limita la altura al 50% del viewport (la imagen cede espacio al texto)
   - `object-contain` asegura que la imagen completa sea visible sin recortes
   - Bordes responsivos: `border-[2px] xs:border-[3px]`
-  
+
 - **Tipografía fluida con clamp()**:
   - **Título**: `clamp(14px, 5vw, 2.5rem)` - nunca baja de 14px, máximo 40px
   - **Descripción**: `clamp(14px, 3vw, 1.125rem)` - nunca baja de 14px, máximo 18px
-  
+
 - **Cortes de línea seguros**:
   - `text-balance` distribuye el texto equilibradamente
   - `break-words` permite cortar palabras largas
   - `overflow-wrap-anywhere` corta donde sea necesario
   - `hyphens-auto` añade guiones automáticos
-  
+
 - **Gaps responsivos**: `gap-2 xs:gap-3 sm:gap-4` progresivos sin causar overflow
 - **data-testid** añadidos para verificación de QA
 
@@ -112,7 +112,7 @@ screens: {
 
 ```javascript
 // Importar funciones
-import { checkOverflowInViewports, checkMinimumFontSize } from './src/utils/qaOverflowCheck';
+import { checkMinimumFontSize, checkOverflowInViewports } from './src/utils/qaOverflowCheck';
 
 // Verificar overflow en los 6 tamaños
 checkOverflowInViewports();

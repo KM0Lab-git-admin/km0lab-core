@@ -1,13 +1,14 @@
-import Image, { StaticImageData } from 'next/image';
+import type { StaticImageData } from 'next/image';
 import type { FC } from 'react';
+import Image from 'next/image';
 
-export interface SlideProps {
+export type SlideProps = {
   title: React.ReactNode;
   subtitle: string;
   imageSrc: string | StaticImageData;
   xp?: number;
   logoSrc?: string;
-}
+};
 
 const Slide: FC<SlideProps> = ({ title: _title, subtitle, imageSrc, xp, logoSrc }) => (
   <div className="flex flex-col items-center justify-center h-full w-full px-2">
@@ -25,7 +26,11 @@ const Slide: FC<SlideProps> = ({ title: _title, subtitle, imageSrc, xp, logoSrc 
       {xp && (
         <div className="absolute left-3 bottom-3 z-20">
           <span className="bg-km0-coral-400 text-white text-xs font-semibold rounded-md px-2.5 py-1 shadow">
-            + {xp} XP
+            +
+            {' '}
+            {xp}
+            {' '}
+            XP
           </span>
         </div>
       )}
@@ -48,4 +53,4 @@ const Slide: FC<SlideProps> = ({ title: _title, subtitle, imageSrc, xp, logoSrc 
   </div>
 );
 
-export default Slide; 
+export default Slide;
