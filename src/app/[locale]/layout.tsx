@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
+import Script from 'next/script';
 import '@/styles/globals.css';
 export const dynamicParams = true; // o elimina esta export si no la necesitas
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -99,6 +100,10 @@ export default async function RootLayout(props: {
           {props.children}
 
         </NextIntlClientProvider>
+        <Script
+          src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
