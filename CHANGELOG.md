@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/KM0Lab-git-admin/km0lab-core/compare/v1.3.0...v1.4.0) (2025-11-07)
+
+
+### Features
+
+* **chat:** integra openai chatkit ([2eaf3f9](https://github.com/KM0Lab-git-admin/km0lab-core/commit/2eaf3f9a9961ec4f67f94f3ad1e38602cd9af751))
+
 # [1.3.0](https://github.com/KM0Lab-git-admin/km0lab-core/compare/v1.2.2...v1.3.0) (2025-11-04)
 
 
