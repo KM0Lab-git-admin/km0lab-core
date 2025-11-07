@@ -221,6 +221,10 @@ export default {
       backgroundImage: {
         'gradient-app': 'linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%)',
       },
+      animationDelay: {
+        '200': '0.2s',
+        '400': '0.4s',
+      },
     },
   },
   plugins: [],

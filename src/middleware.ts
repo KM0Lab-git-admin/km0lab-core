@@ -59,6 +59,12 @@ export default function middleware(
     return NextResponse.next();
   }
 
+  // Allow direct access to API routes without i18n middleware processing
+  // This ensures API routes are served correctly without locale prefix
+  if (path.startsWith('/api/')) {
+    return NextResponse.next();
+  }
+
   return intlMiddleware(request);
 }
 
