@@ -58,10 +58,10 @@ const IntroSlide: React.FC<SlideProps> = ({ slide, totalSlides, currentSlide, on
   const isLastSlide = currentSlide === totalSlides - 1;
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-4 bg-gradient-to-br from-gray-100 to-gray-50">
-      <div className="w-full max-w-[360px] h-auto bg-gradient-to-br from-[#d4d9e6] to-[#fff7ee] rounded-[30px] outline outline-1 outline-offset-[-1px] outline-black inline-flex flex-col justify-between items-center overflow-hidden shadow-2xl">
+    <div className="flex justify-center items-center min-h-screen p-4 bg-gradient-to-br from-km0-blue-50 to-km0-beige-50">
+      <div className="w-full max-w-[360px] h-auto bg-white rounded-[30px] outline outline-1 outline-offset-[-1px] outline-black inline-flex flex-col justify-between items-center overflow-hidden shadow-2xl">
         {/* Header */}
-        <div className="w-full h-auto pt-6 pb-4 px-6 border-b border-neutral-300/50 inline-flex justify-center items-center">
+        <div className="w-full h-auto pt-6 pb-6 px-6 inline-flex justify-center items-center border-b border-neutral-200">
           <div className="Logo inline-flex flex-col justify-start items-start">
             <img
               className="w-[147px] h-[34px] object-contain"
@@ -72,7 +72,7 @@ const IntroSlide: React.FC<SlideProps> = ({ slide, totalSlides, currentSlide, on
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col justify-start items-center gap-6 px-6 py-8 w-full">
+        <div className="flex-1 flex flex-col justify-start items-center gap-2 px-6 py-6 w-full">
           {/* Image Container */}
           <div className="w-full max-w-[320px] h-auto relative">
             <img
@@ -82,7 +82,7 @@ const IntroSlide: React.FC<SlideProps> = ({ slide, totalSlides, currentSlide, on
             />
             {/* XP Button */}
             <div className="absolute bottom-4 left-4 inline-flex justify-start items-start">
-              <div className="w-[90px] h-[35px] bg-[#ff664d] rounded-lg outline outline-2 outline-offset-[-2px] outline-[#b4b4b4] flex justify-center items-center overflow-hidden">
+              <div className="w-[90px] h-[35px] bg-km0-coral-400 rounded-lg outline outline-2 outline-offset-[-2px] outline-neutral-400 flex justify-center items-center overflow-hidden">
                 <div className="px-2.5 rounded-lg flex justify-center items-center gap-[3px] overflow-hidden">
                   <div className="w-6 h-6 relative overflow-hidden">
                     <img
@@ -91,7 +91,7 @@ const IntroSlide: React.FC<SlideProps> = ({ slide, totalSlides, currentSlide, on
                       alt="XP Icon"
                     />
                   </div>
-                  <div className="text-center justify-center text-[#c5f2c7] text-base font-bold capitalize">
+                  <div className="text-center justify-center text-km0-success-500 text-base font-bold capitalize">
                     {slide.xp}
                   </div>
                 </div>
@@ -100,29 +100,29 @@ const IntroSlide: React.FC<SlideProps> = ({ slide, totalSlides, currentSlide, on
           </div>
 
           {/* Title */}
-          <h2 className="text-[#141414] text-[28px] md:text-[32px] font-['Antique_Olive_Std'] text-center font-bold leading-tight">
+          <h2 className="text-km0-coral-400 text-[28px] md:text-[32px] font-brand text-center font-bold leading-tight mt-4 mb-2">
             {slide.title}
           </h2>
 
           {/* Description Text */}
-          <p className="w-full text-[#6d6d6d] text-base font-normal font-['Oakes_Grotesk'] text-center leading-relaxed">
+          <p className="w-full text-neutral-600 text-sm md:text-base font-body text-center leading-relaxed mb-2">
             {slide.text}
           </p>
         </div>
 
         {/* Footer - Page Counter and Skip/Start Button */}
-        <div className="w-full h-auto py-4 px-6 inline-flex justify-between items-center border-t border-neutral-300/50">
+        <div className="w-full h-auto py-4 px-6 inline-flex justify-between items-center border-t border-neutral-200">
           {/* Numerator */}
-          <div className="text-black text-[24px] md:text-[26px] font-medium font-['Inter']">
+          <div className="text-neutral-900 text-[24px] md:text-[26px] font-ui font-medium">
             {currentSlide + 1}/{totalSlides}
           </div>
           {/* Skip or Start Button */}
           {isLastSlide ? (
             <button
               onClick={onStart}
-              className="px-4 py-2 bg-[#174094] rounded flex justify-center items-center gap-2 hover:bg-[#0f2a60] transition-colors"
+              className="px-4 py-2 bg-km0-blue-700 rounded flex justify-center items-center gap-2 hover:bg-km0-blue-800 transition-colors"
             >
-              <span className="text-[#f6f6f6] text-base font-normal font-['Oakes_Grotesk']">
+              <span className="text-white text-base font-normal font-body">
                 Comença
               </span>
               {/* Arrow Right Icon */}
@@ -145,7 +145,7 @@ const IntroSlide: React.FC<SlideProps> = ({ slide, totalSlides, currentSlide, on
           ) : (
             <button
               onClick={onSkip}
-              className="text-[#111113] text-base font-medium font-['FONTSPRING_DEMO_-_Oakes_Grotesk_Medium'] hover:text-[#174094] transition-colors"
+              className="text-neutral-900 text-base font-body font-medium hover:text-km0-blue-700 transition-colors"
             >
               SALTAR
             </button>
@@ -171,7 +171,7 @@ export default function WelcomeScreen() {
     customPaging: (i: number) => (
       <div
         className={`w-3 h-1 rounded-sm mx-1 transition-colors ${
-          i === currentSlide ? 'bg-[#141414]' : 'bg-[#b0b0b0]'
+          i === currentSlide ? 'bg-neutral-900' : 'bg-neutral-400'
         }`}
       />
     ),
@@ -182,7 +182,7 @@ export default function WelcomeScreen() {
           className="p-2 rounded-full hover:bg-gray-200 transition-colors"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="w-5 h-5 text-[#141414]" />
+          <ChevronLeft className="w-5 h-5 text-neutral-900" />
         </button>
         <div className="flex gap-2">{dots}</div>
         <button
@@ -190,7 +190,7 @@ export default function WelcomeScreen() {
           className="p-2 rounded-full hover:bg-gray-200 transition-colors"
           aria-label="Next slide"
         >
-          <ChevronRight className="w-5 h-5 text-[#141414]" />
+          <ChevronRight className="w-5 h-5 text-neutral-900" />
         </button>
       </div>
     ),
@@ -209,7 +209,7 @@ export default function WelcomeScreen() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-gray-100 to-gray-50 flex flex-col justify-center items-center py-8">
+    <div className="w-full min-h-screen bg-gradient-to-br from-km0-blue-50 to-km0-beige-50 flex flex-col justify-center items-center py-8">
       <div className="w-full max-w-[360px] px-4">
         <Slider ref={sliderRef} {...settings}>
           {introSlides.map((slide, index) => (
