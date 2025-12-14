@@ -2,6 +2,55 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* === ANTIQUE OLIVE FONT FACES === */
+@font-face {
+  font-family: 'Antique Olive';
+  src: url('/fonts/Antique-Olive-Std-Roman_3869.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Antique Olive';
+  src: url('/fonts/Antique-Olive-Std-Bold_3863.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Antique Olive';
+  src: url('/fonts/Antique-Olive-Std-Black_3861.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Antique Olive';
+  src: url('/fonts/Antique-Olive-Std-Italic_3865.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Antique Olive Std';
+  src: url('/fonts/Antique-Olive-Std-Roman_3869.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Antique Olive Std';
+  src: url('/fonts/Antique-Olive-Std-Bold_3863.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* === KM0 LAB TYPOGRAPHY SYSTEM === */
   /* Fuentes originales del diseño de Figma */
