@@ -60,8 +60,8 @@ const IntroSlide: React.FC<SlideProps> = ({ slide, totalSlides, currentSlide, on
   return (
     <div className="flex justify-center items-center min-h-screen p-4 bg-gradient-to-br from-km0-blue-50 to-km0-beige-50">
       <div className="w-full max-w-[360px] h-auto bg-white rounded-[30px] outline outline-1 outline-offset-[-1px] outline-black inline-flex flex-col justify-between items-center overflow-hidden shadow-2xl">
-        {/* Header */}
-        <div className="w-full h-auto pt-6 pb-6 px-6 inline-flex justify-center items-center border-b border-neutral-200">
+        {/* Header - Compact */}
+        <div className="w-full h-auto pt-4 pb-4 px-6 inline-flex justify-center items-center border-b border-neutral-200">
           <div className="Logo inline-flex flex-col justify-start items-start">
             <img
               className="w-[147px] h-[34px] object-contain"
@@ -71,8 +71,8 @@ const IntroSlide: React.FC<SlideProps> = ({ slide, totalSlides, currentSlide, on
           </div>
         </div>
 
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col justify-start items-center gap-2 px-6 py-6 w-full">
+        {/* Main Content - Optimized Spacing */}
+        <div className="flex-1 flex flex-col justify-start items-center gap-3 px-6 py-4 w-full">
           {/* Image Container */}
           <div className="w-full max-w-[320px] h-auto relative">
             <img
@@ -99,13 +99,13 @@ const IntroSlide: React.FC<SlideProps> = ({ slide, totalSlides, currentSlide, on
             </div>
           </div>
 
-          {/* Title */}
-          <h2 className="text-km0-coral-400 text-[28px] md:text-[32px] font-brand text-center font-bold leading-tight mt-4 mb-2">
+          {/* Title - Closer to Image */}
+          <h2 className="text-km0-coral-400 text-[28px] md:text-[32px] font-brand text-center font-bold leading-tight mt-3 mb-1">
             {slide.title}
           </h2>
 
-          {/* Description Text */}
-          <p className="w-full text-neutral-600 text-sm md:text-base font-body text-center leading-relaxed mb-2">
+          {/* Description Text - Closer to Title */}
+          <p className="w-full text-neutral-600 text-sm md:text-base font-body text-center leading-relaxed mb-0">
             {slide.text}
           </p>
         </div>
@@ -176,7 +176,7 @@ export default function WelcomeScreen() {
       />
     ),
     appendDots: (dots: React.ReactNode) => (
-      <div className="flex justify-center items-center gap-2 mt-6">
+      <div className="flex justify-center items-center gap-2 mt-4">
         <button
           onClick={() => sliderRef.current?.slickPrev()}
           className="p-2 rounded-full hover:bg-gray-200 transition-colors"
