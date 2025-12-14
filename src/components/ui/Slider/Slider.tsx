@@ -25,56 +25,58 @@ const Slider: React.FC<SliderProps> = ({
   onSkip,
 }) => {
   return (
-    <div className="w-full px-4 pt-3 pb-4 sm:px-12 sm:pt-12 sm:pb-16 sm:max-w-2xl sm:mx-auto md-h:px-8 md-h:pt-4 md-h:pb-8 lg-h:px-12 lg-h:pt-6 lg-h:pb-10 md-h:flex md-h:flex-col md-h:justify-center md-h:items-center flex flex-col justify-center items-center gap-2.5 sm:gap-8 md-h:gap-4 lg-h:gap-6 h-full">
+    <div className="w-full min-h-screen px-4 py-6 sm:px-8 sm:py-12 flex flex-col justify-center items-center gap-4 sm:gap-6 md-h:gap-8 bg-gradient-to-br from-[#f0f4fd] to-[#fff9f0]">
       {/* Image */}
       <img
         src={imageSrc}
         alt={imageAlt}
-        className="w-slide h-auto max-h-slide sm:w-full sm:max-w-md sm:mx-auto md-h:w-96 md-h:max-w-none lg-h:w-[28rem] xl-h:w-[32rem] rounded bg-neutral-200 object-contain"
+        className="w-full max-w-sm h-auto rounded-lg bg-neutral-200 object-cover shadow-md"
       />
 
       {/* Title */}
-      <h2 className="w-full text-center font-brand text-yellow-500 text-3xl sm:text-4xl sm:leading-tight md-h:text-4xl lg-h:text-5xl xl-h:text-6xl font-black">
+      <h2 className="w-full max-w-sm text-center font-brand text-km0-yellow-500 text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
         {title}
       </h2>
 
       {/* Description */}
-      <p className="w-80 sm:w-full sm:max-w-lg sm:mx-auto sm:-mt-4 md-h:w-96 lg-h:w-[28rem] xl-h:w-[32rem] h-24 sm:h-auto sm:min-h-24 md-h:h-28 lg-h:h-32 text-neutral-500 text-base sm:text-lg sm:leading-relaxed md-h:text-lg lg-h:text-xl font-normal leading-normal flex-1 flex items-center justify-center -mt-2">
+      <p className="w-full max-w-sm text-center text-neutral-600 text-sm sm:text-base leading-relaxed font-normal">
         {description}
       </p>
 
       {/* Navigation */}
-      <div className="inline-flex justify-center items-center gap-2 sm:gap-4 md-h:gap-3 lg-h:gap-4" aria-label="slider navigation">
+      <div className="flex justify-center items-center gap-3 sm:gap-4" aria-label="slider navigation">
         {/* Left chevron */}
         <button
           type="button"
-          className="size-4 sm:size-6 sm:hover:scale-110 sm:transition-transform md-h:size-6 lg-h:size-8 flex items-center justify-center"
+          className="p-2 hover:bg-neutral-200 rounded-full transition-colors"
           aria-label="Anterior"
         >
           <img
             src="/assets/icons/Functional_Arrow.svg"
             alt="Anterior"
-            className="w-4 h-4 sm:w-6 sm:h-6 md-h:w-6 md-h:h-6 lg-h:w-8 lg-h:h-8 rotate-180"
+            className="w-5 h-5 sm:w-6 sm:h-6 rotate-180"
           />
         </button>
 
         {/* Dots */}
-        <div className="w-4 h-1 sm:w-6 sm:h-1.5 md-h:w-6 md-h:h-1.5 lg-h:w-8 lg-h:h-2 bg-neutral-400 rounded-sm" />
-        <div className="w-4 h-1 sm:w-6 sm:h-1.5 md-h:w-6 md-h:h-1.5 lg-h:w-8 lg-h:h-2 bg-neutral-400 rounded-sm" />
-        <div className="w-4 h-1 sm:w-6 sm:h-1.5 md-h:w-6 md-h:h-1.5 lg-h:w-8 lg-h:h-2 bg-neutral-900 rounded-sm" />
-        <div className="w-4 h-1 sm:w-6 sm:h-1.5 md-h:w-6 md-h:h-1.5 lg-h:w-8 lg-h:h-2 bg-neutral-400 rounded-sm" />
-        <div className="w-4 h-1 sm:w-6 sm:h-1.5 md-h:w-6 md-h:h-1.5 lg-h:w-8 lg-h:h-2 bg-neutral-400 rounded-sm" />
+        <div className="flex gap-2">
+          <div className="w-3 h-1 sm:w-4 bg-neutral-400 rounded-sm" />
+          <div className="w-3 h-1 sm:w-4 bg-neutral-400 rounded-sm" />
+          <div className="w-3 h-1 sm:w-4 bg-neutral-900 rounded-sm" />
+          <div className="w-3 h-1 sm:w-4 bg-neutral-400 rounded-sm" />
+          <div className="w-3 h-1 sm:w-4 bg-neutral-400 rounded-sm" />
+        </div>
 
         {/* Right chevron */}
         <button
           type="button"
-          className="size-4 sm:size-6 sm:hover:scale-110 sm:transition-transform md-h:size-6 lg-h:size-8 flex items-center justify-center"
+          className="p-2 hover:bg-neutral-200 rounded-full transition-colors"
           aria-label="Siguiente"
         >
           <img
             src="/assets/icons/Functional_Arrow.svg"
             alt="Siguiente"
-            className="w-4 h-4 sm:w-6 sm:h-6 md-h:w-6 md-h:h-6 lg-h:w-8 lg-h:h-8"
+            className="w-5 h-5 sm:w-6 sm:h-6"
           />
         </button>
       </div>
