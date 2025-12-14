@@ -34,7 +34,7 @@ const Slider: React.FC<SliderProps> = ({
       />
 
       {/* Title */}
-      <h2 className="w-full text-center font-brand text-red-600 text-3xl sm:text-4xl sm:leading-tight md-h:text-4xl lg-h:text-5xl xl-h:text-6xl font-black">
+      <h2 className="w-full text-center font-brand text-yellow-500 text-3xl sm:text-4xl sm:leading-tight md-h:text-4xl lg-h:text-5xl xl-h:text-6xl font-black">
         {title}
       </h2>
 
