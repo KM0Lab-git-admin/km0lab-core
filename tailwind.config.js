@@ -13,20 +13,14 @@ export default {
       'lg': '1024px',
       'xl': '1280px',
       '2xl': '1536px',
-      // Breakpoints que consideran altura también
-      'xs-h': { raw: '(min-width: 360px) and (min-height: 640px)' },
-      'sm-h': { raw: '(min-width: 480px) and (min-height: 720px)' },
-      'md-h': { raw: '(min-width: 768px) and (min-height: 800px)' },
-      'lg-h': { raw: '(min-width: 1024px) and (min-height: 900px)' },
+      // Breakpoints con altura (la altura manda: si < 700px => XS siempre)
+      'xs-h': { raw: '(max-height: 699px)' },
+      'sm-h': { raw: '(min-width: 480px) and (min-height: 700px) and (max-height: 799px)' },
+      'md-h': { raw: '(min-width: 768px) and (min-height: 800px) and (max-height: 899px)' },
+      'lg-h': { raw: '(min-width: 1024px) and (min-height: 900px) and (max-height: 999px)' },
       'xl-h': { raw: '(min-width: 1280px) and (min-height: 1000px)' },
     },
     extend: {
-      minWidth: {
-        slide: '20rem', // 320px - ancho mínimo del slide
-      },
-      minHeight: {
-        slide: '17.125rem', // 274px - alto mínimo del slide
-      },
       minWidth: {
         slide: '20rem', // 320px - ancho mínimo del slide
       },
