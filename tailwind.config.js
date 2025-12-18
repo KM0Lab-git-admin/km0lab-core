@@ -13,14 +13,19 @@ export default {
       'lg': '1024px',
       'xl': '1280px',
       '2xl': '1536px',
-      // Breakpoints que consideran altura también
-      'xs-h': { raw: '(min-width: 360px) and (min-height: 640px)' },
-      'sm-h': { raw: '(min-width: 480px) and (min-height: 720px)' },
-      'md-h': { raw: '(min-width: 768px) and (min-height: 800px)' },
-      'lg-h': { raw: '(min-width: 1024px) and (min-height: 900px)' },
+      // Breakpoints que consideran altura; la altura es la restricción principal
+      'xs-h': { raw: '(max-height: 699px)' }, // altura <700 => siempre XS
+      'sm-h': { raw: '(min-width: 480px) and (min-height: 700px) and (max-height: 799px)' },
+      'md-h': { raw: '(min-width: 768px) and (min-height: 800px) and (max-height: 899px)' },
+      'lg-h': { raw: '(min-width: 1024px) and (min-height: 900px) and (max-height: 999px)' },
       'xl-h': { raw: '(min-width: 1280px) and (min-height: 1000px)' },
     },
     extend: {
+      maxHeight: {
+        'slider-container': '558px',
+        'slider-img': '65vh',
+        'slider-img-tall': '75vh',
+      },
       minWidth: {
         slide: '20rem', // 320px - ancho mínimo del slide
       },
@@ -207,10 +212,14 @@ export default {
       maxWidth: {
         header: '24rem', // 384px - ancho del header
         slide: '20rem', // 320px - ancho máximo de la imagen del slide
+        'slider-count-lg': '28rem', // 448px
+        'slider-count-xl': '32rem', // 512px
       },
       width: {
         logo: '9.1875rem', // 147px - ancho del logo
         slide: '20rem', // 320px - ancho fijo del slide
+        'slider-count-lg': '28rem', // 448px
+        'slider-count-xl': '32rem', // 512px
       },
       height: {
         logo: '2.125rem', // 34px - altura del logo

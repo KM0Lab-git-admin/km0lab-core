@@ -1,3 +1,4 @@
+import BreakpointIndicator from '@/components/dev/BreakpointIndicator';
 import SafeHydration from '@/components/SafeHydration';
 import { AppHeader } from '@/components/ui/AppHeader';
 import Slider from '@/components/ui/Slider/Slider';
@@ -5,14 +6,16 @@ import Slider from '@/components/ui/Slider/Slider';
 export default function Welcome2Page() {
   return (
     <SafeHydration>
-      <div className="w-full h-screen flex flex-col justify-between sm:justify-center sm:items-center md:justify-center md:items-center">
+      <div className="w-full h-svh min-h-0 overflow-hidden flex flex-col items-center">
         {/* AppHeader */}
-        <AppHeader />
+        <AppHeader className="mt-2 mb-2 sm:mt-3 sm:mb-3 xs-h:mt-1 xs-h:mb-1" />
         {/* Slider */}
-        <div className="w-full flex-1 flex flex-col justify-center sm:max-w-2xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl">
+        <div className="w-full flex-1 flex min-h-0">
           <Slider />
         </div>
       </div>
+      {/* Indicador de breakpoint (solo en desarrollo) */}
+      <BreakpointIndicator />
     </SafeHydration>
   );
 }
