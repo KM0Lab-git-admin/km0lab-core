@@ -1,5 +1,5 @@
-import Onboarding2 from '@/components/screens/onboarding/Onboarding2';
+import Onboarding from '@/components/screens/onboarding/Onboarding';
 
 export default function Onboarding2Page() {
-  return <Onboarding2 />;
+  return <Onboarding />;
 }

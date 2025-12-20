@@ -4,19 +4,19 @@ import { cn } from '@/components/ui/primitives/utils';
 import { NavigationArrow } from './NavigationArrow';
 import { SlideIndicators } from './SlideIndicators';
 
-type OnboardingNavigationProps = {
+type SimpleSliderNavigationProps = {
   currentSlide: number;
   totalSlides: number;
   onPrev: () => void;
   onNext: () => void;
 };
 
-const OnboardingNavigation = ({
+const SimpleSliderNavigation = ({
   currentSlide,
   totalSlides,
   onPrev,
   onNext,
-}: OnboardingNavigationProps) => {
+}: SimpleSliderNavigationProps) => {
   const isFirstSlide = currentSlide === 0;
   const isLastSlide = currentSlide === totalSlides - 1;
 
@@ -47,5 +47,5 @@ const OnboardingNavigation = ({
   );
 };
 
-export { OnboardingNavigation };
+export { SimpleSliderNavigation };
 

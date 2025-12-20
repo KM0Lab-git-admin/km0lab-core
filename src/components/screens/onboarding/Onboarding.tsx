@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/components/ui/primitives/utils';
 import { Button } from '@/components/ui/primitives/button';
-import { OnboardingNavigation } from './OnboardingNavigation';
+import { SimpleSliderNavigation } from '@/components/ui/slider/SimpleSliderNavigation';
 
 const slides = [
   {
@@ -48,7 +48,7 @@ const slides = [
   },
 ];
 
-export default function Onboarding2() {
+export default function Onboarding() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -91,8 +91,11 @@ export default function Onboarding2() {
     if (!isDragging) return;
     const currentX = e.touches[0]?.clientX ?? 0;
     const diff = currentX - touchStartX.current;
-    dragOffsetRef.current = diff;
-    setDragOffset(diff);
+    // Limitar el drag para evitar overflow horizontal
+    const maxDrag = 100;
+    const clampedDiff = Math.max(-maxDrag, Math.min(maxDrag, diff));
+    dragOffsetRef.current = clampedDiff;
+    setDragOffset(clampedDiff);
   };
 
   const handleTouchEnd = () => {
@@ -122,8 +125,11 @@ export default function Onboarding2() {
     const handleGlobalMouseMove = (e: MouseEvent) => {
       const currentX = e.clientX;
       const diff = currentX - mouseStartX.current;
-      dragOffsetRef.current = diff;
-      setDragOffset(diff);
+      // Limitar el drag para evitar overflow horizontal
+      const maxDrag = 100;
+      const clampedDiff = Math.max(-maxDrag, Math.min(maxDrag, diff));
+      dragOffsetRef.current = clampedDiff;
+      setDragOffset(clampedDiff);
     };
 
     const handleGlobalMouseUp = () => {
@@ -151,8 +157,9 @@ export default function Onboarding2() {
   }, [isDragging]);
 
   const handleSkipOnboarding = () => {
-    // eslint-disable-next-line no-console
-    console.log('Skip Onboarding 2');
+    const lastSlideIndex = slides.length - 1;
+    setCurrentSlide(lastSlideIndex);
+    currentSlideRef.current = lastSlideIndex;
   };
 
   const handleStartApp = () => {
@@ -174,16 +181,16 @@ export default function Onboarding2() {
         'w-full min-h-dvh-fallback',
         'flex flex-col',
         'bg-gradient-white-beige font-ui',
+        'overflow-x-hidden',
       )}
     >
       {/* Wrapper: flex-1 min-h-0 para scroll interno */}
       <div
         className={cn(
           'flex-1 min-h-0 flex flex-col items-center justify-center',
-          'p-3',
+          'p-3 w-full overflow-x-hidden',
           'h700:p-2',
           'h520:px-2 h520:py-1',
-          'h520:items-stretch',
         )}
       >
         {/* Logo fuera de la tarjeta */}
@@ -213,7 +220,7 @@ export default function Onboarding2() {
           className={cn(
             'w-full max-h-full overflow-hidden rounded-2xl bg-white km0-card-shadow',
             'flex flex-col',
-            'max-w-sm',
+            'max-w-sm mx-auto min-w-0',
             'h700:rounded-xl',
             'h520:flex-1 h520:min-h-0',
             'wideShort:max-w-4xl wideShort:flex-row',
@@ -221,7 +228,7 @@ export default function Onboarding2() {
         >
           {/* Carousel Container */}
           <div
-            className="flex-1 min-h-0 overflow-hidden cursor-grab active:cursor-grabbing select-none"
+            className="flex-1 min-h-0 overflow-hidden cursor-grab active:cursor-grabbing select-none w-full"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -230,7 +237,7 @@ export default function Onboarding2() {
             {/* Slides Track */}
             <div
               className={cn(
-                'flex h-full',
+                'flex h-full w-full',
                 !isDragging && 'transition-transform duration-300 ease-out',
               )}
               style={{
@@ -365,7 +372,7 @@ export default function Onboarding2() {
             {safeIndex + 1}/{slides.length}
           </div>
 
-          <OnboardingNavigation
+          <SimpleSliderNavigation
             currentSlide={safeIndex}
             totalSlides={slides.length}
             onPrev={handlePrevSlide}
@@ -377,11 +384,15 @@ export default function Onboarding2() {
             <Button
               type="button"
               onClick={isLastSlide ? handleStartApp : handleSkipOnboarding}
+              disabled={isLastSlide}
               aria-label={isLastSlide ? 'Empezar' : 'Saltar'}
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
-                  isLastSlide ? handleStartApp() : handleSkipOnboarding();
+                  e.preventDefault();
+                  if (!isLastSlide) {
+                    handleSkipOnboarding();
+                  }
                 }
               }}
               variant="default"
@@ -392,6 +403,7 @@ export default function Onboarding2() {
                 '!px-3 !py-2 !text-xs !h-auto',
                 'h700:!px-2.5 h700:!py-1.5 h700:!text-xs',
                 'h520:!px-2 h520:!py-1 h520:!text-[10px]',
+                isLastSlide && 'opacity-50 cursor-not-allowed',
               )}
             >
               {isLastSlide ? 'EMPEZAR' : 'SALTAR'}
@@ -402,3 +414,4 @@ export default function Onboarding2() {
     </div>
   );
 }
+
