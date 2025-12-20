@@ -1,5 +1,5 @@
 'use client';
-import SliderCount from '@/components/ui/SliderCount/SliderCount';
+import SliderCount from '@/components/ui/slider/SliderCount';
 import React from 'react';
 
 type SliderProps = {

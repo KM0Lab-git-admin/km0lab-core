@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/components/ui/utils';
+import { cn } from '@/components/ui/primitives/utils';
 import { NavigationArrow } from './NavigationArrow';
 import { SlideIndicators } from './SlideIndicators';
 

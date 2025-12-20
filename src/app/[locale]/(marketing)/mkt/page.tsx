@@ -1,4 +1,4 @@
-import { Sponsors } from '@/components/Sponsors';
+import { Sponsors } from '@/components/screens/welcome/Sponsors';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type IIndexProps = {

@@ -1,5 +1,5 @@
-import SafeHydration from '@/components/SafeHydration';
-import { AppHeader } from '@/components/ui/AppHeader';
+import SafeHydration from '@/components/screens/welcome/SafeHydration';
+import { AppHeader } from '@/components/ui/layout/AppHeader';
 import FilesList from '@/components/files/FilesList/FilesList';
 
 export default function FilesPage() {
@@ -43,4 +43,3 @@ export default function FilesPage() {
     </SafeHydration>
   );
 }
-

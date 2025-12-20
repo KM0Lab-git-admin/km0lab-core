@@ -1,4 +1,4 @@
-import { Hello } from '@/components/Hello';
+import { Hello } from '@/components/screens/welcome/Hello';
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata(props: {

@@ -1,6 +1,6 @@
-import { Badge } from './ui/badge';
-import { Card } from './ui/card';
-import { Separator } from './ui/separator';
+import { Badge } from '@/components/ui/primitives/badge';
+import { Card } from '@/components/ui/primitives/card';
+import { Separator } from '@/components/ui/primitives/separator';
 
 // Componente del header
 function TypographyHeader() {

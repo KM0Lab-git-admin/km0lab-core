@@ -1,5 +1,5 @@
-import SafeHydration from '@/components/SafeHydration';
-import { AppHeader } from '@/components/ui/AppHeader';
+import SafeHydration from '@/components/screens/welcome/SafeHydration';
+import { AppHeader } from '@/components/ui/layout/AppHeader';
 import ChatKitComponent from '@/components/chat/ChatKit/ChatKit';
 
 export default function ChatPage() {
@@ -19,4 +19,3 @@ export default function ChatPage() {
     </SafeHydration>
   );
 }
-

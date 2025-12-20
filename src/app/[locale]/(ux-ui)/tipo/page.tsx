@@ -1,4 +1,4 @@
-import DesignSystemShowcase from '@/components/DesignSystemShowcase';
+import DesignSystemShowcase from '@/components/screens/welcome/DesignSystemShowcase';
 
 export default function DesignSystemPage() {
   return (

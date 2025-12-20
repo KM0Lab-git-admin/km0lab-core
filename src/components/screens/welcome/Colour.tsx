@@ -9,9 +9,9 @@ import {
   Trophy,
   XCircle,
 } from 'lucide-react';
-import { Badge } from './ui/badge';
-import { Button } from './ui/button';
-import { Card } from './ui/card';
+import { Badge } from '@/components/ui/primitives/badge';
+import { Button } from '@/components/ui/primitives/button';
+import { Card } from '@/components/ui/primitives/card';
 import '@/styles/globals.css';
 
 function ColorScale({

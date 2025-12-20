@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { cn } from '@/components/ui/utils';
+import { cn } from '@/components/ui/primitives/utils';
 
 // Definición de slides
 const slides = [

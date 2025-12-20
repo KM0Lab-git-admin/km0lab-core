@@ -1,7 +1,7 @@
 'use client';
-import { AppHeader } from '@/components/ui/AppHeader';
-import { MobileFrame } from '@/components/ui/MobileFrame';
-import SliderNavigation from '@/components/ui/SliderNavigation';
+import { AppHeader } from '@/components/ui/layout/AppHeader';
+import { MobileFrame } from '@/components/ui/layout/MobileFrame';
+import SliderNavigation from '@/components/ui/slider/SliderNavigation';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 

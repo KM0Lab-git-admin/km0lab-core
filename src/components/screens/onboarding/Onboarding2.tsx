@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { cn } from '@/components/ui/utils';
-import { Button } from '@/components/ui/button';
+import { cn } from '@/components/ui/primitives/utils';
+import { Button } from '@/components/ui/primitives/button';
 import { OnboardingNavigation } from './OnboardingNavigation';
 
 const slides = [

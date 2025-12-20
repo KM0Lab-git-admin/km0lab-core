@@ -1,5 +1,5 @@
-import { DemoBanner } from '@/components/DemoBanner';
-import { LocaleSwitcher } from '@/components/LocaleSwitcher';
+import { DemoBanner } from '@/components/screens/welcome/DemoBanner';
+import { LocaleSwitcher } from '@/components/screens/welcome/LocaleSwitcher';
 import { BaseTemplate } from '@/templates/BaseTemplate';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
