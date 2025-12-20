@@ -51,6 +51,118 @@
   font-display: swap;
 }
 
+/* === BREAKPOINTS DE ALTURA - Custom Variants Globales para Tailwind v4 === */
+/* Orden: de menos estricto a más estricto (el último gana en cascada) */
+/* Uso: h520:hidden, h700:text-sm, wideShort:flex-row, etc. en cualquier componente */
+@custom-variant h700 (@media (max-height: 700px));
+@custom-variant wideShort (@media (min-width: 900px) and (max-height: 650px));
+@custom-variant h520 (@media (max-height: 520px));
+
+/* === KM0 LAB THEME - Colores y extensiones para Tailwind v4 === */
+@theme {
+  /* KM0 Blue */
+  --color-km0-blue-50: #F0F4FD;
+  --color-km0-blue-100: #DADEF8;
+  --color-km0-blue-200: #B5C3F0;
+  --color-km0-blue-300: #90A9E8;
+  --color-km0-blue-400: #6B8FD0;
+  --color-km0-blue-500: #4674B8;
+  --color-km0-blue-600: #2B5AA0;
+  --color-km0-blue-700: #174094;
+  --color-km0-blue-800: #132A50;
+  --color-km0-blue-900: #0F2040;
+
+  /* KM0 Beige */
+  --color-km0-beige-50: #FFF9F0;
+  --color-km0-beige-100: #FFECD2;
+  --color-km0-beige-200: #FDEEA9;
+  --color-km0-beige-300: #FBDB7E;
+  --color-km0-beige-400: #F9C853;
+  --color-km0-beige-500: #F7B528;
+  --color-km0-beige-600: #DCA223;
+  --color-km0-beige-700: #C18F1E;
+  --color-km0-beige-800: #A67C19;
+  --color-km0-beige-900: #8B6914;
+
+  /* KM0 Yellow */
+  --color-km0-yellow-50: #FEFAF0;
+  --color-km0-yellow-100: #FDF5DA;
+  --color-km0-yellow-200: #FBE9B4;
+  --color-km0-yellow-300: #F9DD8E;
+  --color-km0-yellow-400: #F7D168;
+  --color-km0-yellow-500: #F5C542;
+  --color-km0-yellow-600: #DCA223;
+  --color-km0-yellow-700: #C18F1E;
+  --color-km0-yellow-800: #A67C19;
+  --color-km0-yellow-900: #8B6914;
+
+  /* KM0 Coral */
+  --color-km0-coral-50: #FFE0DB;
+  --color-km0-coral-100: #FFC2B7;
+  --color-km0-coral-200: #FFA394;
+  --color-km0-coral-300: #FF8570;
+  --color-km0-coral-400: #FF664D;
+  --color-km0-coral-500: #F73200;
+  --color-km0-coral-600: #DC2C00;
+  --color-km0-coral-700: #C12600;
+  --color-km0-coral-800: #A62000;
+  --color-km0-coral-900: #8B1A00;
+
+  /* Gaming Orange */
+  --color-gaming-orange-50: #FFF7ED;
+  --color-gaming-orange-100: #FFEDD5;
+  --color-gaming-orange-200: #FED7AA;
+  --color-gaming-orange-300: #FDBA74;
+  --color-gaming-orange-400: #FB923C;
+  --color-gaming-orange-500: #FF8A00;
+  --color-gaming-orange-600: #EA580C;
+  --color-gaming-orange-700: #C2410C;
+  --color-gaming-orange-800: #9A3412;
+  --color-gaming-orange-900: #7C2D12;
+
+  /* KM0 Success */
+  --color-km0-success-50: #F0FDF4;
+  --color-km0-success-100: #DCFCE7;
+  --color-km0-success-200: #C5F2C7;
+  --color-km0-success-300: #86EFAC;
+  --color-km0-success-400: #4ADE80;
+  --color-km0-success-500: #00CC66;
+  --color-km0-success-600: #16A34A;
+  --color-km0-success-700: #15803D;
+  --color-km0-success-800: #166534;
+  --color-km0-success-900: #14532D;
+
+  /* Spacing */
+  --spacing-header: 3rem;
+  --spacing-header-gap: 3rem;
+  --spacing-logo-padding: 0.875rem;
+
+  /* Width */
+  --width-logo: 9.1875rem;
+  --width-slide: 20rem;
+
+  /* Height */
+  --height-logo: 2.125rem;
+
+  /* Max Width */
+  --max-width-header: 24rem;
+  --max-width-slide: 20rem;
+
+  /* Min Width */
+  --min-width-slide: 20rem;
+
+  /* Min Height */
+  --min-height-slide: 17.125rem;
+
+  /* Max Height */
+  --max-height-slide: 14rem;
+
+  /* Font Families */
+  --font-brand: 'Antique Olive', 'Antique Olive Std', Georgia, serif;
+  --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Oakes Grotesk', 'Oakes', Helvetica, Arial, sans-serif;
+}
+
 :root {
   /* === KM0 LAB TYPOGRAPHY SYSTEM === */
   /* Fuentes originales del diseño de Figma */
@@ -60,6 +172,8 @@
 
   /* === KM0 LAB BACKGROUND SYSTEM === */
   --gradient-app: linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%);
+  /* Tokens de color (solo los necesarios aquí) */
+  --km0-beige-100: #FFECD2;
 
   /* Font Sizes - Escala armoniosa basada en ratio 1.25 */
   --font-size-xs: 0.75rem; /* 12px - Caption */
@@ -83,7 +197,7 @@
     height: 103.87px;
 
     /* Mostramos el SVG como sprite */
-    background-image: url('/assets/images/Logos.svg');
+    background-image: url('/assets/logos/Logos.svg');
 
     /* MUY IMPORTANTE:
        Hacemos que el fondo "valga" lo mismo que el viewBox del SVG,
@@ -472,6 +586,11 @@
     background: var(--gradient-app);
   }
 
+  /* Blanco → KM0 Beige 100 */
+  .bg-gradient-white-beige {
+    background: linear-gradient(180deg, #ffffff 0%, var(--km0-beige-100) 100%);
+  }
+
   /* Text utilities para cortes de línea seguros */
   .text-balance {
     text-wrap: balance;
@@ -488,5 +607,18 @@
 
   .animate-delay-400 {
     animation-delay: 0.4s;
+  }
+}
+
+/* === FALLBACK DVH === */
+@layer utilities {
+  .min-h-dvh-fallback {
+    min-height: 100vh;
+  }
+}
+
+@supports (height: 100dvh) {
+  .min-h-dvh-fallback {
+    min-height: 100dvh;
   }
 }

@@ -2,7 +2,7 @@
 export default {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}', // si “Colour.tsx” vive aquí
+    './components/**/*.{js,ts,jsx,tsx,mdx}', // si "Colour.tsx" vive aquí
     './app/**/*.{js,ts,jsx,tsx,mdx}', // si usas el nuevo router
   ],
   theme: {
@@ -19,18 +19,14 @@ export default {
       'md-h': { raw: '(min-width: 768px) and (min-height: 800px) and (max-height: 899px)' },
       'lg-h': { raw: '(min-width: 1024px) and (min-height: 900px) and (max-height: 999px)' },
       'xl-h': { raw: '(min-width: 1280px) and (min-height: 1000px)' },
+      // NOTA: Los breakpoints h700, h520, wideShort para Onboarding2
+      // están definidos en globals.css como @custom-variant
     },
     extend: {
       maxHeight: {
         'slider-container': '558px',
         'slider-img': '65vh',
         'slider-img-tall': '75vh',
-      },
-      minWidth: {
-        slide: '20rem', // 320px - ancho mínimo del slide
-      },
-      minHeight: {
-        slide: '17.125rem', // 274px - alto mínimo del slide
       },
       minWidth: {
         slide: '20rem', // 320px - ancho mínimo del slide
@@ -229,6 +225,7 @@ export default {
       },
       backgroundImage: {
         'gradient-app': 'linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%)',
+        'gradient-white-beige': 'linear-gradient(180deg, #ffffff 0%, #FFECD2 100%)',
       },
       animationDelay: {
         '200': '0.2s',
