@@ -13,12 +13,9 @@ export default {
       'lg': '1024px',
       'xl': '1280px',
       '2xl': '1536px',
-      // Breakpoints con altura (la altura manda: si < 700px => XS siempre)
-      'xs-h': { raw: '(max-height: 699px)' },
-      'sm-h': { raw: '(min-width: 480px) and (min-height: 700px) and (max-height: 799px)' },
-      'md-h': { raw: '(min-width: 768px) and (min-height: 800px) and (max-height: 899px)' },
-      'lg-h': { raw: '(min-width: 1024px) and (min-height: 900px) and (max-height: 999px)' },
-      'xl-h': { raw: '(min-width: 1280px) and (min-height: 1000px)' },
+      // NOTA: Tailwind v4 con @tailwindcss/postcss NO soporta screens raw.
+      // Los breakpoints de altura (h700, h600, h520, h460, wideShort)
+      // están definidos en globals.css como @media queries en @layer utilities.
     },
     extend: {
       minWidth: {
@@ -214,6 +211,7 @@ export default {
       },
       backgroundImage: {
         'gradient-app': 'linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%)',
+        'gradient-white-beige': 'linear-gradient(180deg, #ffffff 0%, #FFECD2 100%)',
       },
       animationDelay: {
         '200': '0.2s',

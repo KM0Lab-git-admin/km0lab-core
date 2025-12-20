@@ -39,8 +39,11 @@ export default function WelcomePage() {
   };
 
   return (
-    <div className="min-h-[100svh] flex items-start justify-center overflow-hidden px-2 xs:px-3 sm:px-4 pt-1 xs:pt-2 sm:pt-3" data-testid="hero-container">
-      <MobileFrame>
+    <div
+      className="min-h-dvh-fallback flex flex-col items-stretch justify-center overflow-hidden px-2 xs:px-3 sm:px-4 pt-1 xs:pt-2 sm:pt-3"
+      data-testid="hero-container"
+    >
+      <MobileFrame className="flex-1 min-h-0 w-full">
         {/* Header with Status Bar and Logo */}
         <AppHeader />
 

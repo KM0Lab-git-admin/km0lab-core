@@ -80,58 +80,148 @@ export default function Onboarding() {
   if (!activeSlide) return null;
 
   return (
-    <div className="w-full min-h-svh bg-gradient-app flex items-center justify-center px-3 py-4 font-ui">
-      <section className="w-full max-w-sm overflow-hidden rounded-2xl bg-white km0-card-shadow">
-        {/* Header dentro del frame (como el mock) */}
-        <header className="bg-km0-blue-700 flex items-center justify-center h-header">
-          <div className="logo-1" role="img" aria-label="KM0 Lab" />
-        </header>
-
-        {/* Content */}
-        <div className="px-6 pt-5 pb-6">
-          {/* Image block: fondo de color + card blanca */}
-          <div className={cn('relative rounded-2xl p-4', activeSlide.color)}>
-            <div className="relative rounded-2xl bg-white border border-white shadow-sm p-3">
-              <img
-                src={activeSlide.image}
-                alt={activeSlide.title}
-                className={cn(
-                  'w-full h-auto rounded-xl object-cover transition-transform duration-300',
-                  isAnimating ? 'scale-95' : 'scale-100',
-                )}
-              />
-            </div>
-
-            {/* XP badge */}
-            <div className="absolute left-4 bottom-4 bg-km0-coral-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
-              + 10 XP
-            </div>
-          </div>
-
-          {/* Text */}
-          <div
+    <div
+      className={cn(
+        'w-full min-h-dvh-fallback',
+        'flex flex-col',
+        'bg-gradient-app font-ui',
+      )}
+    >
+      <div
+        className={cn(
+          'flex-1 min-h-0 flex items-center justify-center',
+          'p-3',
+          'h700:p-2',
+          'h520:p-1',
+        )}
+      >
+        <section
+          className={cn(
+            'w-full max-w-sm max-h-full overflow-hidden rounded-2xl bg-white km0-card-shadow',
+            'flex flex-col',
+            'h700:rounded-xl',
+          )}
+        >
+          {/* Header dentro del frame */}
+          <header
             className={cn(
-              'mt-6 text-center transition-all duration-300',
-              isAnimating ? 'translate-y-1 opacity-90' : 'translate-y-0 opacity-100',
+              'bg-km0-blue-700 flex items-center justify-center shrink-0',
+              'py-3',
+              'h700:py-2',
+              'h520:py-1',
             )}
           >
-            <h1 className="font-brand text-3xl md:text-4xl font-black text-neutral-900 uppercase tracking-tight text-balance leading-tight">
-              {activeSlide.title}
-            </h1>
-            <p className="mt-3 font-ui text-neutral-500 text-base md:text-lg leading-relaxed">
-              {activeSlide.subtitle}
-            </p>
+            <div
+              className={cn(
+                'logo-1',
+                'h700:scale-90',
+                'h520:scale-80',
+              )}
+              role="img"
+              aria-label="KM0 Lab"
+            />
+          </header>
+
+          {/* Content scrollable */}
+          <div
+            className={cn(
+              'flex-1 min-h-0 overflow-y-auto',
+              'flex flex-col gap-4',
+              'px-6 pt-5 pb-6',
+              'h700:px-5 h700:pb-4 h700:gap-3',
+              'h520:px-4 h520:pb-3 h520:gap-3',
+            )}
+          >
+            {/* Image block */}
+            <div
+              className={cn(
+                'relative rounded-2xl p-4',
+                'h700:p-3',
+                'h520:p-2',
+                activeSlide.color,
+              )}
+            >
+              <div
+                className={cn(
+                  'relative rounded-2xl bg-white border border-white shadow-sm',
+                  'p-3',
+                  'h700:p-2',
+                  'h520:p-1.5',
+                )}
+              >
+                <img
+                  src={activeSlide.image}
+                  alt={activeSlide.title}
+                  className={cn(
+                    'w-full object-contain rounded-xl transition-transform duration-300',
+                    'max-h-[34dvh]',
+                    'h700:max-h-[28dvh]',
+                    'h520:max-h-[22dvh]',
+                    isAnimating ? 'scale-95' : 'scale-100',
+                  )}
+                />
+              </div>
+
+              {/* XP badge */}
+              <div
+                className={cn(
+                  'absolute left-4 bottom-4 bg-km0-coral-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md',
+                  'h700:left-3 h700:bottom-3',
+                  'h520:hidden',
+                )}
+              >
+                + 10 XP
+              </div>
+            </div>
+
+            {/* Text */}
+            <div
+              className={cn(
+                'text-center transition-all duration-300',
+                'h700:mt-1',
+                'h520:mt-0.5',
+                isAnimating ? 'translate-y-1 opacity-90' : 'translate-y-0 opacity-100',
+              )}
+            >
+              <h1
+                className={cn(
+                  'font-brand font-black text-neutral-900 uppercase tracking-tight text-balance leading-tight',
+                  'text-3xl md:text-4xl',
+                  'h700:text-2xl',
+                  'h520:text-xl',
+                )}
+              >
+                {activeSlide.title}
+              </h1>
+              <p
+                className={cn(
+                  'mt-3 font-ui text-neutral-500 leading-relaxed',
+                  'text-base md:text-lg',
+                  'h700:text-sm h700:mt-2',
+                  'h520:text-sm h520:mt-1.5',
+                )}
+              >
+                {activeSlide.subtitle}
+              </p>
+            </div>
           </div>
 
           {/* Footer controls */}
-          <footer className="mt-6 flex items-center justify-between gap-3">
+          <footer
+            className={cn(
+              'shrink-0 flex items-center justify-between gap-3',
+              'px-6 py-4',
+              'h700:px-5 h700:py-3',
+              'h520:px-4 h520:py-2',
+            )}
+          >
             {/* Counter */}
-            <div className="w-16 text-km0-blue-700 font-bold text-lg">
+            <div className="w-16 text-km0-blue-700 font-bold text-lg h700:text-base h520:text-sm">
               {safeIndex + 1}/{slides.length}
             </div>
 
             {/* Nav */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 h700:gap-2 h520:gap-1.5">
               <button
                 type="button"
                 onClick={prevSlide}
@@ -139,6 +229,8 @@ export default function Onboarding() {
                 aria-label="Anterior"
                 className={cn(
                   'p-2 rounded-full text-neutral-400 hover:text-km0-blue-700 transition-colors',
+                  'h700:p-1.5',
+                  'h520:p-1',
                   safeIndex === 0 && 'opacity-30 cursor-not-allowed hover:text-neutral-400',
                 )}
               >
@@ -151,20 +243,23 @@ export default function Onboarding() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  className="h-5 w-5 h700:h-4 h700:w-4 h520:h-4 h520:w-4"
                 >
                   <path d="M15 18l-6-6 6-6" />
                 </svg>
               </button>
 
-              <div className="flex items-center gap-2" aria-label="Progreso">
+              <div className="flex items-center gap-2 h700:gap-1.5 h520:gap-1" aria-label="Progreso">
                 {slides.map((_, index) => (
                   <div
                     key={index}
                     className={cn(
                       'h-2 rounded-full transition-all duration-200',
+                      'h700:h-1.5',
+                      'h520:h-1',
                       safeIndex === index
-                        ? 'w-8 bg-neutral-900'
-                        : 'w-2 bg-neutral-300',
+                        ? 'w-8 h700:w-6 h520:w-5 bg-neutral-900'
+                        : 'w-2 h700:w-1.5 h520:w-1 bg-neutral-300',
                     )}
                   />
                 ))}
@@ -177,6 +272,8 @@ export default function Onboarding() {
                 aria-label="Siguiente"
                 className={cn(
                   'p-2 rounded-full text-neutral-400 hover:text-km0-blue-700 transition-colors',
+                  'h700:p-1.5',
+                  'h520:p-1',
                   isLastSlide && 'opacity-30 cursor-not-allowed hover:text-neutral-400',
                 )}
               >
@@ -189,6 +286,7 @@ export default function Onboarding() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  className="h-5 w-5 h700:h-4 h700:w-4 h520:h-4 h520:w-4"
                 >
                   <path d="M9 18l6-6-6-6" />
                 </svg>
@@ -201,14 +299,20 @@ export default function Onboarding() {
                 type="button"
                 onClick={isLastSlide ? () => console.log('Start App') : skipOnboarding}
                 aria-label={isLastSlide ? 'Empezar' : 'Saltar'}
-                className="px-4 py-2 rounded bg-km0-blue-700 text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+                className={cn(
+                  'rounded bg-km0-blue-700 text-white font-semibold whitespace-nowrap text-center',
+                  'shadow-sm hover:opacity-90 transition-opacity',
+                  'px-4 py-2 text-sm',
+                  'h700:px-3.5 h700:py-1.5 h700:text-sm',
+                  'h520:px-3 h520:py-1.5 h520:text-xs',
+                )}
               >
                 {isLastSlide ? 'EMPEZAR' : 'SALTAR'}
               </button>
             </div>
           </footer>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
