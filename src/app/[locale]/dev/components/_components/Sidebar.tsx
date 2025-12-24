@@ -71,11 +71,18 @@ export default function Sidebar({
                 {list.map(item => {
                   const isActive = item.id === selectedId;
                   return (
-                    <button
+                    <div
                       key={item.id}
-                      type="button"
+                      role="button"
+                      tabIndex={0}
                       onClick={() => onSelect(item.id)}
-                      className={`group flex w-full items-start justify-between rounded-lg border px-3 py-2 text-left transition ${
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          onSelect(item.id);
+                        }
+                      }}
+                      className={`group flex w-full cursor-pointer items-start justify-between rounded-lg border px-3 py-2 text-left transition ${
                         isActive
                           ? 'border-indigo-500 bg-indigo-50'
                           : 'border-slate-200 hover:border-indigo-300 hover:bg-slate-50'
@@ -97,7 +104,7 @@ export default function Sidebar({
                       >
                         {copiedId === item.id ? 'Copiado' : 'Copiar'}
                       </button>
-                    </button>
+                    </div>
                   );
                 })}
               </div>
