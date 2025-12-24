@@ -189,7 +189,7 @@ export default function Onboarding() {
         className={cn(
           'flex-1 min-h-0 flex flex-col items-center justify-center',
           'p-3 w-full overflow-x-hidden',
-          'h700:p-2',
+          'h700:justify-between h700:px-4 h700:py-2',
           'h520:px-2 h520:py-1',
         )}
       >
@@ -218,10 +218,10 @@ export default function Onboarding() {
         <section
           ref={containerRef}
           className={cn(
-            'w-full max-h-full overflow-hidden rounded-2xl bg-white km0-card-shadow',
+            'w-full h-slide-container overflow-hidden rounded-2xl bg-white km0-card-shadow',
             'flex flex-col',
             'max-w-sm mx-auto min-w-0',
-            'h700:rounded-xl',
+            'h700:rounded-xl h700:flex-1 h700:min-h-0',
             'h520:flex-1 h520:min-h-0',
             'wideShort:max-w-4xl wideShort:flex-row',
           )}
@@ -251,7 +251,7 @@ export default function Onboarding() {
                     'w-full flex-shrink-0 h-full',
                     'flex flex-col',
                     'px-5 pb-2',
-                    'h700:px-4 h700:pb-2',
+                    'h700:px-5 h700:pb-2',
                     'h520:px-3 h520:pb-0.5',
                   )}
                 >
@@ -263,7 +263,7 @@ export default function Onboarding() {
                       'h700:rounded-xl',
                       slide.color,
                       'p-3 mt-5',
-                      'h700:p-2 h700:mt-4',
+                      'h700:p-3 h700:mt-3',
                       'h520:p-2 h520:rounded-xl h520:mt-3',
                     )}
                   >
@@ -273,7 +273,7 @@ export default function Onboarding() {
                         'rounded-2xl',
                         'h700:rounded-xl',
                         'p-2',
-                        'h700:p-1',
+                        'h700:p-2',
                         'h520:p-1 h520:rounded-lg',
                       )}
                     >
@@ -285,7 +285,7 @@ export default function Onboarding() {
                           'rounded-xl',
                           'h700:rounded-lg',
                           'max-h-[32dvh]',
-                          'h700:max-h-[26dvh]',
+                          'h700:max-h-[34dvh]',
                           'h520:max-h-[38dvh]',
                         )}
                         draggable={false}
@@ -311,7 +311,7 @@ export default function Onboarding() {
                       className={cn(
                         'text-center',
                         'mt-4',
-                        'h700:mt-2',
+                        'h700:mt-3',
                         'h520:mt-2',
                       )}
                     >
@@ -414,4 +414,3 @@ export default function Onboarding() {
     </div>
   );
 }
-

@@ -206,19 +206,20 @@ export default {
         'logo-padding': '0.875rem', // 14px - padding del contenedor del logo
       },
       maxWidth: {
-        header: '24rem', // 384px - ancho del header
-        slide: '20rem', // 320px - ancho máximo de la imagen del slide
+        'header': '24rem', // 384px - ancho del header
+        'slide': '20rem', // 320px - ancho máximo de la imagen del slide
         'slider-count-lg': '28rem', // 448px
         'slider-count-xl': '32rem', // 512px
       },
       width: {
-        logo: '9.1875rem', // 147px - ancho del logo
-        slide: '20rem', // 320px - ancho fijo del slide
+        'logo': '9.1875rem', // 147px - ancho del logo
+        'slide': '20rem', // 320px - ancho fijo del slide
         'slider-count-lg': '28rem', // 448px
         'slider-count-xl': '32rem', // 512px
       },
       height: {
         logo: '2.125rem', // 34px - altura del logo
+        'slide-container': '475px', // 475px - altura del contenedor del slide
       },
       maxHeight: {
         slide: '14rem', // 224px - alto máximo de la imagen del slide (reducido para evitar scroll)
@@ -228,8 +229,8 @@ export default {
         'gradient-white-beige': 'linear-gradient(180deg, #ffffff 0%, #FFECD2 100%)',
       },
       animationDelay: {
-        '200': '0.2s',
-        '400': '0.4s',
+        200: '0.2s',
+        400: '0.4s',
       },
     },
   },
