@@ -12,12 +12,17 @@ const inputVariants = cva(
         default: [
           'bg-white text-[#111113] outline-[#111112]/20',
           'placeholder:text-[#111112]/60',
-          'focus-visible:outline-[#111112]/20',
+          'focus-visible:outline-[#FFECD2]',
           'disabled:bg-transparent disabled:text-[#111112]/40 disabled:placeholder:text-[#111112]/40',
         ],
         filled: [
           'bg-[#8ed9d4]/90 text-[#111113] outline-[#111112]/20',
           'focus-visible:outline-[#111112]/20',
+        ],
+        success: [
+          'bg-[#F0FDF4] text-[#111113] outline-[#00CC66]',
+          'focus-visible:outline-[#00CC66]/40',
+          'disabled:bg-[#F0FDF4] disabled:text-[#111113]/40 disabled:outline-[#00CC66]/40',
         ],
         error: [
           'bg-[#fff2f4] text-[#e30000] outline-[#e30000]',
@@ -41,6 +46,7 @@ const messageVariants = cva(
         default: 'text-[#111112]/60',
         error: 'text-[#e30000]',
         errorDisabled: 'text-[#e30000]/40',
+        success: 'text-[#00CC66]',
       },
     },
     defaultVariants: {
@@ -73,18 +79,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
-    // Determine the variant based on error state and value
-    const computedVariant = error
-      ? 'error'
-      : props.value && props.value !== ''
-        ? 'filled'
-        : variant || 'default';
+    const ariaDescribedBy = props['aria-describedby'];
+    const messageId = React.useId();
+    const computedVariant = error ? 'error' : variant ?? 'default';
 
     const messageVariant = error
       ? disabled
         ? 'errorDisabled'
         : 'error'
-      : 'default';
+      : computedVariant === 'success'
+        ? 'success'
+        : 'default';
 
     return (
       <div className="relative w-full">
@@ -100,6 +105,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             disabled={disabled}
             aria-invalid={error}
+            aria-describedby={
+              message
+                ? [ariaDescribedBy, messageId].filter(Boolean).join(' ')
+                : ariaDescribedBy
+            }
             {...props}
           />
           {iconLeft && (
@@ -114,7 +124,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         {message && (
-          <div className={cn(messageVariants({ variant: messageVariant }))}>
+          <div
+            id={messageId}
+            className={cn(messageVariants({ variant: messageVariant }))}
+          >
             {error && (
               <svg
                 width="13"
@@ -154,6 +167,91 @@ export const EmailIcon = () => (
       d="M0 1.5C0 0.671574 0.671573 0 1.5 0H13.5C14.3284 0 15 0.671573 15 1.5V10.5C15 11.3284 14.3284 12 13.5 12H1.5C0.671574 12 0 11.3284 0 10.5V1.5ZM2.63894 1.5L7.5 5.75342L12.3611 1.5H2.63894ZM13.5 2.49658L7.99388 7.31443C7.71111 7.56186 7.28889 7.56186 7.00612 7.31443L1.5 2.49658V10.5H13.5V2.49658Z"
       fill="#111113"
       fillOpacity="0.6"
+    />
+  </svg>
+);
+
+export const PhoneIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-[18px] h-[18px]"
+  >
+    <path
+      d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.2 15.4C15.45 15.15 15.8 15.07 16.12 15.18C17.11 15.51 18.17 15.7 19.27 15.7C19.67 15.7 20 16.03 20 16.43V19.27C20 19.67 19.67 20 19.27 20C10.4 20 4 13.6 4 4.73C4 4.33 4.33 4 4.73 4H7.57C7.97 4 8.3 4.33 8.3 4.73C8.3 5.83 8.49 6.89 8.82 7.88C8.93 8.2 8.85 8.55 8.6 8.8L6.62 10.79Z"
+      fill="#111113"
+      fillOpacity="0.6"
+    />
+  </svg>
+);
+
+export const DateIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-[18px] h-[18px]"
+  >
+    <path
+      d="M6 2C6 1.44772 6.44772 1 7 1C7.55228 1 8 1.44772 8 2V3H12V2C12 1.44772 12.4477 1 13 1C13.5523 1 14 1.44772 14 2V3H15C16.1046 3 17 3.89543 17 5V15C17 16.1046 16.1046 17 15 17H5C3.89543 17 3 16.1046 3 15V5C3 3.89543 3.89543 3 5 3H6V2ZM5 7V15H15V7H5Z"
+      fill="#111113"
+      fillOpacity="0.6"
+    />
+  </svg>
+);
+
+export const ZipCodeIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 15 15"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-[18px] h-[18px]"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M7.5 0C4.46243 0 2 2.46243 2 5.5C2 9.625 7.5 15 7.5 15C7.5 15 13 9.625 13 5.5C13 2.46243 10.5376 0 7.5 0ZM7.5 1.5C9.70914 1.5 11.5 3.29086 11.5 5.5C11.5 6.78441 10.3807 8.82585 8.93206 11.0206C8.42398 11.7905 7.92523 12.5273 7.5 13.1345C7.07477 12.5273 6.57602 11.7905 6.06794 11.0206C4.61934 8.82585 3.5 6.78441 3.5 5.5C3.5 3.29086 5.29086 1.5 7.5 1.5ZM5.5 4.5H9.5V5.5H5.5V4.5ZM5.5 6.5H8.5V7.5H5.5V6.5Z"
+      fill="#111113"
+      fillOpacity="0.6"
+    />
+  </svg>
+);
+
+export const CheckIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-[18px] h-[18px]"
+  >
+    <path
+      d="M7.5 13.4L4.6 10.5C4.2 10.1 3.6 10.1 3.2 10.5C2.8 10.9 2.8 11.5 3.2 11.9L6.8 15.5C7.2 15.9 7.8 15.9 8.2 15.5L17 6.7C17.4 6.3 17.4 5.7 17 5.3C16.6 4.9 16 4.9 15.6 5.3L7.5 13.4Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
+export const XIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-[18px] h-[18px]"
+  >
+    <path
+      d="M6.2 5.8C5.8 5.4 5.2 5.4 4.8 5.8C4.4 6.2 4.4 6.8 4.8 7.2L7.6 10L4.8 12.8C4.4 13.2 4.4 13.8 4.8 14.2C5.2 14.6 5.8 14.6 6.2 14.2L9 11.4L11.8 14.2C12.2 14.6 12.8 14.6 13.2 14.2C13.6 13.8 13.6 13.2 13.2 12.8L10.4 10L13.2 7.2C13.6 6.8 13.6 6.2 13.2 5.8C12.8 5.4 12.2 5.4 11.8 5.8L9 8.6L6.2 5.8Z"
+      fill="currentColor"
     />
   </svg>
 );

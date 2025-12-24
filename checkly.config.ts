@@ -8,7 +8,7 @@ const sendDefaults = {
 };
 
 // FIXME: Add your production URL
-const productionURL = 'https://demo.nextjs-boilerplate.com';
+// const productionURL = 'https://demo.nextjs-boilerplate.com';
 
 const emailChannel = new EmailAlertChannel('email-channel-1', {
   // FIXME: add your own email address, Checkly will send you an email notification if a check fails
@@ -29,14 +29,8 @@ export const config = defineConfig({
       frequency: Frequency.EVERY_24H,
       testMatch: '**/tests/e2e/**/*.check.e2e.ts',
       alertChannels: [emailChannel],
-    },
-    playwrightConfig: {
-      use: {
-        baseURL: process.env.ENVIRONMENT_URL || productionURL,
-        extraHTTPHeaders: {
-          'x-vercel-protection-bypass': process.env.VERCEL_BYPASS_TOKEN,
-        },
-      },
+      // playwrightConfig moved to browserChecks level in newer versions
+      // baseURL and extraHTTPHeaders are configured in the test files
     },
   },
   cli: {

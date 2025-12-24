@@ -161,6 +161,21 @@
   --font-brand: 'Antique Olive', 'Antique Olive Std', Georgia, serif;
   --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
   --font-body: 'Oakes Grotesk', 'Oakes', Helvetica, Arial, sans-serif;
+
+  /* Colores semánticos para componentes UI */
+  --color-primary: #174094;
+  --color-primary-foreground: #ffffff;
+  --color-destructive: #FF4444;
+  --color-destructive-foreground: #ffffff;
+  --color-secondary: #F5F5F5;
+  --color-secondary-foreground: #1a1a1a;
+  --color-accent: #FF664D;
+  --color-accent-foreground: #ffffff;
+  --color-background: #ffffff;
+  --color-foreground: #1a1a1a;
+  --color-muted: #F5F5F5;
+  --color-muted-foreground: #737373;
+  --color-ring: #174094;
 }
 
 :root {

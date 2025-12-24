@@ -1,356 +1,283 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type ChangeEvent } from 'react';
 import {
   Input,
   EmailIcon,
-  ChevronDownIcon,
+  PhoneIcon,
+  DateIcon,
+  ZipCodeIcon,
+  CheckIcon,
+  XIcon,
 } from '@/components/ui/primitives/input';
+import { Button } from '@/components/ui/primitives/button';
+import { getValidatorById, validators } from '@/validation/validators';
+
+const neutralHelperText = 'Introduce un valor';
+const inputId = 'input-demo-playground-input';
 
 export default function InputDemoPage() {
-  const [value1, setValue1] = useState('');
-  const [value2, setValue2] = useState('');
-  const [value3, setValue3] = useState('');
-  const [value4, setValue4] = useState('');
+  const [playgroundValue, setPlaygroundValue] = useState('');
+  const [playgroundPlaceholder, setPlaygroundPlaceholder] =
+    useState('Email');
+  const [showLeftIcon, setShowLeftIcon] = useState(true);
+  const [showRightIcon, setShowRightIcon] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [validationStatus, setValidationStatus] = useState<
+    'neutral' | 'success' | 'error'
+  >('neutral');
+  const [helperText, setHelperText] = useState(neutralHelperText);
+  const [validatorId, setValidatorId] = useState('email');
+  const [hasValidated, setHasValidated] = useState(false);
+
+  const applyLiveValidation = (value: string, nextValidatorId: string) => {
+    if (value.trim().length === 0) {
+      if (validationStatus !== 'neutral') {
+        resetValidation();
+      }
+      return;
+    }
+
+    if (nextValidatorId === 'phone') {
+      const digitsOnly = /^\d+$/.test(value);
+
+      if (!digitsOnly) {
+        setValidationStatus('error');
+        setHelperText('Telefono invalido.');
+        setHasValidated(true);
+        return;
+      }
+
+      if (value.length === 9) {
+        setValidationStatus('success');
+        setHelperText('Correcto.');
+        setHasValidated(true);
+        return;
+      }
+
+      if (validationStatus !== 'neutral') {
+        resetValidation();
+      }
+      return;
+    }
+
+    const validator = getValidatorById(nextValidatorId);
+    const result = validator.validate(value);
+
+    if (result.isValid) {
+      setValidationStatus('success');
+      setHelperText(result.message ?? 'Correcto.');
+      setHasValidated(true);
+      return;
+    }
+
+    if (validationStatus !== 'neutral') {
+      resetValidation();
+    }
+  };
+
+  const resetValidation = () => {
+    setValidationStatus('neutral');
+    setHelperText(neutralHelperText);
+    setHasValidated(false);
+  };
+
+  const handlePlaygroundChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const nextValue = event.target.value;
+    setPlaygroundValue(nextValue);
+    applyLiveValidation(nextValue, validatorId);
+  };
+
+  const handleValidate = () => {
+    const validator = getValidatorById(validatorId);
+    const result = validator.validate(playgroundValue);
+    setValidationStatus(result.isValid ? 'success' : 'error');
+    setHelperText(
+      result.message ??
+        (result.isValid ? 'Correcto.' : 'Valor invalido.'),
+    );
+    setHasValidated(true);
+  };
+
+  const handleReset = () => {
+    setPlaygroundValue('');
+    setPlaygroundPlaceholder('Email');
+    setShowLeftIcon(false);
+    setShowRightIcon(true);
+    setIsDisabled(false);
+    setValidatorId('email');
+    resetValidation();
+  };
+
+  const handleValidatorChange = (
+    event: ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const nextValidatorId = event.target.value;
+    setValidatorId(nextValidatorId);
+    setPlaygroundPlaceholder(
+      nextValidatorId === 'email'
+        ? 'Email'
+        : nextValidatorId === 'phone'
+          ? 'Telefono'
+          : nextValidatorId === 'date'
+            ? 'Fecha (YYYY-MM-DD)'
+            : nextValidatorId === 'postal-code'
+              ? 'Codigo postal'
+              : 'Introduce un valor',
+    );
+    applyLiveValidation(playgroundValue, nextValidatorId);
+  };
 
   return (
     <div className="min-h-screen bg-white p-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-brand font-bold text-km0-blue mb-8">
-          Input Field Component Demo
+          Playground
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Column 1: No icons */}
-          <div className="space-y-6">
-            <h2 className="text-lg font-brand font-semibold mb-4">
-              Sin iconos
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 max-w-5xl items-start">
+          <div className="rounded-lg border border-black/10 p-6 space-y-5 bg-white">
+            <h2 className="text-lg font-brand font-semibold">
+              Controles
             </h2>
 
-            {/* Default state */}
-            <Input placeholder="Email address" />
-
-            {/* Typing state */}
-            <Input value="machie" onChange={() => {}} />
-
-            {/* Filled state */}
-            <Input value="machiel@design.com" onChange={() => {}} />
-
-            {/* Disabled state */}
-            <Input placeholder="Email address" disabled />
-
-            {/* With message */}
-            <Input placeholder="Email address" message="Message" />
-
-            {/* Filled with message */}
-            <Input
-              value="machiel@design.com"
-              onChange={() => {}}
-              message="Message"
-            />
-
-            {/* Error state */}
-            <Input placeholder="Email address" error message="Message" />
-
-            {/* Error filled */}
-            <Input
-              value="machiel@design.com"
-              onChange={() => {}}
-              error
-              message="Message"
-            />
-
-            {/* Error disabled */}
-            <Input
-              placeholder="Email address"
-              error
-              disabled
-              message="Message"
-            />
-          </div>
-
-          {/* Column 2: Icon left */}
-          <div className="space-y-6">
-            <h2 className="text-lg font-brand font-semibold mb-4">
+            <label className="flex items-center gap-3 text-sm font-ui text-[#111112]">
+              <input
+                type="checkbox"
+                className="size-4 accent-black"
+                checked={showLeftIcon}
+                onChange={(event) => setShowLeftIcon(event.target.checked)}
+              />
               Icono izquierda
-            </h2>
+            </label>
 
-            {/* Default state */}
-            <Input placeholder="Email address" iconLeft={<EmailIcon />} />
-
-            {/* Typing state */}
-            <Input
-              value="machie"
-              onChange={() => {}}
-              iconLeft={<EmailIcon />}
-            />
-
-            {/* Filled state */}
-            <Input
-              value="machiel@design.com"
-              onChange={() => {}}
-              iconLeft={<EmailIcon />}
-            />
-
-            {/* Disabled state */}
-            <Input placeholder="Email address" disabled iconLeft={<EmailIcon />} />
-
-            {/* With message */}
-            <Input
-              placeholder="Email address"
-              message="Message"
-              iconLeft={<EmailIcon />}
-            />
-
-            {/* Filled with message */}
-            <Input
-              value="machiel@design.com"
-              onChange={() => {}}
-              message="Message"
-              iconLeft={<EmailIcon />}
-            />
-
-            {/* Error state */}
-            <Input
-              placeholder="Email address"
-              error
-              message="Message"
-              iconLeft={<EmailIcon />}
-            />
-
-            {/* Error filled */}
-            <Input
-              value="machiel@design.com"
-              onChange={() => {}}
-              error
-              message="Message"
-              iconLeft={<EmailIcon />}
-            />
-
-            {/* Error disabled */}
-            <Input
-              placeholder="Email address"
-              error
-              disabled
-              message="Message"
-              iconLeft={<EmailIcon />}
-            />
-          </div>
-
-          {/* Column 3: Icon right */}
-          <div className="space-y-6">
-            <h2 className="text-lg font-brand font-semibold mb-4">
+            <label className="flex items-center gap-3 text-sm font-ui text-[#111112]">
+              <input
+                type="checkbox"
+                className="size-4 accent-black"
+                checked={showRightIcon}
+                onChange={(event) => setShowRightIcon(event.target.checked)}
+              />
               Icono derecha
-            </h2>
+            </label>
 
-            {/* Default state */}
-            <Input
-              placeholder="Email address"
-              iconRight={<ChevronDownIcon />}
-            />
+            <label className="flex items-center gap-3 text-sm font-ui text-[#111112]">
+              <input
+                type="checkbox"
+                className="size-4 accent-black"
+                checked={isDisabled}
+                onChange={(event) => setIsDisabled(event.target.checked)}
+              />
+              Disabled
+            </label>
 
-            {/* Typing state */}
-            <Input
-              value="machie"
-              onChange={() => {}}
-              iconRight={<ChevronDownIcon />}
-            />
+            <label className="flex flex-col gap-2 text-sm font-ui text-[#111112]">
+              Value
+              <input
+                type="text"
+                className="h-10 rounded border border-black/20 px-3 text-sm font-ui"
+                value={playgroundValue}
+                onChange={handlePlaygroundChange}
+                placeholder="Escribe un valor"
+                disabled={isDisabled}
+              />
+            </label>
 
-            {/* Filled state */}
-            <Input
-              value="machiel@design.com"
-              onChange={() => {}}
-              iconRight={<ChevronDownIcon />}
-            />
+            <label className="flex flex-col gap-2 text-sm font-ui text-[#111112]">
+              Placeholder
+              <input
+                type="text"
+                className="h-10 rounded border border-black/20 px-3 text-sm font-ui"
+                value={playgroundPlaceholder}
+                onChange={(event) =>
+                  setPlaygroundPlaceholder(event.target.value)
+                }
+                placeholder="Placeholder"
+                disabled={isDisabled}
+              />
+            </label>
 
-            {/* Disabled state */}
-            <Input
-              placeholder="Email address"
-              disabled
-              iconRight={<ChevronDownIcon />}
-            />
+            <label className="flex flex-col gap-2 text-sm font-ui text-[#111112]">
+              Tipo de validacion
+              <select
+                className="h-10 rounded border border-black/20 px-3 text-sm font-ui bg-white"
+                value={validatorId}
+                onChange={handleValidatorChange}
+                disabled={isDisabled}
+              >
+                {validators.map((validator) => (
+                  <option key={validator.id} value={validator.id}>
+                    {validator.label}
+                  </option>
+                ))}
+              </select>
+            </label>
 
-            {/* With message */}
-            <Input
-              placeholder="Email address"
-              message="Message"
-              iconRight={<ChevronDownIcon />}
-            />
-
-            {/* Filled with message */}
-            <Input
-              value="machiel@design.com"
-              onChange={() => {}}
-              message="Message"
-              iconRight={<ChevronDownIcon />}
-            />
-
-            {/* Error state */}
-            <Input
-              placeholder="Email address"
-              error
-              message="Message"
-              iconRight={<ChevronDownIcon />}
-            />
-
-            {/* Error filled */}
-            <Input
-              value="machiel@design.com"
-              onChange={() => {}}
-              error
-              message="Message"
-              iconRight={<ChevronDownIcon />}
-            />
-
-            {/* Error disabled */}
-            <Input
-              placeholder="Email address"
-              error
-              disabled
-              message="Message"
-              iconRight={<ChevronDownIcon />}
-            />
+            <div className="flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={handleReset}
+                className="px-4 py-2 rounded border border-black/20 text-sm font-brand font-semibold text-[#111112]"
+              >
+                Reset
+              </button>
+            </div>
           </div>
 
-          {/* Column 4: Both icons */}
-          <div className="space-y-6">
+          <div className="rounded-lg border border-black/10 p-6 bg-white">
             <h2 className="text-lg font-brand font-semibold mb-4">
-              Ambos iconos
+              Preview
             </h2>
-
-            {/* Default state */}
-            <Input
-              placeholder="Email address"
-              iconLeft={<EmailIcon />}
-              iconRight={<ChevronDownIcon />}
-            />
-
-            {/* Typing state */}
-            <Input
-              value="machie"
-              onChange={() => {}}
-              iconLeft={<EmailIcon />}
-              iconRight={<ChevronDownIcon />}
-            />
-
-            {/* Filled state */}
-            <Input
-              value="machiel@design.com"
-              onChange={() => {}}
-              iconLeft={<EmailIcon />}
-              iconRight={<ChevronDownIcon />}
-            />
-
-            {/* Disabled state */}
-            <Input
-              placeholder="Email address"
-              disabled
-              iconLeft={<EmailIcon />}
-              iconRight={<ChevronDownIcon />}
-            />
-
-            {/* With message */}
-            <Input
-              placeholder="Email address"
-              message="Message"
-              iconLeft={<EmailIcon />}
-              iconRight={<ChevronDownIcon />}
-            />
-
-            {/* Filled with message */}
-            <Input
-              value="machiel@design.com"
-              onChange={() => {}}
-              message="Message"
-              iconLeft={<EmailIcon />}
-              iconRight={<ChevronDownIcon />}
-            />
-
-            {/* Error state */}
-            <Input
-              placeholder="Email address"
-              error
-              message="Message"
-              iconLeft={<EmailIcon />}
-              iconRight={<ChevronDownIcon />}
-            />
-
-            {/* Error filled */}
-            <Input
-              value="machiel@design.com"
-              onChange={() => {}}
-              error
-              message="Message"
-              iconLeft={<EmailIcon />}
-              iconRight={<ChevronDownIcon />}
-            />
-
-            {/* Error disabled */}
-            <Input
-              placeholder="Email address"
-              error
-              disabled
-              message="Message"
-              iconLeft={<EmailIcon />}
-              iconRight={<ChevronDownIcon />}
-            />
-          </div>
-        </div>
-
-        {/* Interactive examples */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-brand font-bold text-km0-blue mb-6">
-            Ejemplos Interactivos
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
-            <div className="space-y-4">
-              <h3 className="text-lg font-brand font-semibold">
-                Campo básico
-              </h3>
+            <div className="space-y-2">
+              <label
+                className="text-sm font-ui text-[#111112]"
+                htmlFor={inputId}
+              >
+                Valor a validar
+              </label>
               <Input
-                placeholder="Email address"
-                value={value1}
-                onChange={(e) => setValue1(e.target.value)}
+                id={inputId}
+                placeholder={playgroundPlaceholder}
+                value={playgroundValue}
+                onChange={handlePlaygroundChange}
+                disabled={isDisabled}
+                iconLeft={
+                  showLeftIcon ? (
+                    validatorId === 'phone' ? (
+                      <PhoneIcon />
+                  ) : validatorId === 'date' ? (
+                    <DateIcon />
+                  ) : validatorId === 'postal-code' ? (
+                    <ZipCodeIcon />
+                  ) : (
+                    <EmailIcon />
+                  )
+                  ) : undefined
+                }
+                iconRight={
+                  hasValidated && validationStatus === 'success' ? (
+                    <span className="text-[#00CC66]">
+                      <CheckIcon />
+                    </span>
+                  ) : hasValidated && validationStatus === 'error' ? (
+                    <span className="text-[#e30000]">
+                      <XIcon />
+                    </span>
+                  ) : undefined
+                }
+                error={hasValidated && validationStatus === 'error'}
+                variant={
+                  hasValidated && validationStatus === 'success'
+                    ? 'success'
+                    : undefined
+                }
+                message={hasValidated ? helperText : neutralHelperText}
               />
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-brand font-semibold">
-                Con icono de email
-              </h3>
-              <Input
-                placeholder="Email address"
-                value={value2}
-                onChange={(e) => setValue2(e.target.value)}
-                iconLeft={<EmailIcon />}
-              />
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-brand font-semibold">
-                Con dropdown
-              </h3>
-              <Input
-                placeholder="Email address"
-                value={value3}
-                onChange={(e) => setValue3(e.target.value)}
-                iconRight={<ChevronDownIcon />}
-              />
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-brand font-semibold">
-                Con error y mensaje
-              </h3>
-              <Input
-                placeholder="Email address"
-                value={value4}
-                onChange={(e) => setValue4(e.target.value)}
-                error
-                message="Por favor ingresa un email válido"
-                iconLeft={<EmailIcon />}
-              />
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Button type="button" onClick={handleValidate} disabled={isDisabled}>
+                  Validar
+                </Button>
+              </div>
             </div>
           </div>
         </div>
