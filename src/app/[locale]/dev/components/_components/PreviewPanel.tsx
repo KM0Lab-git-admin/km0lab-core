@@ -52,7 +52,8 @@ export default function PreviewPanel({
         </button>
       </header>
 
-      <div className="grid gap-5 py-4 lg:grid-cols-[1.2fr_0.8fr]">
+      <div className="space-y-4 py-4">
+        {/* Preview - ancho completo */}
         <div className="space-y-3">
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
             <ErrorBoundary>
@@ -72,7 +73,8 @@ export default function PreviewPanel({
           ) : null}
         </div>
 
-        <div className="space-y-3">
+        {/* Import y Snippet - debajo en grid horizontal */}
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <CodeSnippet code={importStatement} label="Import" />
           <CodeSnippet code={usageSnippet} label="Snippet" />
           <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">

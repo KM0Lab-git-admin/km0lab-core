@@ -206,3 +206,15 @@ function CustomSelect() {
 - La variante `filled` se activa automáticamente cuando el input tiene un valor
 - El estado de error tiene prioridad sobre otros estados visuales
 - Los iconos se posicionan con `position: absolute` dentro del contenedor
+
+## Estructura de Archivos
+
+```
+input/
+├── input.tsx          # Código del componente
+├── input.styles.ts    # Variantes de CVA (default, filled, error)
+├── input.test.ts      # Tests (opcional)
+├── README.md          # Documentación técnica
+└── index.ts           # Exportación limpia
+```
+

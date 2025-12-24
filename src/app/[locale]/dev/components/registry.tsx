@@ -1,27 +1,9 @@
 'use client';
 
 import type React from 'react';
-import { useState } from 'react';
 import ChatKitComponent from '@/components/chat/ChatKit/ChatKit';
 import BreakpointIndicator from '@/components/devtools/BreakpointIndicator';
 import FilesList from '@/components/files/FilesList/FilesList';
-import { AppHeader } from '@/components/ui/layout/AppHeader';
-import { MobileFrame } from '@/components/ui/layout/MobileFrame';
-import { StatusBar } from '@/components/ui/layout/StatusBar';
-import { Badge } from '@/components/ui/primitives/badge';
-import { Button } from '@/components/ui/primitives/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/primitives/card';
-import { Progress } from '@/components/ui/primitives/progress';
-import { Separator } from '@/components/ui/primitives/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/primitives/tabs';
-import { NavigationArrow } from '@/components/ui/slider/NavigationArrow';
-import ProgressDots from '@/components/ui/slider/ProgressDots';
-import { ProgressIndicator } from '@/components/ui/slider/ProgressIndicator';
-import { SimpleSliderNavigation } from '@/components/ui/slider/SimpleSliderNavigation';
-import Slider from '@/components/ui/slider/Slider';
-import SliderCount from '@/components/ui/slider/SliderCount';
-import SliderNavigation from '@/components/ui/slider/SliderNavigation';
-import { SlideIndicators } from '@/components/ui/slider/SlideIndicators';
 import OnboardingScreen from '@/components/screens/onboarding/Onboarding';
 import ColorPaletteGuide from '@/components/screens/welcome/Colour';
 import { CounterForm } from '@/components/screens/welcome/CounterForm';
@@ -33,6 +15,26 @@ import SafeHydration from '@/components/screens/welcome/SafeHydration';
 import Slide from '@/components/screens/welcome/Slide';
 import { Sponsors } from '@/components/screens/welcome/Sponsors';
 import { XPBadge } from '@/components/screens/welcome/XPBadge';
+import { AppHeader } from '@/components/ui/layout/AppHeader';
+import { MobileFrame } from '@/components/ui/layout/MobileFrame';
+import { StatusBar } from '@/components/ui/layout/StatusBar';
+import { Badge } from '@/components/ui/primitives/badge';
+import { Button } from '@/components/ui/primitives/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/primitives/card';
+import { CheckIcon, DateIcon, EmailIcon, Input, PhoneIcon, XIcon, ZipCodeIcon } from '@/components/ui/primitives/input';
+import { Progress } from '@/components/ui/primitives/progress';
+import { Separator } from '@/components/ui/primitives/separator';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/primitives/tabs';
+import { NavigationArrow } from '@/components/ui/slider/NavigationArrow';
+import ProgressDots from '@/components/ui/slider/ProgressDots';
+import { ProgressIndicator } from '@/components/ui/slider/ProgressIndicator';
+import { SimpleSliderNavigation } from '@/components/ui/slider/SimpleSliderNavigation';
+import { SlideIndicators } from '@/components/ui/slider/SlideIndicators';
+import Slider from '@/components/ui/slider/Slider';
+import SliderCount from '@/components/ui/slider/SliderCount';
+import SliderNavigation from '@/components/ui/slider/SliderNavigation';
+import { getValidatorById, validators } from '@/validation/validators';
+import { useState } from 'react';
 
 /**
  * Cómo añadir un nuevo componente al catálogo:
@@ -87,7 +89,7 @@ const BadgeDemo = () => {
           <input
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={e => setText(e.target.value)}
           />
         </label>
         <label className="text-sm text-slate-600">
@@ -95,7 +97,7 @@ const BadgeDemo = () => {
           <select
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
             value={variant}
-            onChange={(e) => setVariant(e.target.value as (typeof badgeVariants)[number])}
+            onChange={e => setVariant(e.target.value as (typeof badgeVariants)[number])}
           >
             {badgeVariants.map(item => (
               <option key={item} value={item}>{item}</option>
@@ -132,7 +134,7 @@ const ButtonDemo = () => {
           <input
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
             value={label}
-            onChange={(e) => setLabel(e.target.value)}
+            onChange={e => setLabel(e.target.value)}
           />
         </label>
         <label className="text-sm text-slate-600">
@@ -140,7 +142,7 @@ const ButtonDemo = () => {
           <select
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
             value={variant}
-            onChange={(e) => setVariant(e.target.value as (typeof buttonVariants)[number])}
+            onChange={e => setVariant(e.target.value as (typeof buttonVariants)[number])}
           >
             {buttonVariants.map(item => (
               <option key={item} value={item}>{item}</option>
@@ -152,7 +154,7 @@ const ButtonDemo = () => {
           <select
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
             value={size}
-            onChange={(e) => setSize(e.target.value as (typeof buttonSizes)[number])}
+            onChange={e => setSize(e.target.value as (typeof buttonSizes)[number])}
           >
             {buttonSizes.map(item => (
               <option key={item} value={item}>{item}</option>
@@ -164,10 +166,254 @@ const ButtonDemo = () => {
             type="checkbox"
             className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
             checked={disabled}
-            onChange={(e) => setDisabled(e.target.checked)}
+            onChange={e => setDisabled(e.target.checked)}
           />
           Disabled
         </label>
+      </div>
+    </div>
+  );
+};
+
+const InputDemo = () => {
+  const neutralHelperText = 'Introduce un valor';
+  const [playgroundValue, setPlaygroundValue] = useState('');
+  const [playgroundPlaceholder, setPlaygroundPlaceholder] = useState('Email');
+  const [showLeftIcon, setShowLeftIcon] = useState(true);
+  const [showRightIcon, setShowRightIcon] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [validationStatus, setValidationStatus] = useState<'neutral' | 'success' | 'error'>('neutral');
+  const [helperText, setHelperText] = useState(neutralHelperText);
+  const [validatorId, setValidatorId] = useState('email');
+  const [hasValidated, setHasValidated] = useState(false);
+
+  const resetValidation = () => {
+    setValidationStatus('neutral');
+    setHelperText(neutralHelperText);
+    setHasValidated(false);
+  };
+
+  const applyLiveValidation = (value: string, nextValidatorId: string) => {
+    if (value.trim().length === 0) {
+      if (validationStatus !== 'neutral') {
+        resetValidation();
+      }
+      return;
+    }
+
+    if (nextValidatorId === 'phone') {
+      const digitsOnly = /^\d+$/.test(value);
+      if (!digitsOnly) {
+        setValidationStatus('error');
+        setHelperText('Telefono invalido.');
+        setHasValidated(true);
+        return;
+      }
+      if (value.length === 9) {
+        setValidationStatus('success');
+        setHelperText('Correcto.');
+        setHasValidated(true);
+        return;
+      }
+      if (validationStatus !== 'neutral') {
+        resetValidation();
+      }
+      return;
+    }
+
+    const validator = getValidatorById(nextValidatorId);
+    const result = validator.validate(value);
+
+    if (result.isValid) {
+      setValidationStatus('success');
+      setHelperText(result.message ?? 'Correcto.');
+      setHasValidated(true);
+      return;
+    }
+
+    if (validationStatus !== 'neutral') {
+      resetValidation();
+    }
+  };
+
+  const handlePlaygroundChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const nextValue = event.target.value;
+    setPlaygroundValue(nextValue);
+    applyLiveValidation(nextValue, validatorId);
+  };
+
+  const handleValidate = () => {
+    const validator = getValidatorById(validatorId);
+    const result = validator.validate(playgroundValue);
+    setValidationStatus(result.isValid ? 'success' : 'error');
+    setHelperText(result.message ?? (result.isValid ? 'Correcto.' : 'Valor invalido.'));
+    setHasValidated(true);
+  };
+
+  const handleReset = () => {
+    setPlaygroundValue('');
+    setPlaygroundPlaceholder('Email');
+    setShowLeftIcon(true);
+    setShowRightIcon(true);
+    setIsDisabled(false);
+    setValidatorId('email');
+    resetValidation();
+  };
+
+  const handleValidatorChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const nextValidatorId = event.target.value;
+    setValidatorId(nextValidatorId);
+    setPlaygroundPlaceholder(
+      nextValidatorId === 'email'
+        ? 'Email'
+        : nextValidatorId === 'phone'
+          ? 'Telefono'
+          : nextValidatorId === 'date'
+            ? 'Fecha (YYYY-MM-DD)'
+            : nextValidatorId === 'postal-code'
+              ? 'Codigo postal'
+              : 'Introduce un valor',
+    );
+    applyLiveValidation(playgroundValue, nextValidatorId);
+  };
+
+  const getLeftIcon = () => {
+    if (!showLeftIcon) {
+      return undefined;
+    }
+    if (validatorId === 'phone') {
+      return <PhoneIcon />;
+    }
+    if (validatorId === 'date') {
+      return <DateIcon />;
+    }
+    if (validatorId === 'postal-code') {
+      return <ZipCodeIcon />;
+    }
+    return <EmailIcon />;
+  };
+
+  const getRightIcon = () => {
+    if (!showRightIcon) {
+      return undefined;
+    }
+    if (hasValidated && validationStatus === 'success') {
+      return (
+        <span className="text-[#00CC66]">
+          <CheckIcon />
+        </span>
+      );
+    }
+    if (hasValidated && validationStatus === 'error') {
+      return (
+        <span className="text-[#e30000]">
+          <XIcon />
+        </span>
+      );
+    }
+    return undefined;
+  };
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-4 items-start">
+      <div className="rounded-lg border border-slate-200 p-4 space-y-4 bg-white">
+        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Controles</p>
+
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <input
+            type="checkbox"
+            className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+            checked={showLeftIcon}
+            onChange={e => setShowLeftIcon(e.target.checked)}
+          />
+          Icono izquierda
+        </label>
+
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <input
+            type="checkbox"
+            className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+            checked={showRightIcon}
+            onChange={e => setShowRightIcon(e.target.checked)}
+          />
+          Icono derecha
+        </label>
+
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <input
+            type="checkbox"
+            className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+            checked={isDisabled}
+            onChange={e => setIsDisabled(e.target.checked)}
+          />
+          Disabled
+        </label>
+
+        <label className="text-sm text-slate-600">
+          Value
+          <input
+            type="text"
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={playgroundValue}
+            onChange={handlePlaygroundChange}
+            placeholder="Escribe un valor"
+            disabled={isDisabled}
+          />
+        </label>
+
+        <label className="text-sm text-slate-600">
+          Placeholder
+          <input
+            type="text"
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={playgroundPlaceholder}
+            onChange={e => setPlaygroundPlaceholder(e.target.value)}
+            placeholder="Placeholder"
+            disabled={isDisabled}
+          />
+        </label>
+
+        <label className="text-sm text-slate-600">
+          Tipo de validacion
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={validatorId}
+            onChange={handleValidatorChange}
+            disabled={isDisabled}
+          >
+            {validators.map(v => (
+              <option key={v.id} value={v.id}>{v.label}</option>
+            ))}
+          </select>
+        </label>
+
+        <button
+          type="button"
+          onClick={handleReset}
+          className="w-full px-3 py-2 rounded border border-slate-200 text-sm font-medium text-slate-600 hover:border-indigo-400 hover:text-indigo-600"
+        >
+          Reset
+        </button>
+      </div>
+
+      <div className="rounded-lg border border-slate-200 p-4 bg-white">
+        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">Preview</p>
+        <div className="space-y-3">
+          <Input
+            placeholder={playgroundPlaceholder}
+            value={playgroundValue}
+            onChange={handlePlaygroundChange}
+            disabled={isDisabled}
+            iconLeft={getLeftIcon()}
+            iconRight={getRightIcon()}
+            error={hasValidated && validationStatus === 'error'}
+            variant={hasValidated && validationStatus === 'success' ? 'success' : undefined}
+            message={hasValidated ? helperText : neutralHelperText}
+          />
+          <Button type="button" onClick={handleValidate} disabled={isDisabled}>
+            Validar
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -207,7 +453,7 @@ const CardDemo = () => {
           <input
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={e => setTitle(e.target.value)}
           />
         </label>
         <label className="text-sm text-slate-600 sm:col-span-2">
@@ -215,7 +461,7 @@ const CardDemo = () => {
           <input
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
             value={desc}
-            onChange={(e) => setDesc(e.target.value)}
+            onChange={e => setDesc(e.target.value)}
           />
         </label>
         <label className="flex items-center gap-2 text-sm text-slate-600">
@@ -223,7 +469,7 @@ const CardDemo = () => {
             type="checkbox"
             className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
             checked={withFooter}
-            onChange={(e) => setWithFooter(e.target.checked)}
+            onChange={e => setWithFooter(e.target.checked)}
           />
           Mostrar footer
         </label>
@@ -241,13 +487,16 @@ const ProgressDemo = () => {
       <label className="text-sm text-slate-600">
         Valor:
         {' '}
-        <span className="font-semibold text-slate-800">{value}%</span>
+        <span className="font-semibold text-slate-800">
+          {value}
+          %
+        </span>
         <input
           type="range"
           min={0}
           max={100}
           value={value}
-          onChange={(e) => setValue(Number(e.target.value))}
+          onChange={e => setValue(Number(e.target.value))}
           className="mt-2 block w-full accent-indigo-600"
         />
       </label>
@@ -312,7 +561,7 @@ const AppHeaderDemo = () => {
         <input
           className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           value={alt}
-          onChange={(e) => setAlt(e.target.value)}
+          onChange={e => setAlt(e.target.value)}
         />
       </label>
     </div>
@@ -355,7 +604,7 @@ const SliderDemo = () => {
           <input
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={e => setTitle(e.target.value)}
           />
         </label>
         <label className="text-sm text-slate-600">
@@ -365,7 +614,7 @@ const SliderDemo = () => {
             min={1}
             max={8}
             value={total}
-            onChange={(e) => setTotal(Math.max(1, Number(e.target.value)))}
+            onChange={e => setTotal(Math.max(1, Number(e.target.value)))}
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           />
         </label>
@@ -376,7 +625,7 @@ const SliderDemo = () => {
             min={0}
             max={total}
             value={safeCurrent}
-            onChange={(e) => setCurrent(Number(e.target.value))}
+            onChange={e => setCurrent(Number(e.target.value))}
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           />
         </label>
@@ -396,9 +645,9 @@ const SliderNavigationDemo = () => {
       <SliderNavigation
         totalSlides={total}
         currentSlide={current}
-        onPrevious={() => setCurrent((prev) => clamp(prev - 1))}
-        onNext={() => setCurrent((prev) => clamp(prev + 1))}
-        onSlideSelect={(idx) => setCurrent(clamp(idx))}
+        onPrevious={() => setCurrent(prev => clamp(prev - 1))}
+        onNext={() => setCurrent(prev => clamp(prev + 1))}
+        onSlideSelect={idx => setCurrent(clamp(idx))}
       />
       <div className="grid gap-2 sm:grid-cols-2">
         <label className="text-sm text-slate-600">
@@ -408,7 +657,7 @@ const SliderNavigationDemo = () => {
             min={2}
             max={10}
             value={total}
-            onChange={(e) => setTotal(Math.max(2, Number(e.target.value)))}
+            onChange={e => setTotal(Math.max(2, Number(e.target.value)))}
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           />
         </label>
@@ -419,7 +668,7 @@ const SliderNavigationDemo = () => {
             min={0}
             max={total - 1}
             value={current}
-            onChange={(e) => setCurrent(clamp(Number(e.target.value)))}
+            onChange={e => setCurrent(clamp(Number(e.target.value)))}
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           />
         </label>
@@ -468,7 +717,7 @@ const SlideIndicatorsDemo = () => {
           min={0}
           max={total - 1}
           value={current}
-          onChange={(e) => setCurrent(clamp(Number(e.target.value)))}
+          onChange={e => setCurrent(clamp(Number(e.target.value)))}
           className="mt-2 block w-full accent-indigo-600"
         />
       </label>
@@ -479,7 +728,7 @@ const SlideIndicatorsDemo = () => {
           min={2}
           max={10}
           value={total}
-          onChange={(e) => setTotal(Math.max(2, Number(e.target.value)))}
+          onChange={e => setTotal(Math.max(2, Number(e.target.value)))}
           className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
         />
       </label>
@@ -503,7 +752,7 @@ const ProgressDotsDemo = () => {
             min={2}
             max={10}
             value={total}
-            onChange={(e) => setTotal(Math.max(2, Number(e.target.value)))}
+            onChange={e => setTotal(Math.max(2, Number(e.target.value)))}
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           />
         </label>
@@ -514,7 +763,7 @@ const ProgressDotsDemo = () => {
             min={0}
             max={total - 1}
             value={current}
-            onChange={(e) => setCurrent(clamp(Number(e.target.value)))}
+            onChange={e => setCurrent(clamp(Number(e.target.value)))}
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           />
         </label>
@@ -546,7 +795,7 @@ const ProgressIndicatorDemo = () => {
             min={2}
             max={10}
             value={total}
-            onChange={(e) => setTotal(Math.max(2, Number(e.target.value)))}
+            onChange={e => setTotal(Math.max(2, Number(e.target.value)))}
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           />
         </label>
@@ -557,7 +806,7 @@ const ProgressIndicatorDemo = () => {
             min={0}
             max={total - 1}
             value={current}
-            onChange={(e) => setCurrent(clamp(Number(e.target.value)))}
+            onChange={e => setCurrent(clamp(Number(e.target.value)))}
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           />
         </label>
@@ -566,7 +815,7 @@ const ProgressIndicatorDemo = () => {
             type="checkbox"
             className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
             checked={chevrons}
-            onChange={(e) => setChevrons(e.target.checked)}
+            onChange={e => setChevrons(e.target.checked)}
           />
           Mostrar flechas
         </label>
@@ -605,7 +854,7 @@ const NavigationArrowDemo = () => {
           min={0}
           max={4}
           value={index}
-          onChange={(e) => setIndex(Number(e.target.value))}
+          onChange={e => setIndex(Number(e.target.value))}
           className="mt-2 block w-full accent-indigo-600"
         />
       </label>
@@ -634,7 +883,7 @@ const SliderCountDemo = () => {
             min={0}
             max={total}
             value={current}
-            onChange={(e) => setCurrent(Number(e.target.value))}
+            onChange={e => setCurrent(Number(e.target.value))}
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           />
         </label>
@@ -645,7 +894,7 @@ const SliderCountDemo = () => {
             min={1}
             max={10}
             value={total}
-            onChange={(e) => setTotal(Math.max(1, Number(e.target.value)))}
+            onChange={e => setTotal(Math.max(1, Number(e.target.value)))}
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           />
         </label>
@@ -654,7 +903,7 @@ const SliderCountDemo = () => {
           <input
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
             value={label}
-            onChange={(e) => setLabel(e.target.value)}
+            onChange={e => setLabel(e.target.value)}
           />
         </label>
       </div>
@@ -695,7 +944,7 @@ const BreakpointIndicatorDemo = () => {
           type="checkbox"
           className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
           checked={show}
-          onChange={(e) => setShow(e.target.checked)}
+          onChange={e => setShow(e.target.checked)}
         />
         Mostrar overlay (solo visible en dev)
       </label>
@@ -797,7 +1046,7 @@ const XPBadgeDemo = () => {
           min={0}
           max={9999}
           value={points}
-          onChange={(e) => setPoints(Number(e.target.value))}
+          onChange={e => setPoints(Number(e.target.value))}
           className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
         />
       </label>
@@ -830,6 +1079,19 @@ export const componentRegistry: ComponentEntry[] = [
     exportType: 'named',
     Component: Button,
     Demo: ButtonDemo,
+  },
+  {
+    id: 'input',
+    title: 'Input',
+    description: 'Campo de entrada con variantes, iconos y mensajes de validación.',
+    group: 'ui',
+    filePath: 'src/components/ui/primitives/input/input.tsx',
+    importPath: '@/components/ui/primitives/input',
+    exportName: 'Input',
+    exportType: 'named',
+    Component: Input,
+    Demo: InputDemo,
+    notes: ['Incluye iconos: EmailIcon, PhoneIcon, DateIcon, ZipCodeIcon, CheckIcon, XIcon, ChevronDownIcon.'],
   },
   {
     id: 'card',
