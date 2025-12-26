@@ -4,101 +4,86 @@ import * as React from 'react';
 import { cn } from '../utils';
 import { inputVariants, messageVariants } from './input.styles';
 
-export interface InputProps
-  extends Omit<React.ComponentProps<'input'>, 'size'>,
-    VariantProps<typeof inputVariants> {
+export type InputProps = {
   message?: string;
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
   error?: boolean;
-}
+} & Omit<React.ComponentProps<'input'>, 'size'> & VariantProps<typeof inputVariants>;
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      className,
-      variant,
-      type = 'text',
-      message,
-      iconLeft,
-      iconRight,
-      error = false,
-      disabled = false,
-      ...props
-    },
-    ref,
-  ) => {
-    const ariaDescribedBy = props['aria-describedby'];
-    const messageId = React.useId();
-    const computedVariant = error ? 'error' : variant ?? 'default';
+const Input = (
+  { ref, className, variant, type = 'text', message, iconLeft, iconRight, error = false, disabled = false, ...props }: InputProps & { ref?: React.RefObject<HTMLInputElement | null> },
+) => {
+  const ariaDescribedBy = props['aria-describedby'];
+  const messageId = React.useId();
+  const computedVariant = error ? 'error' : variant ?? 'default';
 
-    const messageVariant = error
-      ? disabled
-        ? 'errorDisabled'
-        : 'error'
-      : computedVariant === 'success'
-        ? 'success'
-        : 'default';
+  const messageVariant = error
+    ? disabled
+      ? 'errorDisabled'
+      : 'error'
+    : computedVariant === 'success'
+      ? 'success'
+      : 'default';
 
-    return (
-      <div className="relative w-full">
-        <div className="relative">
-          <input
-            type={type}
-            className={cn(
-              inputVariants({ variant: computedVariant }),
-              iconLeft ? 'pl-12' : '',
-              iconRight ? 'pr-12' : '',
-              className,
-            )}
-            ref={ref}
-            disabled={disabled}
-            aria-invalid={error}
-            aria-describedby={
-              message
-                ? [ariaDescribedBy, messageId].filter(Boolean).join(' ')
-                : ariaDescribedBy
-            }
-            {...props}
-          />
-          {iconLeft && (
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
-              {iconLeft}
-            </div>
+  return (
+    <div className="relative w-full">
+      <div className="relative">
+        <input
+          type={type}
+          className={cn(
+            inputVariants({ variant: computedVariant }),
+            iconLeft ? 'pl-12' : '',
+            iconRight ? 'pr-12' : '',
+            className,
           )}
-          {iconRight && (
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
-              {iconRight}
-            </div>
-          )}
-        </div>
-        {message && (
-          <div
-            id={messageId}
-            className={cn(messageVariants({ variant: messageVariant }))}
-          >
-            {error && (
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 11 11"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="shrink-0 mt-0.5"
-              >
-                <path
-                  d="M5.49998 2.74999C5.35411 2.74999 5.21422 2.80794 5.11107 2.91108C5.00793 3.01423 4.94998 3.15412 4.94998 3.29999V5.49998C4.94998 5.64585 5.00793 5.78574 5.11107 5.88889C5.21422 5.99203 5.35411 6.04998 5.49998 6.04998C5.64585 6.04998 5.78574 5.99203 5.88889 5.88889C5.99203 5.78574 6.04998 5.64585 6.04998 5.49998V3.29999C6.04998 3.15412 5.99203 3.01423 5.88889 2.91108C5.78574 2.80794 5.64585 2.74999 5.49998 2.74999ZM6.00598 7.49097C5.99394 7.45592 5.9773 7.42263 5.95648 7.39197L5.89048 7.30947C5.81314 7.23316 5.71492 7.18146 5.60823 7.1609C5.50154 7.14035 5.39114 7.15185 5.29098 7.19397C5.22433 7.22183 5.16294 7.26089 5.10948 7.30947C5.05851 7.36086 5.01818 7.42181 4.99081 7.48882C4.96344 7.55583 4.94957 7.62759 4.94998 7.69997C4.95085 7.77184 4.9658 7.84285 4.99398 7.90897C5.01869 7.97722 5.0581 8.03921 5.10942 8.09053C5.16075 8.14186 5.22273 8.18127 5.29098 8.20597C5.35682 8.23507 5.428 8.2501 5.49998 8.2501C5.57196 8.2501 5.64315 8.23507 5.70898 8.20597C5.77723 8.18127 5.83922 8.14186 5.89054 8.09053C5.94187 8.03921 5.98128 7.97722 6.00598 7.90897C6.03416 7.84285 6.04911 7.77184 6.04998 7.69997C6.05268 7.66335 6.05268 7.62659 6.04998 7.58997C6.04051 7.5549 6.02567 7.5215 6.00598 7.49097ZM5.49998 0C4.41219 0 3.34882 0.322568 2.44436 0.926914C1.53989 1.53126 0.834944 2.39024 0.418663 3.39523C0.00238305 4.40022 -0.106535 5.50608 0.105683 6.57297C0.317901 7.63986 0.841723 8.61987 1.61091 9.38905C2.3801 10.1582 3.3601 10.6821 4.42699 10.8943C5.49388 11.1065 6.59974 10.9976 7.60473 10.5813C8.60972 10.165 9.4687 9.46007 10.073 8.5556C10.6774 7.65114 11 6.58777 11 5.49998C11 4.77771 10.8577 4.06252 10.5813 3.39523C10.3049 2.72794 9.89977 2.12163 9.38905 1.61091C8.87833 1.10019 8.27202 0.695061 7.60473 0.418661C6.93745 0.142261 6.22225 0 5.49998 0ZM5.49998 9.89996C4.62975 9.89996 3.77906 9.64191 3.05548 9.15843C2.33191 8.67496 1.76795 7.98777 1.43493 7.18378C1.1019 6.37979 1.01477 5.4951 1.18454 4.64159C1.35432 3.78807 1.77337 3.00407 2.38872 2.38872C3.00407 1.77337 3.78807 1.35431 4.64159 1.18454C5.4951 1.01477 6.37979 1.1019 7.18378 1.43492C7.98777 1.76795 8.67496 2.33191 9.15843 3.05548C9.64191 3.77905 9.89997 4.62975 9.89997 5.49998C9.89997 6.66693 9.4364 7.78608 8.61124 8.61124C7.78608 9.43639 6.66693 9.89996 5.49998 9.89996Z"
-                  fill="currentColor"
-                />
-              </svg>
-            )}
-            <span>{message}</span>
+          ref={ref}
+          disabled={disabled}
+          aria-invalid={error}
+          aria-describedby={
+            message
+              ? [ariaDescribedBy, messageId].filter(Boolean).join(' ')
+              : ariaDescribedBy
+          }
+          {...props}
+        />
+        {iconLeft && (
+          <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
+            {iconLeft}
+          </div>
+        )}
+        {iconRight && (
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
+            {iconRight}
           </div>
         )}
       </div>
-    );
-  },
-);
+      {message && (
+        <div
+          id={messageId}
+          className={cn(messageVariants({ variant: messageVariant }))}
+        >
+          {error && (
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 11 11"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="shrink-0 mt-0.5"
+            >
+              <path
+                d="M5.49998 2.74999C5.35411 2.74999 5.21422 2.80794 5.11107 2.91108C5.00793 3.01423 4.94998 3.15412 4.94998 3.29999V5.49998C4.94998 5.64585 5.00793 5.78574 5.11107 5.88889C5.21422 5.99203 5.35411 6.04998 5.49998 6.04998C5.64585 6.04998 5.78574 5.99203 5.88889 5.88889C5.99203 5.78574 6.04998 5.64585 6.04998 5.49998V3.29999C6.04998 3.15412 5.99203 3.01423 5.88889 2.91108C5.78574 2.80794 5.64585 2.74999 5.49998 2.74999ZM6.00598 7.49097C5.99394 7.45592 5.9773 7.42263 5.95648 7.39197L5.89048 7.30947C5.81314 7.23316 5.71492 7.18146 5.60823 7.1609C5.50154 7.14035 5.39114 7.15185 5.29098 7.19397C5.22433 7.22183 5.16294 7.26089 5.10948 7.30947C5.05851 7.36086 5.01818 7.42181 4.99081 7.48882C4.96344 7.55583 4.94957 7.62759 4.94998 7.69997C4.95085 7.77184 4.9658 7.84285 4.99398 7.90897C5.01869 7.97722 5.0581 8.03921 5.10942 8.09053C5.16075 8.14186 5.22273 8.18127 5.29098 8.20597C5.35682 8.23507 5.428 8.2501 5.49998 8.2501C5.57196 8.2501 5.64315 8.23507 5.70898 8.20597C5.77723 8.18127 5.83922 8.14186 5.89054 8.09053C5.94187 8.03921 5.98128 7.97722 6.00598 7.90897C6.03416 7.84285 6.04911 7.77184 6.04998 7.69997C6.05268 7.66335 6.05268 7.62659 6.04998 7.58997C6.04051 7.5549 6.02567 7.5215 6.00598 7.49097ZM5.49998 0C4.41219 0 3.34882 0.322568 2.44436 0.926914C1.53989 1.53126 0.834944 2.39024 0.418663 3.39523C0.00238305 4.40022 -0.106535 5.50608 0.105683 6.57297C0.317901 7.63986 0.841723 8.61987 1.61091 9.38905C2.3801 10.1582 3.3601 10.6821 4.42699 10.8943C5.49388 11.1065 6.59974 10.9976 7.60473 10.5813C8.60972 10.165 9.4687 9.46007 10.073 8.5556C10.6774 7.65114 11 6.58777 11 5.49998C11 4.77771 10.8577 4.06252 10.5813 3.39523C10.3049 2.72794 9.89977 2.12163 9.38905 1.61091C8.87833 1.10019 8.27202 0.695061 7.60473 0.418661C6.93745 0.142261 6.22225 0 5.49998 0ZM5.49998 9.89996C4.62975 9.89996 3.77906 9.64191 3.05548 9.15843C2.33191 8.67496 1.76795 7.98777 1.43493 7.18378C1.1019 6.37979 1.01477 5.4951 1.18454 4.64159C1.35432 3.78807 1.77337 3.00407 2.38872 2.38872C3.00407 1.77337 3.78807 1.35431 4.64159 1.18454C5.4951 1.01477 6.37979 1.1019 7.18378 1.43492C7.98777 1.76795 8.67496 2.33191 9.15843 3.05548C9.64191 3.77905 9.89997 4.62975 9.89997 5.49998C9.89997 6.66693 9.4364 7.78608 8.61124 8.61124C7.78608 9.43639 6.66693 9.89996 5.49998 9.89996Z"
+                fill="currentColor"
+              />
+            </svg>
+          )}
+          <span>{message}</span>
+        </div>
+      )}
+    </div>
+  );
+};
 
 Input.displayName = 'Input';
 
@@ -224,4 +209,3 @@ export const ChevronDownIcon = () => (
 );
 
 export { Input, inputVariants, messageVariants };
-

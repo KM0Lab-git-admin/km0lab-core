@@ -2,9 +2,8 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Componente de desarrollo que muestra el breakpoint actual considerando
- * ancho y alto. La altura manda: si el alto < 700px siempre se muestra XS.
- * Visible solo en desarrollo.
+ * Componente de desarrollo que muestra el breakpoint actual según la tabla
+ * de pruebas (ancho x alto). Visible solo en desarrollo.
  */
 const BreakpointIndicator = () => {
   const [label, setLabel] = useState('XS');
@@ -19,15 +18,12 @@ const BreakpointIndicator = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
 
-      if (height < 700) return 'XS';
-      if (width >= 1280 && height >= 1000) return 'XL-H';
-      if (width >= 1024 && height >= 900) return 'LG-H';
-      if (width >= 768 && height >= 800) return 'MD-H';
-      if (width >= 480 && height >= 700) return 'SM-H';
-      if (width >= 1280) return 'XL';
-      if (width >= 1024) return 'LG';
-      if (width >= 768) return 'MD';
-      if (width >= 480) return 'SM';
+      if (width >= 1920 && height >= 1080) return 'ULTRA-WIDE';
+      if (width >= 1440 && height >= 900) return 'DESKTOP';
+      if (width >= 1280 && height >= 550) return 'LAPTOP-SHORT';
+      if (width >= 768 && height >= 1024) return 'TABLET';
+      if (width >= 667 && height >= 375) return 'MOBILE-L';
+      if (width >= 375 && height >= 667) return 'MOBILE-P';
       return 'XS';
     };
 

@@ -91,7 +91,7 @@ export default function Onboarding() {
         className={cn(
           'flex-1 min-h-0 flex items-center justify-center',
           'p-3',
-          'h700:p-2',
+          'h700:items-stretch h700:px-4 h700:py-2',
           'h520:p-1',
         )}
       >
@@ -99,7 +99,7 @@ export default function Onboarding() {
           className={cn(
             'w-full max-w-sm max-h-full overflow-hidden rounded-2xl bg-white km0-card-shadow',
             'flex flex-col',
-            'h700:rounded-xl',
+            'h700:rounded-xl h700:h-full',
           )}
         >
           {/* Header dentro del frame */}
@@ -128,7 +128,7 @@ export default function Onboarding() {
               'flex-1 min-h-0 overflow-y-auto',
               'flex flex-col gap-4',
               'px-6 pt-5 pb-6',
-              'h700:px-5 h700:pb-4 h700:gap-3',
+              'h700:px-5 h700:pb-4 h700:gap-4',
               'h520:px-4 h520:pb-3 h520:gap-3',
             )}
           >
@@ -155,7 +155,7 @@ export default function Onboarding() {
                   className={cn(
                     'w-full object-contain rounded-xl transition-transform duration-300',
                     'max-h-[34dvh]',
-                    'h700:max-h-[28dvh]',
+                    'h700:max-h-[32dvh]',
                     'h520:max-h-[22dvh]',
                     isAnimating ? 'scale-95' : 'scale-100',
                   )}
