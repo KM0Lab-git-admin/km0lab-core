@@ -51,12 +51,31 @@
   font-display: swap;
 }
 
-/* === BREAKPOINTS DE ALTURA - Custom Variants Globales para Tailwind v4 === */
-/* Orden: de menos estricto a más estricto (el último gana en cascada) */
-/* Uso: h520:hidden, h700:text-sm, wideShort:flex-row, etc. en cualquier componente */
-@custom-variant h700 (@media (max-height: 700px));
-@custom-variant wideShort (@media (min-width: 900px) and (max-height: 650px));
-@custom-variant h520 (@media (max-height: 520px));
+/* === BREAKPOINTS KM0 LAB - Custom Variants para Tailwind v4 === */
+/* Orden: Mobile First (de menor a mayor) */
+/* Cada breakpoint considera AMBOS: width Y height */
+/* Referencia: src/components/devtools/BreakpointIndicator.tsx */
+/* Uso: mobile-p:text-sm, laptop-short:flex-row, desktop:px-8, etc. */
+
+/* XS: fallback (< 375px width o < 375px height) - es el default, no necesita variant */
+
+/* MOBILE-P (Portrait): 375x667 - Base del diseño móvil */
+@custom-variant mobile-p (@media (min-width: 375px) and (min-height: 667px));
+
+/* MOBILE-L (Landscape): 667x375 - Móvil horizontal */
+@custom-variant mobile-l (@media (min-width: 667px) and (min-height: 375px));
+
+/* TABLET: 768x1024 - Tablet vertical */
+@custom-variant tablet (@media (min-width: 768px) and (min-height: 1024px));
+
+/* LAPTOP-SHORT: 1280x550 - Laptop con pantalla corta (cero scroll) */
+@custom-variant laptop-short (@media (min-width: 1280px) and (min-height: 550px));
+
+/* DESKTOP: 1440x900 - Escritorio estándar */
+@custom-variant desktop (@media (min-width: 1440px) and (min-height: 900px));
+
+/* ULTRA-WIDE: 1920x1080 - Pantallas grandes */
+@custom-variant ultra-wide (@media (min-width: 1920px) and (min-height: 1080px));
 
 /* === KM0 LAB THEME - Colores y extensiones para Tailwind v4 === */
 @theme {
@@ -630,10 +649,22 @@
   .min-h-dvh-fallback {
     min-height: 100vh;
   }
+  .h-dvh-fallback {
+    height: 100vh;
+  }
+  .max-h-dvh-fallback {
+    max-height: 100vh;
+  }
 }
 
 @supports (height: 100dvh) {
   .min-h-dvh-fallback {
     min-height: 100dvh;
+  }
+  .h-dvh-fallback {
+    height: 100dvh;
+  }
+  .max-h-dvh-fallback {
+    max-height: 100dvh;
   }
 }

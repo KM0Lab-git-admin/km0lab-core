@@ -24,8 +24,8 @@ const SimpleSliderNavigation = ({
     <div
       className={cn(
         'flex-1 min-w-0 flex items-center justify-center',
-        'gap-1',
-        'h520:gap-0.5',
+        'gap-0.5',
+        'mobile-p:gap-1',
       )}
     >
       <NavigationArrow

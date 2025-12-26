@@ -30,14 +30,13 @@ const NavigationArrow = ({ direction, onClick, disabled, ariaLabel }: Navigation
       onKeyDown={handleKeyDown}
       className={cn(
         'rounded-full text-neutral-400 hover:text-km0-blue-700 transition-colors',
-        'p-2.5',
-        'h700:p-2',
-        'h520:p-2',
+        'p-2',
+        'mobile-p:p-2.5',
         disabled && 'opacity-30 cursor-not-allowed hover:text-neutral-400',
       )}
     >
       <svg
-        className={cn('w-7 h-7', 'h700:w-6 h700:h-6', 'h520:w-6 h520:h-6')}
+        className={cn('w-6 h-6', 'mobile-p:w-7 mobile-p:h-7')}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"

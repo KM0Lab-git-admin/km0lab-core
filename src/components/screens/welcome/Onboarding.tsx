@@ -90,32 +90,34 @@ export default function Onboarding() {
       <div
         className={cn(
           'flex-1 min-h-0 flex items-center justify-center',
-          'p-3',
-          'h700:items-stretch h700:px-4 h700:py-2',
-          'h520:p-1',
+          'p-1',
+          'mobile-p:p-3',
+          'mobile-l:items-stretch mobile-l:px-4 mobile-l:py-2',
         )}
       >
         <section
           className={cn(
-            'w-full max-w-sm max-h-full overflow-hidden rounded-2xl bg-white km0-card-shadow',
+            'w-full max-w-sm max-h-full overflow-hidden rounded-xl bg-white km0-card-shadow',
             'flex flex-col',
-            'h700:rounded-xl h700:h-full',
+            'mobile-p:rounded-2xl',
+            'mobile-l:h-full',
           )}
         >
           {/* Header dentro del frame */}
           <header
             className={cn(
               'bg-km0-blue-700 flex items-center justify-center shrink-0',
-              'py-3',
-              'h700:py-2',
-              'h520:py-1',
+              'py-1',
+              'mobile-l:py-2',
+              'mobile-p:py-3',
             )}
           >
             <div
               className={cn(
                 'logo-1',
-                'h700:scale-90',
-                'h520:scale-80',
+                'scale-[0.8]',
+                'mobile-l:scale-90',
+                'mobile-p:scale-100',
               )}
               role="img"
               aria-label="KM0 Lab"
@@ -126,27 +128,27 @@ export default function Onboarding() {
           <div
             className={cn(
               'flex-1 min-h-0 overflow-y-auto',
-              'flex flex-col gap-4',
-              'px-6 pt-5 pb-6',
-              'h700:px-5 h700:pb-4 h700:gap-4',
-              'h520:px-4 h520:pb-3 h520:gap-3',
+              'flex flex-col gap-3',
+              'px-4 pt-5 pb-3',
+              'mobile-l:px-5 mobile-l:pb-4 mobile-l:gap-4',
+              'mobile-p:px-6 mobile-p:pb-6 mobile-p:gap-4',
             )}
           >
             {/* Image block */}
             <div
               className={cn(
-                'relative rounded-2xl p-4',
-                'h700:p-3',
-                'h520:p-2',
+                'relative rounded-2xl p-2',
+                'mobile-l:p-3',
+                'mobile-p:p-4',
                 activeSlide.color,
               )}
             >
               <div
                 className={cn(
                   'relative rounded-2xl bg-white border border-white shadow-sm',
-                  'p-3',
-                  'h700:p-2',
-                  'h520:p-1.5',
+                  'p-1.5',
+                  'mobile-l:p-2',
+                  'mobile-p:p-3',
                 )}
               >
                 <img
@@ -154,9 +156,9 @@ export default function Onboarding() {
                   alt={activeSlide.title}
                   className={cn(
                     'w-full object-contain rounded-xl transition-transform duration-300',
-                    'max-h-[34dvh]',
-                    'h700:max-h-[32dvh]',
-                    'h520:max-h-[22dvh]',
+                    'max-h-[22dvh]',
+                    'mobile-l:max-h-[32dvh]',
+                    'mobile-p:max-h-[34dvh]',
                     isAnimating ? 'scale-95' : 'scale-100',
                   )}
                 />
@@ -165,9 +167,10 @@ export default function Onboarding() {
               {/* XP badge */}
               <div
                 className={cn(
-                  'absolute left-4 bottom-4 bg-km0-coral-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md',
-                  'h700:left-3 h700:bottom-3',
-                  'h520:hidden',
+                  'absolute bg-km0-coral-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md',
+                  'hidden',
+                  'mobile-l:block mobile-l:left-3 mobile-l:bottom-3',
+                  'mobile-p:left-4 mobile-p:bottom-4',
                 )}
               >
                 + 10 XP
@@ -178,27 +181,29 @@ export default function Onboarding() {
             <div
               className={cn(
                 'text-center transition-all duration-300',
-                'h700:mt-1',
-                'h520:mt-0.5',
+                'mt-0.5',
+                'mobile-l:mt-1',
                 isAnimating ? 'translate-y-1 opacity-90' : 'translate-y-0 opacity-100',
               )}
             >
               <h1
                 className={cn(
                   'font-brand font-black text-neutral-900 uppercase tracking-tight text-balance leading-tight',
-                  'text-3xl md:text-4xl',
-                  'h700:text-2xl',
-                  'h520:text-xl',
+                  'text-xl',
+                  'mobile-l:text-2xl',
+                  'mobile-p:text-3xl',
+                  'desktop:text-4xl',
                 )}
               >
                 {activeSlide.title}
               </h1>
               <p
                 className={cn(
-                  'mt-3 font-ui text-neutral-500 leading-relaxed',
-                  'text-base md:text-lg',
-                  'h700:text-sm h700:mt-2',
-                  'h520:text-sm h520:mt-1.5',
+                  'font-ui text-neutral-500 leading-relaxed',
+                  'text-sm mt-1.5',
+                  'mobile-l:text-sm mobile-l:mt-2',
+                  'mobile-p:text-base mobile-p:mt-3',
+                  'desktop:text-lg',
                 )}
               >
                 {activeSlide.subtitle}
@@ -210,27 +215,27 @@ export default function Onboarding() {
           <footer
             className={cn(
               'shrink-0 flex items-center justify-between gap-3',
-              'px-6 py-4',
-              'h700:px-5 h700:py-3',
-              'h520:px-4 h520:py-2',
+              'px-4 py-2',
+              'mobile-l:px-5 mobile-l:py-3',
+              'mobile-p:px-6 mobile-p:py-4',
             )}
           >
             {/* Counter */}
-            <div className="w-16 text-km0-blue-700 font-bold text-lg h700:text-base h520:text-sm">
+            <div className="w-16 text-km0-blue-700 font-bold text-sm mobile-l:text-base mobile-p:text-lg">
               {safeIndex + 1}/{slides.length}
             </div>
 
             {/* Nav */}
-            <div className="flex items-center gap-3 h700:gap-2 h520:gap-1.5">
+            <div className="flex items-center gap-1.5 mobile-l:gap-2 mobile-p:gap-3">
               <button
                 type="button"
                 onClick={prevSlide}
                 disabled={safeIndex === 0}
                 aria-label="Anterior"
                 className={cn(
-                  'p-2 rounded-full text-neutral-400 hover:text-km0-blue-700 transition-colors',
-                  'h700:p-1.5',
-                  'h520:p-1',
+                  'p-1 rounded-full text-neutral-400 hover:text-km0-blue-700 transition-colors',
+                  'mobile-l:p-1.5',
+                  'mobile-p:p-2',
                   safeIndex === 0 && 'opacity-30 cursor-not-allowed hover:text-neutral-400',
                 )}
               >
@@ -243,23 +248,23 @@ export default function Onboarding() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-5 w-5 h700:h-4 h700:w-4 h520:h-4 h520:w-4"
+                  className="h-4 w-4 mobile-p:h-5 mobile-p:w-5"
                 >
                   <path d="M15 18l-6-6 6-6" />
                 </svg>
               </button>
 
-              <div className="flex items-center gap-2 h700:gap-1.5 h520:gap-1" aria-label="Progreso">
+              <div className="flex items-center gap-1 mobile-l:gap-1.5 mobile-p:gap-2" aria-label="Progreso">
                 {slides.map((_, index) => (
                   <div
                     key={index}
                     className={cn(
-                      'h-2 rounded-full transition-all duration-200',
-                      'h700:h-1.5',
-                      'h520:h-1',
+                      'h-1 rounded-full transition-all duration-200',
+                      'mobile-l:h-1.5',
+                      'mobile-p:h-2',
                       safeIndex === index
-                        ? 'w-8 h700:w-6 h520:w-5 bg-neutral-900'
-                        : 'w-2 h700:w-1.5 h520:w-1 bg-neutral-300',
+                        ? 'w-5 mobile-l:w-6 mobile-p:w-8 bg-neutral-900'
+                        : 'w-1 mobile-l:w-1.5 mobile-p:w-2 bg-neutral-300',
                     )}
                   />
                 ))}
@@ -271,9 +276,9 @@ export default function Onboarding() {
                 disabled={isLastSlide}
                 aria-label="Siguiente"
                 className={cn(
-                  'p-2 rounded-full text-neutral-400 hover:text-km0-blue-700 transition-colors',
-                  'h700:p-1.5',
-                  'h520:p-1',
+                  'p-1 rounded-full text-neutral-400 hover:text-km0-blue-700 transition-colors',
+                  'mobile-l:p-1.5',
+                  'mobile-p:p-2',
                   isLastSlide && 'opacity-30 cursor-not-allowed hover:text-neutral-400',
                 )}
               >
@@ -286,7 +291,7 @@ export default function Onboarding() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-5 w-5 h700:h-4 h700:w-4 h520:h-4 h520:w-4"
+                  className="h-4 w-4 mobile-p:h-5 mobile-p:w-5"
                 >
                   <path d="M9 18l6-6-6-6" />
                 </svg>
@@ -302,9 +307,9 @@ export default function Onboarding() {
                 className={cn(
                   'rounded bg-km0-blue-700 text-white font-semibold whitespace-nowrap text-center',
                   'shadow-sm hover:opacity-90 transition-opacity',
-                  'px-4 py-2 text-sm',
-                  'h700:px-3.5 h700:py-1.5 h700:text-sm',
-                  'h520:px-3 h520:py-1.5 h520:text-xs',
+                  'px-3 py-1.5 text-xs',
+                  'mobile-l:px-3.5 mobile-l:py-1.5 mobile-l:text-sm',
+                  'mobile-p:px-4 mobile-p:py-2 mobile-p:text-sm',
                 )}
               >
                 {isLastSlide ? 'EMPEZAR' : 'SALTAR'}

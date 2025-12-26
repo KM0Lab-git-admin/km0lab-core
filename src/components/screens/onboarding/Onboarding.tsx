@@ -10,7 +10,7 @@ const slides = [
     id: 1,
     titleLine1: 'BIENVENIDO',
     titleLine2: 'A KM0 LAB',
-    subtitle: 'Tu comercio local, más cerca que nunca.',
+    subtitle: 'Tu comercio local, más cerca que nunca. Descubre una nueva forma de interactuar con tus vecinos y apoyar el comercio de proximidad en tu barrio, todo desde una única plataforma diseñada para ti.',
     image: '/images/glovo-style-welcome.png',
     color: 'bg-km0-yellow-100',
   },
@@ -175,55 +175,61 @@ export default function Onboarding() {
   if (!activeSlide) return null;
 
   return (
-    // Page: ocupa todo el viewport
+    // Page: ocupa exactamente el viewport, nunca más
     <div
       className={cn(
-        'w-full min-h-dvh-fallback',
+        'w-full h-dvh-fallback',
         'flex flex-col',
         'bg-gradient-white-beige font-ui',
-        'overflow-x-hidden',
+        'overflow-hidden',
       )}
     >
-      {/* Wrapper: flex-1 min-h-0 para scroll interno */}
+      {/* Wrapper: padding mínimo 10px, flex para distribuir contenido */}
       <div
         className={cn(
-          'flex-1 min-h-0 flex flex-col items-center justify-center',
-          'p-3 w-full overflow-x-hidden',
-          'h700:justify-between h700:px-4 h700:py-2',
-          'h520:px-2 h520:py-1',
+          'flex-1 min-h-0 flex flex-col items-center justify-start', // Always start from top to avoid clipping logo
+          'p-[10px] w-full overflow-hidden',
+          'mobile-p:p-3 mobile-p:justify-center', // Can center in portrait if space allows
+          'tablet:p-8',
+          'laptop-short:p-4 laptop-short:justify-center',
         )}
       >
         {/* Logo fuera de la tarjeta */}
         <header
           className={cn(
             'flex items-center justify-center shrink-0',
-            'pb-3',
-            'h700:pb-2',
-            'h520:pb-1.5',
-            'wideShort:hidden',
+            'pb-2',
+            'mobile-p:pb-3',
+            'tablet:pb-4',
+            'laptop-short:hidden',
           )}
         >
           <div
             className={cn(
               'logo-1',
-              'h700:scale-90',
-              'h520:scale-[0.7]',
+              'scale-[0.65]',
+              'mobile-p:scale-100',
+              'mobile-l:scale-[0.8]',
             )}
             role="img"
             aria-label="KM0 Lab"
           />
         </header>
 
-        {/* Card: max-h-full para no exceder wrapper */}
+        {/* Card: crece en proporción a la resolución */}
         <section
           ref={containerRef}
           className={cn(
-            'w-full h-slide-container overflow-hidden rounded-2xl bg-white km0-card-shadow',
-            'flex flex-col',
-            'max-w-sm mx-auto min-w-0',
-            'h700:rounded-xl h700:flex-1 h700:min-h-0',
-            'h520:flex-1 h520:min-h-0',
-            'wideShort:max-w-4xl wideShort:flex-row',
+            'w-full overflow-hidden rounded-xl bg-white km0-card-shadow',
+            'flex flex-col flex-1 min-h-0',
+            'mx-auto',
+            'max-w-full', 
+            'mobile-l:flex-row mobile-l:max-w-[calc(100vw-40px)]', 
+            'mobile-p:flex-col mobile-p:max-w-[355px] mobile-p:rounded-2xl', 
+            'tablet:flex-col tablet:max-w-[565px] tablet:flex-none tablet:max-h-[935px]', 
+            'laptop-short:max-w-4xl laptop-short:flex-row laptop-short:flex-none laptop-short:max-h-[420px]',
+            'desktop:max-w-6xl desktop:max-h-[650px]',
+            'ultra-wide:max-w-[1400px] ultra-wide:max-h-[850px]',
           )}
         >
           {/* Carousel Container */}
@@ -248,33 +254,38 @@ export default function Onboarding() {
                 <div
                   key={slide.id}
                   className={cn(
-                    'w-full flex-shrink-0 h-full',
+                    'w-full flex-shrink-0 h-full min-w-0 overflow-hidden',
                     'flex flex-col',
-                    'px-5 pb-2',
-                    'h700:px-5 h700:pb-2',
-                    'h520:px-3 h520:pb-0.5',
+                    'px-3 pb-0.5',
+                    'mobile-l:flex-row mobile-l:px-4 mobile-l:pb-0 mobile-l:items-start mobile-l:gap-4 mobile-l:pt-6',
+                    'mobile-p:flex-col mobile-p:px-4 mobile-p:pb-2 mobile-p:items-center mobile-p:pt-0',
+                    'tablet:flex-col tablet:px-8 tablet:pt-6 tablet:items-center',
+                    'laptop-short:flex-row laptop-short:px-10 laptop-short:pt-6 laptop-short:items-start laptop-short:gap-8',
+                    'desktop:px-12 desktop:pt-10 desktop:gap-12',
+                    'ultra-wide:px-16 ultra-wide:pt-14 ultra-wide:gap-16',
                   )}
                 >
                   {/* Imagen */}
                   <div
                     className={cn(
-                      'relative shrink-0',
-                      'rounded-2xl',
-                      'h700:rounded-xl',
+                      'relative shrink-0 min-w-0',
+                      'rounded-xl',
                       slide.color,
-                      'p-3 mt-5',
-                      'h700:p-3 h700:mt-3',
-                      'h520:p-2 h520:rounded-xl h520:mt-3',
+                      'p-2 mt-3',
+                      'mobile-l:p-2 mobile-l:mt-0 mobile-l:w-[40%]',
+                      'mobile-p:p-3 mobile-p:mt-5 mobile-p:rounded-2xl mobile-p:w-full',
+                      'tablet:w-full tablet:mt-4', // Volver a vertical en Tablet
+                      'laptop-short:w-[45%] laptop-short:mt-0',
+                      'desktop:w-[40%]',
+                      'ultra-wide:w-[35%]',
                     )}
                   >
                     <div
                       className={cn(
                         'relative bg-white border border-white shadow-sm',
-                        'rounded-2xl',
-                        'h700:rounded-xl',
-                        'p-2',
-                        'h700:p-2',
-                        'h520:p-1 h520:rounded-lg',
+                        'rounded-lg p-1',
+                        'mobile-l:rounded-xl mobile-l:p-1',
+                        'mobile-p:rounded-2xl mobile-p:p-2',
                       )}
                     >
                       <img
@@ -282,11 +293,13 @@ export default function Onboarding() {
                         alt={`${slide.titleLine1} ${slide.titleLine2}`}
                         className={cn(
                           'w-full object-contain',
-                          'rounded-xl',
-                          'h700:rounded-lg',
-                          'max-h-[32dvh]',
-                          'h700:max-h-[34dvh]',
-                          'h520:max-h-[38dvh]',
+                          'rounded-lg',
+                          'max-h-[38dvh]',
+                          'mobile-l:rounded-xl mobile-l:max-h-[45dvh]',
+                          'mobile-p:max-h-[32dvh]',
+                          'laptop-short:max-h-[280px]',
+                          'desktop:max-h-[450px]',
+                          'ultra-wide:max-h-[600px]',
                         )}
                         draggable={false}
                       />
@@ -296,9 +309,9 @@ export default function Onboarding() {
                     <div
                       className={cn(
                         'absolute bg-km0-coral-400 text-white font-bold rounded-full shadow-md',
-                        'left-3 bottom-3 text-xs px-3 py-1',
-                        'h700:left-2 h700:bottom-2 h700:text-[10px] h700:px-2 h700:py-0.5',
-                        'h520:left-1.5 h520:bottom-1.5 h520:text-[9px] h520:px-2 h520:py-0.5',
+                        'left-1.5 bottom-1.5 text-[9px] px-2 py-0.5',
+                        'mobile-l:left-1.5 mobile-l:bottom-1.5 mobile-l:text-[8px] mobile-l:px-1.5 mobile-l:py-0.5',
+                        'mobile-p:left-3 mobile-p:bottom-3 mobile-p:text-xs mobile-p:px-3 mobile-p:py-1',
                       )}
                     >
                       + 10 XP
@@ -306,25 +319,42 @@ export default function Onboarding() {
                   </div>
 
                   {/* Texto */}
-                  <div className="flex-1 flex flex-col justify-center">
+                  <div
+                    className={cn(
+                      'flex-1 flex flex-col min-w-0',
+                      'justify-start pt-2', // Reducido
+                      'mobile-l:pt-2 mobile-l:justify-start mobile-l:w-[60%] mobile-l:pr-0', 
+                      'mobile-p:pt-4 mobile-p:justify-start mobile-p:w-full mobile-p:pr-0', 
+                      'tablet:w-full tablet:pt-6 tablet:justify-start', 
+                      'laptop-short:pt-2 laptop-short:justify-start laptop-short:w-[55%]',
+                      'desktop:w-[60%] desktop:pt-4',
+                      'ultra-wide:w-[65%] ultra-wide:pt-6',
+                    )}
+                  >
                     <div
                       className={cn(
                         'text-center',
-                        'mt-4',
-                        'h700:mt-3',
-                        'h520:mt-2',
+                        'mobile-l:text-center',
+                        'mobile-p:text-center',
+                        'tablet:text-center',
+                        'laptop-short:text-left',
                       )}
                     >
                       <h1
                         className={cn(
                           'font-brand font-black text-neutral-900 uppercase tracking-tight leading-tight',
-                          'text-2xl md:text-3xl',
-                          'h700:text-xl',
-                          'h520:text-2xl',
+                          'text-lg', // Reducido
+                          'mobile-l:text-lg',
+                          'mobile-p:text-xl', // Reducido
+                          'tablet:text-2xl',
+                          'laptop-short:text-2xl',
+                          'desktop:text-4xl',
+                          'ultra-wide:text-6xl',
                         )}
                       >
                         {slide.titleLine1}
-                        <br />
+                        <br className="mobile-l:hidden laptop-short:hidden" />
+                        <span className="hidden mobile-l:inline laptop-short:inline"> </span>
                         {slide.titleLine2}
                       </h1>
 
@@ -332,11 +362,13 @@ export default function Onboarding() {
                       <p
                         className={cn(
                           'font-ui text-neutral-500 leading-relaxed',
-                          'mt-2',
-                          'h700:mt-1',
-                          'text-sm md:text-base',
-                          'h700:text-sm',
-                          'h520:text-xs h520:mt-0.5',
+                          'text-xs mt-0.5 pb-4',
+                          'mobile-l:text-xs mobile-l:mt-1 mobile-l:pb-2',
+                          'mobile-p:text-sm mobile-p:mt-2 mobile-p:pb-4',
+                          'tablet:pb-8',
+                          'laptop-short:text-sm laptop-short:mt-2 laptop-short:pb-0',
+                          'desktop:text-lg desktop:mt-4',
+                          'ultra-wide:text-2xl ultra-wide:mt-6',
                         )}
                       >
                         {slide.subtitle}
@@ -354,19 +386,20 @@ export default function Onboarding() {
           className={cn(
             'shrink-0 w-full max-w-sm',
             'flex items-center justify-between gap-2',
-            'px-2 pt-3',
-            'h700:px-1 h700:pt-2',
-            'h520:px-1 h520:pt-2',
-            'wideShort:hidden',
+            'px-1 pt-2',
+            'mobile-l:px-1 mobile-l:pt-2',
+            'mobile-p:px-2 mobile-p:pt-3',
+            'tablet:max-w-md',
+            'laptop-short:flex laptop-short:max-w-4xl',
           )}
         >
           {/* Contador */}
           <div
             className={cn(
               'text-km0-blue-700 font-bold shrink-0',
-              'text-base w-12',
-              'h700:text-sm h700:w-10',
-              'h520:text-xs h520:w-8',
+              'text-xs w-8',
+              'mobile-l:text-sm mobile-l:w-10',
+              'mobile-p:text-base mobile-p:w-12',
             )}
           >
             {safeIndex + 1}/{slides.length}
@@ -400,9 +433,9 @@ export default function Onboarding() {
               className={cn(
                 '!rounded !bg-km0-blue-700 !text-white font-semibold whitespace-nowrap text-center',
                 'shadow-sm hover:opacity-90 transition-opacity',
-                '!px-3 !py-2 !text-xs !h-auto',
-                'h700:!px-2.5 h700:!py-1.5 h700:!text-xs',
-                'h520:!px-2 h520:!py-1 h520:!text-[10px]',
+                '!px-2 !py-1 !text-[10px] !h-auto',
+                'mobile-l:!px-2.5 mobile-l:!py-1.5 mobile-l:!text-xs',
+                'mobile-p:!px-3 mobile-p:!py-2 mobile-p:!text-xs',
                 isLastSlide && 'opacity-50 cursor-not-allowed',
               )}
             >

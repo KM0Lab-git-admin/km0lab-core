@@ -7,20 +7,30 @@ export default {
   ],
   theme: {
     screens: {
-      'xs': '360px',
-      'sm': '480px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
-      '2xl': '1536px',
-      // Breakpoints que consideran altura; la altura es la restricción principal
-      'xs-h': { raw: '(max-height: 699px)' }, // altura <700 => siempre XS
-      'sm-h': { raw: '(min-width: 480px) and (min-height: 700px) and (max-height: 799px)' },
-      'md-h': { raw: '(min-width: 768px) and (min-height: 800px) and (max-height: 899px)' },
-      'lg-h': { raw: '(min-width: 1024px) and (min-height: 900px) and (max-height: 999px)' },
-      'xl-h': { raw: '(min-width: 1280px) and (min-height: 1000px)' },
-      // NOTA: Los breakpoints h700, h520, wideShort para Onboarding2
-      // están definidos en globals.css como @custom-variant
+      // === BREAKPOINTS KM0 LAB ===
+      // Orden: Mobile First (de menor a mayor)
+      // Cada breakpoint considera AMBOS: width Y height
+      // Referencia: src/components/devtools/BreakpointIndicator.tsx
+
+      // XS: fallback (< 375px width o < 375px height) - no necesita definición
+
+      // MOBILE-P (Portrait): 375x667 - Base del diseño móvil
+      'mobile-p': { raw: '(min-width: 375px) and (min-height: 667px)' },
+
+      // MOBILE-L (Landscape): 667x375 - Móvil horizontal
+      'mobile-l': { raw: '(min-width: 667px) and (min-height: 375px)' },
+
+      // TABLET: 768x1024 - Tablet vertical
+      'tablet': { raw: '(min-width: 768px) and (min-height: 1024px)' },
+
+      // LAPTOP-SHORT: 1280x550 - Laptop con pantalla corta (cero scroll)
+      'laptop-short': { raw: '(min-width: 1280px) and (min-height: 550px)' },
+
+      // DESKTOP: 1440x900 - Escritorio estándar
+      'desktop': { raw: '(min-width: 1440px) and (min-height: 900px)' },
+
+      // ULTRA-WIDE: 1920x1080 - Pantallas grandes
+      'ultra-wide': { raw: '(min-width: 1920px) and (min-height: 1080px)' },
     },
     extend: {
       maxHeight: {
