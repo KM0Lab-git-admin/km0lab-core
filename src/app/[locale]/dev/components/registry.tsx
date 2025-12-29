@@ -1144,12 +1144,10 @@ const CarouselDemo = () => {
 
 const HeroSlideDemo = () => {
   const [layout, setLayout] = useState<'stack' | 'side'>('stack');
-  const [density, setDensity] = useState<'default' | 'compact'>('default');
-  const [containerWidth, setContainerWidth] = useState(520);
 
   return (
     <div className="space-y-4">
-      <div className="grid gap-2 sm:grid-cols-3">
+      <div className="grid gap-2 sm:grid-cols-2">
         <label className="text-sm text-slate-600">
           Layout
           <select
@@ -1158,36 +1156,8 @@ const HeroSlideDemo = () => {
             onChange={e => setLayout(e.target.value as 'stack' | 'side')}
           >
             <option value="stack">stack (vertical - default)</option>
-            <option value="side">side (forzado)</option>
+            <option value="side">side (horizontal - forzado)</option>
           </select>
-        </label>
-
-        <label className="text-sm text-slate-600">
-          Density
-          <select
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={density}
-            onChange={e => setDensity(e.target.value as 'default' | 'compact')}
-          >
-            <option value="default">default (stack)</option>
-            <option value="compact">compact (short-landscape)</option>
-          </select>
-        </label>
-
-        <label className="text-sm text-slate-600">
-          Card width
-          <input
-            type="range"
-            min={320}
-            max={1120}
-            value={containerWidth}
-            onChange={e => setContainerWidth(Number(e.target.value))}
-            className="mt-2 w-full"
-          />
-          <span className="mt-1 block text-xs text-slate-500">
-            {containerWidth}
-            px
-          </span>
         </label>
       </div>
 
@@ -1196,32 +1166,26 @@ const HeroSlideDemo = () => {
           Layout:
           {' '}
           {layout}
-          {' • '}
-          Density:
-          {' '}
-          {density}
         </p>
-        <div className="rounded-3xl bg-gradient-white-beige p-4">
-          <div
-            className="mx-auto w-full transition-all"
-            style={{ maxWidth: `${containerWidth}px` }}
-          >
-            <HeroSlide
-              title={(
-                <>
-                  BIENVENIDO
-                  {' '}
-                  <span className="text-km0-blue-700">A KM0 LAB</span>
-                </>
-              )}
-              subtitle="Tu comercio local, más cerca que nunca. Descubre una nueva forma de interactuar con tus vecinos."
-              imageSrc="/images/glovo-style-welcome.png"
-              badgeText="+ 10 XP"
-              bgColor="bg-km0-yellow-100"
-              layout={layout}
-              density={density}
-            />
-          </div>
+        <div
+          className={`flex rounded-xl bg-gradient-white-beige p-4 ${
+            layout === 'side' ? 'flex-row items-start gap-6' : 'flex-col items-center'
+          }`}
+        >
+          <HeroSlide
+            title={(
+              <>
+                BIENVENIDO
+                {' '}
+                <span className="text-km0-blue-700">A KM0 LAB</span>
+              </>
+            )}
+            subtitle="Tu comercio local, más cerca que nunca. Descubre una nueva forma de interactuar con tus vecinos."
+            imageSrc="/images/glovo-style-welcome.png"
+            badgeText="+ 10 XP"
+            bgColor="bg-km0-yellow-100"
+            layout={layout}
+          />
         </div>
       </div>
 
@@ -1230,11 +1194,11 @@ const HeroSlideDemo = () => {
         {' '}
         <code>side</code>
         {' '}
-        y la densidad compacta se aplican automáticamente en el breakpoint
+        se activa automáticamente en
         {' '}
         <code>short-landscape</code>
         {' '}
-        (orientation: landscape + max-height: 550px). Cubre casos 667×375 y 1280×550, pero NO 1440×900 en adelante.
+        (orientation: landscape + max-height: 550px). Aplica a 667x375 y 1280x550, pero NO a 1440x900.
       </div>
     </div>
   );
@@ -1244,7 +1208,6 @@ const MediaFrameDemo = () => {
   const [layout, setLayout] = useState<'stack' | 'side'>('stack');
   const [bgColor, setBgColor] = useState('bg-km0-yellow-100');
   const [showBadge, setShowBadge] = useState(true);
-  const [imageHeight, setImageHeight] = useState<'fluid' | 'compact'>('fluid');
 
   const bgOptions = [
     { value: 'bg-km0-yellow-100', label: 'Yellow' },
@@ -1255,7 +1218,7 @@ const MediaFrameDemo = () => {
 
   return (
     <div className="space-y-4">
-      <div className="grid gap-2 sm:grid-cols-4">
+      <div className="grid gap-2 sm:grid-cols-3">
         <label className="text-sm text-slate-600">
           Layout
           <select
@@ -1279,17 +1242,6 @@ const MediaFrameDemo = () => {
             ))}
           </select>
         </label>
-        <label className="text-sm text-slate-600">
-          Image max-height
-          <select
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={imageHeight}
-            onChange={e => setImageHeight(e.target.value as 'fluid' | 'compact')}
-          >
-            <option value="fluid">fluid</option>
-            <option value="compact">compact</option>
-          </select>
-        </label>
         <label className="flex items-center gap-2 text-sm text-slate-600">
           <input
             type="checkbox"
@@ -1309,7 +1261,6 @@ const MediaFrameDemo = () => {
             badgeText={showBadge ? '+ 10 XP' : undefined}
             layout={layout}
             className={bgColor}
-            imageMaxHeight={imageHeight}
           />
         </div>
       </div>

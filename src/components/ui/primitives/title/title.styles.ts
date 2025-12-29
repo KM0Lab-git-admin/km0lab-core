@@ -5,18 +5,6 @@ export const titleVariants = cva(
   {
     variants: {
       size: {
-        hero: [
-          'text-[clamp(2rem,5vw,4rem)]',
-          'leading-[clamp(2.4rem,5.5vw,4.5rem)]',
-          'short-landscape:text-[clamp(1.65rem,3.6vw,2.5rem)]',
-          'short-landscape:leading-[clamp(1.9rem,4.1vw,3rem)]',
-        ].join(' '),
-        heroCompact: [
-          'text-[clamp(1.6rem,4.2vw,3rem)]',
-          'leading-[clamp(1.9rem,4.6vw,3.25rem)]',
-          'short-landscape:text-[clamp(1.35rem,3.2vw,2.2rem)]',
-          'short-landscape:leading-[clamp(1.55rem,3.6vw,2.6rem)]',
-        ].join(' '),
         h1: 'text-2xl mobile-p:text-3xl tablet:text-4xl laptop-short:text-3xl desktop:text-5xl ultra-wide:text-6xl',
         h2: 'text-xl mobile-p:text-2xl tablet:text-3xl laptop-short:text-2xl desktop:text-4xl ultra-wide:text-5xl',
         h3: 'text-lg mobile-p:text-xl tablet:text-2xl laptop-short:text-xl desktop:text-3xl ultra-wide:text-4xl',

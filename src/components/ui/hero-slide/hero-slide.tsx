@@ -2,7 +2,6 @@ import type { VariantProps } from 'class-variance-authority';
 import type React from 'react';
 
 import { MediaFrame } from '@/components/ui/media-frame';
-import type { MediaFrameProps } from '@/components/ui/media-frame';
 import { Subtitle } from '@/components/ui/primitives/subtitle';
 import { Title } from '@/components/ui/primitives/title';
 import { cn } from '@/components/ui/primitives/utils';
@@ -13,9 +12,7 @@ import {
   heroTextWrapperVariants,
 } from './hero-slide.styles';
 
-export interface HeroSlideProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>,
-    VariantProps<typeof heroSlideVariants> {
+export type HeroSlideProps = {
   /** Título principal (ReactNode para permitir énfasis). */
   title: React.ReactNode;
   /** Subtítulo o descripción (ReactNode). */
@@ -30,14 +27,13 @@ export interface HeroSlideProps
   bgColor?: string;
   /** Alineación del texto en modo stack (default: center). */
   align?: VariantProps<typeof heroContentVariants>['align'];
-  /** Controla la altura máxima de la imagen (fluido por defecto). */
-  imageMaxHeight?: MediaFrameProps['imageMaxHeight'];
-}
+} & Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> & VariantProps<typeof heroSlideVariants>;
 
 /**
  * Componente de composición para slides o héroes.
- * Usa Title y Subtitle primitives.
- * Layout 'stack' cambia a horizontal en laptop-short automáticamente vía CSS.
+ * - layout="stack": vertical (default)
+ * - layout="side": horizontal (imagen izquierda, texto derecha)
+ * - density="compact": reduce gaps, Title h2, Subtitle sm, imagen compacta
  */
 const HeroSlide = ({
   title,
@@ -49,15 +45,17 @@ const HeroSlide = ({
   layout = 'stack',
   density = 'default',
   align = 'center',
-  imageMaxHeight = 'fluid',
   className,
   ...props
 }: HeroSlideProps) => {
   const isSide = layout === 'side';
-  const resolvedAlign: 'left' | 'center' = isSide ? 'left' : (align ?? 'center');
-  const resolvedTitleSize = density === 'compact' ? 'heroCompact' : 'hero';
-  const resolvedSubtitleSize = density === 'compact' ? 'heroCompact' : 'hero';
-  const resolvedImageMaxHeight = density === 'compact' ? 'compact' : imageMaxHeight;
+  const isCompact = density === 'compact';
+
+  // Variantes internas basadas en props (sin clases short-landscape sueltas)
+  const resolvedAlign = isSide ? 'left' : (align ?? 'center');
+  const titleSize = isCompact ? 'h2' : 'h1';
+  const subtitleSize = isCompact ? 'sm' : 'md';
+  const imageMaxHeight = isCompact ? 'compact' : 'default';
 
   return (
     <div
@@ -69,19 +67,16 @@ const HeroSlide = ({
         alt={imageAlt}
         badgeText={badgeText}
         tone={bgColor ? undefined : 'default'}
-        className={cn(
-          'shrink-0 transition-all',
-          bgColor,
-        )}
+        className={cn('shrink-0 transition-all', bgColor)}
         layout={isSide ? 'side' : 'stack'}
-        imageMaxHeight={resolvedImageMaxHeight}
+        imageMaxHeight={imageMaxHeight}
       />
 
       <div className={cn(heroContentVariants({ align: resolvedAlign, layout }))}>
         <div className={cn(heroTextWrapperVariants({ density }))}>
           <Title
             as="h1"
-            size={resolvedTitleSize}
+            size={titleSize}
             align={resolvedAlign}
           >
             {title}
@@ -89,9 +84,9 @@ const HeroSlide = ({
 
           {subtitle && (
             <Subtitle
-              size={resolvedSubtitleSize}
+              size={subtitleSize}
               align={resolvedAlign}
-              className="max-w-[clamp(32ch,5vw,52ch)]"
+              className="max-w-[45ch]"
             >
               {subtitle}
             </Subtitle>
