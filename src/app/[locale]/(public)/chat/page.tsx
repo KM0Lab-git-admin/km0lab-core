@@ -1,5 +1,5 @@
 import SafeHydration from '@/components/screens/welcome/SafeHydration';
-import { AppHeader } from '@/components/ui/layout/AppHeader';
+import { LogoHeader } from '@/components/ui/logo-header';
 import ChatKitComponent from '@/components/chat/ChatKit/ChatKit';
 
 export default function ChatPage() {
@@ -7,7 +7,7 @@ export default function ChatPage() {
     <SafeHydration>
       <div className="w-full h-screen flex flex-col">
         {/* AppHeader */}
-        <AppHeader />
+        <LogoHeader />
         
         {/* ChatKit Container */}
         <div className="flex-1 flex items-center justify-center p-4 sm:p-6 md:p-8 overflow-hidden">

@@ -1,5 +1,5 @@
 import SafeHydration from '@/components/screens/welcome/SafeHydration';
-import { AppHeader } from '@/components/ui/layout/AppHeader';
+import { LogoHeader } from '@/components/ui/logo-header';
 import FilesList from '@/components/files/FilesList/FilesList';
 
 export default function FilesPage() {
@@ -7,7 +7,7 @@ export default function FilesPage() {
     <SafeHydration>
       <div className="w-full min-h-screen flex flex-col">
         {/* AppHeader */}
-        <AppHeader />
+        <LogoHeader />
         
         {/* Files Container */}
         <div className="flex-1 p-4 sm:p-6 md:p-8">

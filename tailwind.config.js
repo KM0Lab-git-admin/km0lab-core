@@ -226,6 +226,7 @@ export default {
         'slide': '20rem', // 320px - ancho máximo de la imagen del slide
         'slider-count-lg': '28rem', // 448px
         'slider-count-xl': '32rem', // 512px
+        'mobile-frame': '24rem', // 384px - ancho máximo del frame móvil (max-w-sm)
       },
       width: {
         'logo': '9.1875rem', // 147px - ancho del logo
@@ -243,6 +244,11 @@ export default {
       backgroundImage: {
         'gradient-app': 'linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%)',
         'gradient-white-beige': 'linear-gradient(180deg, #ffffff 0%, #FFECD2 100%)',
+        'gradient-mobile-frame': 'linear-gradient(to bottom right, rgba(144, 169, 232, 0.2) 0%, rgba(255, 236, 210, 0.2) 100%)',
+      },
+      borderRadius: {
+        'mobile-frame': '1rem', // 16px - radio base del frame móvil
+        'mobile-frame-lg': '1.25rem', // 20px - radio en sm+ del frame móvil
       },
       animationDelay: {
         200: '0.2s',

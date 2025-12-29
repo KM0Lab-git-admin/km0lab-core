@@ -3,7 +3,7 @@
 import { useParams, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
-import { AppHeader } from '@/components/ui/layout/AppHeader';
+import { LogoHeader } from '@/components/ui/logo-header';
 import { MobileFrame } from '@/components/ui/layout/MobileFrame';
 import { Button } from '@/components/ui/primitives/button';
 import { Subtitle } from '@/components/ui/primitives/subtitle';
@@ -26,7 +26,7 @@ export default function PostalCodeWelcomePage() {
   return (
     <div className="min-h-dvh-fallback flex flex-col items-stretch justify-center overflow-hidden px-2 xs:px-3 sm:px-4 pt-1 xs:pt-2 sm:pt-3">
       <MobileFrame className="flex-1 min-h-0 w-full">
-        <AppHeader />
+        <LogoHeader />
 
         <div className="w-full flex flex-col items-center gap-2 xs:gap-3 sm:gap-4 flex-1 min-h-0 justify-center">
           <div className="w-full text-center flex flex-col gap-1 xs:gap-2">

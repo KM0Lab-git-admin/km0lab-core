@@ -1,5 +1,5 @@
 'use client';
-import { AppHeader } from '@/components/ui/layout/AppHeader';
+import { LogoHeader } from '@/components/ui/logo-header';
 import { MobileFrame } from '@/components/ui/layout/MobileFrame';
 import { SimpleSliderNavigation } from '@/components/ui/slider';
 import { useTranslations } from 'next-intl';
@@ -45,7 +45,7 @@ export default function WelcomePage() {
     >
       <MobileFrame className="flex-1 min-h-0 w-full">
         {/* Header with Status Bar and Logo */}
-        <AppHeader />
+        <LogoHeader />
 
         {/* Hero Content */}
         <div className="w-full flex flex-col items-center gap-1.5 xs:gap-2.5 sm:gap-3.5 flex-1 min-h-0">

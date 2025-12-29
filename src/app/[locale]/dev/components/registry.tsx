@@ -22,11 +22,13 @@ import {
   useCarousel,
 } from '@/components/ui/carousel';
 import { HeroSlide } from '@/components/ui/hero-slide';
-import { AppHeader } from '@/components/ui/layout/AppHeader';
 import { MobileFrame } from '@/components/ui/layout/MobileFrame';
 import { StatusBar } from '@/components/ui/layout/StatusBar';
 import { ContentCard } from '@/components/ui/content-card';
+import { ContentShell } from '@/components/ui/content-shell';
+import { LogoHeader } from '@/components/ui/logo-header';
 import { MediaFrame } from '@/components/ui/media-frame';
+import { PageContainer } from '@/components/ui/page-container';
 import { Badge } from '@/components/ui/primitives/badge';
 import { Button } from '@/components/ui/primitives/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/primitives/card';
@@ -660,22 +662,6 @@ const SeparatorDemo = () => (
   </div>
 );
 
-const AppHeaderDemo = () => {
-  const [alt, setAlt] = useState('KM0 LAB');
-  return (
-    <div className="space-y-3">
-      <AppHeader logoAlt={alt} />
-      <label className="text-sm text-slate-600">
-        logoAlt
-        <input
-          className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-          value={alt}
-          onChange={e => setAlt(e.target.value)}
-        />
-      </label>
-    </div>
-  );
-};
 
 const MobileFrameDemo = () => (
   <MobileFrame>
@@ -1269,6 +1255,164 @@ const MediaFrameDemo = () => {
   );
 };
 
+const PageContainerDemo = () => {
+  const [as, setAs] = useState<'div' | 'main' | 'section'>('div');
+
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-2 sm:grid-cols-2">
+        <label className="text-sm text-slate-600">
+          Elemento HTML
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={as}
+            onChange={e => setAs(e.target.value as 'div' | 'main' | 'section')}
+          >
+            <option value="div">div</option>
+            <option value="main">main</option>
+            <option value="section">section</option>
+          </select>
+        </label>
+      </div>
+
+      <div className="rounded-lg border border-slate-200 bg-white p-4">
+        <div className="mx-auto max-w-md overflow-hidden rounded-lg border-2 border-dashed border-slate-300" style={{ height: '300px' }}>
+          <PageContainer as={as} className="h-full">
+            <div className="flex h-full items-center justify-center p-4">
+              <div className="text-center">
+                <p className="text-sm font-semibold text-slate-700">PageContainer</p>
+                <p className="mt-1 text-xs text-slate-500">Fondo degradado blanco-beige</p>
+                <p className="mt-1 text-xs text-slate-400">Elemento: {as}</p>
+              </div>
+            </div>
+          </PageContainer>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ContentShellDemo = () => {
+  const [scale, setScale] = useState<'sm' | 'md' | 'lg'>('md');
+  const [as, setAs] = useState<'div' | 'main' | 'section'>('div');
+
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-2 sm:grid-cols-2">
+        <label className="text-sm text-slate-600">
+          Escala
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={scale}
+            onChange={e => setScale(e.target.value as 'sm' | 'md' | 'lg')}
+          >
+            <option value="sm">sm (pequeño)</option>
+            <option value="md">md (mediano)</option>
+            <option value="lg">lg (grande)</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Elemento HTML
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={as}
+            onChange={e => setAs(e.target.value as 'div' | 'main' | 'section')}
+          >
+            <option value="div">div</option>
+            <option value="main">main</option>
+            <option value="section">section</option>
+          </select>
+        </label>
+      </div>
+
+      <div className="rounded-lg border border-slate-200 bg-gradient-white-beige p-4">
+        <div className="mx-auto max-w-2xl overflow-hidden rounded-lg border-2 border-dashed border-slate-300" style={{ height: '300px' }}>
+          <ContentShell scale={scale} as={as} className="h-full">
+            <div className="flex h-full flex-col items-center justify-center gap-4">
+              <Badge variant="secondary">ContentShell</Badge>
+              <p className="text-sm text-slate-700">Escala: {scale}</p>
+              <p className="text-xs text-slate-500">Elemento: {as}</p>
+            </div>
+          </ContentShell>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const LogoHeaderDemo = () => {
+  const [scale, setScale] = useState<'none' | 'sm' | 'md' | 'lg'>('none');
+  const [logoScale, setLogoScale] = useState<'none' | 'sm' | 'md' | 'lg'>('none');
+  const [logoAlt, setLogoAlt] = useState('KMØ LAB®');
+  const [as, setAs] = useState<'header' | 'div' | 'section'>('div');
+
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+        <label className="text-sm text-slate-600">
+          Escala Header
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={scale}
+            onChange={e => setScale(e.target.value as 'none' | 'sm' | 'md' | 'lg')}
+          >
+            <option value="none">none (como AppHeader)</option>
+            <option value="sm">sm</option>
+            <option value="md">md</option>
+            <option value="lg">lg</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Escala Logo
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={logoScale}
+            onChange={e => setLogoScale(e.target.value as 'none' | 'sm' | 'md' | 'lg')}
+          >
+            <option value="none">none (como AppHeader)</option>
+            <option value="sm">sm</option>
+            <option value="md">md</option>
+            <option value="lg">lg</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Logo Alt
+          <input
+            type="text"
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={logoAlt}
+            onChange={e => setLogoAlt(e.target.value)}
+            placeholder="KMØ LAB®"
+          />
+        </label>
+        <label className="text-sm text-slate-600">
+          Elemento HTML
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={as}
+            onChange={e => setAs(e.target.value as 'header' | 'div' | 'section')}
+          >
+            <option value="header">header</option>
+            <option value="div">div</option>
+            <option value="section">section</option>
+          </select>
+        </label>
+      </div>
+
+      <div className="rounded-lg border border-slate-200 bg-white p-4">
+        <div className="mx-auto max-w-md overflow-hidden rounded-lg border-2 border-dashed border-slate-300 bg-gradient-white-beige p-4">
+          <LogoHeader scale={scale} logoScale={logoScale} logoAlt={logoAlt} as={as} />
+          <div className="mt-4 text-center">
+            <p className="text-xs text-slate-500">Header scale: {scale}</p>
+            <p className="text-xs text-slate-500">Logo scale: {logoScale}</p>
+            <p className="text-xs text-slate-500">Elemento: {as}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ContentCardDemo = () => {
   const [scale, setScale] = useState<'sm' | 'md' | 'lg'>('md');
   const [as, setAs] = useState<'section' | 'div' | 'article' | 'aside'>('section');
@@ -1594,18 +1738,6 @@ export const componentRegistry: ComponentEntry[] = [
     notes: ['Incluye TabsList, TabsTrigger y TabsContent.'],
   },
   {
-    id: 'app-header',
-    title: 'AppHeader',
-    description: 'Header con logo centrado.',
-    group: 'ui',
-    filePath: 'src/components/ui/layout/AppHeader.tsx',
-    importPath: '@/components/ui/layout/AppHeader',
-    exportName: 'AppHeader',
-    exportType: 'named',
-    Component: AppHeader,
-    Demo: AppHeaderDemo,
-  },
-  {
     id: 'mobile-frame',
     title: 'MobileFrame',
     description: 'Contenedor estilo frame móvil.',
@@ -1741,6 +1873,59 @@ export const componentRegistry: ComponentEntry[] = [
       'Variantes de escala (sm, md, lg) con padding y max-width responsivos usando clamp().',
       'Soporta diferentes elementos HTML (section, div, article, aside).',
       'Incluye sombra km0-card-shadow y fondo blanco por defecto.',
+    ],
+  },
+  {
+    id: 'page-container',
+    title: 'PageContainer',
+    description: 'Contenedor de página genérico con fondo degradado y altura completa.',
+    group: 'ui',
+    filePath: 'src/components/ui/page-container/page-container.tsx',
+    importPath: '@/components/ui/page-container',
+    exportName: 'PageContainer',
+    exportType: 'named',
+    Component: PageContainer,
+    Demo: PageContainerDemo,
+    notes: [
+      'Fondo degradado blanco-beige del sistema de diseño.',
+      'Altura completa con fallback para navegadores que no soportan dvh.',
+      'Soporta diferentes elementos HTML (div, main, section).',
+    ],
+  },
+  {
+    id: 'content-shell',
+    title: 'ContentShell',
+    description: 'Contenedor de contenido con padding y gap responsivos y variantes de escala.',
+    group: 'ui',
+    filePath: 'src/components/ui/content-shell/content-shell.tsx',
+    importPath: '@/components/ui/content-shell',
+    exportName: 'ContentShell',
+    exportType: 'named',
+    Component: ContentShell,
+    Demo: ContentShellDemo,
+    notes: [
+      'Variantes de escala (sm, md, lg) con padding y gap responsivos usando clamp().',
+      'Layout flexible con items-center y justify-start.',
+      'Soporta diferentes elementos HTML (div, main, section).',
+    ],
+  },
+  {
+    id: 'logo-header',
+    title: 'LogoHeader',
+    description: 'Header genérico con logo centrado y padding responsivo.',
+    group: 'ui',
+    filePath: 'src/components/ui/logo-header/logo-header.tsx',
+    importPath: '@/components/ui/logo-header',
+    exportName: 'LogoHeader',
+    exportType: 'named',
+    Component: LogoHeader,
+    Demo: LogoHeaderDemo,
+    notes: [
+      'Reemplaza a AppHeader. Por defecto (scale="none", logoScale="none") se comporta idénticamente.',
+      'Escala independiente para header (padding) y logo (tamaño).',
+      'Utiliza el sprite logo-1 del sistema de diseño.',
+      'Incluye atributos de accesibilidad (role="img", aria-label).',
+      'Soporta diferentes elementos HTML (header, div, section).',
     ],
   },
   {

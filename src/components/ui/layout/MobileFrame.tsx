@@ -1,14 +1,30 @@
+import type { VariantProps } from 'class-variance-authority';
 import type { ReactNode } from 'react';
 
-type MobileFrameProps = {
+import { cn } from '@/components/ui/primitives/utils';
+
+import { mobileFrameVariants } from './mobile-frame.styles';
+
+export type MobileFrameProps = VariantProps<typeof mobileFrameVariants> & {
+  /** Contenido del frame. */
   children: ReactNode;
+  /** Clases adicionales para personalización. */
   className?: string;
 };
 
-export const MobileFrame = ({ children, className = '' }: MobileFrameProps) => {
+/**
+ * Frame móvil que simula una ventana de aplicación móvil.
+ * Incluye fondo degradado, bordes redondeados y ancho máximo limitado.
+ */
+export const MobileFrame = ({
+  children,
+  gap = 'sm',
+  padding = 'sm',
+  className,
+}: MobileFrameProps) => {
   return (
     <div
-      className={`w-full max-w-sm min-h-0 bg-gradient-to-br from-km0-blue-300/20 to-km0-beige-100/20 rounded-[16px] sm:rounded-[20px] flex flex-col justify-start items-center gap-1.5 sm:gap-2.5 overflow-hidden p-2.5 sm:p-3.5 ${className}`}
+      className={cn(mobileFrameVariants({ gap, padding }), className)}
     >
       {children}
     </div>

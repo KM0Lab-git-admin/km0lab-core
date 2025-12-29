@@ -8,7 +8,10 @@ import {
   useCarousel,
 } from '@/components/ui/carousel';
 import { ContentCard } from '@/components/ui/content-card';
+import { ContentShell } from '@/components/ui/content-shell';
 import { HeroSlide } from '@/components/ui/hero-slide';
+import { LogoHeader } from '@/components/ui/logo-header';
+import { PageContainer } from '@/components/ui/page-container';
 import { Button } from '@/components/ui/primitives/button';
 import { cn } from '@/components/ui/primitives/utils';
 import { SimpleSliderNavigation } from '@/components/ui/slider';
@@ -17,10 +20,6 @@ import { useParams, useRouter } from 'next/navigation';
 import {
   onboardingCounter,
   onboardingFooter,
-  onboardingHeader,
-  onboardingLogo,
-  onboardingPage,
-  onboardingShell,
 } from './onboarding.styles';
 
 export default function Onboarding() {
@@ -58,16 +57,10 @@ export default function Onboarding() {
   const scale = 'md';
 
   return (
-    <div className={onboardingPage()}>
+    <PageContainer>
       <BreakpointIndicator />
-      <div className={onboardingShell({ scale })}>
-        <header className={onboardingHeader({ scale })}>
-          <div
-            className={onboardingLogo({ scale })}
-            role="img"
-            aria-label="KM0 Lab"
-          />
-        </header>
+      <ContentShell scale={scale}>
+        <LogoHeader scale={scale} logoScale={scale} />
 
         <ContentCard scale={scale}>
           <CarouselViewport
@@ -154,7 +147,7 @@ export default function Onboarding() {
             </Button>
           </div>
         </footer>
-      </div>
-    </div>
+      </ContentShell>
+    </PageContainer>
   );
 }

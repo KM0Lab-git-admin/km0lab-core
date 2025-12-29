@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/primitives/button';
 import { Input, ZipCodeIcon } from '@/components/ui/primitives/input';
 import { Subtitle } from '@/components/ui/primitives/subtitle';
 import { Title } from '@/components/ui/primitives/title';
-import { AppHeader } from '@/components/ui/layout/AppHeader';
+import { LogoHeader } from '@/components/ui/logo-header';
 import { MobileFrame } from '@/components/ui/layout/MobileFrame';
 import { cn } from '@/components/ui/primitives/utils';
 import { checkPostalCodeAvailability } from '@/features/postal-code';
@@ -127,7 +127,7 @@ export default function PostalCode() {
   return (
     <div className="min-h-dvh-fallback flex flex-col items-stretch justify-center overflow-hidden px-2 xs:px-3 sm:px-4 pt-1 xs:pt-2 sm:pt-3">
       <MobileFrame className="flex-1 min-h-0 w-full">
-        <AppHeader />
+        <LogoHeader />
 
         <form
           className="w-full flex flex-col items-center gap-2 xs:gap-3 sm:gap-4 flex-1 min-h-0"
