@@ -10,7 +10,7 @@ export type SubtitleProps = React.HTMLAttributes<HTMLElement>
     /** HTML tag to render. */
     as?: 'p' | 'span';
     /** Visual size of the subtitle. */
-    size?: 'lg' | 'md' | 'sm' | 'xs';
+    size?: 'hero' | 'heroCompact' | 'lg' | 'md' | 'sm' | 'xs';
     /** Text alignment. */
     align?: 'left' | 'center';
     /** Color tone. */

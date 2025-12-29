@@ -14,11 +14,18 @@ Primitive UI para enmarcar imágenes o contenido multimedia con soporte para bad
 | `radius` | `'md' \| 'lg' \| 'xl'` | `'lg'` | Radio de los bordes |
 | `shadow` | `'none' \| 'sm' \| 'md'` | `'sm'` | Intensidad de la sombra |
 | `tone` | `'default' \| 'soft'` | `'default'` | Estilo visual del fondo |
+| `imageMaxHeight` | `'fluid' \| 'compact' \| 'full'` | `'fluid'` | Controla el `max-height` aplicado a la imagen interna (usa dvh + clamp) |
 
 ## Layouts
 
 1.  **stack (default)**: El marco ocupa el ancho disponible. Ideal para contenedores fluidos.
 2.  **side**: El marco ocupa un ancho fijo/proporcional (aprox. 40-45%) diseñado para layouts horizontales.
+
+## Escalado fluido
+
+- **Tokens**: los tamaños del frame usan `clamp()` para el ancho (`max-w-[clamp(240px,80vw,560px)]`) y `short-landscape:flex-[0_0_42%]` para layouts horizontales.
+- **Imagen**: por defecto se renderiza con `next/image` y el variant `imageMaxHeight="fluid"` aplica `clamp(220px,45vh,420px)` + `short-landscape:max-h-[clamp(180px,55dvh,320px)]`.
+- **Compact**: selecciona `imageMaxHeight="compact"` para pantallas bajas o contenedores side.
 
 ## Uso Básico
 
@@ -32,10 +39,4 @@ import { MediaFrame } from '@/components/ui/media-frame';
 />
 ```
 
-## Con Children (Next.js Image)
-
-```tsx
-<MediaFrame badgeText="Nuevo" layout="side">
-  <Image src="..." width={500} height={300} alt="..." />
-</MediaFrame>
-```
+> **Tip**: puedes sobrescribir la imagen usando `children`. Si usas `next/image`, recuerda respetar `className={imageVariants(...)}` para mantener el escalado.

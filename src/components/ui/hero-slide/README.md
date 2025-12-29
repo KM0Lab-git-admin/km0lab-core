@@ -15,6 +15,7 @@ Componente de composición de alto nivel para presentaciones o secciones destaca
 | `layout` | `'stack' \| 'side'` | `'stack'` | Comportamiento del layout (ver abajo) |
 | `density` | `'default' \| 'compact'`| `'default'` | Controla espaciados internos |
 | `align` | `'left' \| 'center'` | `'center'` | Alineación del texto en modo `stack` |
+| `imageMaxHeight` | `'fluid' \| 'compact' \| 'full'` | `'fluid'` | Controla la altura máxima delegada al `MediaFrame` |
 
 ## Comportamiento de Layout
 
@@ -28,6 +29,13 @@ Este breakpoint captura SOLO las siguientes resoluciones:
 - ✅ **1280×550** (laptop con altura corta)
 - ❌ **1440×900** (desktop normal - NO aplica)
 - ❌ **1920×1080** (ultra-wide - NO aplica)
+
+## Tokens y escalado fluido
+
+- **Gaps/Paddings**: definidos con `clamp()` dentro de `hero-slide.styles.ts` (`gap-[clamp(...)]`, `px-[clamp(...)]`) para que la composición crezca proporcionalmente.
+- **Tipografías**: usa los nuevos tamaños `Title size="hero"` / `"heroCompact"` y `Subtitle size="hero"` / `"heroCompact"` con valores fluidos (`clamp`) y overrides `short-landscape`.
+- **MediaFrame**: recibe `imageMaxHeight="fluid"` por defecto, que aplica `clamp` + `dvh` para que la imagen nunca provoque scroll y se compacta automáticamente en `short-landscape`.
+- **short-landscape**: todos los tokens incluyen variantes `short-landscape:` para pasar del layout stack al side sin JavaScript y reducir gaps/padding.
 
 ## Uso Básico
 

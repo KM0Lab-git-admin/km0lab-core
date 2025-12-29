@@ -10,7 +10,7 @@ export type TitleProps = React.HTMLAttributes<HTMLHeadingElement>
     /** HTML heading tag to render. */
     as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
     /** Visual size of the title. */
-    size?: 'h1' | 'h2' | 'h3' | 'xl' | 'lg' | 'md' | 'sm';
+    size?: 'hero' | 'heroCompact' | 'h1' | 'h2' | 'h3' | 'xl' | 'lg' | 'md' | 'sm';
     /** Text alignment. */
     align?: 'left' | 'center';
     /** Color tone. */

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { VariantProps } from 'class-variance-authority';
 import type React from 'react';
 
@@ -41,7 +42,7 @@ const MediaFrame = ({
   tone = 'default',
   src,
   alt = '',
-  imageMaxHeight = 'default',
+  imageMaxHeight = 'fluid',
   className,
   children,
   ...props
@@ -53,11 +54,15 @@ const MediaFrame = ({
     <div className={cn(mediaFrameInnerVariants({ radius }))}>
       {children || (
         src && (
-          <img
+          <Image
             src={src}
             alt={alt}
+            width={960}
+            height={960}
             className={cn(imageVariants({ maxHeight: imageMaxHeight }))}
             draggable={false}
+            sizes="(max-width: 768px) 90vw, (max-width: 1280px) 50vw, 560px"
+            priority={false}
           />
         )
       )}

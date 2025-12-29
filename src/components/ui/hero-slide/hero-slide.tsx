@@ -2,6 +2,7 @@ import type { VariantProps } from 'class-variance-authority';
 import type React from 'react';
 
 import { MediaFrame } from '@/components/ui/media-frame';
+import type { MediaFrameProps } from '@/components/ui/media-frame';
 import { Subtitle } from '@/components/ui/primitives/subtitle';
 import { Title } from '@/components/ui/primitives/title';
 import { cn } from '@/components/ui/primitives/utils';
@@ -29,6 +30,8 @@ export interface HeroSlideProps
   bgColor?: string;
   /** Alineación del texto en modo stack (default: center). */
   align?: VariantProps<typeof heroContentVariants>['align'];
+  /** Controla la altura máxima de la imagen (fluido por defecto). */
+  imageMaxHeight?: MediaFrameProps['imageMaxHeight'];
 }
 
 /**
@@ -46,10 +49,15 @@ const HeroSlide = ({
   layout = 'stack',
   density = 'default',
   align = 'center',
+  imageMaxHeight = 'fluid',
   className,
   ...props
 }: HeroSlideProps) => {
   const isSide = layout === 'side';
+  const resolvedAlign: 'left' | 'center' = isSide ? 'left' : (align ?? 'center');
+  const resolvedTitleSize = density === 'compact' ? 'heroCompact' : 'hero';
+  const resolvedSubtitleSize = density === 'compact' ? 'heroCompact' : 'hero';
+  const resolvedImageMaxHeight = density === 'compact' ? 'compact' : imageMaxHeight;
 
   return (
     <div
@@ -63,28 +71,27 @@ const HeroSlide = ({
         tone={bgColor ? undefined : 'default'}
         className={cn(
           'shrink-0 transition-all',
-          !isSide && 'short-landscape:w-[40%] short-landscape:max-h-[60dvh]',
           bgColor,
         )}
         layout={isSide ? 'side' : 'stack'}
+        imageMaxHeight={resolvedImageMaxHeight}
       />
 
-      <div className={cn(heroContentVariants({ align: isSide ? 'left' : align, layout }))}>
+      <div className={cn(heroContentVariants({ align: resolvedAlign, layout }))}>
         <div className={cn(heroTextWrapperVariants({ density }))}>
           <Title
             as="h1"
-            size="h1"
-            align={isSide ? 'left' : align as any}
-            className="short-landscape:text-xl short-landscape:leading-tight"
+            size={resolvedTitleSize}
+            align={resolvedAlign}
           >
             {title}
           </Title>
 
           {subtitle && (
             <Subtitle
-              size="md"
-              align={isSide ? 'left' : align as any}
-              className="max-w-[45ch] short-landscape:text-xs short-landscape:leading-snug"
+              size={resolvedSubtitleSize}
+              align={resolvedAlign}
+              className="max-w-[clamp(32ch,5vw,52ch)]"
             >
               {subtitle}
             </Subtitle>
