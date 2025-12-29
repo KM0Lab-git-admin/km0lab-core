@@ -24,7 +24,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { CheckIcon, DateIcon, EmailIcon, Input, PhoneIcon, XIcon, ZipCodeIcon } from '@/components/ui/primitives/input';
 import { Progress } from '@/components/ui/primitives/progress';
 import { Separator } from '@/components/ui/primitives/separator';
+import { Subtitle } from '@/components/ui/primitives/subtitle';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/primitives/tabs';
+import { Title } from '@/components/ui/primitives/title';
 import { NavigationArrow } from '@/components/ui/slider/NavigationArrow';
 import ProgressDots from '@/components/ui/slider/ProgressDots';
 import { ProgressIndicator } from '@/components/ui/slider/ProgressIndicator';
@@ -60,6 +62,12 @@ export type ComponentEntry = {
 const badgeVariants = ['default', 'secondary', 'destructive', 'outline'] as const;
 const buttonVariants = ['default', 'secondary', 'outline', 'destructive', 'ghost', 'link'] as const;
 const buttonSizes = ['default', 'sm', 'lg', 'icon'] as const;
+const titleSizes = ['h1', 'h2', 'h3', 'xl', 'lg', 'md', 'sm'] as const;
+const titleTones = ['default', 'muted', 'brand'] as const;
+const titleAlignments = ['left', 'center'] as const;
+const subtitleSizes = ['lg', 'md', 'sm', 'xs'] as const;
+const subtitleTones = ['default', 'muted'] as const;
+const subtitleAlignments = ['left', 'center'] as const;
 
 const ServerOnlyNotice = ({ label }: { label: string }) => (
   <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900">
@@ -418,6 +426,100 @@ const InputDemo = () => {
     </div>
   );
 };
+
+const TitleDemo = () => (
+  <div className="space-y-4">
+    <div className="grid gap-3 sm:grid-cols-2">
+      {titleSizes.map(size => (
+        <div key={size} className="rounded-lg border border-slate-200 bg-white p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+            Size
+            {' '}
+            {size}
+          </p>
+          <Title size={size} className="mt-1">
+            Title
+            {' '}
+            {size.toUpperCase()}
+          </Title>
+        </div>
+      ))}
+    </div>
+    <div className="grid gap-3 sm:grid-cols-2">
+      {titleTones.map(tone => (
+        <div key={tone} className="rounded-lg border border-slate-200 bg-white p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+            Tone
+            {' '}
+            {tone}
+          </p>
+          <Title size="lg" tone={tone}>
+            KM0 Lab Title
+          </Title>
+        </div>
+      ))}
+      {titleAlignments.map(align => (
+        <div key={align} className="rounded-lg border border-slate-200 bg-white p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+            Align
+            {' '}
+            {align}
+          </p>
+          <Title size="md" align={align} className="w-full">
+            Alignment Test
+          </Title>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const SubtitleDemo = () => (
+  <div className="space-y-4">
+    <div className="grid gap-3 sm:grid-cols-2">
+      {subtitleSizes.map(size => (
+        <div key={size} className="rounded-lg border border-slate-200 bg-white p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+            Size
+            {' '}
+            {size}
+          </p>
+          <Subtitle size={size} className="mt-1">
+            Subtitle size
+            {' '}
+            {size}
+          </Subtitle>
+        </div>
+      ))}
+    </div>
+    <div className="grid gap-3 sm:grid-cols-2">
+      {subtitleTones.map(tone => (
+        <div key={tone} className="rounded-lg border border-slate-200 bg-white p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+            Tone
+            {' '}
+            {tone}
+          </p>
+          <Subtitle size="md" tone={tone}>
+            UI subtitle copy
+          </Subtitle>
+        </div>
+      ))}
+      {subtitleAlignments.map(align => (
+        <div key={align} className="rounded-lg border border-slate-200 bg-white p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+            Align
+            {' '}
+            {align}
+          </p>
+          <Subtitle size="sm" align={align} className="w-full">
+            Alignment sample text.
+          </Subtitle>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 const CardDemo = () => {
   const [withFooter, setWithFooter] = useState(true);
@@ -1092,6 +1194,30 @@ export const componentRegistry: ComponentEntry[] = [
     Component: Input,
     Demo: InputDemo,
     notes: ['Incluye iconos: EmailIcon, PhoneIcon, DateIcon, ZipCodeIcon, CheckIcon, XIcon, ChevronDownIcon.'],
+  },
+  {
+    id: 'title',
+    title: 'Title',
+    description: 'Heading brand con variantes de tamaИo, tono y alineaciИn.',
+    group: 'ui',
+    filePath: 'src/components/ui/primitives/title/title.tsx',
+    importPath: '@/components/ui/primitives/title',
+    exportName: 'Title',
+    exportType: 'named',
+    Component: Title,
+    Demo: TitleDemo,
+  },
+  {
+    id: 'subtitle',
+    title: 'Subtitle',
+    description: 'Texto auxiliar para UI con escala tipogrИfica responsive.',
+    group: 'ui',
+    filePath: 'src/components/ui/primitives/subtitle/subtitle.tsx',
+    importPath: '@/components/ui/primitives/subtitle',
+    exportName: 'Subtitle',
+    exportType: 'named',
+    Component: Subtitle,
+    Demo: SubtitleDemo,
   },
   {
     id: 'card',
