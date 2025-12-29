@@ -110,5 +110,30 @@
         "description": "Join KM0 LAB and transform the way you shop and support your community."
       }
     }
+  },
+  "PostalCode": {
+    "form_aria": "Postal code form",
+    "image_alt": "Local commerce illustration",
+    "xp_badge": "+ 20 XP",
+    "title": "Enter your postal code",
+    "subtitle": "So we can show you nearby shops and services.",
+    "input_label": "Postal code",
+    "input_aria": "Enter your postal code",
+    "placeholder": "E.g. 08001",
+    "helper": "5 digits, no letters",
+    "format_error": "Invalid postal code. Use 5 digits.",
+    "unavailable_error": "We’re not in your area yet.",
+    "success": "Looks good.",
+    "checking": "Checking...",
+    "continue": "Continue",
+    "continue_aria": "Continue with the postal code",
+    "notify": "Notify me when available",
+    "notify_aria": "Notify me when available"
+  },
+  "PostalCodeWelcome": {
+    "title": "Welcome!",
+    "subtitle": "Your postal code is available. You can continue.",
+    "cta": "Go to onboarding",
+    "cta_aria": "Go to onboarding"
   }
 }

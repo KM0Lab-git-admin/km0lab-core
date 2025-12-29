@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import { cn } from '@/components/ui/primitives/utils';
 
 // Definición de slides
@@ -43,8 +44,13 @@ const slides = [
 ];
 
 export default function Onboarding() {
+  const router = useRouter();
+  const params = useParams();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const localeParam = params?.locale;
+  const locale = typeof localeParam === 'string' ? localeParam : localeParam?.[0];
 
   const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
@@ -70,6 +76,11 @@ export default function Onboarding() {
     // Lógica para saltar onboarding (ej. guardar en localStorage y redirigir)
     // eslint-disable-next-line no-console
     console.log('Skip Onboarding');
+  };
+
+  const handleStartApp = () => {
+    if (!locale) return;
+    router.push(`/${locale}/postal-code`);
   };
 
   const lastIndex = Math.max(slides.length - 1, 0);
@@ -302,7 +313,7 @@ export default function Onboarding() {
             <div className="w-16 flex justify-end">
               <button
                 type="button"
-                onClick={isLastSlide ? () => console.log('Start App') : skipOnboarding}
+                onClick={isLastSlide ? handleStartApp : skipOnboarding}
                 aria-label={isLastSlide ? 'Empezar' : 'Saltar'}
                 className={cn(
                   'rounded bg-km0-blue-700 text-white font-semibold whitespace-nowrap text-center',

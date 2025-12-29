@@ -118,5 +118,30 @@
         "description": "Únete a KM0 LAB y transforma la forma en que compras y apoyas a tu comunidad."
       }
     }
+  },
+  "PostalCode": {
+    "form_aria": "Formulario de código postal",
+    "image_alt": "Ilustración de comercio local",
+    "xp_badge": "+ 20 XP",
+    "title": "Introduce tu código postal",
+    "subtitle": "Así te mostramos comercio y servicios cerca de ti.",
+    "input_label": "Código postal",
+    "input_aria": "Introduce tu código postal",
+    "placeholder": "Ej. 08001",
+    "helper": "5 números, sin letras",
+    "format_error": "Código postal no válido. Usa 5 números.",
+    "unavailable_error": "Aún no estamos en tu zona.",
+    "success": "Correcto.",
+    "checking": "Comprobando...",
+    "continue": "Continuar",
+    "continue_aria": "Continuar con el código postal",
+    "notify": "Avísame cuando esté disponible",
+    "notify_aria": "Avísame cuando esté disponible"
+  },
+  "PostalCodeWelcome": {
+    "title": "¡Bienvenido!",
+    "subtitle": "Tu código postal está disponible. Ya puedes continuar.",
+    "cta": "Ir al onboarding",
+    "cta_aria": "Ir al onboarding"
   }
 }
