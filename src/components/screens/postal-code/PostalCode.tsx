@@ -10,10 +10,20 @@ import { Input, ZipCodeIcon } from '@/components/ui/primitives/input';
 import { Subtitle } from '@/components/ui/primitives/subtitle';
 import { Title } from '@/components/ui/primitives/title';
 import { LogoHeader } from '@/components/ui/logo-header';
-import { MobileFrame } from '@/components/ui/layout/MobileFrame';
+import { ContentCard } from '@/components/ui/content-card';
+import { ContentShell } from '@/components/ui/content-shell';
+import { PageContainer } from '@/components/ui/page-container';
 import { cn } from '@/components/ui/primitives/utils';
 import { checkPostalCodeAvailability } from '@/features/postal-code';
 import { getValidatorById } from '@/validation/validators';
+import {
+  postalCodeButton,
+  postalCodeButtonContainer,
+  postalCodeForm,
+  postalCodeInputContainer,
+  postalCodeNotifyButton,
+  postalCodeTitleContainer,
+} from './postal-code.styles';
 
 type AvailabilityStatus = 'idle' | 'checking' | 'available' | 'unavailable';
 
@@ -99,11 +109,17 @@ export default function PostalCode() {
   const isUnavailable = availabilityStatus === 'unavailable';
   const isAvailable = availabilityStatus === 'available';
 
-  const inputError = (hasValue && !formatValidation.isValid) || isUnavailable;
+  // Mostrar error de formato si:
+  // 1. El validador detecta caracteres no numéricos (muestra error inmediatamente), O
+  // 2. Ha completado los 5 caracteres y no son válidos
+  const hasCompleteLength = trimmedPostalCode.length === 5;
+  const hasFormatError = formatValidation.message && !formatValidation.isValid;
+  const shouldShowFormatError = hasFormatError && (hasCompleteLength || formatValidation.message?.includes('numeros'));
+  const inputError = shouldShowFormatError || isUnavailable;
 
   const inputMessage = (() => {
     if (!hasValue) return t('helper');
-    if (!formatValidation.isValid) return t('format_error');
+    if (shouldShowFormatError) return formatValidation.message || t('format_error');
     if (isUnavailable) return t('unavailable_error');
     if (isAvailable) return t('success');
     return t('helper');
@@ -124,88 +140,89 @@ export default function PostalCode() {
     handleContinue();
   };
 
+  // Scale semántico: puede venir de props o contexto en el futuro
+  const scale = 'md';
+
   return (
-    <div className="min-h-dvh-fallback flex flex-col items-stretch justify-center overflow-hidden px-2 xs:px-3 sm:px-4 pt-1 xs:pt-2 sm:pt-3">
-      <MobileFrame className="flex-1 min-h-0 w-full">
-        <LogoHeader />
+    <PageContainer>
+      <ContentShell scale={scale}>
+        <LogoHeader scale={scale} logoScale={scale} />
 
-        <form
-          className="w-full flex flex-col items-center gap-2 xs:gap-3 sm:gap-4 flex-1 min-h-0"
-          onSubmit={handleSubmit}
-          aria-label={t('form_aria')}
-        >
-          <MediaFrame
-            src="/images/glovo-style-discover.png"
-            alt={t('image_alt')}
-            badgeText={t('xp_badge')}
-            className="w-full"
-          />
-
-          <div className="w-full text-center flex flex-col gap-1 xs:gap-2">
-            <Title as="h1" size="h2" align="center" uppercase>
-              {t('title')}
-            </Title>
-            <Subtitle size="sm" align="center" tone="muted">
-              {t('subtitle')}
-            </Subtitle>
-          </div>
-
-          <div className="w-full flex flex-col gap-2">
-            <label htmlFor={inputId} className="sr-only">
-              {t('input_label')}
-            </label>
-            <Input
-              id={inputId}
-              value={postalCode}
-              onChange={(event) => handlePostalCodeChange(event.target.value)}
-              placeholder={t('placeholder')}
-              iconLeft={<ZipCodeIcon />}
-              inputMode="numeric"
-              autoComplete="postal-code"
-              maxLength={5}
-              error={inputError}
-              variant={isAvailable ? 'success' : undefined}
-              message={inputMessage}
-              aria-label={t('input_aria')}
+        <ContentCard scale={scale}>
+          <form
+            className={postalCodeForm({ scale })}
+            onSubmit={handleSubmit}
+            aria-label={t('form_aria')}
+          >
+            <MediaFrame
+              src="/images/glovo-style-discover.png"
+              alt={t('image_alt')}
+              badgeText={t('xp_badge')}
+              className="w-full"
             />
-          </div>
 
-          <div className="w-full flex flex-col gap-2">
-            <Button
-              type="submit"
-              onClick={handleContinue}
-              disabled={!isAvailable || isChecking}
-              aria-label={t('continue_aria')}
-              className={cn(
-                'w-full rounded bg-km0-blue-700 text-white font-semibold whitespace-nowrap text-center',
-                'shadow-sm hover:opacity-90 transition-opacity',
-              )}
-            >
-              {isChecking ? (
-                <>
-                  <LoadingSpinner className="text-white" />
-                  {t('checking')}
-                </>
-              ) : (
-                t('continue')
-              )}
-            </Button>
+            <div className={postalCodeTitleContainer({ scale })}>
+              <Title as="h1" size="h2" align="center" uppercase>
+                {t('title')}
+              </Title>
+              <Subtitle size="sm" align="center" tone="muted">
+                {t('subtitle')}
+              </Subtitle>
+            </div>
 
-            {isUnavailable && (
-              <button
-                type="button"
-                aria-label={t('notify_aria')}
-                onClick={() => {}}
-                className="w-full text-center text-sm font-semibold text-km0-blue-700 underline underline-offset-2"
+            <div className={postalCodeInputContainer({ scale })}>
+              <label htmlFor={inputId} className="sr-only">
+                {t('input_label')}
+              </label>
+              <Input
+                id={inputId}
+                value={postalCode}
+                onChange={(event) => handlePostalCodeChange(event.target.value)}
+                placeholder={t('placeholder')}
+                iconLeft={<ZipCodeIcon />}
+                inputMode="numeric"
+                autoComplete="postal-code"
+                maxLength={5}
+                error={inputError}
+                variant={isAvailable ? 'success' : undefined}
+                message={inputMessage}
+                aria-label={t('input_aria')}
+              />
+            </div>
+
+            <div className={postalCodeButtonContainer({ scale })}>
+              <Button
+                type="submit"
+                onClick={handleContinue}
+                disabled={!isAvailable || isChecking}
+                aria-label={t('continue_aria')}
+                className={postalCodeButton({ scale })}
               >
-                {t('notify')}
-              </button>
-            )}
-          </div>
-        </form>
-      </MobileFrame>
-    </div>
+                {isChecking ? (
+                  <>
+                    <LoadingSpinner className="text-white" />
+                    {t('checking')}
+                  </>
+                ) : (
+                  t('continue')
+                )}
+              </Button>
+
+              {isUnavailable && (
+                <button
+                  type="button"
+                  aria-label={t('notify_aria')}
+                  onClick={() => {}}
+                  className={postalCodeNotifyButton({ scale })}
+                >
+                  {t('notify')}
+                </button>
+              )}
+            </div>
+          </form>
+        </ContentCard>
+      </ContentShell>
+    </PageContainer>
   );
 }
-
 
