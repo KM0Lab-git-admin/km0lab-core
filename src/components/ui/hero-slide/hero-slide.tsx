@@ -1,88 +1,100 @@
-'use client';
-
 import type { VariantProps } from 'class-variance-authority';
 import type React from 'react';
 
 import { MediaFrame } from '@/components/ui/media-frame';
+import { Subtitle } from '@/components/ui/primitives/subtitle';
+import { Title } from '@/components/ui/primitives/title';
 import { cn } from '@/components/ui/primitives/utils';
 
 import {
-  heroSlideContentVariants,
-  heroSlideSubtitleVariants,
-  heroSlideTextContainerVariants,
-  heroSlideTitleVariants,
+  heroContentVariants,
+  heroSlideVariants,
+  heroTextWrapperVariants,
 } from './hero-slide.styles';
 
-export type HeroSlideProps = React.HTMLAttributes<HTMLDivElement>
-  & VariantProps<typeof heroSlideContentVariants>
-  & {
-    /** First line of the title. */
-    titleLine1: string;
-    /** Second line of the title. */
-    titleLine2: string;
-    /** Subtitle/description text. */
-    subtitle: string;
-    /** Image source URL. */
-    imageSrc: string;
-    /** Background color class for image frame. */
-    bgColor?: string;
-    /** Optional badge text. */
-    badgeText?: string;
-    /** Size variant for title/subtitle. */
-    size?: 'default' | 'compact';
-    /** Additional class names. */
-    className?: string;
-  };
+export interface HeroSlideProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>,
+    VariantProps<typeof heroSlideVariants> {
+  /** Título principal (ReactNode para permitir énfasis). */
+  title: React.ReactNode;
+  /** Subtítulo o descripción (ReactNode). */
+  subtitle?: React.ReactNode;
+  /** Fuente de la imagen hero. */
+  imageSrc: string;
+  /** Texto alternativo de la imagen. */
+  imageAlt?: string;
+  /** Texto del badge sobre la imagen (ej: '+ 10 XP'). */
+  badgeText?: string;
+  /** Clase de color de fondo para el MediaFrame. */
+  bgColor?: string;
+  /** Alineación del texto en modo stack (default: center). */
+  align?: VariantProps<typeof heroContentVariants>['align'];
+}
 
 /**
- * Hero slide content with image and title/subtitle.
- * Supports stack (vertical) and side (horizontal) layouts.
- * Layout adapts automatically based on breakpoints.
+ * Componente de composición para slides o héroes.
+ * Usa Title y Subtitle primitives.
+ * Layout 'stack' cambia a horizontal en laptop-short automáticamente vía CSS.
  */
 const HeroSlide = ({
-  titleLine1,
-  titleLine2,
+  title,
   subtitle,
   imageSrc,
-  bgColor = 'bg-km0-yellow-100',
+  imageAlt = '',
   badgeText,
-  layout = 'side',
-  size = 'default',
+  bgColor,
+  layout = 'stack',
+  density = 'default',
+  align = 'center',
   className,
   ...props
-}: HeroSlideProps) => (
-  <>
-    {/* Image */}
-    <MediaFrame
-      src={imageSrc}
-      alt={`${titleLine1} ${titleLine2}`}
-      bgColor={bgColor}
-      badgeText={badgeText}
-      layout={layout}
-    />
+}: HeroSlideProps) => {
+  const isSide = layout === 'side';
 
-    {/* Text content */}
+  return (
     <div
-      className={cn(heroSlideContentVariants({ layout }), className)}
+      className={cn(heroSlideVariants({ layout, density }), className)}
       {...props}
     >
-      <div className={cn(heroSlideTextContainerVariants({ layout }))}>
-        <h1 className={cn(heroSlideTitleVariants({ size }))}>
-          {titleLine1}
-          <br className="mobile-l:hidden laptop-short:hidden" />
-          <span className="hidden mobile-l:inline laptop-short:inline"> </span>
-          {titleLine2}
-        </h1>
+      <MediaFrame
+        src={imageSrc}
+        alt={imageAlt}
+        badgeText={badgeText}
+        tone={bgColor ? undefined : 'default'}
+        className={cn(
+          'shrink-0 transition-all',
+          !isSide && 'laptop-short:w-[45%]',
+          bgColor,
+        )}
+        layout={isSide ? 'side' : 'stack'}
+      />
 
-        <p className={cn(heroSlideSubtitleVariants({ size }))}>
-          {subtitle}
-        </p>
+      <div className={cn(heroContentVariants({ align: isSide ? 'left' : align, layout }))}>
+        <div className={cn(heroTextWrapperVariants({ density }))}>
+          <Title
+            as="h1"
+            size="h1"
+            align={isSide ? 'left' : align as any}
+            className="laptop-short:text-2xl"
+          >
+            {title}
+          </Title>
+
+          {subtitle && (
+            <Subtitle
+              size="md"
+              align={isSide ? 'left' : align as any}
+              className="max-w-[45ch] laptop-short:text-xs"
+            >
+              {subtitle}
+            </Subtitle>
+          )}
+        </div>
       </div>
     </div>
-  </>
-);
+  );
+};
 
 HeroSlide.displayName = 'HeroSlide';
 
 export { HeroSlide };
-

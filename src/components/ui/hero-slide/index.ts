@@ -1,9 +1,7 @@
 export { HeroSlide } from './hero-slide';
 export type { HeroSlideProps } from './hero-slide';
 export {
-  heroSlideContentVariants,
-  heroSlideSubtitleVariants,
-  heroSlideTextContainerVariants,
-  heroSlideTitleVariants,
+  heroContentVariants,
+  heroSlideVariants,
+  heroTextWrapperVariants,
 } from './hero-slide.styles';
-

@@ -1,53 +1,40 @@
 # HeroSlide
 
-Componente de slide hero con imagen enmarcada y título/subtítulo. Diseñado para ser usado dentro de un carrusel.
+Componente de composición de alto nivel para presentaciones o secciones destacadas. Optimiza automáticamente el layout para pantallas cortas (`laptop-short`) sin necesidad de JavaScript.
 
 ## Props
 
 | Prop | Tipo | Default | Descripción |
 |------|------|---------|-------------|
-| `titleLine1` | `string` | - | Primera línea del título |
-| `titleLine2` | `string` | - | Segunda línea del título |
-| `subtitle` | `string` | - | Texto descriptivo |
-| `imageSrc` | `string` | - | URL de la imagen |
-| `bgColor` | `string` | `'bg-km0-yellow-100'` | Clase de color de fondo para el frame |
-| `badgeText` | `string` | - | Texto del badge (ej: '+ 10 XP') |
-| `layout` | `'stack' \| 'side'` | `'side'` | Layout del contenido |
-| `size` | `'default' \| 'compact'` | `'default'` | Tamaño de tipografía |
+| `title` | `ReactNode` | - | Título principal (soporta JSX para énfasis) |
+| `subtitle` | `ReactNode` | - | Subtítulo o descripción opcional |
+| `imageSrc` | `string` | - | Fuente de la imagen |
+| `imageAlt` | `string` | `""` | Texto alternativo de la imagen |
+| `badgeText` | `string` | - | Texto del badge sobre la imagen |
+| `bgColor` | `string` | - | Clase de color de fondo para el MediaFrame |
+| `layout` | `'stack' \| 'side'` | `'stack'` | Comportamiento del layout (ver abajo) |
+| `density` | `'default' \| 'compact'`| `'default'` | Controla espaciados internos |
+| `align` | `'left' \| 'center'` | `'center'` | Alineación del texto en modo `stack` |
 
-## Uso básico
+## Comportamiento de Layout
+
+1.  **stack (default)**: Disposición vertical (imagen arriba, texto abajo). Al entrar en el breakpoint `laptop-short` (altura < 550px), cambia **automáticamente** a disposición horizontal vía CSS para evitar scroll.
+2.  **side**: Fuerza la disposición horizontal en todos los breakpoints.
+
+## Uso Básico
 
 ```tsx
 import { HeroSlide } from '@/components/ui/hero-slide';
 
 <HeroSlide
-  titleLine1="BIENVENIDO"
-  titleLine2="A KM0 LAB"
-  subtitle="Tu comercio local, más cerca que nunca."
-  imageSrc="/images/welcome.png"
-  bgColor="bg-km0-yellow-100"
-  badgeText="+ 10 XP"
-  layout="side"
+  title={<>BIENVENIDO <span className="text-brand">A KM0 LAB</span></>}
+  subtitle="Tu comercio local más cerca que nunca."
+  imageSrc="/welcome.png"
+  badgeText="+10 XP"
 />
 ```
 
-## Layouts
-
-### Stack (vertical)
-- Imagen arriba
-- Texto centrado abajo
-- Por defecto en móvil y tablet
-
-### Side (horizontal)
-- Imagen a la izquierda
-- Texto a la derecha
-- Se activa en `laptop-short` para ahorrar altura
-
-## Breakpoints
-
-El componente respeta los breakpoints del proyecto:
-- `mobile-p`, `mobile-l`: Layout stack
-- `tablet`: Layout stack
-- `laptop-short`: Layout side (horizontal)
-- `desktop`, `ultra-wide`: Layout side
-
+## Notas Técnicas
+- Utiliza internamente los primitives `Title` y `Subtitle`.
+- Utiliza `MediaFrame` para el manejo de la imagen y el badge.
+- En `laptop-short` se reduce el tamaño de fuente y los gaps de forma automática.

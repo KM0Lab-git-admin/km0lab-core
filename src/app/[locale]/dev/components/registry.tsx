@@ -15,9 +15,17 @@ import SafeHydration from '@/components/screens/welcome/SafeHydration';
 import Slide from '@/components/screens/welcome/Slide';
 import { Sponsors } from '@/components/screens/welcome/Sponsors';
 import { XPBadge } from '@/components/screens/welcome/XPBadge';
+import {
+  CarouselSlide,
+  CarouselTrack,
+  CarouselViewport,
+  useCarousel,
+} from '@/components/ui/carousel';
+import { HeroSlide } from '@/components/ui/hero-slide';
 import { AppHeader } from '@/components/ui/layout/AppHeader';
 import { MobileFrame } from '@/components/ui/layout/MobileFrame';
 import { StatusBar } from '@/components/ui/layout/StatusBar';
+import { MediaFrame } from '@/components/ui/media-frame';
 import { Badge } from '@/components/ui/primitives/badge';
 import { Button } from '@/components/ui/primitives/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/primitives/card';
@@ -33,14 +41,6 @@ import {
   SliderCount,
   SliderDots,
 } from '@/components/ui/slider';
-import {
-  CarouselSlide,
-  CarouselTrack,
-  CarouselViewport,
-  useCarousel,
-} from '@/components/ui/carousel';
-import { HeroSlide } from '@/components/ui/hero-slide';
-import { MediaFrame } from '@/components/ui/media-frame';
 import { getValidatorById, validators } from '@/validation/validators';
 import { useState } from 'react';
 
@@ -722,7 +722,7 @@ const SimpleSliderNavigationDemo = () => {
             min={1}
             max={10}
             value={total}
-            onChange={e => {
+            onChange={(e) => {
               const nextTotal = Math.max(1, Number(e.target.value));
               setTotal(nextTotal);
               setCurrent(prev => clamp(prev, nextTotal));
@@ -813,7 +813,7 @@ const SliderDotsDemo = () => {
         current={safeCurrent}
         size={size}
         tone={tone}
-        onSelect={interactive ? (idx) => setCurrent(clamp(idx)) : undefined}
+        onSelect={interactive ? idx => setCurrent(clamp(idx)) : undefined}
       />
       <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
         <label className="text-sm text-slate-600">
@@ -823,7 +823,7 @@ const SliderDotsDemo = () => {
             min={2}
             max={10}
             value={total}
-            onChange={e => {
+            onChange={(e) => {
               const nextTotal = Math.max(2, Number(e.target.value));
               setTotal(nextTotal);
               setCurrent(prev => Math.max(0, Math.min(prev, nextTotal - 1)));
@@ -1173,12 +1173,17 @@ const HeroSlideDemo = () => {
           }`}
         >
           <HeroSlide
-            titleLine1="BIENVENIDO"
-            titleLine2="A KM0 LAB"
-            subtitle="Tu comercio local, más cerca que nunca. Descubre una nueva forma de interactuar."
+            title={(
+              <>
+                BIENVENIDO
+                {' '}
+                <span className="text-km0-blue-700">A KM0 LAB</span>
+              </>
+            )}
+            subtitle="Tu comercio local, más cerca que nunca. Descubre una nueva forma de interactuar con tus vecinos."
             imageSrc="/images/glovo-style-welcome.png"
-            bgColor="bg-km0-yellow-100"
             badgeText="+ 10 XP"
+            bgColor="bg-km0-yellow-100"
             layout={layout}
           />
         </div>
@@ -1253,9 +1258,9 @@ const MediaFrameDemo = () => {
           <MediaFrame
             src="/images/glovo-style-discover.png"
             alt="Demo image"
-            bgColor={bgColor}
             badgeText={showBadge ? '+ 10 XP' : undefined}
             layout={layout}
+            className={bgColor}
           />
         </div>
       </div>
@@ -1846,5 +1851,3 @@ export const componentRegistry: ComponentEntry[] = [
     Demo: DemoBanner,
   },
 ];
-
-

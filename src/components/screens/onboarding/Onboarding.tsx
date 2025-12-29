@@ -112,16 +112,19 @@ export default function Onboarding() {
                   key={slide.id}
                   slideId={slide.id}
                   isActive={index === currentIndex}
-                  layout="side"
                 >
                   <HeroSlide
-                    titleLine1={slide.titleLine1}
-                    titleLine2={slide.titleLine2}
+                    title={(
+                      <>
+                        {slide.titleLine1}
+                        {' '}
+                        {slide.titleLine2}
+                      </>
+                    )}
                     subtitle={slide.subtitle}
                     imageSrc={slide.imageSrc}
-                    bgColor={slide.bgColor}
                     badgeText={slide.xpBadge}
-                    layout="side"
+                    bgColor={slide.bgColor}
                   />
                 </CarouselSlide>
               ))}

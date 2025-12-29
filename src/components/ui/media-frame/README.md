@@ -1,50 +1,41 @@
 # MediaFrame
 
-Componente de frame para imágenes con borde, sombra y badge opcional. Usado para encapsular imágenes hero en slides y cards.
+Primitive UI para enmarcar imágenes o contenido multimedia con soporte para badges informativos, sombras y radios de borde personalizables.
 
 ## Props
 
 | Prop | Tipo | Default | Descripción |
 |------|------|---------|-------------|
-| `src` | `string` | - | URL de la imagen |
-| `alt` | `string` | - | Texto alternativo |
-| `bgColor` | `string` | `'bg-km0-yellow-100'` | Clase de color de fondo |
-| `badgeText` | `string` | - | Texto del badge opcional |
-| `badgeSize` | `'sm' \| 'md' \| 'lg'` | `'md'` | Tamaño del badge |
-| `layout` | `'stack' \| 'side'` | `'side'` | Layout que afecta el ancho |
-| `maxHeight` | `'default' \| 'compact'` | `'default'` | Altura máxima de la imagen |
-| `rounded` | `'sm' \| 'md' \| 'lg'` | `'sm'` | Radio de bordes |
+| `layout` | `'stack' \| 'side'` | `'stack'` | Controla el ancho del contenedor |
+| `src` | `string` | - | Fuente de la imagen (opcional si se usa children) |
+| `alt` | `string` | `""` | Texto alternativo |
+| `badgeText` | `string` | - | Texto para el badge informativo |
+| `badgePosition`| `'top-left' \| 'top-right' \| 'bottom-left' \| 'bottom-right'` | `'bottom-left'` | Posición del badge |
+| `radius` | `'md' \| 'lg' \| 'xl'` | `'lg'` | Radio de los bordes |
+| `shadow` | `'none' \| 'sm' \| 'md'` | `'sm'` | Intensidad de la sombra |
+| `tone` | `'default' \| 'soft'` | `'default'` | Estilo visual del fondo |
 
-## Uso básico
+## Layouts
+
+1.  **stack (default)**: El marco ocupa el ancho disponible. Ideal para contenedores fluidos.
+2.  **side**: El marco ocupa un ancho fijo/proporcional (aprox. 40-45%) diseñado para layouts horizontales.
+
+## Uso Básico
 
 ```tsx
 import { MediaFrame } from '@/components/ui/media-frame';
 
-<MediaFrame
-  src="/images/product.png"
-  alt="Producto destacado"
-  bgColor="bg-km0-coral-100"
-  badgeText="+ 10 XP"
-  layout="side"
+<MediaFrame 
+  src="/path/to/image.png" 
+  badgeText="+ 10 XP" 
+  radius="xl"
 />
 ```
 
-## Estructura visual
+## Con Children (Next.js Image)
 
+```tsx
+<MediaFrame badgeText="Nuevo" layout="side">
+  <Image src="..." width={500} height={300} alt="..." />
+</MediaFrame>
 ```
-┌─────────────────────────────┐
-│ ┌─────────────────────────┐ │ ← Container (bgColor)
-│ │                         │ │
-│ │        Imagen           │ │ ← Inner frame (white + shadow)
-│ │                         │ │
-│ └─────────────────────────┘ │
-│ [+ 10 XP]                   │ ← Badge (opcional)
-└─────────────────────────────┘
-```
-
-## Responsive
-
-El componente ajusta su ancho según el layout:
-- `stack`: Ancho completo
-- `side`: 40-45% del ancho en `laptop-short`
-

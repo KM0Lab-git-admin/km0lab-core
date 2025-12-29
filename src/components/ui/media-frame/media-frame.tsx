@@ -1,66 +1,70 @@
-'use client';
-
 import type { VariantProps } from 'class-variance-authority';
 import type React from 'react';
 
 import { cn } from '@/components/ui/primitives/utils';
 
 import {
-  mediaFrameBadgeVariants,
-  mediaFrameContainerVariants,
-  mediaFrameImageVariants,
+  badgeVariants,
+  imageVariants,
   mediaFrameInnerVariants,
+  mediaFrameVariants,
 } from './media-frame.styles';
 
-export type MediaFrameProps = React.HTMLAttributes<HTMLDivElement>
-  & VariantProps<typeof mediaFrameContainerVariants>
-  & VariantProps<typeof mediaFrameImageVariants>
-  & {
-    /** Image source URL. */
-    src: string;
-    /** Image alt text. */
-    alt: string;
-    /** Background color class (e.g., 'bg-km0-yellow-100'). */
-    bgColor?: string;
-    /** Optional badge text (e.g., '+ 10 XP'). */
-    badgeText?: string;
-    /** Badge size variant. */
-    badgeSize?: 'sm' | 'md' | 'lg';
-    /** Additional class names for container. */
-    className?: string;
-  };
+export interface MediaFrameProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof mediaFrameVariants> {
+  /** Texto a mostrar en el badge (opcional). */
+  badgeText?: string;
+  /** Posición del badge dentro del marco. */
+  badgePosition?: VariantProps<typeof badgeVariants>['position'];
+  /** Fuente de la imagen (atajo para children <img>). */
+  src?: string;
+  /** Texto alternativo para la imagen. */
+  alt?: string;
+  /** Altura máxima de la imagen interna. */
+  imageMaxHeight?: VariantProps<typeof imageVariants>['maxHeight'];
+  /** Contenido personalizado (normalmente un <img> o <Image>). */
+  children?: React.ReactNode;
+}
 
 /**
- * Framed image container with optional XP badge.
- * Used for hero images in slides and cards.
+ * Primitive UI: Marco contenedor para imágenes con soporte de badges,
+ * sombras y radios de borde personalizables.
+ * Layout por defecto: 'stack' (ancho completo).
  */
 const MediaFrame = ({
-  src,
-  alt,
-  bgColor = 'bg-km0-yellow-100',
+  layout = 'stack',
   badgeText,
-  badgeSize = 'md',
-  layout = 'side',
-  maxHeight = 'default',
-  rounded = 'sm',
+  badgePosition = 'bottom-left',
+  radius = 'lg',
+  shadow = 'sm',
+  tone = 'default',
+  src,
+  alt = '',
+  imageMaxHeight = 'default',
   className,
+  children,
   ...props
 }: MediaFrameProps) => (
   <div
-    className={cn(mediaFrameContainerVariants({ layout }), bgColor, className)}
+    className={cn(mediaFrameVariants({ layout, radius, shadow, tone }), className)}
     {...props}
   >
-    <div className={cn(mediaFrameInnerVariants({ rounded, padding: 'md' }))}>
-      <img
-        src={src}
-        alt={alt}
-        className={cn(mediaFrameImageVariants({ rounded, maxHeight }))}
-        draggable={false}
-      />
+    <div className={cn(mediaFrameInnerVariants({ radius }))}>
+      {children || (
+        src && (
+          <img
+            src={src}
+            alt={alt}
+            className={cn(imageVariants({ maxHeight: imageMaxHeight }))}
+            draggable={false}
+          />
+        )
+      )}
     </div>
 
     {badgeText && (
-      <div className={cn(mediaFrameBadgeVariants({ size: badgeSize }))}>
+      <div className={cn(badgeVariants({ position: badgePosition }))}>
         {badgeText}
       </div>
     )}
@@ -70,4 +74,3 @@ const MediaFrame = ({
 MediaFrame.displayName = 'MediaFrame';
 
 export { MediaFrame };
-

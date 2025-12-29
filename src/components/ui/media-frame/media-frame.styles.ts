@@ -1,103 +1,87 @@
 import { cva } from 'class-variance-authority';
 
-export const mediaFrameContainerVariants = cva(
-  'relative shrink-0 min-w-0 rounded-xl',
+export const mediaFrameVariants = cva(
+  'relative flex items-center justify-center overflow-hidden border border-black/5 transition-all',
   {
     variants: {
       /**
-       * Layout variant affects sizing:
-       * - stack: Full width image container
-       * - side: Constrained width for side-by-side layout
+       * Layout del contenedor:
+       * - stack: Ocupa el ancho disponible (default genérico).
+       * - side: Pensado para layouts horizontales, ocupa un porcentaje.
        */
       layout: {
-        stack: [
-          'p-2 mt-3',
-          'mobile-p:p-3 mobile-p:mt-5 mobile-p:rounded-2xl mobile-p:w-full',
-          'tablet:w-full tablet:mt-4',
-          'desktop:w-full',
-          'ultra-wide:w-full',
-        ].join(' '),
-        side: [
-          'p-2 mt-3',
-          'mobile-l:p-2 mobile-l:mt-0 mobile-l:w-2/5',
-          'mobile-p:p-3 mobile-p:mt-5 mobile-p:rounded-2xl mobile-p:w-full',
-          'tablet:w-full tablet:mt-4',
-          'laptop-short:w-[45%] laptop-short:mt-0',
-          'desktop:w-2/5',
-          'ultra-wide:w-[35%]',
-        ].join(' '),
+        stack: 'w-full',
+        side: 'w-2/5 mobile-p:w-full laptop-short:w-[45%]',
+      },
+      tone: {
+        default: 'bg-white shadow-sm',
+        soft: 'bg-neutral-50/50',
+      },
+      radius: {
+        md: 'rounded-lg',
+        lg: 'rounded-xl',
+        xl: 'rounded-2xl',
+      },
+      shadow: {
+        none: 'shadow-none',
+        sm: 'shadow-sm',
+        md: 'shadow-md',
       },
     },
     defaultVariants: {
-      layout: 'side',
+      layout: 'stack',
+      tone: 'default',
+      radius: 'lg',
+      shadow: 'sm',
     },
   },
 );
 
 export const mediaFrameInnerVariants = cva(
-  'relative bg-white border border-white shadow-sm',
+  'relative flex h-full w-full items-center justify-center p-2 shadow-inner',
   {
     variants: {
-      rounded: {
-        sm: 'rounded-lg',
-        md: 'rounded-xl',
-        lg: 'rounded-2xl',
-      },
-      padding: {
-        sm: 'p-1',
-        md: 'p-1 mobile-p:p-2',
-        lg: 'p-2',
+      radius: {
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
       },
     },
     defaultVariants: {
-      rounded: 'sm',
-      padding: 'md',
+      radius: 'lg',
     },
   },
 );
 
-export const mediaFrameImageVariants = cva('w-full object-contain', {
-  variants: {
-    rounded: {
-      sm: 'rounded-lg',
-      md: 'rounded-xl mobile-l:rounded-xl',
-      lg: 'rounded-2xl',
+export const badgeVariants = cva(
+  'absolute z-10 flex items-center justify-center bg-km0-coral-400 font-bold text-white shadow-md transition-all',
+  {
+    variants: {
+      position: {
+        'top-left': 'left-2 top-2',
+        'top-right': 'right-2 top-2',
+        'bottom-left': 'bottom-2 left-2',
+        'bottom-right': 'bottom-2 right-2',
+      },
+      size: {
+        default: 'px-3 py-1 text-xs mobile-p:text-sm laptop-short:px-2 laptop-short:py-0.5 laptop-short:text-[10px]',
+      },
     },
+    defaultVariants: {
+      position: 'bottom-left',
+      size: 'default',
+    },
+  },
+);
+
+export const imageVariants = cva('h-full w-full object-contain', {
+  variants: {
     maxHeight: {
-      default: [
-        'max-h-[38dvh]',
-        'mobile-l:max-h-[45dvh]',
-        'mobile-p:max-h-[32dvh]',
-        'laptop-short:max-h-[280px]',
-        'desktop:max-h-[450px]',
-        'ultra-wide:max-h-[600px]',
-      ].join(' '),
-      compact: [
-        'max-h-[35dvh]',
-        'laptop-short:max-h-[240px]',
-        'desktop:max-h-[400px]',
-      ].join(' '),
+      default: 'max-h-[280px] mobile-p:max-h-[320px] laptop-short:max-h-[220px] desktop:max-h-[400px]',
+      full: 'max-h-full',
     },
   },
   defaultVariants: {
-    rounded: 'sm',
     maxHeight: 'default',
   },
 });
-
-export const mediaFrameBadgeVariants = cva(
-  'absolute bg-km0-coral-400 text-white font-bold rounded-full shadow-md',
-  {
-    variants: {
-      size: {
-        sm: 'left-1.5 bottom-1.5 text-[9px] px-2 py-0.5',
-        md: 'left-1.5 bottom-1.5 text-[8px] px-1.5 py-0.5 mobile-l:left-1.5 mobile-l:bottom-1.5 mobile-p:left-3 mobile-p:bottom-3 mobile-p:text-xs mobile-p:px-3 mobile-p:py-1',
-        lg: 'left-3 bottom-3 text-xs px-3 py-1',
-      },
-    },
-    defaultVariants: {
-      size: 'md',
-    },
-  },
-);
-

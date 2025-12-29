@@ -1,9 +1,8 @@
 export { MediaFrame } from './media-frame';
 export type { MediaFrameProps } from './media-frame';
 export {
-  mediaFrameBadgeVariants,
-  mediaFrameContainerVariants,
-  mediaFrameImageVariants,
+  badgeVariants,
+  imageVariants,
   mediaFrameInnerVariants,
+  mediaFrameVariants,
 } from './media-frame.styles';
-

@@ -1,111 +1,58 @@
 import { cva } from 'class-variance-authority';
 
-export const heroSlideContentVariants = cva(
-  'flex-1 flex flex-col min-w-0',
+export const heroSlideVariants = cva(
+  'flex w-full flex-col items-center transition-all',
   {
     variants: {
-      /**
-       * Layout variant:
-       * - stack: Vertical, centered content
-       * - side: Horizontal, left-aligned content in laptop-short
-       */
       layout: {
+        /** Stack: Imagen arriba, texto abajo. En laptop-short cambia a horizontal por CSS. */
         stack: [
-          'justify-start pt-2',
-          'mobile-p:pt-4 mobile-p:justify-start mobile-p:w-full mobile-p:pr-0',
-          'tablet:w-full tablet:pt-6 tablet:justify-start',
-          'desktop:pt-4',
-          'ultra-wide:pt-6',
+          'gap-4 mobile-p:gap-6 tablet:gap-8',
+          'laptop-short:flex-row laptop-short:items-start laptop-short:gap-8 laptop-short:text-left',
         ].join(' '),
-        side: [
-          'justify-start pt-2',
-          'mobile-l:pt-2 mobile-l:justify-start mobile-l:w-3/5 mobile-l:pr-0',
-          'mobile-p:pt-4 mobile-p:justify-start mobile-p:w-full mobile-p:pr-0',
-          'tablet:w-full tablet:pt-6 tablet:justify-start',
-          'laptop-short:pt-2 laptop-short:justify-start laptop-short:w-[55%]',
-          'desktop:w-3/5 desktop:pt-4',
-          'ultra-wide:w-[65%] ultra-wide:pt-6',
-        ].join(' '),
+        /** Side: Siempre horizontal (imagen izquierda, texto derecha). */
+        side: 'flex-row items-start gap-4 mobile-p:gap-6 laptop-short:gap-8 text-left',
+      },
+      density: {
+        default: 'mobile-p:gap-6 tablet:gap-8',
+        compact: 'gap-2 mobile-p:gap-3 laptop-short:gap-4',
       },
     },
     defaultVariants: {
-      layout: 'side',
+      layout: 'stack',
+      density: 'default',
     },
   },
 );
 
-export const heroSlideTextContainerVariants = cva('', {
+export const heroContentVariants = cva(
+  'flex flex-1 flex-col min-w-0',
+  {
+    variants: {
+      align: {
+        center: 'items-center text-center',
+        left: 'items-start text-left',
+      },
+      layout: {
+        stack: 'laptop-short:items-start laptop-short:text-left',
+        side: 'items-start text-left',
+      },
+    },
+    defaultVariants: {
+      align: 'center',
+      layout: 'stack',
+    },
+  },
+);
+
+export const heroTextWrapperVariants = cva('flex flex-col gap-1', {
   variants: {
-    layout: {
-      stack: 'text-center',
-      side: [
-        'text-center',
-        'mobile-l:text-center',
-        'mobile-p:text-center',
-        'tablet:text-center',
-        'laptop-short:text-left',
-      ].join(' '),
+    density: {
+      default: 'mobile-p:gap-2 tablet:gap-4',
+      compact: 'gap-1 laptop-short:gap-2',
     },
   },
   defaultVariants: {
-    layout: 'side',
+    density: 'default',
   },
 });
-
-export const heroSlideTitleVariants = cva(
-  'font-brand font-black text-neutral-900 uppercase tracking-tight leading-tight',
-  {
-    variants: {
-      size: {
-        default: [
-          'text-lg',
-          'mobile-l:text-lg',
-          'mobile-p:text-xl',
-          'tablet:text-2xl',
-          'laptop-short:text-2xl',
-          'desktop:text-4xl',
-          'ultra-wide:text-6xl',
-        ].join(' '),
-        compact: [
-          'text-base',
-          'mobile-p:text-lg',
-          'tablet:text-xl',
-          'laptop-short:text-xl',
-          'desktop:text-2xl',
-        ].join(' '),
-      },
-    },
-    defaultVariants: {
-      size: 'default',
-    },
-  },
-);
-
-export const heroSlideSubtitleVariants = cva(
-  'font-ui text-neutral-500 leading-relaxed',
-  {
-    variants: {
-      size: {
-        default: [
-          'text-xs mt-0.5 pb-4',
-          'mobile-l:text-xs mobile-l:mt-1 mobile-l:pb-2',
-          'mobile-p:text-sm mobile-p:mt-2 mobile-p:pb-4',
-          'tablet:pb-8',
-          'laptop-short:text-sm laptop-short:mt-2 laptop-short:pb-0',
-          'desktop:text-lg desktop:mt-4',
-          'ultra-wide:text-2xl ultra-wide:mt-6',
-        ].join(' '),
-        compact: [
-          'text-xs mt-1 pb-2',
-          'mobile-p:text-sm mobile-p:mt-2 mobile-p:pb-3',
-          'laptop-short:text-xs laptop-short:mt-1 laptop-short:pb-0',
-          'desktop:text-base desktop:mt-2',
-        ].join(' '),
-      },
-    },
-    defaultVariants: {
-      size: 'default',
-    },
-  },
-);
-
