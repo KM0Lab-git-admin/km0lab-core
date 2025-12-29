@@ -109,12 +109,12 @@ export default function PostalCode() {
   const isUnavailable = availabilityStatus === 'unavailable';
   const isAvailable = availabilityStatus === 'available';
 
-  // Mostrar error de formato si:
+  // Mostrar error de formato solo si:
   // 1. El validador detecta caracteres no numéricos (muestra error inmediatamente), O
   // 2. Ha completado los 5 caracteres y no son válidos
-  const hasCompleteLength = trimmedPostalCode.length === 5;
+  // Si son números pero incompletos (< 5), no mostrar error (permitir que siga escribiendo)
   const hasFormatError = formatValidation.message && !formatValidation.isValid;
-  const shouldShowFormatError = hasFormatError && (hasCompleteLength || formatValidation.message?.includes('numeros'));
+  const shouldShowFormatError = hasFormatError;
   const inputError = shouldShowFormatError || isUnavailable;
 
   const inputMessage = (() => {

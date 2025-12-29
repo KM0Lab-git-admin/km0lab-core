@@ -79,7 +79,13 @@ const postalCodeValidator: Validator = {
       return { isValid: false, message: 'Codigo postal invalido. Usa 5 numeros.' };
     }
 
-    // Verificar que tenga exactamente 5 dígitos
+    // Si son todos números pero incompletos (< 5), no es válido pero no mostramos error
+    // (el usuario está escribiendo, permitimos que continúe)
+    if (trimmed.length < 5) {
+      return { isValid: false };
+    }
+
+    // Verificar que tenga exactamente 5 dígitos (ya sabemos que son todos números)
     const isValid = /^\d{5}$/.test(trimmed);
     return isValid
       ? { isValid: true, message: 'Correcto.' }
