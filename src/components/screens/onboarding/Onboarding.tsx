@@ -7,13 +7,14 @@ import {
   CarouselViewport,
   useCarousel,
 } from '@/components/ui/carousel';
+import { ContentCard } from '@/components/ui/content-card';
 import { HeroSlide } from '@/components/ui/hero-slide';
 import { Button } from '@/components/ui/primitives/button';
 import { cn } from '@/components/ui/primitives/utils';
 import { SimpleSliderNavigation } from '@/components/ui/slider';
 import { onboardingSlides } from '@/features/onboarding/slides';
+import { useParams, useRouter } from 'next/navigation';
 import {
-  onboardingCard,
   onboardingCounter,
   onboardingFooter,
   onboardingHeader,
@@ -23,6 +24,8 @@ import {
 } from './onboarding.styles';
 
 export default function Onboarding() {
+  const router = useRouter();
+  const params = useParams();
   const {
     currentIndex,
     dragOffset,
@@ -42,8 +45,13 @@ export default function Onboarding() {
   };
 
   const handleStartApp = () => {
-    // eslint-disable-next-line no-console
-    console.log('Start App');
+    const localeParam = params?.locale;
+    const locale
+      = typeof localeParam === 'string' ? localeParam : localeParam?.[0];
+    if (!locale) {
+      return;
+    }
+    router.push(`/${locale}/postal-code`);
   };
 
   // Scale semántico: puede venir de props o contexto en el futuro
@@ -61,7 +69,7 @@ export default function Onboarding() {
           />
         </header>
 
-        <section className={onboardingCard({ scale })}>
+        <ContentCard scale={scale}>
           <CarouselViewport
             className="flex-1 min-h-0 w-full"
             onTouchStart={handleTouchStart}
@@ -100,7 +108,7 @@ export default function Onboarding() {
               ))}
             </CarouselTrack>
           </CarouselViewport>
-        </section>
+        </ContentCard>
 
         <footer className={onboardingFooter({ scale })}>
           <div className={onboardingCounter({ scale })}>
@@ -121,12 +129,15 @@ export default function Onboarding() {
             <Button
               type="button"
               onClick={isLast ? handleStartApp : handleSkipOnboarding}
-              disabled={isLast}
+              disabled={false}
               aria-label={isLast ? 'Empezar' : 'Saltar'}
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
+                  if (isLast) {
+                    handleStartApp();
+                  }
                   if (!isLast) {
                     handleSkipOnboarding();
                   }
@@ -137,7 +148,6 @@ export default function Onboarding() {
               className={cn(
                 'rounded bg-km0-blue-700 text-white font-semibold whitespace-nowrap text-center',
                 'shadow-sm hover:opacity-90 transition-opacity',
-                isLast && 'opacity-50 cursor-not-allowed',
               )}
             >
               {isLast ? 'EMPEZAR' : 'SALTAR'}

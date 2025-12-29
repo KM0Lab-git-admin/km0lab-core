@@ -25,6 +25,7 @@ import { HeroSlide } from '@/components/ui/hero-slide';
 import { AppHeader } from '@/components/ui/layout/AppHeader';
 import { MobileFrame } from '@/components/ui/layout/MobileFrame';
 import { StatusBar } from '@/components/ui/layout/StatusBar';
+import { ContentCard } from '@/components/ui/content-card';
 import { MediaFrame } from '@/components/ui/media-frame';
 import { Badge } from '@/components/ui/primitives/badge';
 import { Button } from '@/components/ui/primitives/button';
@@ -1268,6 +1269,74 @@ const MediaFrameDemo = () => {
   );
 };
 
+const ContentCardDemo = () => {
+  const [scale, setScale] = useState<'sm' | 'md' | 'lg'>('md');
+  const [as, setAs] = useState<'section' | 'div' | 'article' | 'aside'>('section');
+
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-2 sm:grid-cols-2">
+        <label className="text-sm text-slate-600">
+          Escala
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={scale}
+            onChange={e => setScale(e.target.value as 'sm' | 'md' | 'lg')}
+          >
+            <option value="sm">sm (pequeño)</option>
+            <option value="md">md (mediano)</option>
+            <option value="lg">lg (grande)</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Elemento HTML
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={as}
+            onChange={e => setAs(e.target.value as 'section' | 'div' | 'article' | 'aside')}
+          >
+            <option value="section">section</option>
+            <option value="div">div</option>
+            <option value="article">article</option>
+            <option value="aside">aside</option>
+          </select>
+        </label>
+      </div>
+
+      <div className="rounded-lg border border-slate-200 bg-gradient-white-beige p-4">
+        <div className="mx-auto max-w-2xl">
+          <ContentCard scale={scale} as={as}>
+            <div className="flex flex-col gap-4">
+              <Title size="h2">Título de ejemplo</Title>
+              <Subtitle size="md">
+                Este es un ejemplo de ContentCard con escala
+                {' '}
+                {scale}
+                {' '}
+                y elemento
+                {' '}
+                {as}
+                .
+              </Subtitle>
+              <div className="rounded-lg bg-km0-blue-50 p-4">
+                <p className="text-sm text-slate-700">
+                  El componente ContentCard proporciona un contenedor con estilos responsivos,
+                  sombra personalizada y variantes de escala para diferentes contextos.
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">Reutilizable</Badge>
+                <Badge variant="secondary">Responsive</Badge>
+                <Badge variant="secondary">Flexible</Badge>
+              </div>
+            </div>
+          </ContentCard>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ChatKitDemo = () => (
   <div className="space-y-2">
     <div className="rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-2 text-xs text-indigo-900">
@@ -1655,6 +1724,23 @@ export const componentRegistry: ComponentEntry[] = [
     notes: [
       'Soporta diferentes colores de fondo vía bgColor prop.',
       'Badge opcional para mostrar XP u otro texto.',
+    ],
+  },
+  {
+    id: 'content-card',
+    title: 'ContentCard',
+    description: 'Tarjeta de contenido genérica con estilos responsivos, sombra y variantes de escala.',
+    group: 'ui',
+    filePath: 'src/components/ui/content-card/content-card.tsx',
+    importPath: '@/components/ui/content-card',
+    exportName: 'ContentCard',
+    exportType: 'named',
+    Component: ContentCard,
+    Demo: ContentCardDemo,
+    notes: [
+      'Variantes de escala (sm, md, lg) con padding y max-width responsivos usando clamp().',
+      'Soporta diferentes elementos HTML (section, div, article, aside).',
+      'Incluye sombra km0-card-shadow y fondo blanco por defecto.',
     ],
   },
   {
