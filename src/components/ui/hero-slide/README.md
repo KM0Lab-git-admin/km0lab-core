@@ -1,6 +1,6 @@
 # HeroSlide
 
-Componente de composición de alto nivel para presentaciones o secciones destacadas. Optimiza automáticamente el layout para pantallas cortas (`laptop-short`) sin necesidad de JavaScript.
+Componente de composición de alto nivel para presentaciones o secciones destacadas. Optimiza automáticamente el layout para pantallas en **landscape con altura corta** (`short-landscape`) sin necesidad de JavaScript.
 
 ## Props
 
@@ -18,8 +18,16 @@ Componente de composición de alto nivel para presentaciones o secciones destaca
 
 ## Comportamiento de Layout
 
-1.  **stack (default)**: Disposición vertical (imagen arriba, texto abajo). Al entrar en el breakpoint `laptop-short` (altura < 550px), cambia **automáticamente** a disposición horizontal vía CSS para evitar scroll.
+1.  **stack (default)**: Disposición vertical (imagen arriba, texto abajo). Al entrar en el breakpoint `short-landscape` (orientation: landscape AND max-height: 550px), cambia **automáticamente** a disposición horizontal vía CSS para evitar scroll.
 2.  **side**: Fuerza la disposición horizontal en todos los breakpoints.
+
+### Breakpoint `short-landscape`
+
+Este breakpoint captura SOLO las siguientes resoluciones:
+- ✅ **667×375** (móvil en landscape)
+- ✅ **1280×550** (laptop con altura corta)
+- ❌ **1440×900** (desktop normal - NO aplica)
+- ❌ **1920×1080** (ultra-wide - NO aplica)
 
 ## Uso Básico
 
@@ -37,4 +45,4 @@ import { HeroSlide } from '@/components/ui/hero-slide';
 ## Notas Técnicas
 - Utiliza internamente los primitives `Title` y `Subtitle`.
 - Utiliza `MediaFrame` para el manejo de la imagen y el badge.
-- En `laptop-short` se reduce el tamaño de fuente y los gaps de forma automática.
+- En `short-landscape` se reduce el tamaño de fuente, los gaps y la imagen para caber sin scroll.

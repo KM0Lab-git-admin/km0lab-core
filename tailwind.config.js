@@ -31,6 +31,12 @@ export default {
 
       // ULTRA-WIDE: 1920x1080 - Pantallas grandes
       'ultra-wide': { raw: '(min-width: 1920px) and (min-height: 1080px)' },
+
+      // === BREAKPOINT ESPECIAL: SHORT-LANDSCAPE ===
+      // Activa layout "side" SOLO en landscape con altura corta
+      // Captura: 667x375 (móvil landscape), 1280x550 (laptop short)
+      // NO captura: 1440x900, 1920x1080 (desktops con altura normal)
+      'short-landscape': { raw: '(orientation: landscape) and (max-height: 550px)' },
     },
     extend: {
       maxHeight: {

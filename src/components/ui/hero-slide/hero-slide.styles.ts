@@ -5,17 +5,21 @@ export const heroSlideVariants = cva(
   {
     variants: {
       layout: {
-        /** Stack: Imagen arriba, texto abajo. En laptop-short cambia a horizontal por CSS. */
+        /**
+         * Stack: Imagen arriba, texto abajo.
+         * En short-landscape (667x375, 1280x550) cambia a horizontal por CSS.
+         * NO cambia en desktop normal (1440x900, 1920x1080).
+         */
         stack: [
           'gap-4 mobile-p:gap-6 tablet:gap-8',
-          'laptop-short:flex-row laptop-short:items-start laptop-short:gap-8 laptop-short:text-left',
+          'short-landscape:flex-row short-landscape:items-center short-landscape:gap-4 short-landscape:text-left',
         ].join(' '),
         /** Side: Siempre horizontal (imagen izquierda, texto derecha). */
-        side: 'flex-row items-start gap-4 mobile-p:gap-6 laptop-short:gap-8 text-left',
+        side: 'flex-row items-start gap-4 mobile-p:gap-6 text-left',
       },
       density: {
-        default: 'mobile-p:gap-6 tablet:gap-8',
-        compact: 'gap-2 mobile-p:gap-3 laptop-short:gap-4',
+        default: 'mobile-p:gap-6 tablet:gap-8 short-landscape:gap-4',
+        compact: 'gap-2 mobile-p:gap-3 short-landscape:gap-3',
       },
     },
     defaultVariants: {
@@ -34,7 +38,7 @@ export const heroContentVariants = cva(
         left: 'items-start text-left',
       },
       layout: {
-        stack: 'laptop-short:items-start laptop-short:text-left',
+        stack: 'short-landscape:items-start short-landscape:text-left',
         side: 'items-start text-left',
       },
     },
@@ -48,8 +52,8 @@ export const heroContentVariants = cva(
 export const heroTextWrapperVariants = cva('flex flex-col gap-1', {
   variants: {
     density: {
-      default: 'mobile-p:gap-2 tablet:gap-4',
-      compact: 'gap-1 laptop-short:gap-2',
+      default: 'mobile-p:gap-2 tablet:gap-4 short-landscape:gap-1',
+      compact: 'gap-1 short-landscape:gap-1',
     },
   },
   defaultVariants: {

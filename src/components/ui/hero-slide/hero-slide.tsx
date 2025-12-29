@@ -63,7 +63,7 @@ const HeroSlide = ({
         tone={bgColor ? undefined : 'default'}
         className={cn(
           'shrink-0 transition-all',
-          !isSide && 'laptop-short:w-[45%]',
+          !isSide && 'short-landscape:w-[40%] short-landscape:max-h-[60dvh]',
           bgColor,
         )}
         layout={isSide ? 'side' : 'stack'}
@@ -75,7 +75,7 @@ const HeroSlide = ({
             as="h1"
             size="h1"
             align={isSide ? 'left' : align as any}
-            className="laptop-short:text-2xl"
+            className="short-landscape:text-xl short-landscape:leading-tight"
           >
             {title}
           </Title>
@@ -84,7 +84,7 @@ const HeroSlide = ({
             <Subtitle
               size="md"
               align={isSide ? 'left' : align as any}
-              className="max-w-[45ch] laptop-short:text-xs"
+              className="max-w-[45ch] short-landscape:text-xs short-landscape:leading-snug"
             >
               {subtitle}
             </Subtitle>

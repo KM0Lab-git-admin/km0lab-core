@@ -53,17 +53,17 @@ export default function Onboarding() {
           'p-[10px] w-full overflow-hidden',
           'mobile-p:p-3 mobile-p:justify-center',
           'tablet:p-8',
-          'laptop-short:p-4 laptop-short:justify-center',
+          'short-landscape:p-2 short-landscape:justify-center',
         )}
       >
-        {/* Logo fuera de la tarjeta - oculto en laptop-short */}
+        {/* Logo fuera de la tarjeta - compacto en short-landscape */}
         <header
           className={cn(
             'flex items-center justify-center shrink-0',
             'pb-2',
             'mobile-p:pb-3',
             'tablet:pb-4',
-            'laptop-short:hidden',
+            'short-landscape:pb-1',
           )}
         >
           <div
@@ -72,6 +72,7 @@ export default function Onboarding() {
               'scale-[0.65]',
               'mobile-p:scale-100',
               'mobile-l:scale-[0.8]',
+              'short-landscape:scale-[0.5]',
             )}
             role="img"
             aria-label="KM0 Lab"
@@ -85,12 +86,12 @@ export default function Onboarding() {
             'flex flex-col flex-1 min-h-0',
             'mx-auto',
             'max-w-full',
-            'mobile-l:flex-row mobile-l:max-w-[calc(100vw-40px)]',
-            'mobile-p:flex-col mobile-p:max-w-[355px] mobile-p:rounded-2xl',
-            'tablet:flex-col tablet:max-w-[565px] tablet:flex-none tablet:max-h-[935px]',
-            'laptop-short:max-w-4xl laptop-short:flex-row laptop-short:flex-none laptop-short:max-h-[420px]',
+            'mobile-p:max-w-[355px] mobile-p:rounded-2xl',
+            'tablet:max-w-[565px] tablet:flex-none tablet:max-h-[935px]',
             'desktop:max-w-6xl desktop:max-h-[650px]',
             'ultra-wide:max-w-[1400px] ultra-wide:max-h-[850px]',
+            // Short landscape: horizontal layout, altura limitada
+            'short-landscape:max-w-4xl short-landscape:max-h-[calc(100dvh-80px)]',
           )}
         >
           {/* Carousel Container */}
@@ -141,7 +142,7 @@ export default function Onboarding() {
             'mobile-l:px-1 mobile-l:pt-2',
             'mobile-p:px-2 mobile-p:pt-3',
             'tablet:max-w-md',
-            'laptop-short:flex laptop-short:max-w-4xl',
+            'short-landscape:pt-1 short-landscape:max-w-4xl',
           )}
         >
           {/* Contador */}
@@ -151,6 +152,7 @@ export default function Onboarding() {
               'text-xs w-8',
               'mobile-l:text-sm mobile-l:w-10',
               'mobile-p:text-base mobile-p:w-12',
+              'short-landscape:text-xs short-landscape:w-8',
             )}
           >
             {currentIndex + 1}

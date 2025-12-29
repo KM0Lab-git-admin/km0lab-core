@@ -6,32 +6,30 @@ export const carouselSlideVariants = cva(
     variants: {
       /**
        * Layout variant:
-       * - stack: Vertical layout (image top, text bottom) - default for most screens
-       * - side: Horizontal layout (image left, text right) - for laptop-short
+       * - stack: Vertical layout (default). Cambia a horizontal SOLO en short-landscape (667x375, 1280x550).
+       * - side: Siempre horizontal (imagen izquierda, texto derecha).
        */
       layout: {
         stack: [
-          'flex flex-col',
-          'px-3 pb-0.5',
-          'mobile-p:flex-col mobile-p:px-4 mobile-p:pb-2 mobile-p:items-center mobile-p:pt-0',
-          'tablet:flex-col tablet:px-8 tablet:pt-6 tablet:items-center',
-          'desktop:px-12 desktop:pt-10',
-          'ultra-wide:px-16 ultra-wide:pt-14',
+          'flex flex-col items-center',
+          'px-3 py-2',
+          'mobile-p:px-4 mobile-p:py-4',
+          'tablet:px-8 tablet:py-6',
+          'desktop:px-12 desktop:py-10',
+          'ultra-wide:px-16 ultra-wide:py-14',
+          // En short-landscape cambia a horizontal
+          'short-landscape:flex-row short-landscape:items-center short-landscape:px-4 short-landscape:py-2 short-landscape:gap-4',
         ].join(' '),
         side: [
-          'flex flex-col',
-          'px-3 pb-0.5',
-          'mobile-l:flex-row mobile-l:px-4 mobile-l:pb-0 mobile-l:items-start mobile-l:gap-4 mobile-l:pt-6',
-          'mobile-p:flex-col mobile-p:px-4 mobile-p:pb-2 mobile-p:items-center mobile-p:pt-0',
-          'tablet:flex-col tablet:px-8 tablet:pt-6 tablet:items-center',
-          'laptop-short:flex-row laptop-short:px-10 laptop-short:pt-6 laptop-short:items-start laptop-short:gap-8',
-          'desktop:px-12 desktop:pt-10 desktop:gap-12',
-          'ultra-wide:px-16 ultra-wide:pt-14 ultra-wide:gap-16',
+          'flex flex-row items-center',
+          'px-4 py-2 gap-4',
+          'mobile-p:px-6 mobile-p:gap-6',
+          'tablet:px-8 tablet:gap-8',
         ].join(' '),
       },
     },
     defaultVariants: {
-      layout: 'side',
+      layout: 'stack',
     },
   },
 );

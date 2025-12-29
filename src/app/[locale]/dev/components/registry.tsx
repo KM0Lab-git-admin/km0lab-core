@@ -1155,8 +1155,8 @@ const HeroSlideDemo = () => {
             value={layout}
             onChange={e => setLayout(e.target.value as 'stack' | 'side')}
           >
-            <option value="stack">stack (vertical)</option>
-            <option value="side">side (horizontal - laptop-short)</option>
+            <option value="stack">stack (vertical - default)</option>
+            <option value="side">side (horizontal - forzado)</option>
           </select>
         </label>
       </div>
@@ -1196,9 +1196,9 @@ const HeroSlideDemo = () => {
         {' '}
         se activa automáticamente en
         {' '}
-        <code>laptop-short</code>
+        <code>short-landscape</code>
         {' '}
-        (1280x550) para evitar scroll vertical.
+        (orientation: landscape + max-height: 550px). Aplica a 667x375 y 1280x550, pero NO a 1440x900.
       </div>
     </div>
   );
@@ -1627,7 +1627,7 @@ export const componentRegistry: ComponentEntry[] = [
   {
     id: 'hero-slide',
     title: 'HeroSlide',
-    description: 'Slide hero con imagen enmarcada y título/subtítulo. Soporta layouts stack y side.',
+    description: 'Slide hero con imagen enmarcada y título/subtítulo. Layout stack por defecto, cambia a side automáticamente en short-landscape (667x375, 1280x550) vía CSS.',
     group: 'ui',
     filePath: 'src/components/ui/hero-slide/hero-slide.tsx',
     importPath: '@/components/ui/hero-slide',
