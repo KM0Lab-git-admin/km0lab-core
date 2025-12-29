@@ -33,6 +33,14 @@ import {
   SliderCount,
   SliderDots,
 } from '@/components/ui/slider';
+import {
+  CarouselSlide,
+  CarouselTrack,
+  CarouselViewport,
+  useCarousel,
+} from '@/components/ui/carousel';
+import { HeroSlide } from '@/components/ui/hero-slide';
+import { MediaFrame } from '@/components/ui/media-frame';
 import { getValidatorById, validators } from '@/validation/validators';
 import { useState } from 'react';
 
@@ -1035,6 +1043,226 @@ const SliderCountDemo = () => {
     </div>
   );
 };
+
+const carouselDemoSlides = [
+  { id: 'demo-1', titleLine1: 'BIENVENIDO', titleLine2: 'A KM0', subtitle: 'Tu comercio local, más cerca.', imageSrc: '/images/glovo-style-welcome.png', bgColor: 'bg-km0-yellow-100', xpBadge: '+ 10 XP' },
+  { id: 'demo-2', titleLine1: 'DESCUBRE', titleLine2: 'TIENDAS', subtitle: 'Explora los mejores productos.', imageSrc: '/images/glovo-style-discover.png', bgColor: 'bg-km0-blue-100', xpBadge: '+ 10 XP' },
+  { id: 'demo-3', titleLine1: 'CONECTA', titleLine2: 'VECINOS', subtitle: 'Comunidad activa y solidaria.', imageSrc: '/images/glovo-style-connect.png', bgColor: 'bg-km0-coral-100', xpBadge: '+ 10 XP' },
+];
+
+const CarouselDemo = () => {
+  const {
+    currentIndex,
+    dragOffset,
+    isDragging,
+    next,
+    prev,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
+    handleMouseDown,
+  } = useCarousel({ totalSlides: carouselDemoSlides.length });
+
+  return (
+    <div className="space-y-4">
+      <div className="rounded-lg border border-slate-200 bg-white p-3">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+          Carousel interactivo (drag/swipe)
+        </p>
+        <div className="rounded-xl bg-gradient-white-beige p-4">
+          <div className="mx-auto max-w-md overflow-hidden rounded-xl bg-white shadow-md">
+            <CarouselViewport
+              className="h-64"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              onMouseDown={handleMouseDown}
+              ariaLabel="Demo carousel"
+            >
+              <CarouselTrack
+                currentIndex={currentIndex}
+                dragOffset={dragOffset}
+                isDragging={isDragging}
+              >
+                {carouselDemoSlides.map((slide, index) => (
+                  <CarouselSlide
+                    key={slide.id}
+                    slideId={slide.id}
+                    isActive={index === currentIndex}
+                    layout="stack"
+                    className="p-4"
+                  >
+                    <div className={`rounded-lg ${slide.bgColor} p-3`}>
+                      <img
+                        src={slide.imageSrc}
+                        alt={slide.titleLine1}
+                        className="mx-auto h-24 object-contain"
+                        draggable={false}
+                      />
+                    </div>
+                    <div className="mt-3 text-center">
+                      <h3 className="font-brand text-lg font-bold">
+                        {slide.titleLine1}
+                        {' '}
+                        {slide.titleLine2}
+                      </h3>
+                      <p className="text-sm text-slate-500">{slide.subtitle}</p>
+                    </div>
+                  </CarouselSlide>
+                ))}
+              </CarouselTrack>
+            </CarouselViewport>
+            <div className="flex items-center justify-center gap-4 border-t border-slate-100 p-3">
+              <button
+                type="button"
+                onClick={prev}
+                disabled={currentIndex === 0}
+                className="rounded bg-slate-100 px-3 py-1 text-sm disabled:opacity-50"
+              >
+                Prev
+              </button>
+              <span className="text-sm font-semibold">
+                {currentIndex + 1}
+                /
+                {carouselDemoSlides.length}
+              </span>
+              <button
+                type="button"
+                onClick={next}
+                disabled={currentIndex === carouselDemoSlides.length - 1}
+                className="rounded bg-slate-100 px-3 py-1 text-sm disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const HeroSlideDemo = () => {
+  const [layout, setLayout] = useState<'stack' | 'side'>('stack');
+
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-2 sm:grid-cols-2">
+        <label className="text-sm text-slate-600">
+          Layout
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={layout}
+            onChange={e => setLayout(e.target.value as 'stack' | 'side')}
+          >
+            <option value="stack">stack (vertical)</option>
+            <option value="side">side (horizontal - laptop-short)</option>
+          </select>
+        </label>
+      </div>
+
+      <div className="rounded-lg border border-slate-200 bg-white p-4">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
+          Layout:
+          {' '}
+          {layout}
+        </p>
+        <div
+          className={`flex rounded-xl bg-gradient-white-beige p-4 ${
+            layout === 'side' ? 'flex-row items-start gap-6' : 'flex-col items-center'
+          }`}
+        >
+          <HeroSlide
+            titleLine1="BIENVENIDO"
+            titleLine2="A KM0 LAB"
+            subtitle="Tu comercio local, más cerca que nunca. Descubre una nueva forma de interactuar."
+            imageSrc="/images/glovo-style-welcome.png"
+            bgColor="bg-km0-yellow-100"
+            badgeText="+ 10 XP"
+            layout={layout}
+          />
+        </div>
+      </div>
+
+      <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+        El layout
+        {' '}
+        <code>side</code>
+        {' '}
+        se activa automáticamente en
+        {' '}
+        <code>laptop-short</code>
+        {' '}
+        (1280x550) para evitar scroll vertical.
+      </div>
+    </div>
+  );
+};
+
+const MediaFrameDemo = () => {
+  const [layout, setLayout] = useState<'stack' | 'side'>('stack');
+  const [bgColor, setBgColor] = useState('bg-km0-yellow-100');
+  const [showBadge, setShowBadge] = useState(true);
+
+  const bgOptions = [
+    { value: 'bg-km0-yellow-100', label: 'Yellow' },
+    { value: 'bg-km0-blue-100', label: 'Blue' },
+    { value: 'bg-km0-coral-100', label: 'Coral' },
+    { value: 'bg-km0-success-100', label: 'Success' },
+  ];
+
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-2 sm:grid-cols-3">
+        <label className="text-sm text-slate-600">
+          Layout
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={layout}
+            onChange={e => setLayout(e.target.value as 'stack' | 'side')}
+          >
+            <option value="stack">stack</option>
+            <option value="side">side</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Background
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={bgColor}
+            onChange={e => setBgColor(e.target.value)}
+          >
+            {bgOptions.map(opt => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+        </label>
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <input
+            type="checkbox"
+            className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+            checked={showBadge}
+            onChange={e => setShowBadge(e.target.checked)}
+          />
+          Show badge
+        </label>
+      </div>
+
+      <div className="rounded-lg border border-slate-200 bg-white p-4">
+        <div className="mx-auto max-w-xs">
+          <MediaFrame
+            src="/images/glovo-style-discover.png"
+            alt="Demo image"
+            bgColor={bgColor}
+            badgeText={showBadge ? '+ 10 XP' : undefined}
+            layout={layout}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ChatKitDemo = () => (
   <div className="space-y-2">
     <div className="rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-2 text-xs text-indigo-900">
@@ -1373,6 +1601,55 @@ export const componentRegistry: ComponentEntry[] = [
     exportType: 'named',
     Component: SliderCount,
     Demo: SliderCountDemo,
+  },
+  {
+    id: 'carousel',
+    title: 'Carousel',
+    description: 'Carrusel genérico con drag/swipe. Incluye Viewport, Track y Slide.',
+    group: 'ui',
+    filePath: 'src/components/ui/carousel/index.ts',
+    importPath: '@/components/ui/carousel',
+    exportName: 'CarouselViewport',
+    exportType: 'named',
+    Component: CarouselViewport,
+    Demo: CarouselDemo,
+    notes: [
+      'Usa useCarousel hook para lógica de eventos.',
+      'CarouselSlide soporta layouts: stack (vertical) y side (horizontal).',
+      'El layout side se activa en laptop-short para evitar scroll.',
+    ],
+  },
+  {
+    id: 'hero-slide',
+    title: 'HeroSlide',
+    description: 'Slide hero con imagen enmarcada y título/subtítulo. Soporta layouts stack y side.',
+    group: 'ui',
+    filePath: 'src/components/ui/hero-slide/hero-slide.tsx',
+    importPath: '@/components/ui/hero-slide',
+    exportName: 'HeroSlide',
+    exportType: 'named',
+    Component: HeroSlide,
+    Demo: HeroSlideDemo,
+    notes: [
+      'Layout stack: imagen arriba, texto abajo (default).',
+      'Layout side: imagen izquierda, texto derecha (laptop-short).',
+    ],
+  },
+  {
+    id: 'media-frame',
+    title: 'MediaFrame',
+    description: 'Frame de imagen con fondo de color y badge XP opcional.',
+    group: 'ui',
+    filePath: 'src/components/ui/media-frame/media-frame.tsx',
+    importPath: '@/components/ui/media-frame',
+    exportName: 'MediaFrame',
+    exportType: 'named',
+    Component: MediaFrame,
+    Demo: MediaFrameDemo,
+    notes: [
+      'Soporta diferentes colores de fondo vía bgColor prop.',
+      'Badge opcional para mostrar XP u otro texto.',
+    ],
   },
   {
     id: 'chatkit',
