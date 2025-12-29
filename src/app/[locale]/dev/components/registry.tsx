@@ -27,14 +27,12 @@ import { Separator } from '@/components/ui/primitives/separator';
 import { Subtitle } from '@/components/ui/primitives/subtitle';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/primitives/tabs';
 import { Title } from '@/components/ui/primitives/title';
-import { NavigationArrow } from '@/components/ui/slider/NavigationArrow';
-import ProgressDots from '@/components/ui/slider/ProgressDots';
-import { ProgressIndicator } from '@/components/ui/slider/ProgressIndicator';
-import { SimpleSliderNavigation } from '@/components/ui/slider/SimpleSliderNavigation';
-import { SlideIndicators } from '@/components/ui/slider/SlideIndicators';
-import Slider from '@/components/ui/slider/Slider';
-import SliderCount from '@/components/ui/slider/SliderCount';
-import SliderNavigation from '@/components/ui/slider/SliderNavigation';
+import {
+  SimpleSliderNavigation,
+  SliderArrowButton,
+  SliderCount,
+  SliderDots,
+} from '@/components/ui/slider';
 import { getValidatorById, validators } from '@/validation/validators';
 import { useState } from 'react';
 
@@ -682,46 +680,298 @@ const MobileFrameDemo = () => (
   </MobileFrame>
 );
 
-const SliderDemo = () => {
-  const [title, setTitle] = useState('Demo slide title');
-  const [current, setCurrent] = useState(2);
+const SimpleSliderNavigationDemo = () => {
   const [total, setTotal] = useState(5);
+  const [current, setCurrent] = useState(2);
+  const [layout, setLayout] = useState<'default' | 'compact'>('default');
+  const [showDots, setShowDots] = useState(true);
+  const [showArrows, setShowArrows] = useState(true);
+  const [arrowVariant, setArrowVariant] = useState<'ghost' | 'solid'>('ghost');
+  const [dotsTone, setDotsTone] = useState<'default' | 'brand'>('default');
 
-  const safeCurrent = Math.min(current, total);
+  const clamp = (value: number, totalSlides: number) => Math.max(0, Math.min(value, totalSlides - 1));
+  const safeCurrent = clamp(current, total);
 
   return (
     <div className="space-y-3">
-      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
-        <Slider
-          title={title}
-          description="Cambia props desde los controles para ver el estado del slider."
-          current={safeCurrent}
-          total={total}
-          onSkip={() => alert('Skip pressed')}
-        />
-      </div>
-      <div className="grid gap-2 sm:grid-cols-3">
-        <label className="text-sm text-slate-600 sm:col-span-2">
-          Título
-          <input
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-          />
-        </label>
+      <SimpleSliderNavigation
+        totalSlides={total}
+        currentSlide={safeCurrent}
+        onPrev={() => setCurrent(prev => clamp(prev - 1, total))}
+        onNext={() => setCurrent(prev => clamp(prev + 1, total))}
+        onDotSelect={idx => setCurrent(clamp(idx, total))}
+        layout={layout}
+        showDots={showDots}
+        showArrows={showArrows}
+        arrowVariant={arrowVariant}
+        dotsTone={dotsTone}
+      />
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
         <label className="text-sm text-slate-600">
           Total slides
           <input
             type="number"
             min={1}
-            max={8}
+            max={10}
             value={total}
-            onChange={e => setTotal(Math.max(1, Number(e.target.value)))}
+            onChange={e => {
+              const nextTotal = Math.max(1, Number(e.target.value));
+              setTotal(nextTotal);
+              setCurrent(prev => clamp(prev, nextTotal));
+            }}
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           />
         </label>
         <label className="text-sm text-slate-600">
-          Slide actual
+          Current
+          <input
+            type="number"
+            min={0}
+            max={total - 1}
+            value={safeCurrent}
+            onChange={e => setCurrent(clamp(Number(e.target.value), total))}
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+          />
+        </label>
+        <label className="text-sm text-slate-600">
+          Layout
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={layout}
+            onChange={e => setLayout(e.target.value as 'default' | 'compact')}
+          >
+            <option value="default">default</option>
+            <option value="compact">compact</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Arrow variant
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={arrowVariant}
+            onChange={e => setArrowVariant(e.target.value as 'ghost' | 'solid')}
+          >
+            <option value="ghost">ghost</option>
+            <option value="solid">solid</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Dots tone
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={dotsTone}
+            onChange={e => setDotsTone(e.target.value as 'default' | 'brand')}
+          >
+            <option value="default">default</option>
+            <option value="brand">brand</option>
+          </select>
+        </label>
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <input
+            type="checkbox"
+            className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+            checked={showDots}
+            onChange={e => setShowDots(e.target.checked)}
+          />
+          Show dots
+        </label>
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <input
+            type="checkbox"
+            className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+            checked={showArrows}
+            onChange={e => setShowArrows(e.target.checked)}
+          />
+          Show arrows
+        </label>
+      </div>
+    </div>
+  );
+};
+
+const SliderDotsDemo = () => {
+  const [total, setTotal] = useState(5);
+  const [current, setCurrent] = useState(1);
+  const [size, setSize] = useState<'sm' | 'md'>('md');
+  const [tone, setTone] = useState<'default' | 'brand'>('default');
+  const [interactive, setInteractive] = useState(true);
+  const clamp = (value: number) => Math.max(0, Math.min(value, total - 1));
+  const safeCurrent = clamp(current);
+
+  return (
+    <div className="space-y-3">
+      <SliderDots
+        total={total}
+        current={safeCurrent}
+        size={size}
+        tone={tone}
+        onSelect={interactive ? (idx) => setCurrent(clamp(idx)) : undefined}
+      />
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        <label className="text-sm text-slate-600">
+          Total
+          <input
+            type="number"
+            min={2}
+            max={10}
+            value={total}
+            onChange={e => {
+              const nextTotal = Math.max(2, Number(e.target.value));
+              setTotal(nextTotal);
+              setCurrent(prev => Math.max(0, Math.min(prev, nextTotal - 1)));
+            }}
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+          />
+        </label>
+        <label className="text-sm text-slate-600">
+          Current
+          <input
+            type="number"
+            min={0}
+            max={total - 1}
+            value={safeCurrent}
+            onChange={e => setCurrent(clamp(Number(e.target.value)))}
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+          />
+        </label>
+        <label className="text-sm text-slate-600">
+          Size
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={size}
+            onChange={e => setSize(e.target.value as 'sm' | 'md')}
+          >
+            <option value="sm">sm</option>
+            <option value="md">md</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Tone
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={tone}
+            onChange={e => setTone(e.target.value as 'default' | 'brand')}
+          >
+            <option value="default">default</option>
+            <option value="brand">brand</option>
+          </select>
+        </label>
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <input
+            type="checkbox"
+            className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+            checked={interactive}
+            onChange={e => setInteractive(e.target.checked)}
+          />
+          Interactive
+        </label>
+      </div>
+    </div>
+  );
+};
+
+const SliderArrowButtonDemo = () => {
+  const [index, setIndex] = useState(1);
+  const [size, setSize] = useState<'sm' | 'md'>('md');
+  const [variant, setVariant] = useState<'ghost' | 'solid'>('ghost');
+  const [disabled, setDisabled] = useState(false);
+  const maxIndex = 4;
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white p-3">
+        <SliderArrowButton
+          direction="prev"
+          ariaLabel="Anterior"
+          size={size}
+          variant={variant}
+          disabled={disabled || index <= 0}
+          onClick={() => setIndex(prev => Math.max(0, prev - 1))}
+        />
+        <div className="text-sm font-semibold text-slate-800">
+          Step
+          {' '}
+          {index + 1}
+        </div>
+        <SliderArrowButton
+          direction="next"
+          ariaLabel="Siguiente"
+          size={size}
+          variant={variant}
+          disabled={disabled || index >= maxIndex}
+          onClick={() => setIndex(prev => Math.min(maxIndex, prev + 1))}
+        />
+      </div>
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        <label className="text-sm text-slate-600">
+          Size
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={size}
+            onChange={e => setSize(e.target.value as 'sm' | 'md')}
+          >
+            <option value="sm">sm</option>
+            <option value="md">md</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Variant
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={variant}
+            onChange={e => setVariant(e.target.value as 'ghost' | 'solid')}
+          >
+            <option value="ghost">ghost</option>
+            <option value="solid">solid</option>
+          </select>
+        </label>
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <input
+            type="checkbox"
+            className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+            checked={disabled}
+            onChange={e => setDisabled(e.target.checked)}
+          />
+          Disabled
+        </label>
+        <label className="text-sm text-slate-600 sm:col-span-2 lg:col-span-3">
+          Step
+          <input
+            type="range"
+            min={0}
+            max={maxIndex}
+            value={index}
+            onChange={e => setIndex(Number(e.target.value))}
+            className="mt-2 block w-full accent-indigo-600"
+          />
+        </label>
+      </div>
+    </div>
+  );
+};
+
+const SliderCountDemo = () => {
+  const [current, setCurrent] = useState(2);
+  const [total, setTotal] = useState(5);
+  const [label, setLabel] = useState('Skip');
+  const [layout, setLayout] = useState<'default' | 'compact'>('default');
+  const [size, setSize] = useState<'sm' | 'md'>('md');
+  const [showAction, setShowAction] = useState(true);
+  const safeCurrent = Math.min(Math.max(current, 0), total);
+
+  return (
+    <div className="space-y-3">
+      <SliderCount
+        current={safeCurrent}
+        total={total}
+        layout={layout}
+        size={size}
+        actionLabel={showAction ? label : undefined}
+        onAction={showAction ? () => alert('Action clicked') : undefined}
+      />
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        <label className="text-sm text-slate-600">
+          Current
           <input
             type="number"
             min={0}
@@ -731,264 +981,6 @@ const SliderDemo = () => {
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
           />
         </label>
-      </div>
-    </div>
-  );
-};
-
-const SliderNavigationDemo = () => {
-  const [total, setTotal] = useState(5);
-  const [current, setCurrent] = useState(0);
-
-  const clamp = (value: number) => Math.max(0, Math.min(value, total - 1));
-
-  return (
-    <div className="space-y-3">
-      <SliderNavigation
-        totalSlides={total}
-        currentSlide={current}
-        onPrevious={() => setCurrent(prev => clamp(prev - 1))}
-        onNext={() => setCurrent(prev => clamp(prev + 1))}
-        onSlideSelect={idx => setCurrent(clamp(idx))}
-      />
-      <div className="grid gap-2 sm:grid-cols-2">
-        <label className="text-sm text-slate-600">
-          Slides
-          <input
-            type="number"
-            min={2}
-            max={10}
-            value={total}
-            onChange={e => setTotal(Math.max(2, Number(e.target.value)))}
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-          />
-        </label>
-        <label className="text-sm text-slate-600">
-          Actual
-          <input
-            type="number"
-            min={0}
-            max={total - 1}
-            value={current}
-            onChange={e => setCurrent(clamp(Number(e.target.value)))}
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-          />
-        </label>
-      </div>
-    </div>
-  );
-};
-
-const SimpleSliderNavigationDemo = () => {
-  const [total] = useState(4);
-  const [current, setCurrent] = useState(1);
-
-  const clamp = (value: number) => Math.max(0, Math.min(value, total - 1));
-
-  return (
-    <div className="space-y-3">
-      <SimpleSliderNavigation
-        totalSlides={total}
-        currentSlide={current}
-        onPrev={() => setCurrent(prev => clamp(prev - 1))}
-        onNext={() => setCurrent(prev => clamp(prev + 1))}
-      />
-      <div className="text-xs text-slate-600">
-        Slide:
-        {' '}
-        <span className="font-semibold text-slate-800">{current + 1}</span>
-        /
-        {total}
-      </div>
-    </div>
-  );
-};
-
-const SlideIndicatorsDemo = () => {
-  const [total, setTotal] = useState(6);
-  const [current, setCurrent] = useState(2);
-  const clamp = (value: number) => Math.max(0, Math.min(value, total - 1));
-
-  return (
-    <div className="space-y-3">
-      <SlideIndicators totalSlides={total} currentSlide={current} />
-      <label className="text-sm text-slate-600">
-        Slide actual
-        <input
-          type="range"
-          min={0}
-          max={total - 1}
-          value={current}
-          onChange={e => setCurrent(clamp(Number(e.target.value)))}
-          className="mt-2 block w-full accent-indigo-600"
-        />
-      </label>
-      <label className="text-sm text-slate-600">
-        Total
-        <input
-          type="number"
-          min={2}
-          max={10}
-          value={total}
-          onChange={e => setTotal(Math.max(2, Number(e.target.value)))}
-          className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-        />
-      </label>
-    </div>
-  );
-};
-
-const ProgressDotsDemo = () => {
-  const [total, setTotal] = useState(5);
-  const [current, setCurrent] = useState(1);
-  const clamp = (value: number) => Math.max(0, Math.min(value, total - 1));
-
-  return (
-    <div className="space-y-3">
-      <ProgressDots total={total} current={current} />
-      <div className="grid gap-2 sm:grid-cols-2">
-        <label className="text-sm text-slate-600">
-          Total
-          <input
-            type="number"
-            min={2}
-            max={10}
-            value={total}
-            onChange={e => setTotal(Math.max(2, Number(e.target.value)))}
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-          />
-        </label>
-        <label className="text-sm text-slate-600">
-          Actual
-          <input
-            type="number"
-            min={0}
-            max={total - 1}
-            value={current}
-            onChange={e => setCurrent(clamp(Number(e.target.value)))}
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-          />
-        </label>
-      </div>
-    </div>
-  );
-};
-
-const ProgressIndicatorDemo = () => {
-  const [total, setTotal] = useState(4);
-  const [current, setCurrent] = useState(0);
-  const [chevrons, setChevrons] = useState(true);
-  const clamp = (value: number) => Math.max(0, Math.min(value, total - 1));
-
-  return (
-    <div className="space-y-3">
-      <ProgressIndicator
-        total={total}
-        current={current}
-        showChevrons={chevrons}
-        onPrevious={() => setCurrent(prev => clamp(prev - 1))}
-        onNext={() => setCurrent(prev => clamp(prev + 1))}
-      />
-      <div className="grid gap-2 sm:grid-cols-3">
-        <label className="text-sm text-slate-600">
-          Total
-          <input
-            type="number"
-            min={2}
-            max={10}
-            value={total}
-            onChange={e => setTotal(Math.max(2, Number(e.target.value)))}
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-          />
-        </label>
-        <label className="text-sm text-slate-600">
-          Actual
-          <input
-            type="number"
-            min={0}
-            max={total - 1}
-            value={current}
-            onChange={e => setCurrent(clamp(Number(e.target.value)))}
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-          />
-        </label>
-        <label className="flex items-center gap-2 text-sm text-slate-600">
-          <input
-            type="checkbox"
-            className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
-            checked={chevrons}
-            onChange={e => setChevrons(e.target.checked)}
-          />
-          Mostrar flechas
-        </label>
-      </div>
-    </div>
-  );
-};
-
-const NavigationArrowDemo = () => {
-  const [index, setIndex] = useState(1);
-  return (
-    <div className="flex flex-col gap-3">
-      <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white p-3">
-        <NavigationArrow
-          direction="prev"
-          ariaLabel="Anterior"
-          disabled={index <= 0}
-          onClick={() => setIndex(prev => Math.max(0, prev - 1))}
-        />
-        <div className="text-sm font-semibold text-slate-800">
-          Paso
-          {' '}
-          {index + 1}
-        </div>
-        <NavigationArrow
-          direction="next"
-          ariaLabel="Siguiente"
-          disabled={index >= 4}
-          onClick={() => setIndex(prev => Math.min(4, prev + 1))}
-        />
-      </div>
-      <label className="text-sm text-slate-600">
-        Ajustar paso
-        <input
-          type="range"
-          min={0}
-          max={4}
-          value={index}
-          onChange={e => setIndex(Number(e.target.value))}
-          className="mt-2 block w-full accent-indigo-600"
-        />
-      </label>
-    </div>
-  );
-};
-
-const SliderCountDemo = () => {
-  const [current, setCurrent] = useState(2);
-  const [total, setTotal] = useState(5);
-  const [label, setLabel] = useState('SALTAR');
-
-  return (
-    <div className="space-y-3">
-      <SliderCount
-        current={current}
-        total={total}
-        skipText={label}
-        onSkip={() => alert('Skip clicked')}
-      />
-      <div className="grid gap-2 sm:grid-cols-3">
-        <label className="text-sm text-slate-600">
-          Actual
-          <input
-            type="number"
-            min={0}
-            max={total}
-            value={current}
-            onChange={e => setCurrent(Number(e.target.value))}
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-          />
-        </label>
         <label className="text-sm text-slate-600">
           Total
           <input
@@ -1001,18 +993,48 @@ const SliderCountDemo = () => {
           />
         </label>
         <label className="text-sm text-slate-600">
-          Texto skip
+          Layout
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={layout}
+            onChange={e => setLayout(e.target.value as 'default' | 'compact')}
+          >
+            <option value="default">default</option>
+            <option value="compact">compact</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Size
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={size}
+            onChange={e => setSize(e.target.value as 'sm' | 'md')}
+          >
+            <option value="sm">sm</option>
+            <option value="md">md</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Action label
           <input
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
             value={label}
             onChange={e => setLabel(e.target.value)}
           />
         </label>
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <input
+            type="checkbox"
+            className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+            checked={showAction}
+            onChange={e => setShowAction(e.target.checked)}
+          />
+          Show action
+        </label>
       </div>
     </div>
   );
 };
-
 const ChatKitDemo = () => (
   <div className="space-y-2">
     <div className="rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-2 text-xs text-indigo-900">
@@ -1305,100 +1327,52 @@ export const componentRegistry: ComponentEntry[] = [
     Component: StatusBar,
   },
   {
-    id: 'navigation-arrow',
-    title: 'NavigationArrow',
-    description: 'Flechas accesibles para sliders.',
+    id: 'slider-arrow-button',
+    title: 'SliderArrowButton',
+    description: 'Arrow button for slider navigation.',
     group: 'ui',
-    filePath: 'src/components/ui/slider/NavigationArrow.tsx',
-    importPath: '@/components/ui/slider/NavigationArrow',
-    exportName: 'NavigationArrow',
+    filePath: 'src/components/ui/slider/slider-arrow-button/slider-arrow-button.tsx',
+    importPath: '@/components/ui/slider',
+    exportName: 'SliderArrowButton',
     exportType: 'named',
-    Component: NavigationArrow,
-    Demo: NavigationArrowDemo,
+    Component: SliderArrowButton,
+    Demo: SliderArrowButtonDemo,
   },
   {
-    id: 'progress-dots',
-    title: 'ProgressDots',
-    description: 'Indicadores de progreso por puntos.',
+    id: 'slider-dots',
+    title: 'SliderDots',
+    description: 'Dot indicators for slider progress.',
     group: 'ui',
-    filePath: 'src/components/ui/slider/ProgressDots.tsx',
-    importPath: '@/components/ui/slider/ProgressDots',
-    exportType: 'default',
-    exportName: 'ProgressDots',
-    Component: ProgressDots,
-    Demo: ProgressDotsDemo,
-  },
-  {
-    id: 'progress-indicator',
-    title: 'ProgressIndicator',
-    description: 'Indicador de barra para slides/steps.',
-    group: 'ui',
-    filePath: 'src/components/ui/slider/ProgressIndicator.tsx',
-    importPath: '@/components/ui/slider/ProgressIndicator',
-    exportName: 'ProgressIndicator',
+    filePath: 'src/components/ui/slider/slider-dots/slider-dots.tsx',
+    importPath: '@/components/ui/slider',
+    exportName: 'SliderDots',
     exportType: 'named',
-    Component: ProgressIndicator,
-    Demo: ProgressIndicatorDemo,
+    Component: SliderDots,
+    Demo: SliderDotsDemo,
   },
   {
     id: 'simple-slider-navigation',
     title: 'SimpleSliderNavigation',
-    description: 'Navegación básica de slider con dots.',
+    description: 'Slider navigation with arrows and dots.',
     group: 'ui',
-    filePath: 'src/components/ui/slider/SimpleSliderNavigation.tsx',
-    importPath: '@/components/ui/slider/SimpleSliderNavigation',
+    filePath: 'src/components/ui/slider/simple-slider-navigation/simple-slider-navigation.tsx',
+    importPath: '@/components/ui/slider',
     exportName: 'SimpleSliderNavigation',
     exportType: 'named',
     Component: SimpleSliderNavigation,
     Demo: SimpleSliderNavigationDemo,
   },
   {
-    id: 'slide-indicators',
-    title: 'SlideIndicators',
-    description: 'Indicadores gruesos para carrusel.',
-    group: 'ui',
-    filePath: 'src/components/ui/slider/SlideIndicators.tsx',
-    importPath: '@/components/ui/slider/SlideIndicators',
-    exportName: 'SlideIndicators',
-    exportType: 'named',
-    Component: SlideIndicators,
-    Demo: SlideIndicatorsDemo,
-  },
-  {
-    id: 'slider',
-    title: 'Slider',
-    description: 'Hero slider con navegación simple.',
-    group: 'ui',
-    filePath: 'src/components/ui/slider/Slider.tsx',
-    importPath: '@/components/ui/slider/Slider',
-    exportType: 'default',
-    exportName: 'Slider',
-    Component: Slider,
-    Demo: SliderDemo,
-  },
-  {
     id: 'slider-count',
     title: 'SliderCount',
-    description: 'Contador + CTA de saltar.',
+    description: 'Current/total counter with optional action.',
     group: 'ui',
-    filePath: 'src/components/ui/slider/SliderCount.tsx',
-    importPath: '@/components/ui/slider/SliderCount',
-    exportType: 'default',
+    filePath: 'src/components/ui/slider/slider-count/slider-count.tsx',
+    importPath: '@/components/ui/slider',
     exportName: 'SliderCount',
+    exportType: 'named',
     Component: SliderCount,
     Demo: SliderCountDemo,
-  },
-  {
-    id: 'slider-navigation',
-    title: 'SliderNavigation',
-    description: 'Navegación completa con dots y flechas.',
-    group: 'ui',
-    filePath: 'src/components/ui/slider/SliderNavigation.tsx',
-    importPath: '@/components/ui/slider/SliderNavigation',
-    exportType: 'default',
-    exportName: 'SliderNavigation',
-    Component: SliderNavigation,
-    Demo: SliderNavigationDemo,
   },
   {
     id: 'chatkit',
@@ -1595,3 +1569,5 @@ export const componentRegistry: ComponentEntry[] = [
     Demo: DemoBanner,
   },
 ];
+
+

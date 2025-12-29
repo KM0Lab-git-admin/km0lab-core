@@ -1,7 +1,7 @@
 import BreakpointIndicator from '@/components/devtools/BreakpointIndicator';
 import SafeHydration from '@/components/screens/welcome/SafeHydration';
 import { AppHeader } from '@/components/ui/layout/AppHeader';
-import Slider from '@/components/ui/slider/Slider';
+import Slider from '@/components/screens/welcome/Slider';
 
 export default function Welcome2Page() {
   return (

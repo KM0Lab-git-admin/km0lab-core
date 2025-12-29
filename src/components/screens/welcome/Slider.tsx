@@ -1,5 +1,6 @@
 'use client';
-import SliderCount from '@/components/ui/slider/SliderCount';
+
+import { SliderCount } from '@/components/ui/slider';
 import React from 'react';
 
 type SliderProps = {
@@ -14,7 +15,7 @@ type SliderProps = {
 };
 
 const Slider: React.FC<SliderProps> = ({
-  title = 'Títol Intro 1',
+  title = 'Tヴtol Intro 1',
   description =
   'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa',
   imageAlt = 'Slide image',
@@ -90,8 +91,8 @@ const Slider: React.FC<SliderProps> = ({
         <SliderCount
           current={current}
           total={total}
-          skipText={skipText}
-          onSkip={onSkip}
+          actionLabel={skipText}
+          onAction={onSkip}
         />
       </div>
     </div>

@@ -1,7 +1,7 @@
 'use client';
 import { AppHeader } from '@/components/ui/layout/AppHeader';
 import { MobileFrame } from '@/components/ui/layout/MobileFrame';
-import SliderNavigation from '@/components/ui/slider/SliderNavigation';
+import { SimpleSliderNavigation } from '@/components/ui/slider';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
@@ -96,12 +96,14 @@ export default function WelcomePage() {
           {/* Navegación del slider */}
           {!isLoading && (
             <div className="w-full flex justify-center mt-3">
-              <SliderNavigation
+              <SimpleSliderNavigation
                 totalSlides={totalSlides}
                 currentSlide={currentSlide}
-                onPrevious={handlePrevious}
+                onPrev={handlePrevious}
                 onNext={handleNext}
-                onSlideSelect={handleSlideSelect}
+                onDotSelect={handleSlideSelect}
+                arrowVariant="solid"
+                className="flex-none"
               />
             </div>
           )}

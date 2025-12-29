@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/components/ui/primitives/utils';
 import { Button } from '@/components/ui/primitives/button';
-import { SimpleSliderNavigation } from '@/components/ui/slider/SimpleSliderNavigation';
+import { SimpleSliderNavigation } from '@/components/ui/slider';
 
 const slides = [
   {
@@ -410,6 +410,7 @@ export default function Onboarding() {
             totalSlides={slides.length}
             onPrev={handlePrevSlide}
             onNext={handleNextSlide}
+            layout="compact"
           />
 
           {/* CTA */}
