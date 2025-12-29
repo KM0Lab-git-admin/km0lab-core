@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant portrait (@media (orientation: portrait));
+@custom-variant landscape (@media (orientation: landscape));
 
 /* === ANTIQUE OLIVE FONT FACES === */
 @font-face {
@@ -80,76 +82,76 @@
 /* === KM0 LAB THEME - Colores y extensiones para Tailwind v4 === */
 @theme {
   /* KM0 Blue */
-  --color-km0-blue-50: #F0F4FD;
-  --color-km0-blue-100: #DADEF8;
-  --color-km0-blue-200: #B5C3F0;
-  --color-km0-blue-300: #90A9E8;
-  --color-km0-blue-400: #6B8FD0;
-  --color-km0-blue-500: #4674B8;
-  --color-km0-blue-600: #2B5AA0;
+  --color-km0-blue-50: #f0f4fd;
+  --color-km0-blue-100: #dadef8;
+  --color-km0-blue-200: #b5c3f0;
+  --color-km0-blue-300: #90a9e8;
+  --color-km0-blue-400: #6b8fd0;
+  --color-km0-blue-500: #4674b8;
+  --color-km0-blue-600: #2b5aa0;
   --color-km0-blue-700: #174094;
-  --color-km0-blue-800: #132A50;
-  --color-km0-blue-900: #0F2040;
+  --color-km0-blue-800: #132a50;
+  --color-km0-blue-900: #0f2040;
 
   /* KM0 Beige */
-  --color-km0-beige-50: #FFF9F0;
-  --color-km0-beige-100: #FFECD2;
-  --color-km0-beige-200: #FDEEA9;
-  --color-km0-beige-300: #FBDB7E;
-  --color-km0-beige-400: #F9C853;
-  --color-km0-beige-500: #F7B528;
-  --color-km0-beige-600: #DCA223;
-  --color-km0-beige-700: #C18F1E;
-  --color-km0-beige-800: #A67C19;
-  --color-km0-beige-900: #8B6914;
+  --color-km0-beige-50: #fff9f0;
+  --color-km0-beige-100: #ffecd2;
+  --color-km0-beige-200: #fdeea9;
+  --color-km0-beige-300: #fbdb7e;
+  --color-km0-beige-400: #f9c853;
+  --color-km0-beige-500: #f7b528;
+  --color-km0-beige-600: #dca223;
+  --color-km0-beige-700: #c18f1e;
+  --color-km0-beige-800: #a67c19;
+  --color-km0-beige-900: #8b6914;
 
   /* KM0 Yellow */
-  --color-km0-yellow-50: #FEFAF0;
-  --color-km0-yellow-100: #FDF5DA;
-  --color-km0-yellow-200: #FBE9B4;
-  --color-km0-yellow-300: #F9DD8E;
-  --color-km0-yellow-400: #F7D168;
-  --color-km0-yellow-500: #F5C542;
-  --color-km0-yellow-600: #DCA223;
-  --color-km0-yellow-700: #C18F1E;
-  --color-km0-yellow-800: #A67C19;
-  --color-km0-yellow-900: #8B6914;
+  --color-km0-yellow-50: #fefaf0;
+  --color-km0-yellow-100: #fdf5da;
+  --color-km0-yellow-200: #fbe9b4;
+  --color-km0-yellow-300: #f9dd8e;
+  --color-km0-yellow-400: #f7d168;
+  --color-km0-yellow-500: #f5c542;
+  --color-km0-yellow-600: #dca223;
+  --color-km0-yellow-700: #c18f1e;
+  --color-km0-yellow-800: #a67c19;
+  --color-km0-yellow-900: #8b6914;
 
   /* KM0 Coral */
-  --color-km0-coral-50: #FFE0DB;
-  --color-km0-coral-100: #FFC2B7;
-  --color-km0-coral-200: #FFA394;
-  --color-km0-coral-300: #FF8570;
-  --color-km0-coral-400: #FF664D;
-  --color-km0-coral-500: #F73200;
-  --color-km0-coral-600: #DC2C00;
-  --color-km0-coral-700: #C12600;
-  --color-km0-coral-800: #A62000;
-  --color-km0-coral-900: #8B1A00;
+  --color-km0-coral-50: #ffe0db;
+  --color-km0-coral-100: #ffc2b7;
+  --color-km0-coral-200: #ffa394;
+  --color-km0-coral-300: #ff8570;
+  --color-km0-coral-400: #ff664d;
+  --color-km0-coral-500: #f73200;
+  --color-km0-coral-600: #dc2c00;
+  --color-km0-coral-700: #c12600;
+  --color-km0-coral-800: #a62000;
+  --color-km0-coral-900: #8b1a00;
 
   /* Gaming Orange */
-  --color-gaming-orange-50: #FFF7ED;
-  --color-gaming-orange-100: #FFEDD5;
-  --color-gaming-orange-200: #FED7AA;
-  --color-gaming-orange-300: #FDBA74;
-  --color-gaming-orange-400: #FB923C;
-  --color-gaming-orange-500: #FF8A00;
-  --color-gaming-orange-600: #EA580C;
-  --color-gaming-orange-700: #C2410C;
-  --color-gaming-orange-800: #9A3412;
-  --color-gaming-orange-900: #7C2D12;
+  --color-gaming-orange-50: #fff7ed;
+  --color-gaming-orange-100: #ffedd5;
+  --color-gaming-orange-200: #fed7aa;
+  --color-gaming-orange-300: #fdba74;
+  --color-gaming-orange-400: #fb923c;
+  --color-gaming-orange-500: #ff8a00;
+  --color-gaming-orange-600: #ea580c;
+  --color-gaming-orange-700: #c2410c;
+  --color-gaming-orange-800: #9a3412;
+  --color-gaming-orange-900: #7c2d12;
 
   /* KM0 Success */
-  --color-km0-success-50: #F0FDF4;
-  --color-km0-success-100: #DCFCE7;
-  --color-km0-success-200: #C5F2C7;
-  --color-km0-success-300: #86EFAC;
-  --color-km0-success-400: #4ADE80;
-  --color-km0-success-500: #00CC66;
-  --color-km0-success-600: #16A34A;
-  --color-km0-success-700: #15803D;
+  --color-km0-success-50: #f0fdf4;
+  --color-km0-success-100: #dcfce7;
+  --color-km0-success-200: #c5f2c7;
+  --color-km0-success-300: #86efac;
+  --color-km0-success-400: #4ade80;
+  --color-km0-success-500: #00cc66;
+  --color-km0-success-600: #16a34a;
+  --color-km0-success-700: #15803d;
   --color-km0-success-800: #166534;
-  --color-km0-success-900: #14532D;
+  --color-km0-success-900: #14532d;
 
   /* Spacing */
   --spacing-header: 3rem;
@@ -184,15 +186,15 @@
   /* Colores semánticos para componentes UI */
   --color-primary: #174094;
   --color-primary-foreground: #ffffff;
-  --color-destructive: #FF4444;
+  --color-destructive: #ff4444;
   --color-destructive-foreground: #ffffff;
-  --color-secondary: #F5F5F5;
+  --color-secondary: #f5f5f5;
   --color-secondary-foreground: #1a1a1a;
-  --color-accent: #FF664D;
+  --color-accent: #ff664d;
   --color-accent-foreground: #ffffff;
   --color-background: #ffffff;
   --color-foreground: #1a1a1a;
-  --color-muted: #F5F5F5;
+  --color-muted: #f5f5f5;
   --color-muted-foreground: #737373;
   --color-ring: #174094;
 }
@@ -207,7 +209,7 @@
   /* === KM0 LAB BACKGROUND SYSTEM === */
   --gradient-app: linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%);
   /* Tokens de color (solo los necesarios aquí) */
-  --km0-beige-100: #FFECD2;
+  --km0-beige-100: #ffecd2;
 
   /* Font Sizes - Escala armoniosa basada en ratio 1.25 */
   --font-size-xs: 0.75rem; /* 12px - Caption */

@@ -41,12 +41,27 @@ Todo componente o pantalla debe validarse en las siguientes resoluciones antes d
 ">
 ```
 
+### Variantes de Orientación
+
+Además de los breakpoints por tamaño, el sistema incluye variantes basadas en **orientación**:
+
+```jsx
+// Portrait: height > width (vertical)
+// Landscape: width > height (horizontal)
+<div className="
+  portrait:flex-col portrait:text-center    // Stack en portrait
+  landscape:flex-row landscape:text-left    // Side en landscape
+">
+```
+
+**Uso principal**: Para decidir plantillas de layout (stack vs side) en componentes como `HeroSlide`.
+
 ### Referencia de Breakpoints
 
 Los breakpoints están definidos en:
 - `tailwind.config.js` → `theme.screens`
-- `src/styles/globals.css` → `@custom-variant`
-- `src/components/devtools/BreakpointIndicator.tsx` → Indicador visual en desarrollo
+- `src/styles/globals.css` → `@custom-variant` (incluye `portrait` y `landscape`)
+- `src/components/devtools/BreakpointIndicator.tsx` → Indicador visual en desarrollo (muestra breakpoint + orientación)
 
 ## 3. Estrategia contra el Scroll Vertical
 

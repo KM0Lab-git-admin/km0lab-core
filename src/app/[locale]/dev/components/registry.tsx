@@ -1192,13 +1192,13 @@ const HeroSlideDemo = () => {
       <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
         El layout
         {' '}
-        <code>side</code>
+        <code>stack</code>
         {' '}
-        se activa automáticamente en
+        cambia automáticamente a horizontal (side) en
         {' '}
-        <code>short-landscape</code>
+        <code>landscape</code>
         {' '}
-        (orientation: landscape + max-height: 550px). Aplica a 667x375 y 1280x550, pero NO a 1440x900.
+        (orientation: landscape). Esto aplica tanto en móvil landscape como en desktop apaisado.
       </div>
     </div>
   );
@@ -1627,7 +1627,7 @@ export const componentRegistry: ComponentEntry[] = [
   {
     id: 'hero-slide',
     title: 'HeroSlide',
-    description: 'Slide hero con imagen enmarcada y título/subtítulo. Layout stack por defecto, cambia a side automáticamente en short-landscape (667x375, 1280x550) vía CSS.',
+    description: 'Slide hero con imagen enmarcada y título/subtítulo. Layout stack por defecto, cambia a side automáticamente en landscape (orientation: landscape) vía CSS.',
     group: 'ui',
     filePath: 'src/components/ui/hero-slide/hero-slide.tsx',
     importPath: '@/components/ui/hero-slide',
@@ -1636,8 +1636,9 @@ export const componentRegistry: ComponentEntry[] = [
     Component: HeroSlide,
     Demo: HeroSlideDemo,
     notes: [
-      'Layout stack: imagen arriba, texto abajo (default).',
-      'Layout side: imagen izquierda, texto derecha (laptop-short).',
+      'Layout stack: imagen arriba, texto abajo (default en portrait).',
+      'En landscape, stack se convierte automáticamente en horizontal (imagen izquierda, texto derecha).',
+      'Layout side: fuerza siempre horizontal, independientemente de la orientación.',
     ],
   },
   {

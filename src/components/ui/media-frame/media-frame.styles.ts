@@ -78,9 +78,19 @@ export const badgeVariants = cva(
 export const imageVariants = cva('h-full w-full object-contain', {
   variants: {
     maxHeight: {
-      default: 'max-h-[280px] mobile-p:max-h-[320px] laptop-short:max-h-[220px] desktop:max-h-[400px]',
-      /** Variante compacta para short-landscape: altura limitada a 38dvh */
-      compact: 'max-h-[38dvh]',
+      default: [
+        'max-h-[clamp(180px,30dvh,400px)]',
+        'portrait:max-h-[clamp(200px,32dvh,380px)]',
+        'landscape:max-h-[clamp(200px,30dvh,350px)]',
+        'tablet:max-h-[clamp(300px,45dvh,500px)]',
+        'desktop:max-h-[clamp(400px,50dvh,600px)]',
+      ].join(' '),
+      /** Variante compacta: altura limitada proporcionalmente */
+      compact: [
+        'max-h-[clamp(160px,28dvh,280px)]',
+        'portrait:max-h-[clamp(180px,30dvh,300px)]',
+        'landscape:max-h-[clamp(160px,28dvh,240px)]',
+      ].join(' '),
       full: 'max-h-full',
     },
   },

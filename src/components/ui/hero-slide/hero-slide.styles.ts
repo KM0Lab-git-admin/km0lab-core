@@ -5,32 +5,36 @@ export const heroSlideVariants = cva(
   {
     variants: {
       layout: {
-        /** Stack: Vertical por defecto, horizontal en mobile-l (667x375) via CSS. */
+        /** Stack: Vertical por defecto (portrait). En landscape se convierte en side automáticamente. */
         stack: [
-          'flex-col items-center gap-4 mobile-p:gap-6 tablet:gap-8',
-          // En mobile-l (667x375) cambia a horizontal
-          'mobile-l:flex-row mobile-l:items-center mobile-l:gap-3 mobile-l:text-left',
-          // Vuelve a vertical en mobile-p (375x667 portrait)
-          'mobile-p:flex-col mobile-p:items-center mobile-p:text-center',
+          'flex-col items-center',
+          'portrait:flex-col portrait:items-center portrait:text-center',
+          'landscape:flex-row landscape:items-center landscape:text-left',
         ].join(' '),
         /** Side: Siempre horizontal. */
-        side: 'flex-row items-center gap-3 text-left',
+        side: 'flex-row items-center text-left',
       },
       density: {
         default: '',
-        compact: 'gap-2',
+        compact: '',
+      },
+      scale: {
+        sm: 'gap-3 portrait:gap-4 landscape:gap-3',
+        md: 'gap-4 portrait:gap-6 landscape:gap-4 tablet:gap-6 tablet:portrait:gap-8',
+        lg: 'gap-5 portrait:gap-7 landscape:gap-5 tablet:gap-8 tablet:portrait:gap-10 desktop:gap-10 desktop:portrait:gap-12',
       },
     },
     defaultVariants: {
       layout: 'stack',
       density: 'default',
+      scale: 'md',
     },
   },
 );
 
 export const heroContentVariants = cva(
-  // flex-1 min-w-0: permite que el texto tome el espacio restante y haga wrap
-  'flex flex-1 flex-col min-w-0 overflow-visible',
+  // flex-1 min-w-0 min-h-0: permite que el texto tome el espacio restante y haga wrap, sin cortarse
+  'flex flex-1 flex-col min-w-0 min-h-0 overflow-visible',
   {
     variants: {
       align: {
@@ -38,8 +42,11 @@ export const heroContentVariants = cva(
         left: 'items-start text-left',
       },
       layout: {
-        // Stack: centrado por defecto, left en mobile-l
-        stack: 'mobile-l:items-start mobile-l:text-left mobile-l:justify-center mobile-p:items-center mobile-p:text-center',
+        // Stack: centrado en portrait, left en landscape
+        stack: [
+          'portrait:items-center portrait:text-center',
+          'landscape:items-start landscape:text-left landscape:justify-center',
+        ].join(' '),
         // Side: siempre left
         side: 'items-start text-left justify-center',
       },
@@ -51,14 +58,20 @@ export const heroContentVariants = cva(
   },
 );
 
-export const heroTextWrapperVariants = cva('flex flex-col gap-1', {
+export const heroTextWrapperVariants = cva('flex flex-col', {
   variants: {
     density: {
-      default: 'mobile-p:gap-2 tablet:gap-4 short-landscape:gap-1',
-      compact: 'gap-1 short-landscape:gap-1',
+      default: '',
+      compact: '',
+    },
+    scale: {
+      sm: 'gap-1',
+      md: 'gap-1 portrait:gap-2 tablet:gap-4',
+      lg: 'gap-2 portrait:gap-3 tablet:gap-5 desktop:gap-6',
     },
   },
   defaultVariants: {
     density: 'default',
+    scale: 'md',
   },
 });

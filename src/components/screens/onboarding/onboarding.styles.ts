@@ -9,9 +9,9 @@ export const onboardingShell = cva(
   {
     variants: {
       scale: {
-        sm: 'px-3 py-3 gap-4',
-        md: 'px-4 py-6 gap-6 tablet:px-6 tablet:py-8 desktop:px-10 desktop:py-10',
-        lg: 'px-5 py-8 gap-7 tablet:px-8 tablet:py-12 desktop:px-12 desktop:py-14',
+        sm: 'p-[clamp(10px,2vw,16px)] gap-[clamp(12px,2vh,16px)]',
+        md: 'p-[clamp(12px,2.5vw,24px)] gap-[clamp(16px,2.5vh,24px)] tablet:p-[clamp(24px,3vw,32px)] tablet:gap-[clamp(24px,3vh,32px)] desktop:p-[clamp(32px,4vw,48px)] desktop:gap-[clamp(32px,4vh,40px)]',
+        lg: 'p-[clamp(16px,3vw,32px)] gap-[clamp(20px,3vh,28px)] tablet:p-[clamp(32px,4vw,48px)] tablet:gap-[clamp(32px,4vh,40px)] desktop:p-[clamp(48px,5vw,64px)] desktop:gap-[clamp(40px,5vh,56px)]',
       },
     },
     defaultVariants: {
@@ -23,9 +23,9 @@ export const onboardingShell = cva(
 export const onboardingHeader = cva('flex items-center justify-center shrink-0', {
   variants: {
     scale: {
-      sm: 'pb-2',
-      md: 'pb-3 tablet:pb-4',
-      lg: 'pb-4 tablet:pb-5 desktop:pb-6',
+      sm: 'pb-[clamp(8px,1.5vh,12px)]',
+      md: 'pb-[clamp(12px,2vh,16px)] tablet:pb-[clamp(16px,2.5vh,24px)]',
+      lg: 'pb-[clamp(16px,2.5vh,24px)] tablet:pb-[clamp(20px,3vh,32px)] desktop:pb-[clamp(24px,3.5vh,40px)]',
     },
   },
   defaultVariants: {
@@ -35,9 +35,9 @@ export const onboardingHeader = cva('flex items-center justify-center shrink-0',
 export const onboardingLogo = cva('logo-1', {
   variants: {
     scale: {
-      sm: 'scale-90',
-      md: 'scale-100 tablet:scale-110',
-      lg: 'scale-100 tablet:scale-110 desktop:scale-125',
+      sm: 'scale-[clamp(0.5,8vw,0.65)]',
+      md: 'scale-[clamp(0.6,9vw,0.75)] tablet:scale-[clamp(0.7,10vw,0.85)]',
+      lg: 'scale-[clamp(0.7,10vw,0.85)] tablet:scale-[clamp(0.8,11vw,0.95)] desktop:scale-[clamp(0.85,12vw,1)]',
     },
   },
   defaultVariants: {
@@ -46,13 +46,33 @@ export const onboardingLogo = cva('logo-1', {
 });
 
 export const onboardingCard = cva(
-  'w-full flex flex-col flex-1 min-h-0 overflow-hidden rounded-2xl bg-white km0-card-shadow',
+  'w-full flex flex-col flex-1 min-h-0 overflow-hidden rounded-xl bg-white km0-card-shadow mx-auto',
   {
     variants: {
       scale: {
-        sm: 'max-w-onboarding-card-sm p-4 gap-4',
-        md: 'max-w-onboarding-card-md p-5 gap-5 tablet:max-w-onboarding-card-lg tablet:p-8 desktop:p-10',
-        lg: 'max-w-onboarding-card-lg p-6 gap-6 tablet:p-10 desktop:p-12',
+        sm: [
+          'max-w-[clamp(280px,90vw,320px)]',
+          'p-[clamp(12px,2vw,16px)]',
+          'gap-[clamp(12px,2vh,16px)]',
+        ].join(' '),
+        md: [
+          'max-w-[clamp(320px,85vw,565px)]',
+          'p-[clamp(16px,2.5vw,24px)]',
+          'gap-[clamp(16px,2.5vh,24px)]',
+          'tablet:max-w-[clamp(500px,80vw,700px)]',
+          'tablet:p-[clamp(24px,3vw,32px)]',
+          'desktop:max-w-[clamp(800px,75vw,1200px)]',
+          'desktop:p-[clamp(32px,4vw,48px)]',
+        ].join(' '),
+        lg: [
+          'max-w-[clamp(400px,80vw,700px)]',
+          'p-[clamp(20px,3vw,28px)]',
+          'gap-[clamp(20px,3vh,28px)]',
+          'tablet:max-w-[clamp(600px,75vw,900px)]',
+          'tablet:p-[clamp(32px,4vw,48px)]',
+          'desktop:max-w-[clamp(1000px,70vw,1400px)]',
+          'desktop:p-[clamp(48px,5vw,64px)]',
+        ].join(' '),
       },
     },
     defaultVariants: {
@@ -62,13 +82,34 @@ export const onboardingCard = cva(
 );
 
 export const onboardingFooter = cva(
-  'shrink-0 w-full flex items-center justify-between gap-3',
+  'shrink-0 w-full flex items-center justify-between',
   {
     variants: {
       scale: {
-        sm: 'max-w-xs px-2 pt-3',
-        md: 'max-w-sm px-3 pt-4 tablet:max-w-md',
-        lg: 'max-w-md px-4 pt-5 tablet:max-w-lg desktop:max-w-xl',
+        sm: [
+          'max-w-[clamp(240px,80vw,320px)]',
+          'px-[clamp(8px,1.5vw,12px)]',
+          'pt-[clamp(12px,2vh,16px)]',
+          'gap-[clamp(8px,1.5vw,12px)]',
+        ].join(' '),
+        md: [
+          'max-w-[clamp(280px,75vw,384px)]',
+          'px-[clamp(12px,2vw,16px)]',
+          'pt-[clamp(16px,2.5vh,20px)]',
+          'gap-[clamp(12px,2vw,16px)]',
+          'tablet:max-w-[clamp(400px,70vw,512px)]',
+          'tablet:px-[clamp(16px,2.5vw,24px)]',
+          'tablet:pt-[clamp(20px,3vh,28px)]',
+        ].join(' '),
+        lg: [
+          'max-w-[clamp(320px,70vw,448px)]',
+          'px-[clamp(16px,2.5vw,24px)]',
+          'pt-[clamp(20px,3vh,28px)]',
+          'gap-[clamp(16px,2.5vw,24px)]',
+          'tablet:max-w-[clamp(480px,65vw,640px)]',
+          'tablet:px-[clamp(24px,3vw,32px)]',
+          'desktop:max-w-[clamp(640px,60vw,768px)]',
+        ].join(' '),
       },
     },
     defaultVariants: {
@@ -78,13 +119,13 @@ export const onboardingFooter = cva(
 );
 
 export const onboardingCounter = cva(
-  'text-km0-blue-700 font-bold shrink-0 text-sm w-10',
+  'text-km0-blue-700 font-bold shrink-0',
   {
     variants: {
       scale: {
-        sm: '',
-        md: 'text-base w-12',
-        lg: 'text-base w-14',
+        sm: 'text-xs w-8',
+        md: 'text-sm tablet:text-base w-10 tablet:w-12',
+        lg: 'text-base tablet:text-lg w-12 tablet:w-14',
       },
     },
     defaultVariants: {

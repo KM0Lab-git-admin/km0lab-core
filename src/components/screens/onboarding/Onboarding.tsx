@@ -1,5 +1,6 @@
 'use client';
 
+import BreakpointIndicator from '@/components/devtools/BreakpointIndicator';
 import {
   CarouselSlide,
   CarouselTrack,
@@ -11,6 +12,15 @@ import { Button } from '@/components/ui/primitives/button';
 import { cn } from '@/components/ui/primitives/utils';
 import { SimpleSliderNavigation } from '@/components/ui/slider';
 import { onboardingSlides } from '@/features/onboarding/slides';
+import {
+  onboardingCard,
+  onboardingCounter,
+  onboardingFooter,
+  onboardingHeader,
+  onboardingLogo,
+  onboardingPage,
+  onboardingShell,
+} from './onboarding.styles';
 
 export default function Onboarding() {
   const {
@@ -36,67 +46,22 @@ export default function Onboarding() {
     console.log('Start App');
   };
 
+  // Scale semántico: puede venir de props o contexto en el futuro
+  const scale = 'md';
+
   return (
-    // Page: ocupa exactamente el viewport, nunca más
-    <div
-      className={cn(
-        'w-full h-dvh-fallback',
-        'flex flex-col',
-        'bg-gradient-white-beige font-ui',
-        'overflow-hidden',
-      )}
-    >
-      {/* Wrapper: padding mínimo 10px, flex para distribuir contenido */}
-      <div
-        className={cn(
-          'flex-1 min-h-0 flex flex-col items-center justify-start',
-          'p-[10px] w-full overflow-hidden',
-          'mobile-p:p-3 mobile-p:justify-center',
-          'tablet:p-8',
-          // mobile-l (667x375): padding compacto
-          'mobile-l:p-1.5 mobile-l:justify-center',
-        )}
-      >
-        {/* Logo fuera de la tarjeta - compacto en mobile-l */}
-        <header
-          className={cn(
-            'flex items-center justify-center shrink-0',
-            'pb-2',
-            'mobile-p:pb-3',
-            'tablet:pb-4',
-            // mobile-l: logo más pequeño y menos padding
-            'mobile-l:pb-0.5',
-          )}
-        >
+    <div className={onboardingPage()}>
+      <BreakpointIndicator />
+      <div className={onboardingShell({ scale })}>
+        <header className={onboardingHeader({ scale })}>
           <div
-            className={cn(
-              'logo-1',
-              'scale-[0.65]',
-              'mobile-p:scale-100',
-              // mobile-l: logo más visible
-              'mobile-l:scale-[0.65]',
-            )}
+            className={onboardingLogo({ scale })}
             role="img"
             aria-label="KM0 Lab"
           />
         </header>
 
-        {/* Card: crece en proporción a la resolución */}
-        <section
-          className={cn(
-            'w-full overflow-hidden rounded-xl bg-white km0-card-shadow',
-            'flex flex-col flex-1 min-h-0',
-            'mx-auto',
-            'max-w-full',
-            'mobile-p:max-w-[355px] mobile-p:rounded-2xl',
-            'tablet:max-w-[565px] tablet:flex-none tablet:max-h-[935px]',
-            'desktop:max-w-6xl desktop:max-h-[650px]',
-            'ultra-wide:max-w-[1400px] ultra-wide:max-h-[850px]',
-            // mobile-l (667x375): card más pequeña para logo + footer
-            'mobile-l:max-w-[calc(100vw-16px)] mobile-l:max-h-[calc(100dvh-115px)] mobile-l:p-1.5',
-          )}
-        >
-          {/* Carousel Container */}
+        <section className={onboardingCard({ scale })}>
           <CarouselViewport
             className="flex-1 min-h-0 w-full"
             onTouchStart={handleTouchStart}
@@ -129,6 +94,7 @@ export default function Onboarding() {
                     imageSrc={slide.imageSrc}
                     badgeText={slide.xpBadge}
                     bgColor={slide.bgColor}
+                    scale={scale}
                   />
                 </CarouselSlide>
               ))}
@@ -136,28 +102,8 @@ export default function Onboarding() {
           </CarouselViewport>
         </section>
 
-        {/* Footer: fuera de la tarjeta */}
-        <footer
-          className={cn(
-            'shrink-0 w-full max-w-sm',
-            'flex items-center justify-between gap-2',
-            'px-1 pt-2',
-            'mobile-p:px-2 mobile-p:pt-3',
-            'tablet:max-w-md',
-            // mobile-l (667x375): compacto, ancho completo
-            'mobile-l:pt-1 mobile-l:max-w-[calc(100vw-16px)] mobile-l:gap-3',
-          )}
-        >
-          {/* Contador */}
-          <div
-            className={cn(
-              'text-km0-blue-700 font-bold shrink-0',
-              'text-xs w-8',
-              'mobile-p:text-base mobile-p:w-12',
-              // mobile-l: tamaño compacto
-              'mobile-l:text-xs mobile-l:w-8',
-            )}
-          >
+        <footer className={onboardingFooter({ scale })}>
+          <div className={onboardingCounter({ scale })}>
             {currentIndex + 1}
             /
             {onboardingSlides.length}
@@ -171,7 +117,6 @@ export default function Onboarding() {
             layout="compact"
           />
 
-          {/* CTA */}
           <div className="shrink-0">
             <Button
               type="button"
@@ -188,13 +133,10 @@ export default function Onboarding() {
                 }
               }}
               variant="default"
-              size="sm"
+              size="xs"
               className={cn(
-                '!rounded !bg-km0-blue-700 !text-white font-semibold whitespace-nowrap text-center',
+                'rounded bg-km0-blue-700 text-white font-semibold whitespace-nowrap text-center',
                 'shadow-sm hover:opacity-90 transition-opacity',
-                '!px-2 !py-1 !text-[10px] !h-auto',
-                'mobile-l:!px-2.5 mobile-l:!py-1.5 mobile-l:!text-xs',
-                'mobile-p:!px-3 mobile-p:!py-2 mobile-p:!text-xs',
                 isLast && 'opacity-50 cursor-not-allowed',
               )}
             >

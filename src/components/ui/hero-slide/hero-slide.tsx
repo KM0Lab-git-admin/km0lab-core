@@ -31,9 +31,10 @@ export type HeroSlideProps = {
 
 /**
  * Componente de composición para slides o héroes.
- * - layout="stack": vertical (default)
- * - layout="side": horizontal (imagen izquierda, texto derecha)
+ * - layout="stack": vertical en portrait, horizontal en landscape (default)
+ * - layout="side": siempre horizontal (imagen izquierda, texto derecha)
  * - density="compact": reduce gaps, Title h2, Subtitle sm, imagen compacta
+ * - scale="sm|md|lg": controla el escalado proporcional (gaps, padding, etc.)
  */
 const HeroSlide = ({
   title,
@@ -44,6 +45,7 @@ const HeroSlide = ({
   bgColor,
   layout = 'stack',
   density = 'default',
+  scale = 'md',
   align = 'center',
   className,
   ...props
@@ -59,7 +61,7 @@ const HeroSlide = ({
 
   return (
     <div
-      className={cn(heroSlideVariants({ layout, density }), className)}
+      className={cn(heroSlideVariants({ layout, density, scale }), className)}
       {...props}
     >
       <MediaFrame
@@ -69,10 +71,10 @@ const HeroSlide = ({
         tone={bgColor ? undefined : 'default'}
         className={cn(
           'shrink-0 transition-all',
-          // En mobile-l (667x375): ancho fijo y altura más limitada
-          'mobile-l:w-[42%] mobile-l:max-h-[calc(100dvh-130px)]',
-          // Vuelve a ancho completo en mobile-p (portrait)
-          'mobile-p:w-full mobile-p:max-w-none mobile-p:max-h-none',
+          // En stack portrait: ancho completo, altura flexible
+          'portrait:w-full portrait:max-w-none portrait:flex-shrink',
+          // En stack landscape o side: ancho fijo para layout horizontal
+          'landscape:w-[40%] landscape:min-w-[180px] landscape:max-w-[280px]',
           bgColor,
         )}
         layout={isSide ? 'side' : 'stack'}
@@ -80,12 +82,11 @@ const HeroSlide = ({
       />
 
       <div className={cn(heroContentVariants({ align: resolvedAlign, layout }))}>
-        <div className={cn(heroTextWrapperVariants({ density }))}>
+        <div className={cn(heroTextWrapperVariants({ density, scale }))}>
           <Title
             as="h1"
             size={titleSize}
             align={resolvedAlign}
-            className="mobile-l:text-lg mobile-l:leading-tight"
           >
             {title}
           </Title>
@@ -94,7 +95,7 @@ const HeroSlide = ({
             <Subtitle
               size={subtitleSize}
               align={resolvedAlign}
-              className="max-w-[45ch] mobile-l:text-xs mobile-l:leading-snug"
+              className="max-w-[45ch]"
             >
               {subtitle}
             </Subtitle>
