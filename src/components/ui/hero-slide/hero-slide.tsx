@@ -51,7 +51,7 @@ const HeroSlide = ({
   const isSide = layout === 'side';
   const isCompact = density === 'compact';
 
-  // Variantes internas basadas en props (sin clases short-landscape sueltas)
+  // Variantes internas basadas en props
   const resolvedAlign = isSide ? 'left' : (align ?? 'center');
   const titleSize = isCompact ? 'h2' : 'h1';
   const subtitleSize = isCompact ? 'sm' : 'md';
@@ -67,7 +67,14 @@ const HeroSlide = ({
         alt={imageAlt}
         badgeText={badgeText}
         tone={bgColor ? undefined : 'default'}
-        className={cn('shrink-0 transition-all', bgColor)}
+        className={cn(
+          'shrink-0 transition-all',
+          // En mobile-l (667x375): ancho fijo y altura más limitada
+          'mobile-l:w-[42%] mobile-l:max-h-[calc(100dvh-130px)]',
+          // Vuelve a ancho completo en mobile-p (portrait)
+          'mobile-p:w-full mobile-p:max-w-none mobile-p:max-h-none',
+          bgColor,
+        )}
         layout={isSide ? 'side' : 'stack'}
         imageMaxHeight={imageMaxHeight}
       />
@@ -78,6 +85,7 @@ const HeroSlide = ({
             as="h1"
             size={titleSize}
             align={resolvedAlign}
+            className="mobile-l:text-lg mobile-l:leading-tight"
           >
             {title}
           </Title>
@@ -86,7 +94,7 @@ const HeroSlide = ({
             <Subtitle
               size={subtitleSize}
               align={resolvedAlign}
-              className="max-w-[45ch]"
+              className="max-w-[45ch] mobile-l:text-xs mobile-l:leading-snug"
             >
               {subtitle}
             </Subtitle>

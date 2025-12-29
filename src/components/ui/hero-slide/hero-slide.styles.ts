@@ -5,14 +5,19 @@ export const heroSlideVariants = cva(
   {
     variants: {
       layout: {
-        /** Stack: Imagen arriba, texto abajo (vertical). */
-        stack: 'flex-col items-center gap-4 mobile-p:gap-6 tablet:gap-8',
-        /** Side: Horizontal (imagen izquierda, texto derecha). */
+        /** Stack: Vertical por defecto, horizontal en mobile-l (667x375) via CSS. */
+        stack: [
+          'flex-col items-center gap-4 mobile-p:gap-6 tablet:gap-8',
+          // En mobile-l (667x375) cambia a horizontal
+          'mobile-l:flex-row mobile-l:items-center mobile-l:gap-3 mobile-l:text-left',
+          // Vuelve a vertical en mobile-p (375x667 portrait)
+          'mobile-p:flex-col mobile-p:items-center mobile-p:text-center',
+        ].join(' '),
+        /** Side: Siempre horizontal. */
         side: 'flex-row items-center gap-3 text-left',
       },
       density: {
         default: '',
-        /** Compact: reduce gaps para pantallas cortas. */
         compact: 'gap-2',
       },
     },
@@ -24,7 +29,8 @@ export const heroSlideVariants = cva(
 );
 
 export const heroContentVariants = cva(
-  'flex flex-1 flex-col min-w-0',
+  // flex-1 min-w-0: permite que el texto tome el espacio restante y haga wrap
+  'flex flex-1 flex-col min-w-0 overflow-visible',
   {
     variants: {
       align: {
@@ -32,8 +38,10 @@ export const heroContentVariants = cva(
         left: 'items-start text-left',
       },
       layout: {
-        stack: 'short-landscape:items-start short-landscape:text-left',
-        side: 'items-start text-left',
+        // Stack: centrado por defecto, left en mobile-l
+        stack: 'mobile-l:items-start mobile-l:text-left mobile-l:justify-center mobile-p:items-center mobile-p:text-center',
+        // Side: siempre left
+        side: 'items-start text-left justify-center',
       },
     },
     defaultVariants: {

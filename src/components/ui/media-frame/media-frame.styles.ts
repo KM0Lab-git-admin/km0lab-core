@@ -11,8 +11,8 @@ export const mediaFrameVariants = cva(
        */
       layout: {
         stack: 'w-full',
-        /** Side: ancho fijo para layouts horizontales */
-        side: 'w-[40%] shrink-0',
+        /** Side: ancho fijo para layouts horizontales, con límites */
+        side: 'w-[40%] min-w-[180px] max-w-[280px] shrink-0',
       },
       tone: {
         default: 'bg-white shadow-sm',

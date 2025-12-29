@@ -53,17 +53,19 @@ export default function Onboarding() {
           'p-[10px] w-full overflow-hidden',
           'mobile-p:p-3 mobile-p:justify-center',
           'tablet:p-8',
-          'short-landscape:p-2 short-landscape:justify-center',
+          // mobile-l (667x375): padding compacto
+          'mobile-l:p-1.5 mobile-l:justify-center',
         )}
       >
-        {/* Logo fuera de la tarjeta - compacto en short-landscape */}
+        {/* Logo fuera de la tarjeta - compacto en mobile-l */}
         <header
           className={cn(
             'flex items-center justify-center shrink-0',
             'pb-2',
             'mobile-p:pb-3',
             'tablet:pb-4',
-            'short-landscape:pb-1',
+            // mobile-l: logo más pequeño y menos padding
+            'mobile-l:pb-0.5',
           )}
         >
           <div
@@ -71,8 +73,8 @@ export default function Onboarding() {
               'logo-1',
               'scale-[0.65]',
               'mobile-p:scale-100',
-              'mobile-l:scale-[0.8]',
-              'short-landscape:scale-[0.45]',
+              // mobile-l: logo más visible
+              'mobile-l:scale-[0.65]',
             )}
             role="img"
             aria-label="KM0 Lab"
@@ -90,9 +92,8 @@ export default function Onboarding() {
             'tablet:max-w-[565px] tablet:flex-none tablet:max-h-[935px]',
             'desktop:max-w-6xl desktop:max-h-[650px]',
             'ultra-wide:max-w-[1400px] ultra-wide:max-h-[850px]',
-            // Short landscape: horizontal layout, altura limitada
-            'short-landscape:max-w-4xl short-landscape:max-h-[calc(100dvh-20px)]',
-            'short-landscape:p-1.5',
+            // mobile-l (667x375): card más pequeña para logo + footer
+            'mobile-l:max-w-[calc(100vw-16px)] mobile-l:max-h-[calc(100dvh-115px)] mobile-l:p-1.5',
           )}
         >
           {/* Carousel Container */}
@@ -114,43 +115,21 @@ export default function Onboarding() {
                   key={slide.id}
                   slideId={slide.id}
                   isActive={index === currentIndex}
+                  layout="stack"
                 >
-                  {/* Portrait / default: layout stack */}
-                  <div className="short-landscape:hidden h-full">
-                    <HeroSlide
-                      title={(
-                        <>
-                          {slide.titleLine1}
-                          {' '}
-                          {slide.titleLine2}
-                        </>
-                      )}
-                      subtitle={slide.subtitle}
-                      imageSrc={slide.imageSrc}
-                      badgeText={slide.xpBadge}
-                      bgColor={slide.bgColor}
-                      layout="stack"
-                      density="default"
-                    />
-                  </div>
-                  {/* Short-landscape: layout side + compact */}
-                  <div className="hidden short-landscape:flex h-full items-center">
-                    <HeroSlide
-                      title={(
-                        <>
-                          {slide.titleLine1}
-                          {' '}
-                          {slide.titleLine2}
-                        </>
-                      )}
-                      subtitle={slide.subtitle}
-                      imageSrc={slide.imageSrc}
-                      badgeText={slide.xpBadge}
-                      bgColor={slide.bgColor}
-                      layout="side"
-                      density="compact"
-                    />
-                  </div>
+                  <HeroSlide
+                    title={(
+                      <>
+                        {slide.titleLine1}
+                        {' '}
+                        {slide.titleLine2}
+                      </>
+                    )}
+                    subtitle={slide.subtitle}
+                    imageSrc={slide.imageSrc}
+                    badgeText={slide.xpBadge}
+                    bgColor={slide.bgColor}
+                  />
                 </CarouselSlide>
               ))}
             </CarouselTrack>
@@ -163,11 +142,10 @@ export default function Onboarding() {
             'shrink-0 w-full max-w-sm',
             'flex items-center justify-between gap-2',
             'px-1 pt-2',
-            'mobile-l:px-1 mobile-l:pt-2',
             'mobile-p:px-2 mobile-p:pt-3',
             'tablet:max-w-md',
-            'short-landscape:pt-1 short-landscape:max-w-4xl',
-            'short-landscape:pb-0.5',
+            // mobile-l (667x375): compacto, ancho completo
+            'mobile-l:pt-1 mobile-l:max-w-[calc(100vw-16px)] mobile-l:gap-3',
           )}
         >
           {/* Contador */}
@@ -175,9 +153,9 @@ export default function Onboarding() {
             className={cn(
               'text-km0-blue-700 font-bold shrink-0',
               'text-xs w-8',
-              'mobile-l:text-sm mobile-l:w-10',
               'mobile-p:text-base mobile-p:w-12',
-              'short-landscape:text-xs short-landscape:w-8',
+              // mobile-l: tamaño compacto
+              'mobile-l:text-xs mobile-l:w-8',
             )}
           >
             {currentIndex + 1}

@@ -1,7 +1,8 @@
 import { cva } from 'class-variance-authority';
 
 export const carouselSlideVariants = cva(
-  'w-full flex-shrink-0 h-full min-w-0 overflow-hidden',
+  // overflow-hidden removido: el viewport ya lo tiene. Esto permite que el texto no se corte.
+  'w-full flex-shrink-0 h-full min-w-0',
   {
     variants: {
       /**
