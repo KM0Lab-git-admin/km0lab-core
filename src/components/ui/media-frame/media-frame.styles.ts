@@ -79,17 +79,20 @@ export const imageVariants = cva('h-full w-full object-contain', {
   variants: {
     maxHeight: {
       default: [
-        'max-h-[clamp(180px,30dvh,400px)]',
-        'portrait:max-h-[clamp(200px,32dvh,380px)]',
-        'landscape:max-h-[clamp(200px,30dvh,350px)]',
-        'tablet:max-h-[clamp(300px,45dvh,500px)]',
-        'desktop:max-h-[clamp(400px,50dvh,600px)]',
+        // Más restrictivo: prioriza espacio para texto
+        'max-h-[clamp(140px,22dvh,260px)]',
+        'portrait:max-h-[clamp(160px,25dvh,300px)]',
+        'landscape:max-h-[clamp(140px,22dvh,260px)]',
+        // Tablet: más espacio pero aún restrictivo
+        'tablet:max-h-[clamp(220px,32dvh,380px)]',
+        // Desktop: más generoso
+        'desktop:max-h-[clamp(300px,42dvh,480px)]',
       ].join(' '),
       /** Variante compacta: altura limitada proporcionalmente */
       compact: [
-        'max-h-[clamp(160px,28dvh,280px)]',
-        'portrait:max-h-[clamp(180px,30dvh,300px)]',
-        'landscape:max-h-[clamp(160px,28dvh,240px)]',
+        'max-h-[clamp(100px,18dvh,200px)]',
+        'portrait:max-h-[clamp(120px,20dvh,220px)]',
+        'landscape:max-h-[clamp(100px,18dvh,180px)]',
       ].join(' '),
       full: 'max-h-full',
     },

@@ -5,9 +5,32 @@ export const contentShellVariants = cva(
   {
     variants: {
       scale: {
-        sm: 'p-[clamp(10px,2vw,16px)] gap-[clamp(12px,2vh,16px)]',
-        md: 'p-[clamp(12px,2.5vw,24px)] gap-[clamp(16px,2.5vh,24px)] mobile-p:gap-[clamp(12px,2vh,20px)] tablet:p-[clamp(24px,3vw,32px)] tablet:gap-[clamp(24px,3vh,32px)] desktop:p-[clamp(32px,4vw,48px)] desktop:gap-[clamp(32px,4vh,40px)]',
-        lg: 'p-[clamp(16px,3vw,32px)] gap-[clamp(20px,3vh,28px)] tablet:p-[clamp(32px,4vw,48px)] tablet:gap-[clamp(32px,4vh,40px)] desktop:p-[clamp(48px,5vw,64px)] desktop:gap-[clamp(40px,5vh,56px)]',
+        sm: [
+          'p-[clamp(8px,1.5vw,16px)]',
+          'gap-[clamp(8px,1.5vh,16px)]',
+        ].join(' '),
+        md: [
+          // Padding adaptativo
+          'p-[clamp(8px,2vw,24px)]',
+          'gap-[clamp(8px,2vh,24px)]',
+          // Mobile-P: más ajustado
+          'mobile-p:p-[clamp(8px,1.5vw,20px)]',
+          'mobile-p:gap-[clamp(6px,1.5vh,20px)]',
+          // Tablet: intermedio
+          'tablet:p-[clamp(16px,2.5vw,32px)]',
+          'tablet:gap-[clamp(12px,2vh,32px)]',
+          // Desktop: generoso
+          'desktop:p-[clamp(24px,3.5vw,48px)]',
+          'desktop:gap-[clamp(20px,3vh,40px)]',
+        ].join(' '),
+        lg: [
+          'p-[clamp(12px,2.5vw,32px)]',
+          'gap-[clamp(12px,2.5vh,28px)]',
+          'tablet:p-[clamp(24px,3.5vw,48px)]',
+          'tablet:gap-[clamp(20px,3vh,40px)]',
+          'desktop:p-[clamp(32px,4.5vw,64px)]',
+          'desktop:gap-[clamp(24px,3.5vh,56px)]',
+        ].join(' '),
       },
     },
     defaultVariants: {

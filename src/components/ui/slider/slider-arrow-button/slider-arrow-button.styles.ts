@@ -5,8 +5,19 @@ export const sliderArrowButtonVariants = cva(
   {
     variants: {
       size: {
-        sm: 'p-1.5 mobile-p:p-2',
-        md: 'p-2 mobile-p:p-3',
+        sm: [
+          'p-2 min-h-[44px] min-w-[44px]',
+          'mobile-p:p-2.5',
+          'tablet:p-3 tablet:min-h-[48px] tablet:min-w-[48px]',
+          'desktop:p-3.5 desktop:min-h-[52px] desktop:min-w-[52px]',
+        ].join(' '),
+        md: [
+          'p-2.5 min-h-[44px] min-w-[44px]',
+          'mobile-p:p-3 mobile-p:min-h-[48px] mobile-p:min-w-[48px]',
+          'tablet:p-3.5 tablet:min-h-[52px] tablet:min-w-[52px]',
+          'desktop:p-4 desktop:min-h-[56px] desktop:min-w-[56px]',
+          'desktop:hover:bg-km0-blue-100',
+        ].join(' '),
       },
       variant: {
         ghost: 'text-neutral-400 hover:text-km0-blue-700',
@@ -30,8 +41,18 @@ export const sliderArrowIconVariants = cva(
   {
     variants: {
       size: {
-        sm: 'h-4 w-4 mobile-p:h-5 mobile-p:w-5',
-        md: 'h-6 w-6 mobile-p:h-8 mobile-p:w-8',
+        sm: [
+          'h-5 w-5',
+          'mobile-p:h-6 mobile-p:w-6',
+          'tablet:h-7 tablet:w-7',
+          'desktop:h-8 desktop:w-8',
+        ].join(' '),
+        md: [
+          'h-6 w-6',
+          'mobile-p:h-8 mobile-p:w-8',
+          'tablet:h-9 tablet:w-9',
+          'desktop:h-10 desktop:w-10',
+        ].join(' '),
       },
     },
     defaultVariants: {

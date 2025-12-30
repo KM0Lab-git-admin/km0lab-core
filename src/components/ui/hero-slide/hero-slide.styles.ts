@@ -19,9 +19,30 @@ export const heroSlideVariants = cva(
         compact: '',
       },
       scale: {
-        sm: 'gap-3 portrait:gap-4 landscape:gap-3',
-        md: 'gap-4 portrait:gap-6 landscape:gap-4 tablet:gap-6 tablet:portrait:gap-8',
-        lg: 'gap-5 portrait:gap-7 landscape:gap-5 tablet:gap-8 tablet:portrait:gap-10 desktop:gap-10 desktop:portrait:gap-12',
+        sm: [
+          'gap-[clamp(6px,1.2vh,16px)]',
+          'portrait:gap-[clamp(8px,1.5vh,20px)]',
+          'landscape:gap-[clamp(6px,1.2vh,16px)]',
+        ].join(' '),
+        md: [
+          // Gaps más ajustados que se reducen cuando hay poco espacio
+          'gap-[clamp(8px,1.5vh,24px)]',
+          'portrait:gap-[clamp(10px,2vh,32px)]',
+          'landscape:gap-[clamp(8px,1.5vh,24px)]',
+          'tablet:gap-[clamp(12px,2vh,40px)]',
+          'tablet:portrait:gap-[clamp(16px,2.5vh,48px)]',
+          'desktop:gap-[clamp(16px,2.5vh,48px)]',
+          'desktop:portrait:gap-[clamp(20px,3vh,60px)]',
+        ].join(' '),
+        lg: [
+          'gap-[clamp(10px,2vh,28px)]',
+          'portrait:gap-[clamp(12px,2.5vh,36px)]',
+          'landscape:gap-[clamp(10px,2vh,28px)]',
+          'tablet:gap-[clamp(16px,2.5vh,48px)]',
+          'tablet:portrait:gap-[clamp(20px,3vh,60px)]',
+          'desktop:gap-[clamp(20px,3vh,60px)]',
+          'desktop:portrait:gap-[clamp(24px,3.5vh,72px)]',
+        ].join(' '),
       },
     },
     defaultVariants: {
@@ -65,9 +86,21 @@ export const heroTextWrapperVariants = cva('flex flex-col', {
       compact: '',
     },
     scale: {
-      sm: 'gap-1',
-      md: 'gap-1 portrait:gap-2 tablet:gap-4',
-      lg: 'gap-2 portrait:gap-3 tablet:gap-5 desktop:gap-6',
+      sm: [
+        'gap-[clamp(2px,0.5vh,8px)]',
+      ].join(' '),
+      md: [
+        'gap-[clamp(4px,0.8vh,16px)]',
+        'portrait:gap-[clamp(6px,1vh,20px)]',
+        'tablet:gap-[clamp(8px,1.5vh,24px)]',
+        'desktop:gap-[clamp(12px,2vh,32px)]',
+      ].join(' '),
+      lg: [
+        'gap-[clamp(6px,1.2vh,20px)]',
+        'portrait:gap-[clamp(8px,1.5vh,24px)]',
+        'tablet:gap-[clamp(12px,2vh,32px)]',
+        'desktop:gap-[clamp(16px,2.5vh,40px)]',
+      ].join(' '),
     },
   },
   defaultVariants: {

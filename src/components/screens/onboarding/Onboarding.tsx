@@ -142,6 +142,11 @@ export default function Onboarding() {
               className={cn(
                 'rounded bg-km0-blue-700 text-white font-semibold whitespace-nowrap text-center',
                 'shadow-sm hover:opacity-90 transition-opacity',
+                'h-9 px-4 text-sm',
+                'mobile-p:h-10 mobile-p:px-5 mobile-p:text-base',
+                'tablet:h-11 tablet:px-6 tablet:text-lg tablet:shadow-md tablet:font-bold',
+                'desktop:h-12 desktop:px-8 desktop:text-xl desktop:shadow-lg',
+                'ultra-wide:h-14 ultra-wide:px-10 ultra-wide:text-2xl',
               )}
             >
               {isLast ? 'EMPEZAR' : 'SALTAR'}
