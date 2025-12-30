@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority';
 
 export const onboardingFooter = cva(
-  'shrink-0 w-full flex items-center justify-center',
+  'shrink-0 w-full flex items-center justify-between',
   {
     variants: {
       scale: {
