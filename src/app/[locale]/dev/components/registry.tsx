@@ -1643,7 +1643,7 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'Button',
     description: 'Botón accesible con variantes y tamaños.',
     group: 'ui',
-    filePath: 'src/components/ui/primitives/button.tsx',
+    filePath: 'src/components/ui/primitives/button/button.tsx',
     importPath: '@/components/ui/primitives/button',
     exportName: 'Button',
     exportType: 'named',
