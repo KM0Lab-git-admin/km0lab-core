@@ -6,7 +6,7 @@ export const sliderArrowButtonVariants = cva(
     variants: {
       size: {
         sm: 'p-1.5 mobile-p:p-2',
-        md: 'p-2 mobile-p:p-2.5',
+        md: 'p-2 mobile-p:p-3',
       },
       variant: {
         ghost: 'text-neutral-400 hover:text-km0-blue-700',
@@ -31,7 +31,7 @@ export const sliderArrowIconVariants = cva(
     variants: {
       size: {
         sm: 'h-4 w-4 mobile-p:h-5 mobile-p:w-5',
-        md: 'h-6 w-6 mobile-p:h-7 mobile-p:w-7',
+        md: 'h-6 w-6 mobile-p:h-8 mobile-p:w-8',
       },
     },
     defaultVariants: {

@@ -14,6 +14,8 @@ export const contentCardVariants = cva(
           'max-w-[clamp(320px,85vw,565px)]',
           'p-[clamp(16px,2.5vw,24px)]',
           'gap-[clamp(16px,2.5vh,24px)]',
+          'mobile-p:p-[clamp(12px,2vw,20px)]',
+          'mobile-p:gap-[clamp(12px,2vh,20px)]',
           'tablet:max-w-[clamp(500px,80vw,700px)]',
           'tablet:p-[clamp(24px,3vw,32px)]',
           'desktop:max-w-[clamp(800px,75vw,1200px)]',
