@@ -61,6 +61,7 @@ export default function PostalCode() {
   const [postalCode, setPostalCode] = useState('');
   const [availabilityStatus, setAvailabilityStatus] =
     useState<AvailabilityStatus>('idle');
+  const [cityName, setCityName] = useState<string | null>(null);
 
   const latestRequestIdRef = useRef(0);
 
@@ -82,11 +83,13 @@ export default function PostalCode() {
   useEffect(() => {
     if (!hasValue) {
       setAvailabilityStatus('idle');
+      setCityName(null);
       return;
     }
 
     if (!formatValidation.isValid) {
       setAvailabilityStatus('idle');
+      setCityName(null);
       return;
     }
 
@@ -95,13 +98,15 @@ export default function PostalCode() {
     latestRequestIdRef.current = requestId;
 
     checkPostalCodeAvailability(trimmedPostalCode)
-      .then((isAvailable) => {
+      .then((result) => {
         if (latestRequestIdRef.current !== requestId) return;
-        setAvailabilityStatus(isAvailable ? 'available' : 'unavailable');
+        setAvailabilityStatus(result.isAvailable ? 'available' : 'unavailable');
+        setCityName(result.city || null);
       })
       .catch(() => {
         if (latestRequestIdRef.current !== requestId) return;
         setAvailabilityStatus('unavailable');
+        setCityName(null);
       });
   }, [formatValidation.isValid, hasValue, trimmedPostalCode]);
 
@@ -140,8 +145,8 @@ export default function PostalCode() {
     handleContinue();
   };
 
-  // Scale semántico: puede venir de props o contexto en el futuro
   const scale = 'md';
+  const showCityName = isAvailable && cityName;
 
   return (
     <PageContainer>
@@ -161,14 +166,29 @@ export default function PostalCode() {
               className="w-full"
             />
 
-            <div className={postalCodeTitleContainer({ scale })}>
-              <Title as="h1" size="h2" align="center" uppercase>
-                {t('title')}
-              </Title>
-              <Subtitle size="sm" align="center" tone="muted">
-                {t('subtitle')}
-              </Subtitle>
-            </div>
+            {!showCityName && (
+              <div className={postalCodeTitleContainer({ scale })}>
+                <Title as="h1" size="h2" align="center" uppercase>
+                  {t('title')}
+                </Title>
+                <Subtitle size="sm" align="center" tone="muted">
+                  {t('subtitle')}
+                </Subtitle>
+              </div>
+            )}
+
+            {showCityName && (
+              <div className={postalCodeTitleContainer({ scale })}>
+                <Title
+                  as="h1"
+                  size="h2"
+                  align="center"
+                  className="text-km0-success-500"
+                >
+                  {cityName}
+                </Title>
+              </div>
+            )}
 
             <div className={postalCodeInputContainer({ scale })}>
               <label htmlFor={inputId} className="sr-only">

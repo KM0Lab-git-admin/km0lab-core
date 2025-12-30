@@ -1,5 +1,5 @@
 export { checkPostalCodeAvailability } from './checkPostalCodeAvailability';
-export { postalCodeDb } from './postalCodeDb';
+export { postalCodeDb, getPostalCodeCity } from './postalCodeDb';
 
 
 
