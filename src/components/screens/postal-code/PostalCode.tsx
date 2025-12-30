@@ -132,7 +132,7 @@ export default function PostalCode() {
   const handleContinue = () => {
     if (!isAvailable) return;
     if (!locale) return;
-    router.push(`/${locale}/postal-code-welcome`);
+    router.push(`/${locale}/chat`);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
