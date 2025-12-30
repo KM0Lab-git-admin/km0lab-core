@@ -644,6 +644,57 @@
   .animate-delay-400 {
     animation-delay: 0.4s;
   }
+
+  /* === SISTEMA ANTI-RECORTE: Altura disponible calculada === */
+  /* Calcula altura disponible restando header + footer + padding */
+  /* Valores conservadores que funcionan en todas las resoluciones */
+  .h-content-available {
+    height: calc(100dvh - clamp(150px, 20vh, 200px));
+  }
+
+  @media (min-width: 480px) {
+    .mobile-p\:h-content-available {
+      height: calc(100dvh - clamp(140px, 18vh, 180px));
+    }
+  }
+
+  @media (min-width: 768px) {
+    .tablet\:h-content-available {
+      height: calc(100dvh - clamp(170px, 24vh, 220px));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .desktop\:h-content-available {
+      height: calc(100dvh - clamp(190px, 27vh, 240px));
+    }
+  }
+
+  /* === SISTEMA ANTI-RECORTE: Padding adaptativo genérico === */
+  .p-adaptive {
+    padding: clamp(8px, 1.5vw, 24px);
+  }
+
+  .p-adaptive-sm {
+    padding: clamp(6px, 1.2vw, 20px);
+  }
+
+  .p-adaptive-lg {
+    padding: clamp(12px, 2vw, 32px);
+  }
+
+  /* === SISTEMA ANTI-RECORTE: Gap adaptativo genérico === */
+  .gap-adaptive {
+    gap: clamp(8px, 1.5vh, 24px);
+  }
+
+  .gap-adaptive-sm {
+    gap: clamp(6px, 1.2vh, 20px);
+  }
+
+  .gap-adaptive-lg {
+    gap: clamp(12px, 2vh, 32px);
+  }
 }
 
 /* === FALLBACK DVH === */
