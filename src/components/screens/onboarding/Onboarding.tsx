@@ -11,16 +11,14 @@ import { ContentCard } from '@/components/ui/content-card';
 import { ContentShell } from '@/components/ui/content-shell';
 import { HeroSlide } from '@/components/ui/hero-slide';
 import { LogoHeader } from '@/components/ui/logo-header';
+import { NavigationFooter } from '@/components/ui/navigation-footer';
 import { PageContainer } from '@/components/ui/page-container';
 import { Button } from '@/components/ui/primitives/button';
 import { cn } from '@/components/ui/primitives/utils';
 import { SimpleSliderNavigation } from '@/components/ui/slider';
 import { onboardingSlides } from '@/features/onboarding/slides';
 import { useParams, useRouter } from 'next/navigation';
-import {
-  onboardingCounter,
-  onboardingFooter,
-} from './onboarding.styles';
+import { onboardingCounter } from './onboarding.styles';
 
 export default function Onboarding() {
   const router = useRouter();
@@ -103,22 +101,25 @@ export default function Onboarding() {
           </CarouselViewport>
         </ContentCard>
 
-        <footer className={onboardingFooter({ scale })}>
-          <div className={onboardingCounter({ scale })}>
-            {currentIndex + 1}
-            /
-            {onboardingSlides.length}
-          </div>
-
-          <SimpleSliderNavigation
-            currentSlide={currentIndex}
-            totalSlides={onboardingSlides.length}
-            onPrev={prev}
-            onNext={next}
-            layout="compact"
-          />
-
-          <div className="shrink-0">
+        <NavigationFooter
+          scale={scale}
+          left={(
+            <div className={onboardingCounter({ scale })}>
+              {currentIndex + 1}
+              /
+              {onboardingSlides.length}
+            </div>
+          )}
+          center={(
+            <SimpleSliderNavigation
+              currentSlide={currentIndex}
+              totalSlides={onboardingSlides.length}
+              onPrev={prev}
+              onNext={next}
+              layout="compact"
+            />
+          )}
+          right={(
             <Button
               type="button"
               onClick={isLast ? handleStartApp : handleSkipOnboarding}
@@ -145,8 +146,8 @@ export default function Onboarding() {
             >
               {isLast ? 'EMPEZAR' : 'SALTAR'}
             </Button>
-          </div>
-        </footer>
+          )}
+        />
       </ContentShell>
     </PageContainer>
   );

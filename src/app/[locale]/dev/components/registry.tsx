@@ -28,6 +28,7 @@ import { ContentCard } from '@/components/ui/content-card';
 import { ContentShell } from '@/components/ui/content-shell';
 import { LogoHeader } from '@/components/ui/logo-header';
 import { MediaFrame } from '@/components/ui/media-frame';
+import { NavigationFooter } from '@/components/ui/navigation-footer';
 import { PageContainer } from '@/components/ui/page-container';
 import { Badge } from '@/components/ui/primitives/badge';
 import { Button } from '@/components/ui/primitives/button';
@@ -1481,6 +1482,87 @@ const ContentCardDemo = () => {
   );
 };
 
+const NavigationFooterDemo = () => {
+  const [scale, setScale] = useState<'sm' | 'md' | 'lg'>('md');
+  const [current, setCurrent] = useState(0);
+  const total = 5;
+
+  const handlePrev = () => setCurrent(prev => Math.max(0, prev - 1));
+  const handleNext = () => setCurrent(prev => Math.min(total - 1, prev + 1));
+
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-2 sm:grid-cols-2">
+        <label className="text-sm text-slate-600">
+          Escala
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={scale}
+            onChange={e => setScale(e.target.value as 'sm' | 'md' | 'lg')}
+          >
+            <option value="sm">sm (pequeño)</option>
+            <option value="md">md (mediano)</option>
+            <option value="lg">lg (grande)</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Slide actual
+          <input
+            type="number"
+            min={0}
+            max={total - 1}
+            value={current}
+            onChange={e => setCurrent(Math.min(total - 1, Math.max(0, Number(e.target.value))))}
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+          />
+        </label>
+      </div>
+
+      <div className="rounded-lg border border-slate-200 bg-gradient-white-beige p-4">
+        <div className="flex justify-center">
+          <NavigationFooter
+            scale={scale}
+            left={(
+              <div className="text-km0-blue-700 font-bold text-sm">
+                {current + 1}
+                /
+                {total}
+              </div>
+            )}
+            center={(
+              <SimpleSliderNavigation
+                currentSlide={current}
+                totalSlides={total}
+                onPrev={handlePrev}
+                onNext={handleNext}
+                onDotSelect={setCurrent}
+                layout="compact"
+              />
+            )}
+            right={(
+              <Button
+                variant="default"
+                size="sm"
+                className="bg-km0-blue-700 text-white"
+              >
+                {current === total - 1 ? 'EMPEZAR' : 'SALTAR'}
+              </Button>
+            )}
+          />
+        </div>
+      </div>
+
+      <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+        Usa
+        {' '}
+        <code>justify-evenly</code>
+        {' '}
+        para garantizar espaciado equidistante entre los tres slots, independientemente del tamaño de cada elemento.
+      </div>
+    </div>
+  );
+};
+
 const ChatKitDemo = () => (
   <div className="space-y-2">
     <div className="rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-2 text-xs text-indigo-900">
@@ -1907,6 +1989,24 @@ export const componentRegistry: ComponentEntry[] = [
       'Variantes de escala (sm, md, lg) con padding y gap responsivos usando clamp().',
       'Layout flexible con items-center y justify-start.',
       'Soporta diferentes elementos HTML (div, main, section).',
+    ],
+  },
+  {
+    id: 'navigation-footer',
+    title: 'NavigationFooter',
+    description: 'Footer de navegación con tres slots equidistantes (left, center, right).',
+    group: 'ui',
+    filePath: 'src/components/ui/navigation-footer/navigation-footer.tsx',
+    importPath: '@/components/ui/navigation-footer',
+    exportName: 'NavigationFooter',
+    exportType: 'named',
+    Component: NavigationFooter,
+    Demo: NavigationFooterDemo,
+    notes: [
+      'Usa justify-evenly para garantizar espaciado equidistante entre los tres slots.',
+      'Variantes de escala (sm, md, lg) con padding y max-width responsivos.',
+      'Ideal para footers de navegación en flujos de onboarding o sliders.',
+      'Renderiza un elemento <footer> semántico.',
     ],
   },
   {
