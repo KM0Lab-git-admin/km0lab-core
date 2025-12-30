@@ -137,7 +137,7 @@ export default function Onboarding() {
                 }
               }}
               variant="default"
-              size="xs"
+              size="lg"
               className={cn(
                 'rounded bg-km0-blue-700 text-white font-semibold whitespace-nowrap text-center',
                 'shadow-sm hover:opacity-90 transition-opacity',

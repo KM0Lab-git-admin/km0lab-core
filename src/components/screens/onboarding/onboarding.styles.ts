@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority';
 
 export const onboardingFooter = cva(
-  'shrink-0 w-full flex items-center justify-between',
+  'shrink-0 w-full flex items-center justify-center',
   {
     variants: {
       scale: {
@@ -19,6 +19,7 @@ export const onboardingFooter = cva(
           'tablet:max-w-[clamp(400px,70vw,512px)]',
           'tablet:px-[clamp(16px,2.5vw,24px)]',
           'tablet:pt-[clamp(20px,3vh,28px)]',
+          'desktop:max-w-[clamp(640px,60vw,768px)]',
         ].join(' '),
         lg: [
           'max-w-[clamp(320px,70vw,448px)]',
