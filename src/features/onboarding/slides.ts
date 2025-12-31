@@ -20,52 +20,83 @@ export type SlideData = {
   xpBadge?: string;
 };
 
-export const onboardingSlides: SlideData[] = [
+type OnboardingSlidesTranslations = {
+  welcome: {
+    titleLine1: string;
+    titleLine2: string;
+    subtitle: string;
+    xpBadge: string;
+  };
+  discover: {
+    titleLine1: string;
+    titleLine2: string;
+    subtitle: string;
+    xpBadge: string;
+  };
+  connect: {
+    titleLine1: string;
+    titleLine2: string;
+    subtitle: string;
+    xpBadge: string;
+  };
+  spaces: {
+    titleLine1: string;
+    titleLine2: string;
+    subtitle: string;
+    xpBadge: string;
+  };
+  start: {
+    titleLine1: string;
+    titleLine2: string;
+    subtitle: string;
+    xpBadge: string;
+  };
+};
+
+export const getOnboardingSlides = (t: OnboardingSlidesTranslations): SlideData[] => [
   {
     id: 'welcome',
-    titleLine1: 'BIENVENIDO',
-    titleLine2: 'A KM0 LAB',
-    subtitle:
-      'Tu comercio local, más cerca que nunca. Descubre una nueva forma de interactuar con tus vecinos y apoyar el comercio de proximidad en tu barrio, todo desde una única plataforma diseñada para ti.',
+    titleLine1: t.welcome.titleLine1,
+    titleLine2: t.welcome.titleLine2,
+    subtitle: t.welcome.subtitle,
     imageSrc: '/images/glovo-style-welcome.png',
     bgColor: 'bg-km0-yellow-100',
-    xpBadge: '+ 10 XP',
+    xpBadge: t.welcome.xpBadge,
   },
   {
     id: 'discover',
-    titleLine1: 'DESCUBRE',
-    titleLine2: 'TIENDAS',
-    subtitle: 'Explora los mejores productos de tu barrio.',
+    titleLine1: t.discover.titleLine1,
+    titleLine2: t.discover.titleLine2,
+    subtitle: t.discover.subtitle,
     imageSrc: '/images/glovo-style-discover.png',
     bgColor: 'bg-km0-blue-100',
-    xpBadge: '+ 10 XP',
+    xpBadge: t.discover.xpBadge,
   },
   {
     id: 'connect',
-    titleLine1: 'CONECTA CON',
-    titleLine2: 'VECINOS',
-    subtitle: 'Forma parte de una comunidad activa y solidaria.',
+    titleLine1: t.connect.titleLine1,
+    titleLine2: t.connect.titleLine2,
+    subtitle: t.connect.subtitle,
     imageSrc: '/images/glovo-style-connect.png',
     bgColor: 'bg-km0-coral-100',
-    xpBadge: '+ 10 XP',
+    xpBadge: t.connect.xpBadge,
   },
   {
     id: 'spaces',
-    titleLine1: 'ESPACIOS',
-    titleLine2: 'PÚBLICOS',
-    subtitle: 'Disfruta y cuida los espacios de todos.',
+    titleLine1: t.spaces.titleLine1,
+    titleLine2: t.spaces.titleLine2,
+    subtitle: t.spaces.subtitle,
     imageSrc: '/images/glovo-style-public.png',
     bgColor: 'bg-km0-success-100',
-    xpBadge: '+ 10 XP',
+    xpBadge: t.spaces.xpBadge,
   },
   {
     id: 'start',
-    titleLine1: 'EMPIEZA',
-    titleLine2: 'AHORA',
-    subtitle: 'Únete a la revolución del comercio local.',
+    titleLine1: t.start.titleLine1,
+    titleLine2: t.start.titleLine2,
+    subtitle: t.start.subtitle,
     imageSrc: '/images/glovo-style-start.png',
     bgColor: 'bg-km0-yellow-100',
-    xpBadge: '+ 10 XP',
+    xpBadge: t.start.xpBadge,
   },
 ];
-

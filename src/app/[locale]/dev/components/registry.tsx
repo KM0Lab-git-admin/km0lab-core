@@ -1,5 +1,6 @@
 'use client';
 
+import type { Locale } from '@/utils/languageConfig';
 import type React from 'react';
 import ChatKitComponent from '@/components/chat/ChatKit/ChatKit';
 import BreakpointIndicator from '@/components/devtools/BreakpointIndicator';
@@ -46,7 +47,9 @@ import {
   SliderCount,
   SliderDots,
 } from '@/components/ui/slider';
+import { getLanguageConfig } from '@/utils/languageConfig';
 import { getValidatorById, validators } from '@/validation/validators';
+import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 /**
@@ -82,13 +85,16 @@ const subtitleSizes = ['lg', 'md', 'sm', 'xs'] as const;
 const subtitleTones = ['default', 'muted'] as const;
 const subtitleAlignments = ['left', 'center'] as const;
 
-const ServerOnlyNotice = ({ label }: { label: string }) => (
-  <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900">
-    {label}
-    {' '}
-    es Server Component / depende de backend. No se renderiza aquí; revisa el import y úsalo en un entorno server.
-  </div>
-);
+const ServerOnlyNotice = ({ label }: { label: string }) => {
+  const t = useTranslations('ComponentRegistry');
+  return (
+    <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900">
+      {label}
+      {' '}
+      {t('server_only_notice')}
+    </div>
+  );
+};
 
 const BadgeDemo = () => {
   const [variant, setVariant] = useState<(typeof badgeVariants)[number]>('default');
@@ -197,19 +203,13 @@ const ButtonDemo = () => {
 };
 
 const LanguageButtonDemo = () => {
+  const locale = useLocale() as Locale;
   const [variant, setVariant] = useState<(typeof languageButtonVariants)[number]>('default');
   const [size, setSize] = useState<(typeof languageButtonSizes)[number]>('default');
   const [disabled, setDisabled] = useState(false);
-  const [title, setTitle] = useState('Español');
-  const [subtitle, setSubtitle] = useState('Anquim idioma vos cum ansa');
-  const [flagType, setFlagType] = useState<'spanish' | 'catalan'>('spanish');
+  const [selectedLocale, setSelectedLocale] = useState<Locale>(locale);
 
-  const flagSrc = flagType === 'spanish'
-    ? '/assets/images/spanish_flag.png'
-    : '/assets/images/catalan_flag.png';
-  const flagAlt = flagType === 'spanish'
-    ? 'Bandera de España'
-    : 'Bandera de Cataluña';
+  const languageConfig = getLanguageConfig(selectedLocale);
 
   return (
     <div className="space-y-3">
@@ -218,37 +218,34 @@ const LanguageButtonDemo = () => {
           variant={variant}
           size={size}
           disabled={disabled}
-          flagSrc={flagSrc}
-          flagAlt={flagAlt}
-          title={title}
-          subtitle={subtitle}
+          flagSrc={languageConfig.flagSrc}
+          flagAlt={languageConfig.flagAlt}
+          title={languageConfig.title}
+          subtitle={languageConfig.subtitle}
         />
       </div>
       <div className="grid gap-2 sm:grid-cols-2">
         <label className="text-sm text-slate-600">
-          Título
-          <input
+          Idioma
+          <select
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-          />
-        </label>
-        <label className="text-sm text-slate-600">
-          Subtítulo
-          <input
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={subtitle}
-            onChange={e => setSubtitle(e.target.value)}
-          />
+            value={selectedLocale}
+            onChange={e => setSelectedLocale(e.target.value as Locale)}
+          >
+            <option value="es">Español</option>
+            <option value="ca">Català</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+          </select>
         </label>
         <label className="text-sm text-slate-600">
           Variante
           <select
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
             value={variant}
-            onChange={e => setVariant(e.target.value as (typeof buttonVariants)[number])}
+            onChange={e => setVariant(e.target.value as (typeof languageButtonVariants)[number])}
           >
-            {buttonVariants.map(item => (
+            {languageButtonVariants.map(item => (
               <option key={item} value={item}>{item}</option>
             ))}
           </select>
@@ -263,17 +260,6 @@ const LanguageButtonDemo = () => {
             {languageButtonSizes.map(item => (
               <option key={item} value={item}>{item}</option>
             ))}
-          </select>
-        </label>
-        <label className="text-sm text-slate-600">
-          Bandera
-          <select
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={flagType}
-            onChange={e => setFlagType(e.target.value as 'spanish' | 'catalan')}
-          >
-            <option value="spanish">Español</option>
-            <option value="catalan">Catalán</option>
           </select>
         </label>
         <label className="flex items-center gap-2 text-sm text-slate-600">

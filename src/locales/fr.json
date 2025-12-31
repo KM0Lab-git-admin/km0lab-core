@@ -133,7 +133,97 @@
   "PostalCodeWelcome": {
     "title": "Bienvenue !",
     "subtitle": "Ton code postal est disponible. Tu peux continuer.",
-    "cta": "Aller à l’onboarding",
-    "cta_aria": "Aller à l’onboarding"
+    "cta": "Aller à l'onboarding",
+    "cta_aria": "Aller à l'onboarding"
+  },
+  "Onboarding": {
+    "start": "COMMENCER",
+    "skip": "PASSER",
+    "start_aria": "Commencer",
+    "skip_aria": "Passer"
+  },
+  "FilesList": {
+    "loading": "Chargement des fichiers...",
+    "error": "Erreur",
+    "error_loading": "Erreur lors du chargement des fichiers",
+    "unknown_error": "Erreur inconnue",
+    "no_files": "Aucun fichier disponible",
+    "name": "Nom",
+    "size": "Taille",
+    "purpose": "Objectif",
+    "date": "Date",
+    "id": "ID",
+    "action": "Action",
+    "copy_id": "Copier l'ID",
+    "id_copied": "ID copié dans le presse-papiers",
+    "bytes": "Octets",
+    "kb": "Ko",
+    "mb": "Mo",
+    "gb": "Go"
+  },
+  "ChatKit": {
+    "loading": "Chargement de l'assistant...",
+    "error": "Erreur lors du chargement de ChatKit",
+    "unknown_error": "Erreur inconnue",
+    "session_error": "Impossible de créer la session ChatKit"
+  },
+  "LanguageButton": {
+    "title": "Français",
+    "subtitle": "Anquim idioma vos cum ansa",
+    "flag_alt": "Drapeau de la France"
+  },
+  "OnboardingSlides": {
+    "welcome": {
+      "titleLine1": "BIENVENUE",
+      "titleLine2": "CHEZ KM0 LAB",
+      "subtitle": "Votre commerce local, plus proche que jamais. Découvrez une nouvelle façon d'interagir avec vos voisins et de soutenir le commerce de proximité dans votre quartier, le tout depuis une plateforme unique conçue pour vous.",
+      "xpBadge": "+ 10 XP"
+    },
+    "discover": {
+      "titleLine1": "DÉCOUVREZ",
+      "titleLine2": "LES MAGASINS",
+      "subtitle": "Explorez les meilleurs produits de votre quartier.",
+      "xpBadge": "+ 10 XP"
+    },
+    "connect": {
+      "titleLine1": "CONNECTEZ-VOUS AVEC",
+      "titleLine2": "VOS VOISINS",
+      "subtitle": "Faites partie d'une communauté active et solidaire.",
+      "xpBadge": "+ 10 XP"
+    },
+    "spaces": {
+      "titleLine1": "ESPACES",
+      "titleLine2": "PUBLICS",
+      "subtitle": "Profitez et prenez soin des espaces de tous.",
+      "xpBadge": "+ 10 XP"
+    },
+    "start": {
+      "titleLine1": "COMMENCEZ",
+      "titleLine2": "MAINTENANT",
+      "subtitle": "Rejoignez la révolution du commerce local.",
+      "xpBadge": "+ 10 XP"
+    }
+  },
+  "ComponentRegistry": {
+    "server_only_notice": "est Server Component / dépend du backend. Non rendu ici ; vérifie l'import et utilise-le dans un environnement serveur.",
+    "pending_demo": "Démo en attente pour",
+    "pending_demo_description": "Composant rendu avec des props minimales.",
+    "ui_primitives": "UI / Primitives",
+    "features": "Features",
+    "screens": "Screens",
+    "copy_import": "Copier l'import",
+    "import": "Import",
+    "snippet": "Snippet",
+    "export": "Export",
+    "path": "Path",
+    "named": "named",
+    "default": "default",
+    "screenshots": "Captures d'écran",
+    "assets": "assets",
+    "search_placeholder": "Rechercher par nom ou chemin...",
+    "no_results": "Aucun composant ne correspond à la recherche.",
+    "copied": "Copié",
+    "copy": "Copier",
+    "usage": "Utilisation"
   }
 }

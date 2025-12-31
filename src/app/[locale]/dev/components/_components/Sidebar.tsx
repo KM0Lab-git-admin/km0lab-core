@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import type { ComponentEntry } from '../registry';
 
@@ -12,12 +13,6 @@ type SidebarProps = {
   onCopyImport: (entry: ComponentEntry) => void | Promise<void>;
 };
 
-const groupLabels: Record<ComponentEntry['group'], string> = {
-  ui: 'UI / Primitives',
-  screens: 'Screens',
-  features: 'Features',
-};
-
 export default function Sidebar({
   items,
   selectedId,
@@ -26,7 +21,21 @@ export default function Sidebar({
   onSelect,
   onCopyImport,
 }: SidebarProps) {
+  const t = useTranslations('ComponentRegistry');
   const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const getGroupLabel = (group: ComponentEntry['group']) => {
+    switch (group) {
+      case 'ui':
+        return t('ui_primitives');
+      case 'screens':
+        return t('screens');
+      case 'features':
+        return t('features');
+      default:
+        return group;
+    }
+  };
 
   const grouped = useMemo(() => {
     const groups: Record<ComponentEntry['group'], ComponentEntry[]> = {
@@ -52,7 +61,7 @@ export default function Sidebar({
         <input
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          placeholder="Buscar por nombre o ruta..."
+          placeholder={t('search_placeholder')}
           className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
         />
       </div>
@@ -65,7 +74,7 @@ export default function Sidebar({
           return (
             <div key={group}>
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
-                {groupLabels[group]}
+                {getGroupLabel(group)}
               </p>
               <div className="space-y-2">
                 {list.map(item => {
@@ -102,7 +111,7 @@ export default function Sidebar({
                         }}
                         className="ml-2 rounded-md border border-slate-200 bg-white px-2 py-1 text-[11px] font-medium text-slate-600 transition hover:border-indigo-400 hover:text-indigo-600"
                       >
-                        {copiedId === item.id ? 'Copiado' : 'Copiar'}
+                        {copiedId === item.id ? t('copied') : t('copy')}
                       </button>
                     </div>
                   );

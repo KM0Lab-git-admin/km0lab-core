@@ -16,13 +16,50 @@ import { PageContainer } from '@/components/ui/page-container';
 import { Button } from '@/components/ui/primitives/button';
 import { cn } from '@/components/ui/primitives/utils';
 import { SimpleSliderNavigation } from '@/components/ui/slider';
-import { onboardingSlides } from '@/features/onboarding/slides';
+import { getOnboardingSlides } from '@/features/onboarding/slides';
+import { useTranslations } from 'next-intl';
 import { useParams, useRouter } from 'next/navigation';
 import { onboardingCounter } from './onboarding.styles';
 
 export default function Onboarding() {
   const router = useRouter();
   const params = useParams();
+  const t = useTranslations('Onboarding');
+  const tSlides = useTranslations('OnboardingSlides');
+
+  const onboardingSlides = getOnboardingSlides({
+    welcome: {
+      titleLine1: tSlides('welcome.titleLine1'),
+      titleLine2: tSlides('welcome.titleLine2'),
+      subtitle: tSlides('welcome.subtitle'),
+      xpBadge: tSlides('welcome.xpBadge'),
+    },
+    discover: {
+      titleLine1: tSlides('discover.titleLine1'),
+      titleLine2: tSlides('discover.titleLine2'),
+      subtitle: tSlides('discover.subtitle'),
+      xpBadge: tSlides('discover.xpBadge'),
+    },
+    connect: {
+      titleLine1: tSlides('connect.titleLine1'),
+      titleLine2: tSlides('connect.titleLine2'),
+      subtitle: tSlides('connect.subtitle'),
+      xpBadge: tSlides('connect.xpBadge'),
+    },
+    spaces: {
+      titleLine1: tSlides('spaces.titleLine1'),
+      titleLine2: tSlides('spaces.titleLine2'),
+      subtitle: tSlides('spaces.subtitle'),
+      xpBadge: tSlides('spaces.xpBadge'),
+    },
+    start: {
+      titleLine1: tSlides('start.titleLine1'),
+      titleLine2: tSlides('start.titleLine2'),
+      subtitle: tSlides('start.subtitle'),
+      xpBadge: tSlides('start.xpBadge'),
+    },
+  });
+
   const {
     currentIndex,
     dragOffset,
@@ -124,7 +161,7 @@ export default function Onboarding() {
               type="button"
               onClick={isLast ? handleStartApp : handleSkipOnboarding}
               disabled={false}
-              aria-label={isLast ? 'Empezar' : 'Saltar'}
+              aria-label={isLast ? t('start_aria') : t('skip_aria')}
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -149,7 +186,7 @@ export default function Onboarding() {
                 'ultra-wide:h-14 ultra-wide:px-10 ultra-wide:text-2xl',
               )}
             >
-              {isLast ? 'EMPEZAR' : 'SALTAR'}
+              {isLast ? t('start') : t('skip')}
             </Button>
           )}
         />
