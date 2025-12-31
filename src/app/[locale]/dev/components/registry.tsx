@@ -21,11 +21,11 @@ import {
   CarouselViewport,
   useCarousel,
 } from '@/components/ui/carousel';
+import { ContentCard } from '@/components/ui/content-card';
+import { ContentShell } from '@/components/ui/content-shell';
 import { HeroSlide } from '@/components/ui/hero-slide';
 import { MobileFrame } from '@/components/ui/layout/MobileFrame';
 import { StatusBar } from '@/components/ui/layout/StatusBar';
-import { ContentCard } from '@/components/ui/content-card';
-import { ContentShell } from '@/components/ui/content-shell';
 import { LogoHeader } from '@/components/ui/logo-header';
 import { MediaFrame } from '@/components/ui/media-frame';
 import { NavigationFooter } from '@/components/ui/navigation-footer';
@@ -34,6 +34,7 @@ import { Badge } from '@/components/ui/primitives/badge';
 import { Button } from '@/components/ui/primitives/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/primitives/card';
 import { CheckIcon, DateIcon, EmailIcon, Input, PhoneIcon, XIcon, ZipCodeIcon } from '@/components/ui/primitives/input';
+import { LanguageButton } from '@/components/ui/primitives/language-button';
 import { Progress } from '@/components/ui/primitives/progress';
 import { Separator } from '@/components/ui/primitives/separator';
 import { Subtitle } from '@/components/ui/primitives/subtitle';
@@ -72,6 +73,8 @@ export type ComponentEntry = {
 const badgeVariants = ['default', 'secondary', 'destructive', 'outline'] as const;
 const buttonVariants = ['default', 'secondary', 'outline', 'destructive', 'ghost', 'link'] as const;
 const buttonSizes = ['default', 'sm', 'lg', 'icon'] as const;
+const languageButtonVariants = ['default', 'secondary', 'outline', 'destructive', 'ghost', 'link', 'fold'] as const;
+const languageButtonSizes = ['default', 'sm', 'lg', 'xs'] as const;
 const titleSizes = ['h1', 'h2', 'h3', 'xl', 'lg', 'md', 'sm'] as const;
 const titleTones = ['default', 'muted', 'brand'] as const;
 const titleAlignments = ['left', 'center'] as const;
@@ -177,6 +180,100 @@ const ButtonDemo = () => {
             {buttonSizes.map(item => (
               <option key={item} value={item}>{item}</option>
             ))}
+          </select>
+        </label>
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <input
+            type="checkbox"
+            className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+            checked={disabled}
+            onChange={e => setDisabled(e.target.checked)}
+          />
+          Disabled
+        </label>
+      </div>
+    </div>
+  );
+};
+
+const LanguageButtonDemo = () => {
+  const [variant, setVariant] = useState<(typeof languageButtonVariants)[number]>('default');
+  const [size, setSize] = useState<(typeof languageButtonSizes)[number]>('default');
+  const [disabled, setDisabled] = useState(false);
+  const [title, setTitle] = useState('Español');
+  const [subtitle, setSubtitle] = useState('Anquim idioma vos cum ansa');
+  const [flagType, setFlagType] = useState<'spanish' | 'catalan'>('spanish');
+
+  const flagSrc = flagType === 'spanish'
+    ? '/assets/images/spanish_flag.png'
+    : '/assets/images/catalan_flag.png';
+  const flagAlt = flagType === 'spanish'
+    ? 'Bandera de España'
+    : 'Bandera de Cataluña';
+
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap items-center gap-2">
+        <LanguageButton
+          variant={variant}
+          size={size}
+          disabled={disabled}
+          flagSrc={flagSrc}
+          flagAlt={flagAlt}
+          title={title}
+          subtitle={subtitle}
+        />
+      </div>
+      <div className="grid gap-2 sm:grid-cols-2">
+        <label className="text-sm text-slate-600">
+          Título
+          <input
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+          />
+        </label>
+        <label className="text-sm text-slate-600">
+          Subtítulo
+          <input
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={subtitle}
+            onChange={e => setSubtitle(e.target.value)}
+          />
+        </label>
+        <label className="text-sm text-slate-600">
+          Variante
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={variant}
+            onChange={e => setVariant(e.target.value as (typeof buttonVariants)[number])}
+          >
+            {buttonVariants.map(item => (
+              <option key={item} value={item}>{item}</option>
+            ))}
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Tamaño
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={size}
+            onChange={e => setSize(e.target.value as (typeof languageButtonSizes)[number])}
+          >
+            {languageButtonSizes.map(item => (
+              <option key={item} value={item}>{item}</option>
+            ))}
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Bandera
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={flagType}
+            onChange={e => setFlagType(e.target.value as 'spanish' | 'catalan')}
+          >
+            <option value="spanish">Español</option>
+            <option value="catalan">Catalán</option>
           </select>
         </label>
         <label className="flex items-center gap-2 text-sm text-slate-600">
@@ -662,7 +759,6 @@ const SeparatorDemo = () => (
     </div>
   </div>
 );
-
 
 const MobileFrameDemo = () => (
   <MobileFrame>
@@ -1283,7 +1379,10 @@ const PageContainerDemo = () => {
               <div className="text-center">
                 <p className="text-sm font-semibold text-slate-700">PageContainer</p>
                 <p className="mt-1 text-xs text-slate-500">Fondo degradado blanco-beige</p>
-                <p className="mt-1 text-xs text-slate-400">Elemento: {as}</p>
+                <p className="mt-1 text-xs text-slate-400">
+                  Elemento:
+                  {as}
+                </p>
               </div>
             </div>
           </PageContainer>
@@ -1331,8 +1430,14 @@ const ContentShellDemo = () => {
           <ContentShell scale={scale} as={as} className="h-full">
             <div className="flex h-full flex-col items-center justify-center gap-4">
               <Badge variant="secondary">ContentShell</Badge>
-              <p className="text-sm text-slate-700">Escala: {scale}</p>
-              <p className="text-xs text-slate-500">Elemento: {as}</p>
+              <p className="text-sm text-slate-700">
+                Escala:
+                {scale}
+              </p>
+              <p className="text-xs text-slate-500">
+                Elemento:
+                {as}
+              </p>
             </div>
           </ContentShell>
         </div>
@@ -1404,9 +1509,18 @@ const LogoHeaderDemo = () => {
         <div className="mx-auto max-w-md overflow-hidden rounded-lg border-2 border-dashed border-slate-300 bg-gradient-white-beige p-4">
           <LogoHeader scale={scale} logoScale={logoScale} logoAlt={logoAlt} as={as} />
           <div className="mt-4 text-center">
-            <p className="text-xs text-slate-500">Header scale: {scale}</p>
-            <p className="text-xs text-slate-500">Logo scale: {logoScale}</p>
-            <p className="text-xs text-slate-500">Elemento: {as}</p>
+            <p className="text-xs text-slate-500">
+              Header scale:
+              {scale}
+            </p>
+            <p className="text-xs text-slate-500">
+              Logo scale:
+              {logoScale}
+            </p>
+            <p className="text-xs text-slate-500">
+              Elemento:
+              {as}
+            </p>
           </div>
         </div>
       </div>
@@ -1731,6 +1845,18 @@ export const componentRegistry: ComponentEntry[] = [
     exportType: 'named',
     Component: Button,
     Demo: ButtonDemo,
+  },
+  {
+    id: 'language-button',
+    title: 'LanguageButton',
+    description: 'Botón especializado para selección de idioma con bandera, título, subtítulo y flecha.',
+    group: 'ui',
+    filePath: 'src/components/ui/primitives/language-button/language-button.tsx',
+    importPath: '@/components/ui/primitives/language-button',
+    exportName: 'LanguageButton',
+    exportType: 'named',
+    Component: LanguageButton,
+    Demo: LanguageButtonDemo,
   },
   {
     id: 'input',
