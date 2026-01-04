@@ -220,6 +220,7 @@ export default {
         'header': '3rem', // 48px - altura del header
         'header-gap': '3rem', // 48px - gap entre elementos
         'logo-padding': '0.875rem', // 14px - padding del contenedor del logo
+        '1.25': '0.3125rem', // 5px - spacing personalizado para márgenes pequeños
       },
       maxWidth: {
         'header': '24rem', // 384px - ancho del header
@@ -227,6 +228,7 @@ export default {
         'slider-count-lg': '28rem', // 448px
         'slider-count-xl': '32rem', // 512px
         'mobile-frame': '24rem', // 384px - ancho máximo del frame móvil (max-w-sm)
+        'language-button': '315px', // 315px - ancho máximo del botón de idioma
       },
       width: {
         'logo': '9.1875rem', // 147px - ancho del logo

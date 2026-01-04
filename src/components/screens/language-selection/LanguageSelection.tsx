@@ -78,20 +78,20 @@ export default function LanguageSelection() {
             </Subtitle>
 
             {/* Botones de idioma */}
-            <div className="flex w-full flex-col gap-3">
+            <div className="flex w-full flex-col items-center gap-3">
               {availableLocales.map((locale) => {
                 const config = getLanguageConfig(locale);
                 return (
                   <LanguageButton
                     key={locale}
-                    variant="secondary"
+                    variant="outline"
                     size="default"
                     flagSrc={config.flagSrc}
                     flagAlt={config.flagAlt}
                     title={config.title}
                     subtitle={config.subtitle}
                     onClick={() => handleLanguageSelect(locale)}
-                    className="w-full"
+                    className="w-full max-w-language-button"
                   />
                 );
               })}

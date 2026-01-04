@@ -18,10 +18,10 @@ export const languageButtonVariants = cva(
         fold: 'bg-primary text-primary-foreground hover:bg-primary/90',
       },
       size: {
-        xs: 'h-8 px-4 py-2 text-xs',
-        sm: 'h-10 px-5 py-2.5 text-sm',
-        default: 'h-12 px-6 py-3 text-sm',
-        lg: 'h-14 px-7 py-3.5 text-base',
+        xs: 'min-h-8 px-4 py-2 text-xs',
+        sm: 'min-h-10 px-5 py-2.5 text-sm',
+        default: 'min-h-12 px-6 py-3 text-sm',
+        lg: 'min-h-14 px-7 py-3.5 text-base',
       },
     },
     defaultVariants: {
@@ -35,7 +35,7 @@ export const languageButtonContentVariants = cva('flex items-center gap-3 flex-1
 
 export const languageButtonTextContainerVariants = cva('flex flex-col items-start min-w-0 flex-1 gap-1');
 
-export const languageButtonTitleVariants = cva('font-semibold leading-tight truncate w-full mt-2', {
+export const languageButtonTitleVariants = cva('font-semibold leading-tight truncate w-full mt-0', {
   variants: {
     variant: {
       default: '',
@@ -52,7 +52,7 @@ export const languageButtonTitleVariants = cva('font-semibold leading-tight trun
   },
 });
 
-export const languageButtonSubtitleVariants = cva('leading-tight truncate w-full mb-2', {
+export const languageButtonSubtitleVariants = cva('leading-tight truncate w-full mb-0', {
   variants: {
     variant: {
       default: 'text-white/90',

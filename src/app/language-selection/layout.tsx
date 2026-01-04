@@ -30,15 +30,15 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function LanguageSelectionLayout(props: {
+export default function LanguageSelectionLayout({
+  children,
+}: {
   children: React.ReactNode;
 }) {
-  // Layout específico para la página de selección de idioma
-  // Esta página está fuera de [locale] y no requiere next-intl
   return (
     <html lang="en" className={inter.variable}>
       <body suppressHydrationWarning className="min-h-screen bg-gradient-app font-[var(--font-inter)]">
-        {props.children}
+        {children}
         <Script
           src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
           strategy="afterInteractive"
@@ -47,5 +47,4 @@ export default function LanguageSelectionLayout(props: {
     </html>
   );
 }
-
 
