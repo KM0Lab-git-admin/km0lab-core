@@ -79,6 +79,12 @@
 /* ULTRA-WIDE: 1920x1080 - Pantallas grandes */
 @custom-variant ultra-wide (@media (min-width: 1920px) and (min-height: 1080px));
 
+/* === BREAKPOINT ESPECIAL: SHORT-LANDSCAPE === */
+/* Activa layout "side" SOLO en landscape con altura corta */
+/* Captura: 667x375 (móvil landscape), 1280x550 (laptop short) */
+/* NO captura: 1440x900, 1920x1080 (desktops con altura normal) */
+@custom-variant short-landscape (@media (orientation: landscape) and (max-height: 550px));
+
 /* === KM0 LAB THEME - Colores y extensiones para Tailwind v4 === */
 @theme {
   /* KM0 Blue */
@@ -141,6 +147,42 @@
   --color-gaming-orange-800: #9a3412;
   --color-gaming-orange-900: #7c2d12;
 
+  /* Orange Light */
+  --color-orange-light-50: #fff8f1;
+  --color-orange-light-100: #feecdc;
+  --color-orange-light-200: #fdd5b9;
+  --color-orange-light-300: #fdba8c;
+  --color-orange-light-400: #ffb347;
+  --color-orange-light-500: #ff9500;
+  --color-orange-light-600: #f97316;
+  --color-orange-light-700: #c2410c;
+  --color-orange-light-800: #9a3412;
+  --color-orange-light-900: #7c2d12;
+
+  /* Orange Dark */
+  --color-orange-dark-50: #fef3f0;
+  --color-orange-dark-100: #fde4df;
+  --color-orange-dark-200: #fabfb7;
+  --color-orange-dark-300: #f69e91;
+  --color-orange-dark-400: #f1826f;
+  --color-orange-dark-500: #e6704f;
+  --color-orange-dark-600: #cc6600;
+  --color-orange-dark-700: #b85c00;
+  --color-orange-dark-800: #9a4d00;
+  --color-orange-dark-900: #7d3e00;
+
+  /* Neutral */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #2d2d2d;
+  --color-neutral-900: #1a1a1a;
+
   /* KM0 Success */
   --color-km0-success-50: #f0fdf4;
   --color-km0-success-100: #dcfce7;
@@ -153,21 +195,68 @@
   --color-km0-success-800: #166534;
   --color-km0-success-900: #14532d;
 
+  /* Gaming Success */
+  --color-gaming-success-50: #f0fdf4;
+  --color-gaming-success-100: #dcfce7;
+  --color-gaming-success-200: #bbf7d0;
+  --color-gaming-success-300: #86efac;
+  --color-gaming-success-400: #4ade80;
+  --color-gaming-success-500: #00cc66;
+  --color-gaming-success-600: #16a34a;
+  --color-gaming-success-700: #15803d;
+  --color-gaming-success-800: #166534;
+  --color-gaming-success-900: #14532d;
+
+  /* Gaming Warning */
+  --color-gaming-warning-50: #fefaf0;
+  --color-gaming-warning-100: #fdf5da;
+  --color-gaming-warning-200: #fbe9b4;
+  --color-gaming-warning-300: #f9dd8e;
+  --color-gaming-warning-400: #f7d168;
+  --color-gaming-warning-500: #f5c542;
+  --color-gaming-warning-600: #d97706;
+  --color-gaming-warning-700: #b45309;
+  --color-gaming-warning-800: #92400e;
+  --color-gaming-warning-900: #78350f;
+
+  /* Gaming Fire */
+  --color-gaming-fire-50: #fef2f2;
+  --color-gaming-fire-100: #fee2e2;
+  --color-gaming-fire-200: #fecaca;
+  --color-gaming-fire-300: #fca5a5;
+  --color-gaming-fire-400: #f87171;
+  --color-gaming-fire-500: #ff4444;
+  --color-gaming-fire-600: #dc2626;
+  --color-gaming-fire-700: #b91c1c;
+  --color-gaming-fire-800: #991b1b;
+  --color-gaming-fire-900: #7f1d1d;
+
+  /* Gaming Gold */
+  --color-gaming-gold: #ffd700;
+
   /* Spacing */
   --spacing-header: 3rem;
   --spacing-header-gap: 3rem;
   --spacing-logo-padding: 0.875rem;
+  --spacing-1\.25: 0.3125rem;
 
   /* Width */
   --width-logo: 9.1875rem;
   --width-slide: 20rem;
+  --width-slider-count-lg: 28rem;
+  --width-slider-count-xl: 32rem;
 
   /* Height */
   --height-logo: 2.125rem;
+  --height-slide-container: 475px;
 
   /* Max Width */
   --max-width-header: 24rem;
   --max-width-slide: 20rem;
+  --max-width-slider-count-lg: 28rem;
+  --max-width-slider-count-xl: 32rem;
+  --max-width-mobile-frame: 24rem;
+  --max-width-language-button: 315px;
 
   /* Min Width */
   --min-width-slide: 20rem;
@@ -177,11 +266,27 @@
 
   /* Max Height */
   --max-height-slide: 14rem;
+  --max-height-slider-container: 558px;
+  --max-height-slider-img: 65vh;
+  --max-height-slider-img-tall: 75vh;
 
   /* Font Families */
   --font-brand: 'Antique Olive', 'Antique Olive Std', Georgia, serif;
   --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
   --font-body: 'Oakes Grotesk', 'Oakes', Helvetica, Arial, sans-serif;
+
+  /* Background Image */
+  --background-image-gradient-app: linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%);
+  --background-image-gradient-white-beige: linear-gradient(180deg, #ffffff 0%, #FFECD2 100%);
+  --background-image-gradient-mobile-frame: linear-gradient(to bottom right, rgba(144, 169, 232, 0.2) 0%, rgba(255, 236, 210, 0.2) 100%);
+
+  /* Border Radius */
+  --radius-mobile-frame: 1rem;
+  --radius-mobile-frame-lg: 1.25rem;
+
+  /* Animation Delay */
+  --animation-delay-200: 0.2s;
+  --animation-delay-400: 0.4s;
 
   /* Colores semánticos para componentes UI */
   --color-primary: #174094;
