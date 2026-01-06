@@ -8,6 +8,15 @@ export const contentShellVariants = cva(
         sm: [
           'p-[clamp(8px,1.5vw,16px)]',
           'gap-[clamp(8px,1.5vh,16px)]',
+          // Constrained por defecto
+          'tablet:max-w-[570px]',
+          'tablet:mx-auto',
+          'laptop-short:max-w-[570px]',
+          'laptop-short:mx-auto',
+          'desktop:max-w-[570px]',
+          'desktop:mx-auto',
+          'ultra-wide:max-w-[570px]',
+          'ultra-wide:mx-auto',
         ].join(' '),
         md: [
           // Padding adaptativo
@@ -22,6 +31,15 @@ export const contentShellVariants = cva(
           // Desktop: generoso
           'desktop:p-[clamp(24px,3.5vw,48px)]',
           'desktop:gap-[clamp(20px,3vh,40px)]',
+          // Constrained por defecto
+          'tablet:max-w-[570px]',
+          'tablet:mx-auto',
+          'laptop-short:max-w-[570px]',
+          'laptop-short:mx-auto',
+          'desktop:max-w-[570px]',
+          'desktop:mx-auto',
+          'ultra-wide:max-w-[570px]',
+          'ultra-wide:mx-auto',
         ].join(' '),
         lg: [
           'p-[clamp(12px,2.5vw,32px)]',
@@ -30,6 +48,15 @@ export const contentShellVariants = cva(
           'tablet:gap-[clamp(20px,3vh,40px)]',
           'desktop:p-[clamp(32px,4.5vw,64px)]',
           'desktop:gap-[clamp(24px,3.5vh,56px)]',
+          // Constrained por defecto
+          'tablet:max-w-[570px]',
+          'tablet:mx-auto',
+          'laptop-short:max-w-[570px]',
+          'laptop-short:mx-auto',
+          'desktop:max-w-[570px]',
+          'desktop:mx-auto',
+          'ultra-wide:max-w-[570px]',
+          'ultra-wide:mx-auto',
         ].join(' '),
       },
     },

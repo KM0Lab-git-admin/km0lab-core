@@ -88,6 +88,10 @@ export default function Onboarding() {
     router.push(`/${locale}/postal-code`);
   };
 
+  const handleBack = () => {
+    router.push('/language-selection');
+  };
+
   // Scale semántico: puede venir de props o contexto en el futuro
   const scale = 'md';
 
@@ -95,7 +99,30 @@ export default function Onboarding() {
     <PageContainer>
       <BreakpointIndicator />
       <ContentShell scale={scale}>
-        <LogoHeader scale={scale} logoScale={scale} />
+        <LogoHeader
+          scale={scale}
+          logoScale={scale}
+          leftAction={(
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={handleBack}
+              aria-label="Volver a selección de idioma"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </Button>
+          )}
+        />
 
         <ContentCard scale={scale}>
           <CarouselViewport

@@ -145,13 +145,41 @@ export default function PostalCode() {
     handleContinue();
   };
 
+  const handleBack = () => {
+    if (!locale) return;
+    router.push(`/${locale}/onboarding`);
+  };
+
   const scale = 'md';
   const showCityName = isAvailable && cityName;
 
   return (
     <PageContainer>
       <ContentShell scale={scale}>
-        <LogoHeader scale={scale} logoScale={scale} />
+        <LogoHeader
+          scale={scale}
+          logoScale={scale}
+          leftAction={(
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={handleBack}
+              aria-label="Volver al onboarding"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </Button>
+          )}
+        />
 
         <ContentCard scale={scale}>
           <form
