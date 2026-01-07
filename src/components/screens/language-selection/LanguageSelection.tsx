@@ -5,7 +5,6 @@ import { ContentCard } from '@/components/ui/content-card';
 import { ContentShell } from '@/components/ui/content-shell';
 import { LogoHeader } from '@/components/ui/logo-header';
 import { PageContainer } from '@/components/ui/page-container';
-import { Button } from '@/components/ui/primitives/button';
 import { LanguageButton } from '@/components/ui/primitives/language-button';
 import { Subtitle } from '@/components/ui/primitives/subtitle';
 import { Title } from '@/components/ui/primitives/title';
@@ -67,26 +66,6 @@ export default function LanguageSelection() {
         <LogoHeader
           scale={scale}
           logoScale={scale}
-          leftAction={(
-            <Button
-              size="icon"
-              variant="ghost"
-              onClick={() => router.back()}
-              aria-label="Volver atrás"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </Button>
-          )}
         />
 
         <ContentCard scale={scale}>
