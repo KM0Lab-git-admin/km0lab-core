@@ -38,7 +38,9 @@ export default function LanguageSelectionLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body suppressHydrationWarning className="min-h-screen bg-gradient-app font-[var(--font-inter)]">
-        {children}
+        <div className="h-dvh-fallback w-full overflow-hidden">
+          {children}
+        </div>
         <Script
           src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
           strategy="afterInteractive"
