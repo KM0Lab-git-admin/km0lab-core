@@ -7,12 +7,12 @@ export const heroSlideVariants = cva(
       layout: {
         /** Stack: Vertical por defecto (portrait). En landscape se convierte en side automáticamente. */
         stack: [
-          'flex-col items-center',
-          'portrait:flex-col portrait:items-center portrait:text-center',
-          'landscape:flex-row landscape:items-center landscape:text-left',
+          'flex-col items-center justify-start',
+          'portrait:flex-col portrait:items-center portrait:text-center portrait:justify-start',
+          'landscape:flex-row landscape:items-start landscape:text-left',
         ].join(' '),
         /** Side: Siempre horizontal. */
-        side: 'flex-row items-center text-left',
+        side: 'flex-row items-start text-left',
       },
       density: {
         default: '',
@@ -58,19 +58,25 @@ export const heroSlideVariants = cva(
  */
 export const heroTextVariants = cva(
   // Base: flex column + permite que el texto tome espacio y haga wrap
-  'flex flex-1 flex-col min-w-0 min-h-0 overflow-visible',
+  // justify-start fija el título arriba para que no se mueva según el contenido
+  'flex flex-1 flex-col min-w-0 min-h-0 overflow-visible justify-start',
   {
     variants: {
       align: {
-        center: 'items-center text-center',
-        left: 'items-start text-left',
+        center: [
+          'items-center text-center',
+          'landscape:items-center landscape:text-center',
+        ].join(' '),
+        left: [
+          'items-start text-left',
+          'landscape:items-start landscape:text-left',
+        ].join(' '),
       },
       layout: {
         stack: [
           'portrait:items-center portrait:text-center',
-          'landscape:items-start landscape:text-left landscape:justify-center',
         ].join(' '),
-        side: 'items-start text-left justify-center',
+        side: 'items-start text-left',
       },
       scale: {
         sm: 'gap-[clamp(2px,0.5vh,8px)]',

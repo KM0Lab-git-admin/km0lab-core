@@ -22,7 +22,7 @@ const subtitleSizeMap = {
 } as const;
 
 export interface TitleSubtitleProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>,
     VariantProps<typeof titleSubtitleVariants> {
   /** Título principal (requerido). */
   title: React.ReactNode;
@@ -66,7 +66,7 @@ const TitleSubtitle = ({
     >
       <Title
         size={titleSize}
-        align={align}
+        align={align ?? 'center'}
         className={titleClassName}
       >
         {title}
@@ -75,7 +75,7 @@ const TitleSubtitle = ({
       {subtitle && (
         <Subtitle
           size={subtitleSize}
-          align={align}
+          align={align ?? 'center'}
           tone={subtitleTone}
           className={subtitleClassName}
         >
