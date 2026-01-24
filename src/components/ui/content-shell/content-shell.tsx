@@ -13,18 +13,22 @@ export interface ContentShellProps
 }
 
 /**
- * Contenedor de contenido con padding y gap responsivos.
- * Incluye variantes de escala para diferentes contextos de uso.
+ * Contenedor de contenido principal - Fuente de verdad para spacing.
+ *
+ * Define CSS Variables (--shell-padding, --shell-gap) que los componentes hijos
+ * pueden heredar para mantener consistencia en toda la página.
+ *
+ * Absorbe los estilos de PageContainer (bg-gradient, font-ui) para reducir anidación.
  */
 const ContentShell = ({
   as: Component = 'div',
-  scale = 'md',
+  background = 'gradient',
   className,
   ...props
 }: ContentShellProps) => {
   return (
     <Component
-      className={cn(contentShellVariants({ scale }), className)}
+      className={cn(contentShellVariants({ background }), className)}
       {...props}
     />
   );
@@ -33,4 +37,3 @@ const ContentShell = ({
 ContentShell.displayName = 'ContentShell';
 
 export { ContentShell };
-

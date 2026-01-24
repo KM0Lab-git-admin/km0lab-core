@@ -6,7 +6,6 @@ import { cn } from '@/components/ui/primitives/utils';
 import {
   badgeVariants,
   imageVariants,
-  mediaFrameInnerVariants,
   mediaFrameVariants,
 } from './media-frame.styles';
 
@@ -28,9 +27,8 @@ export interface MediaFrameProps
 }
 
 /**
- * Primitive UI: Marco contenedor para imágenes con soporte de badges,
- * sombras y radios de borde personalizables.
- * Layout por defecto: 'stack' (ancho completo).
+ * Marco contenedor para imágenes con soporte de badges.
+ * Simplificado: sin div interno (MediaFrameInner eliminado).
  */
 const MediaFrame = ({
   layout = 'stack',
@@ -50,18 +48,16 @@ const MediaFrame = ({
     className={cn(mediaFrameVariants({ layout, radius, shadow, tone }), className)}
     {...props}
   >
-    <div className={cn(mediaFrameInnerVariants({ radius }))}>
-      {children || (
-        src && (
-          <img
-            src={src}
-            alt={alt}
-            className={cn(imageVariants({ maxHeight: imageMaxHeight }))}
-            draggable={false}
-          />
-        )
-      )}
-    </div>
+    {children || (
+      src && (
+        <img
+          src={src}
+          alt={alt}
+          className={cn(imageVariants({ maxHeight: imageMaxHeight }))}
+          draggable={false}
+        />
+      )
+    )}
 
     {badgeText && (
       <div className={cn(badgeVariants({ position: badgePosition }))}>

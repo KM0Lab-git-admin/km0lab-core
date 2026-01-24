@@ -25,7 +25,6 @@ export const heroSlideVariants = cva(
           'landscape:gap-[clamp(6px,1.2vh,16px)]',
         ].join(' '),
         md: [
-          // Gaps más ajustados que se reducen cuando hay poco espacio
           'gap-[clamp(8px,1.5vh,24px)]',
           'portrait:gap-[clamp(10px,2vh,32px)]',
           'landscape:gap-[clamp(8px,1.5vh,24px)]',
@@ -53,8 +52,12 @@ export const heroSlideVariants = cva(
   },
 );
 
-export const heroContentVariants = cva(
-  // flex-1 min-w-0 min-h-0: permite que el texto tome el espacio restante y haga wrap, sin cortarse
+/**
+ * heroTextVariants - Fusiona heroContentVariants + heroTextWrapperVariants.
+ * Reduce 2 divs a 1 solo contenedor para título y subtítulo.
+ */
+export const heroTextVariants = cva(
+  // Base: flex column + permite que el texto tome espacio y haga wrap
   'flex flex-1 flex-col min-w-0 min-h-0 overflow-visible',
   {
     variants: {
@@ -63,48 +66,32 @@ export const heroContentVariants = cva(
         left: 'items-start text-left',
       },
       layout: {
-        // Stack: centrado en portrait, left en landscape
         stack: [
           'portrait:items-center portrait:text-center',
           'landscape:items-start landscape:text-left landscape:justify-center',
         ].join(' '),
-        // Side: siempre left
         side: 'items-start text-left justify-center',
+      },
+      scale: {
+        sm: 'gap-[clamp(2px,0.5vh,8px)]',
+        md: [
+          'gap-[clamp(4px,0.8vh,16px)]',
+          'portrait:gap-[clamp(6px,1vh,20px)]',
+          'tablet:gap-[clamp(8px,1.5vh,24px)]',
+          'desktop:gap-[clamp(12px,2vh,32px)]',
+        ].join(' '),
+        lg: [
+          'gap-[clamp(6px,1.2vh,20px)]',
+          'portrait:gap-[clamp(8px,1.5vh,24px)]',
+          'tablet:gap-[clamp(12px,2vh,32px)]',
+          'desktop:gap-[clamp(16px,2.5vh,40px)]',
+        ].join(' '),
       },
     },
     defaultVariants: {
       align: 'center',
       layout: 'stack',
+      scale: 'md',
     },
   },
 );
-
-export const heroTextWrapperVariants = cva('flex flex-col', {
-  variants: {
-    density: {
-      default: '',
-      compact: '',
-    },
-    scale: {
-      sm: [
-        'gap-[clamp(2px,0.5vh,8px)]',
-      ].join(' '),
-      md: [
-        'gap-[clamp(4px,0.8vh,16px)]',
-        'portrait:gap-[clamp(6px,1vh,20px)]',
-        'tablet:gap-[clamp(8px,1.5vh,24px)]',
-        'desktop:gap-[clamp(12px,2vh,32px)]',
-      ].join(' '),
-      lg: [
-        'gap-[clamp(6px,1.2vh,20px)]',
-        'portrait:gap-[clamp(8px,1.5vh,24px)]',
-        'tablet:gap-[clamp(12px,2vh,32px)]',
-        'desktop:gap-[clamp(16px,2.5vh,40px)]',
-      ].join(' '),
-    },
-  },
-  defaultVariants: {
-    density: 'default',
-    scale: 'md',
-  },
-});

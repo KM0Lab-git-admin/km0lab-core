@@ -30,7 +30,6 @@ import { StatusBar } from '@/components/ui/layout/StatusBar';
 import { LogoHeader } from '@/components/ui/logo-header';
 import { MediaFrame } from '@/components/ui/media-frame';
 import { NavigationFooter } from '@/components/ui/navigation-footer';
-import { PageContainer } from '@/components/ui/page-container';
 import { Badge } from '@/components/ui/primitives/badge';
 import { Button } from '@/components/ui/primitives/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/primitives/card';
@@ -1338,63 +1337,22 @@ const MediaFrameDemo = () => {
   );
 };
 
-const PageContainerDemo = () => {
-  const [as, setAs] = useState<'div' | 'main' | 'section'>('div');
-
-  return (
-    <div className="space-y-4">
-      <div className="grid gap-2 sm:grid-cols-2">
-        <label className="text-sm text-slate-600">
-          Elemento HTML
-          <select
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={as}
-            onChange={e => setAs(e.target.value as 'div' | 'main' | 'section')}
-          >
-            <option value="div">div</option>
-            <option value="main">main</option>
-            <option value="section">section</option>
-          </select>
-        </label>
-      </div>
-
-      <div className="rounded-lg border border-slate-200 bg-white p-4">
-        <div className="mx-auto max-w-md overflow-hidden rounded-lg border-2 border-dashed border-slate-300" style={{ height: '300px' }}>
-          <PageContainer as={as} className="h-full">
-            <div className="flex h-full items-center justify-center p-4">
-              <div className="text-center">
-                <p className="text-sm font-semibold text-slate-700">PageContainer</p>
-                <p className="mt-1 text-xs text-slate-500">Fondo degradado blanco-beige</p>
-                <p className="mt-1 text-xs text-slate-400">
-                  Elemento:
-                  {as}
-                </p>
-              </div>
-            </div>
-          </PageContainer>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const ContentShellDemo = () => {
-  const [scale, setScale] = useState<'sm' | 'md' | 'lg'>('md');
+  const [background, setBackground] = useState<'gradient' | 'none'>('gradient');
   const [as, setAs] = useState<'div' | 'main' | 'section'>('div');
 
   return (
     <div className="space-y-4">
       <div className="grid gap-2 sm:grid-cols-2">
         <label className="text-sm text-slate-600">
-          Escala
+          Fondo
           <select
             className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={scale}
-            onChange={e => setScale(e.target.value as 'sm' | 'md' | 'lg')}
+            value={background}
+            onChange={e => setBackground(e.target.value as 'gradient' | 'none')}
           >
-            <option value="sm">sm (pequeño)</option>
-            <option value="md">md (mediano)</option>
-            <option value="lg">lg (grande)</option>
+            <option value="gradient">gradient (degradado blanco-beige)</option>
+            <option value="none">none (transparente)</option>
           </select>
         </label>
         <label className="text-sm text-slate-600">
@@ -1411,18 +1369,21 @@ const ContentShellDemo = () => {
         </label>
       </div>
 
-      <div className="rounded-lg border border-slate-200 bg-gradient-white-beige p-4">
+      <div className="rounded-lg border border-slate-200 bg-slate-100 p-4">
         <div className="mx-auto max-w-2xl overflow-hidden rounded-lg border-2 border-dashed border-slate-300" style={{ height: '300px' }}>
-          <ContentShell scale={scale} as={as} className="h-full">
+          <ContentShell background={background} as={as} className="h-full">
             <div className="flex h-full flex-col items-center justify-center gap-4">
               <Badge variant="secondary">ContentShell</Badge>
               <p className="text-sm text-slate-700">
-                Escala:
-                {scale}
+                Fondo:
+                {background}
               </p>
               <p className="text-xs text-slate-500">
                 Elemento:
                 {as}
+              </p>
+              <p className="text-xs text-slate-400">
+                CSS Variables: --shell-padding, --shell-gap
               </p>
             </div>
           </ContentShell>
@@ -1515,24 +1476,11 @@ const LogoHeaderDemo = () => {
 };
 
 const ContentCardDemo = () => {
-  const [scale, setScale] = useState<'sm' | 'md' | 'lg'>('md');
   const [as, setAs] = useState<'section' | 'div' | 'article' | 'aside'>('section');
 
   return (
     <div className="space-y-4">
       <div className="grid gap-2 sm:grid-cols-2">
-        <label className="text-sm text-slate-600">
-          Escala
-          <select
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={scale}
-            onChange={e => setScale(e.target.value as 'sm' | 'md' | 'lg')}
-          >
-            <option value="sm">sm (pequeño)</option>
-            <option value="md">md (mediano)</option>
-            <option value="lg">lg (grande)</option>
-          </select>
-        </label>
         <label className="text-sm text-slate-600">
           Elemento HTML
           <select
@@ -1548,35 +1496,31 @@ const ContentCardDemo = () => {
         </label>
       </div>
 
-      <div className="rounded-lg border border-slate-200 bg-gradient-white-beige p-4">
-        <div className="mx-auto max-w-2xl">
-          <ContentCard scale={scale} as={as}>
+      <div className="rounded-lg border border-slate-200 p-4">
+        <ContentShell className="max-w-2xl mx-auto">
+          <ContentCard as={as}>
             <div className="flex flex-col gap-4">
               <Title size="h2">Título de ejemplo</Title>
               <Subtitle size="md">
-                Este es un ejemplo de ContentCard con escala
-                {' '}
-                {scale}
-                {' '}
-                y elemento
+                ContentCard hereda spacing de ContentShell via CSS Variables.
+                Elemento:
                 {' '}
                 {as}
                 .
               </Subtitle>
               <div className="rounded-lg bg-km0-blue-50 p-4">
                 <p className="text-sm text-slate-700">
-                  El componente ContentCard proporciona un contenedor con estilos responsivos,
-                  sombra personalizada y variantes de escala para diferentes contextos.
+                  El componente ContentCard hereda --shell-padding y --shell-gap de ContentShell.
+                  Solo define estilos visuales propios (fondo blanco, sombra, border-radius).
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                <Badge variant="secondary">Reutilizable</Badge>
-                <Badge variant="secondary">Responsive</Badge>
-                <Badge variant="secondary">Flexible</Badge>
+                <Badge variant="secondary">Hereda spacing</Badge>
+                <Badge variant="secondary">CSS Variables</Badge>
               </div>
             </div>
           </ContentCard>
-        </div>
+        </ContentShell>
       </div>
     </div>
   );
@@ -2055,7 +1999,7 @@ export const componentRegistry: ComponentEntry[] = [
   {
     id: 'content-card',
     title: 'ContentCard',
-    description: 'Tarjeta de contenido genérica con estilos responsivos, sombra y variantes de escala.',
+    description: 'Tarjeta de contenido que hereda spacing de ContentShell via CSS Variables.',
     group: 'ui',
     filePath: 'src/components/ui/content-card/content-card.tsx',
     importPath: '@/components/ui/content-card',
@@ -2064,32 +2008,15 @@ export const componentRegistry: ComponentEntry[] = [
     Component: ContentCard,
     Demo: ContentCardDemo,
     notes: [
-      'Variantes de escala (sm, md, lg) con padding y max-width responsivos usando clamp().',
+      'Hereda --shell-padding y --shell-gap de ContentShell.',
+      'Solo define estilos visuales: fondo blanco, sombra km0-card-shadow, border-radius.',
       'Soporta diferentes elementos HTML (section, div, article, aside).',
-      'Incluye sombra km0-card-shadow y fondo blanco por defecto.',
-    ],
-  },
-  {
-    id: 'page-container',
-    title: 'PageContainer',
-    description: 'Contenedor de página genérico con fondo degradado y altura completa.',
-    group: 'ui',
-    filePath: 'src/components/ui/page-container/page-container.tsx',
-    importPath: '@/components/ui/page-container',
-    exportName: 'PageContainer',
-    exportType: 'named',
-    Component: PageContainer,
-    Demo: PageContainerDemo,
-    notes: [
-      'Fondo degradado blanco-beige del sistema de diseño.',
-      'Altura completa con fallback para navegadores que no soportan dvh.',
-      'Soporta diferentes elementos HTML (div, main, section).',
     ],
   },
   {
     id: 'content-shell',
     title: 'ContentShell',
-    description: 'Contenedor de contenido con padding y gap responsivos y variantes de escala.',
+    description: 'Contenedor principal - Fuente de verdad para spacing via CSS Variables.',
     group: 'ui',
     filePath: 'src/components/ui/content-shell/content-shell.tsx',
     importPath: '@/components/ui/content-shell',
@@ -2098,8 +2025,10 @@ export const componentRegistry: ComponentEntry[] = [
     Component: ContentShell,
     Demo: ContentShellDemo,
     notes: [
-      'Variantes de escala (sm, md, lg) con padding y gap responsivos usando clamp().',
-      'Layout flexible con items-center y justify-start.',
+      'Define CSS Variables (--shell-padding, --shell-gap) por breakpoint.',
+      'Los componentes hijos heredan estas variables automáticamente.',
+      'Absorbe los estilos de PageContainer (bg-gradient, font-ui).',
+      'Variante background: gradient (default) o none (transparente).',
       'Soporta diferentes elementos HTML (div, main, section).',
     ],
   },

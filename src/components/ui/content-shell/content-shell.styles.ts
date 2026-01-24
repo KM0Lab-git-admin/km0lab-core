@@ -1,38 +1,58 @@
 import { cva } from 'class-variance-authority';
 
+/**
+ * ContentShell - Fuente de verdad para spacing por breakpoint.
+ *
+ * Define CSS Variables que los componentes hijos pueden heredar:
+ * - --shell-padding: padding del contenedor
+ * - --shell-gap: gap entre elementos
+ *
+ * Los hijos pueden usar: p-[var(--shell-padding)], gap-[var(--shell-gap)]
+ */
 export const contentShellVariants = cva(
-  // Clases base - padding mínimo de 12px siempre (todas las variantes y todos los breakpoints)
-  'flex-1 min-h-0 flex flex-col items-center justify-start w-full overflow-hidden max-w-[570px] mx-auto p-[clamp(12px,2vw,24px)] gap-[clamp(8px,2vh,24px)]',
+  [
+    // Layout base
+    'flex-1 min-h-0 flex flex-col items-center justify-start w-full overflow-hidden',
+    'max-w-[570px] mx-auto',
+
+    // === CSS VARIABLES - FUENTE DE VERDAD PARA SPACING ===
+    // Base (xs/mobile pequeño)
+    '[--shell-padding:12px]',
+    '[--shell-gap:8px]',
+
+    // mobile-p (480px+)
+    'mobile-p:[--shell-padding:16px]',
+    'mobile-p:[--shell-gap:12px]',
+
+    // tablet (768px+)
+    'tablet:[--shell-padding:24px]',
+    'tablet:[--shell-gap:16px]',
+
+    // desktop (1280px+)
+    'desktop:[--shell-padding:32px]',
+    'desktop:[--shell-gap:24px]',
+
+    // Aplicar las variables
+    'p-[var(--shell-padding)]',
+    'gap-[var(--shell-gap)]',
+
+    // === ESTILOS VISUALES (absorbidos de PageContainer) ===
+    'bg-gradient-white-beige',
+    'font-ui',
+  ].join(' '),
   {
     variants: {
-      scale: {
-        sm: [
-          // Solo sobrescribir con valores específicos de sm
-          'p-[clamp(12px,1.5vw,16px)]',
-          'gap-[clamp(8px,1.5vh,16px)]',
-        ].join(' '),
-        md: [
-          // Base ya tiene el padding, solo añadir breakpoints específicos
-          'mobile-p:p-[clamp(12px,1.5vw,20px)]',
-          'mobile-p:gap-[clamp(6px,1.5vh,20px)]',
-          'tablet:p-[clamp(16px,2.5vw,32px)]',
-          'tablet:gap-[clamp(12px,2vh,32px)]',
-          'desktop:p-[clamp(24px,3.5vw,48px)]',
-          'desktop:gap-[clamp(20px,3vh,40px)]',
-        ].join(' '),
-        lg: [
-          // Sobrescribir base con valores de lg
-          'p-[clamp(12px,2.5vw,32px)]',
-          'gap-[clamp(12px,2.5vh,28px)]',
-          'tablet:p-[clamp(24px,3.5vw,48px)]',
-          'tablet:gap-[clamp(20px,3vh,40px)]',
-          'desktop:p-[clamp(32px,4.5vw,64px)]',
-          'desktop:gap-[clamp(24px,3.5vh,56px)]',
-        ].join(' '),
+      /**
+       * Variante de fondo - permite diferentes fondos por página.
+       * Por defecto usa bg-gradient-white-beige.
+       */
+      background: {
+        gradient: '', // default, ya está en base
+        none: '!bg-transparent',
       },
     },
     defaultVariants: {
-      scale: 'md',
+      background: 'gradient',
     },
   },
 );

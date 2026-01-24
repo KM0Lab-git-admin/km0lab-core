@@ -12,7 +12,6 @@ import { Title } from '@/components/ui/primitives/title';
 import { LogoHeader } from '@/components/ui/logo-header';
 import { ContentCard } from '@/components/ui/content-card';
 import { ContentShell } from '@/components/ui/content-shell';
-import { PageContainer } from '@/components/ui/page-container';
 import { cn } from '@/components/ui/primitives/utils';
 import { checkPostalCodeAvailability } from '@/features/postal-code';
 import { getValidatorById } from '@/validation/validators';
@@ -114,10 +113,6 @@ export default function PostalCode() {
   const isUnavailable = availabilityStatus === 'unavailable';
   const isAvailable = availabilityStatus === 'available';
 
-  // Mostrar error de formato solo si:
-  // 1. El validador detecta caracteres no numéricos (muestra error inmediatamente), O
-  // 2. Ha completado los 5 caracteres y no son válidos
-  // Si son números pero incompletos (< 5), no mostrar error (permitir que siga escribiendo)
   const hasFormatError = formatValidation.message && !formatValidation.isValid;
   const shouldShowFormatError = hasFormatError;
   const inputError = shouldShowFormatError || isUnavailable;
@@ -150,127 +145,122 @@ export default function PostalCode() {
     router.push(`/${locale}/onboarding`);
   };
 
-  const scale = 'md';
   const showCityName = isAvailable && cityName;
 
   return (
-    <PageContainer>
-      <ContentShell scale={scale}>
-        <LogoHeader
-          scale={scale}
-          logoScale={scale}
-          leftAction={(
-            <Button
-              size="icon"
-              variant="ghost"
-              onClick={handleBack}
-              aria-label="Volver al onboarding"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </Button>
-          )}
-        />
-
-        <ContentCard scale={scale}>
-          <form
-            className={postalCodeForm({ scale })}
-            onSubmit={handleSubmit}
-            aria-label={t('form_aria')}
+    <ContentShell>
+      <LogoHeader
+        logoScale="md"
+        leftAction={(
+          <Button
+            size="icon"
+            variant="ghost"
+            onClick={handleBack}
+            aria-label="Volver al onboarding"
           >
-            <MediaFrame
-              src="/images/glovo-style-discover.png"
-              alt={t('image_alt')}
-              badgeText={t('xp_badge')}
-              className="w-full"
-            />
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </Button>
+        )}
+      />
 
-            {!showCityName && (
-              <div className={postalCodeTitleContainer({ scale })}>
-                <Title as="h1" size="h2" align="center" uppercase>
-                  {t('title')}
-                </Title>
-                <Subtitle size="sm" align="center" tone="muted">
-                  {t('subtitle')}
-                </Subtitle>
-              </div>
-            )}
+      <ContentCard>
+        <form
+          className={postalCodeForm()}
+          onSubmit={handleSubmit}
+          aria-label={t('form_aria')}
+        >
+          <MediaFrame
+            src="/images/glovo-style-discover.png"
+            alt={t('image_alt')}
+            badgeText={t('xp_badge')}
+            className="w-full"
+          />
 
-            {showCityName && (
-              <div className={postalCodeTitleContainer({ scale })}>
-                <Title
-                  as="h1"
-                  size="h2"
-                  align="center"
-                  className="text-km0-success-500"
-                >
-                  {cityName}
-                </Title>
-              </div>
-            )}
-
-            <div className={postalCodeInputContainer({ scale })}>
-              <label htmlFor={inputId} className="sr-only">
-                {t('input_label')}
-              </label>
-              <Input
-                id={inputId}
-                value={postalCode}
-                onChange={(event) => handlePostalCodeChange(event.target.value)}
-                placeholder={t('placeholder')}
-                iconLeft={<ZipCodeIcon />}
-                inputMode="numeric"
-                autoComplete="postal-code"
-                maxLength={5}
-                error={inputError}
-                variant={isAvailable ? 'success' : undefined}
-                message={inputMessage}
-                aria-label={t('input_aria')}
-              />
+          {!showCityName && (
+            <div className={postalCodeTitleContainer()}>
+              <Title as="h1" size="h2" align="center" uppercase>
+                {t('title')}
+              </Title>
+              <Subtitle size="sm" align="center" tone="muted">
+                {t('subtitle')}
+              </Subtitle>
             </div>
+          )}
 
-            <div className={postalCodeButtonContainer({ scale })}>
-              <Button
-                type="submit"
-                onClick={handleContinue}
-                disabled={!isAvailable || isChecking}
-                aria-label={t('continue_aria')}
-                className={postalCodeButton({ scale })}
+          {showCityName && (
+            <div className={postalCodeTitleContainer()}>
+              <Title
+                as="h1"
+                size="h2"
+                align="center"
+                className="text-km0-success-500"
               >
-                {isChecking ? (
-                  <>
-                    <LoadingSpinner className="text-white" />
-                    {t('checking')}
-                  </>
-                ) : (
-                  t('continue')
-                )}
-              </Button>
-
-              {isUnavailable && (
-                <button
-                  type="button"
-                  aria-label={t('notify_aria')}
-                  onClick={() => {}}
-                  className={postalCodeNotifyButton({ scale })}
-                >
-                  {t('notify')}
-                </button>
-              )}
+                {cityName}
+              </Title>
             </div>
-          </form>
-        </ContentCard>
-      </ContentShell>
-    </PageContainer>
+          )}
+
+          <div className={postalCodeInputContainer()}>
+            <label htmlFor={inputId} className="sr-only">
+              {t('input_label')}
+            </label>
+            <Input
+              id={inputId}
+              value={postalCode}
+              onChange={(event) => handlePostalCodeChange(event.target.value)}
+              placeholder={t('placeholder')}
+              iconLeft={<ZipCodeIcon />}
+              inputMode="numeric"
+              autoComplete="postal-code"
+              maxLength={5}
+              error={inputError}
+              variant={isAvailable ? 'success' : undefined}
+              message={inputMessage}
+              aria-label={t('input_aria')}
+            />
+          </div>
+
+          <div className={postalCodeButtonContainer()}>
+            <Button
+              type="submit"
+              onClick={handleContinue}
+              disabled={!isAvailable || isChecking}
+              aria-label={t('continue_aria')}
+              className={postalCodeButton()}
+            >
+              {isChecking ? (
+                <>
+                  <LoadingSpinner className="text-white" />
+                  {t('checking')}
+                </>
+              ) : (
+                t('continue')
+              )}
+            </Button>
+
+            {isUnavailable && (
+              <button
+                type="button"
+                aria-label={t('notify_aria')}
+                onClick={() => {}}
+                className={postalCodeNotifyButton()}
+              >
+                {t('notify')}
+              </button>
+            )}
+          </div>
+        </form>
+      </ContentCard>
+    </ContentShell>
   );
 }
-

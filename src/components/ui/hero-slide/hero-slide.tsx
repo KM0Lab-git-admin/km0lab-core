@@ -7,9 +7,8 @@ import { Title } from '@/components/ui/primitives/title';
 import { cn } from '@/components/ui/primitives/utils';
 
 import {
-  heroContentVariants,
   heroSlideVariants,
-  heroTextWrapperVariants,
+  heroTextVariants,
 } from './hero-slide.styles';
 
 export type HeroSlideProps = {
@@ -25,16 +24,18 @@ export type HeroSlideProps = {
   badgeText?: string;
   /** Clase de color de fondo para el MediaFrame. */
   bgColor?: string;
-  /** Alineación del texto en modo stack (default: center). */
-  align?: VariantProps<typeof heroContentVariants>['align'];
+  /** Alineación del texto (default: center). */
+  align?: VariantProps<typeof heroTextVariants>['align'];
 } & Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> & VariantProps<typeof heroSlideVariants>;
 
 /**
  * Componente de composición para slides o héroes.
+ * Simplificado: 1 solo wrapper para texto (antes eran 2).
+ *
  * - layout="stack": vertical en portrait, horizontal en landscape (default)
- * - layout="side": siempre horizontal (imagen izquierda, texto derecha)
- * - density="compact": reduce gaps, Title h2, Subtitle sm, imagen compacta
- * - scale="sm|md|lg": controla el escalado proporcional (gaps, padding, etc.)
+ * - layout="side": siempre horizontal
+ * - density="compact": reduce gaps, Title h2, Subtitle sm
+ * - scale="sm|md|lg": controla el escalado proporcional
  */
 const HeroSlide = ({
   title,
@@ -53,7 +54,6 @@ const HeroSlide = ({
   const isSide = layout === 'side';
   const isCompact = density === 'compact';
 
-  // Variantes internas basadas en props
   const resolvedAlign = isSide ? 'left' : (align ?? 'center');
   const titleSize = isCompact ? 'h2' : 'h1';
   const subtitleSize = isCompact ? 'sm' : 'md';
@@ -71,9 +71,7 @@ const HeroSlide = ({
         tone={bgColor ? undefined : 'default'}
         className={cn(
           'shrink-0 transition-all',
-          // En stack portrait: ancho completo, altura flexible
           'portrait:w-full portrait:max-w-none portrait:flex-shrink',
-          // En stack landscape o side: ancho fijo para layout horizontal
           'landscape:w-[40%] landscape:min-w-[180px] landscape:max-w-[280px]',
           bgColor,
         )}
@@ -81,26 +79,25 @@ const HeroSlide = ({
         imageMaxHeight={imageMaxHeight}
       />
 
-      <div className={cn(heroContentVariants({ align: resolvedAlign, layout }))}>
-        <div className={cn(heroTextWrapperVariants({ density, scale }))}>
-          <Title
-            as="h1"
-            size={titleSize}
-            align={resolvedAlign}
-          >
-            {title}
-          </Title>
+      {/* Un solo wrapper para texto (antes eran ContentWrapper + TextWrapper) */}
+      <div className={cn(heroTextVariants({ align: resolvedAlign, layout, scale }))}>
+        <Title
+          as="h1"
+          size={titleSize}
+          align={resolvedAlign}
+        >
+          {title}
+        </Title>
 
-          {subtitle && (
-            <Subtitle
-              size={subtitleSize}
-              align={resolvedAlign}
-              className="max-w-[45ch]"
-            >
-              {subtitle}
-            </Subtitle>
-          )}
-        </div>
+        {subtitle && (
+          <Subtitle
+            size={subtitleSize}
+            align={resolvedAlign}
+            className="max-w-[45ch]"
+          >
+            {subtitle}
+          </Subtitle>
+        )}
       </div>
     </div>
   );

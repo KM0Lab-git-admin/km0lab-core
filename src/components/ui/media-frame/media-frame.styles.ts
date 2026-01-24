@@ -1,17 +1,16 @@
 import { cva } from 'class-variance-authority';
 
+/**
+ * MediaFrame - Contenedor de imagen simplificado.
+ * Fusiona los estilos de mediaFrameInnerVariants para reducir anidación DOM.
+ */
 export const mediaFrameVariants = cva(
-  'relative flex items-center justify-center overflow-hidden border border-black/5 transition-all',
+  // Fusionado: border, overflow, position + padding y shadow-inner de Inner
+  'relative flex items-center justify-center overflow-hidden border border-black/5 transition-all p-2 shadow-inner',
   {
     variants: {
-      /**
-       * Layout del contenedor:
-       * - stack: Ocupa el ancho disponible (default genérico).
-       * - side: Pensado para layouts horizontales, ocupa un porcentaje.
-       */
       layout: {
         stack: 'w-full',
-        /** Side: ancho fijo para layouts horizontales, con límites */
         side: 'w-[40%] min-w-[180px] max-w-[280px] shrink-0',
       },
       tone: {
@@ -34,22 +33,6 @@ export const mediaFrameVariants = cva(
       tone: 'default',
       radius: 'lg',
       shadow: 'sm',
-    },
-  },
-);
-
-export const mediaFrameInnerVariants = cva(
-  'relative flex h-full w-full items-center justify-center p-2 shadow-inner',
-  {
-    variants: {
-      radius: {
-        md: 'rounded-md',
-        lg: 'rounded-lg',
-        xl: 'rounded-xl',
-      },
-    },
-    defaultVariants: {
-      radius: 'lg',
     },
   },
 );
@@ -79,16 +62,12 @@ export const imageVariants = cva('h-full w-full object-contain', {
   variants: {
     maxHeight: {
       default: [
-        // Más restrictivo: prioriza espacio para texto
         'max-h-[clamp(140px,22dvh,260px)]',
         'portrait:max-h-[clamp(160px,25dvh,300px)]',
         'landscape:max-h-[clamp(140px,22dvh,260px)]',
-        // Tablet: más espacio pero aún restrictivo
         'tablet:max-h-[clamp(220px,32dvh,380px)]',
-        // Desktop: más generoso
         'desktop:max-h-[clamp(300px,42dvh,480px)]',
       ].join(' '),
-      /** Variante compacta: altura limitada proporcionalmente */
       compact: [
         'max-h-[clamp(100px,18dvh,200px)]',
         'portrait:max-h-[clamp(120px,20dvh,220px)]',

@@ -1,4 +1,3 @@
-import type { VariantProps } from 'class-variance-authority';
 import type React from 'react';
 
 import { cn } from '@/components/ui/primitives/utils';
@@ -6,26 +5,25 @@ import { cn } from '@/components/ui/primitives/utils';
 import { contentCardVariants } from './content-card.styles';
 
 export interface ContentCardProps
-  extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof contentCardVariants> {
+  extends React.HTMLAttributes<HTMLElement> {
   /** Elemento HTML a renderizar (default: 'section'). */
   as?: 'section' | 'div' | 'article' | 'aside';
 }
 
 /**
- * Componente genérico de tarjeta de contenido con estilos responsivos.
- * Incluye sombra, redondeado, fondo blanco y variantes de escala.
- * Útil para contenedores de contenido principal en diferentes contextos.
+ * Tarjeta de contenido principal.
+ *
+ * Hereda spacing de ContentShell via CSS Variables (--shell-padding, --shell-gap).
+ * Solo define estilos visuales propios: fondo blanco, sombra, border-radius.
  */
 const ContentCard = ({
   as: Component = 'section',
-  scale = 'md',
   className,
   ...props
 }: ContentCardProps) => {
   return (
     <Component
-      className={cn(contentCardVariants({ scale }), className)}
+      className={cn(contentCardVariants(), className)}
       {...props}
     />
   );
@@ -34,4 +32,3 @@ const ContentCard = ({
 ContentCard.displayName = 'ContentCard';
 
 export { ContentCard };
-

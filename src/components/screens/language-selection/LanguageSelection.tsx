@@ -4,7 +4,6 @@ import BreakpointIndicator from '@/components/devtools/BreakpointIndicator';
 import { ContentCard } from '@/components/ui/content-card';
 import { ContentShell } from '@/components/ui/content-shell';
 import { LogoHeader } from '@/components/ui/logo-header';
-import { PageContainer } from '@/components/ui/page-container';
 import { LanguageButton } from '@/components/ui/primitives/language-button';
 import { Subtitle } from '@/components/ui/primitives/subtitle';
 import { Title } from '@/components/ui/primitives/title';
@@ -49,60 +48,50 @@ export default function LanguageSelection() {
   }, []);
 
   const handleLanguageSelect = (locale: Locale) => {
-    // Redirigir a onboarding con el locale seleccionado
     router.push(`/${locale}/onboarding`);
   };
-
-  // Scale semántico: puede venir de props o contexto en el futuro
-  const scale = 'md';
 
   // Idiomas disponibles (configurable)
   const availableLocales: Locale[] = ['ca', 'es'];
 
   return (
-    <PageContainer>
+    <ContentShell>
       <BreakpointIndicator />
-      <ContentShell scale={scale}>
-        <LogoHeader
-          scale={scale}
-          logoScale={scale}
-        />
+      <LogoHeader logoScale="md" />
 
-        <ContentCard scale={scale}>
-          <div className="flex flex-col items-center gap-6 py-8">
-            {/* Título */}
-            <Title size="h1" align="center" className="text-km0-blue-700">
-              {texts.title}
-            </Title>
+      <ContentCard>
+        <div className="flex flex-col items-center gap-6 py-8">
+          {/* Título */}
+          <Title size="h1" align="center" className="text-km0-blue-700">
+            {texts.title}
+          </Title>
 
-            {/* Subtítulo */}
-            <Subtitle size="md" align="center" tone="muted">
-              {texts.subtitle}
-            </Subtitle>
+          {/* Subtítulo */}
+          <Subtitle size="md" align="center" tone="muted">
+            {texts.subtitle}
+          </Subtitle>
 
-            {/* Botones de idioma */}
-            <div className="flex w-full flex-col items-center gap-3">
-              {availableLocales.map((locale) => {
-                const config = getLanguageConfig(locale);
-                return (
-                  <LanguageButton
-                    key={locale}
-                    variant="outline"
-                    size="default"
-                    flagSrc={config.flagSrc}
-                    flagAlt={config.flagAlt}
-                    title={config.title}
-                    subtitle={config.subtitle}
-                    onClick={() => handleLanguageSelect(locale)}
-                    className="w-full max-w-language-button"
-                  />
-                );
-              })}
-            </div>
+          {/* Botones de idioma */}
+          <div className="flex w-full flex-col items-center gap-3">
+            {availableLocales.map((locale) => {
+              const config = getLanguageConfig(locale);
+              return (
+                <LanguageButton
+                  key={locale}
+                  variant="outline"
+                  size="default"
+                  flagSrc={config.flagSrc}
+                  flagAlt={config.flagAlt}
+                  title={config.title}
+                  subtitle={config.subtitle}
+                  onClick={() => handleLanguageSelect(locale)}
+                  className="w-full max-w-language-button"
+                />
+              );
+            })}
           </div>
-        </ContentCard>
-      </ContentShell>
-    </PageContainer>
+        </div>
+      </ContentCard>
+    </ContentShell>
   );
 }
-
