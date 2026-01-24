@@ -8,6 +8,7 @@ export const logoVariants = cva('logo-1', {
       md: [
         'scale-[clamp(0.55,8.5vw,0.65)]',
         'mobile-p:scale-[clamp(0.6,9vw,0.7)]',
+        'short-landscape:scale-[0.55]',
         'tablet:scale-[clamp(0.7,10vw,0.8)]',
         'laptop-short:scale-[clamp(0.65,9vw,0.75)]',
         'desktop:scale-[clamp(0.85,11vw,0.95)]',

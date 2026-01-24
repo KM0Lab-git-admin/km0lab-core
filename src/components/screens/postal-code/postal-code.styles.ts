@@ -16,22 +16,6 @@ export const postalCodeForm = cva(
   },
 );
 
-export const postalCodeTitleContainer = cva(
-  'w-full text-center flex flex-col',
-  {
-    variants: {
-      scale: {
-        sm: 'gap-1',
-        md: 'gap-1 xs:gap-2',
-        lg: 'gap-2 xs:gap-3',
-      },
-    },
-    defaultVariants: {
-      scale: 'md',
-    },
-  },
-);
-
 export const postalCodeInputContainer = cva('w-full flex flex-col', {
   variants: {
     scale: {

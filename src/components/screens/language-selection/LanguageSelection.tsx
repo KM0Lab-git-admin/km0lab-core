@@ -5,8 +5,7 @@ import { ContentCard } from '@/components/ui/content-card';
 import { ContentShell } from '@/components/ui/content-shell';
 import { LogoHeader } from '@/components/ui/logo-header';
 import { LanguageButton } from '@/components/ui/primitives/language-button';
-import { Subtitle } from '@/components/ui/primitives/subtitle';
-import { Title } from '@/components/ui/primitives/title';
+import { TitleSubtitle } from '@/components/ui/title-subtitle';
 import { getLanguageConfig, type Locale } from '@/utils/languageConfig';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -57,22 +56,19 @@ export default function LanguageSelection() {
   return (
     <ContentShell>
       <BreakpointIndicator />
-      <LogoHeader logoScale="md" />
+      <LogoHeader scale="sm" logoScale="md" />
 
       <ContentCard>
-        <div className="flex flex-col items-center gap-6 py-8">
-          {/* Título */}
-          <Title size="h1" align="center" className="text-km0-blue-700">
-            {texts.title}
-          </Title>
-
-          {/* Subtítulo */}
-          <Subtitle size="md" align="center" tone="muted">
-            {texts.subtitle}
-          </Subtitle>
+        <div className="flex flex-col items-center gap-6 py-8 short-landscape:gap-3 short-landscape:py-3">
+          <TitleSubtitle
+            title={texts.title}
+            subtitle={texts.subtitle}
+            size="lg"
+            titleClassName="text-km0-blue-700"
+          />
 
           {/* Botones de idioma */}
-          <div className="flex w-full flex-col items-center gap-3">
+          <div className="flex w-full flex-col items-center gap-3 short-landscape:gap-2">
             {availableLocales.map((locale) => {
               const config = getLanguageConfig(locale);
               return (

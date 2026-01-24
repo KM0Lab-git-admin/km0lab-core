@@ -38,7 +38,7 @@ export default function LanguageSelectionLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body suppressHydrationWarning className="min-h-screen bg-gradient-app font-[var(--font-inter)]">
-        <div className="h-dvh-fallback w-full overflow-hidden">
+        <div className="h-dvh-fallback w-full overflow-hidden flex flex-col bg-gradient-white-beige">
           {children}
         </div>
         <Script

@@ -20,7 +20,7 @@ export const languageButtonVariants = cva(
       size: {
         xs: 'min-h-8 px-4 py-2 text-xs',
         sm: 'min-h-10 px-5 py-2.5 text-sm',
-        default: 'min-h-12 px-6 py-3 text-sm',
+        default: 'min-h-12 px-6 py-3 text-sm short-landscape:min-h-9 short-landscape:px-4 short-landscape:py-1.5 short-landscape:text-xs',
         lg: 'min-h-14 px-7 py-3.5 text-base',
       },
     },

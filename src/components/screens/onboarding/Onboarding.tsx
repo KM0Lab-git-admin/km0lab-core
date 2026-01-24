@@ -95,6 +95,7 @@ export default function Onboarding() {
     <ContentShell>
       <BreakpointIndicator />
       <LogoHeader
+        scale="sm"
         logoScale="md"
         leftAction={(
           <Button

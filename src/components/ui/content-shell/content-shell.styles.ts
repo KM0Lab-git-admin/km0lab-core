@@ -12,17 +12,18 @@ import { cva } from 'class-variance-authority';
 export const contentShellVariants = cva(
   [
     // Layout base
-    'flex-1 min-h-0 flex flex-col items-center justify-start w-full overflow-hidden',
+    'flex-1 min-h-0 flex flex-col items-center justify-center w-full overflow-hidden',
     'max-w-[570px] mx-auto',
+    'short-landscape:justify-start',
 
     // === CSS VARIABLES - FUENTE DE VERDAD PARA SPACING ===
     // Base (xs/mobile pequeño)
     '[--shell-padding:12px]',
-    '[--shell-gap:8px]',
+    '[--shell-gap:12px]',
 
-    // mobile-p (480px+)
+    // mobile-p (375px+)
     'mobile-p:[--shell-padding:16px]',
-    'mobile-p:[--shell-gap:12px]',
+    'mobile-p:[--shell-gap:16px]',
 
     // tablet (768px+)
     'tablet:[--shell-padding:24px]',
@@ -31,6 +32,10 @@ export const contentShellVariants = cva(
     // desktop (1280px+)
     'desktop:[--shell-padding:32px]',
     'desktop:[--shell-gap:24px]',
+
+    // short-landscape (landscape con altura ≤ 550px) - más compacto
+    'short-landscape:[--shell-padding:8px]',
+    'short-landscape:[--shell-gap:4px]',
 
     // Aplicar las variables
     'p-[var(--shell-padding)]',

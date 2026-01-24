@@ -7,8 +7,7 @@ import { useTranslations } from 'next-intl';
 import { MediaFrame } from '@/components/ui/media-frame';
 import { Button } from '@/components/ui/primitives/button';
 import { Input, ZipCodeIcon } from '@/components/ui/primitives/input';
-import { Subtitle } from '@/components/ui/primitives/subtitle';
-import { Title } from '@/components/ui/primitives/title';
+import { TitleSubtitle } from '@/components/ui/title-subtitle';
 import { LogoHeader } from '@/components/ui/logo-header';
 import { ContentCard } from '@/components/ui/content-card';
 import { ContentShell } from '@/components/ui/content-shell';
@@ -21,7 +20,6 @@ import {
   postalCodeForm,
   postalCodeInputContainer,
   postalCodeNotifyButton,
-  postalCodeTitleContainer,
 } from './postal-code.styles';
 
 type AvailabilityStatus = 'idle' | 'checking' | 'available' | 'unavailable';
@@ -150,6 +148,7 @@ export default function PostalCode() {
   return (
     <ContentShell>
       <LogoHeader
+        scale="sm"
         logoScale="md"
         leftAction={(
           <Button
@@ -187,27 +186,20 @@ export default function PostalCode() {
           />
 
           {!showCityName && (
-            <div className={postalCodeTitleContainer()}>
-              <Title as="h1" size="h2" align="center" uppercase>
-                {t('title')}
-              </Title>
-              <Subtitle size="sm" align="center" tone="muted">
-                {t('subtitle')}
-              </Subtitle>
-            </div>
+            <TitleSubtitle
+              title={t('title')}
+              subtitle={t('subtitle')}
+              size="sm"
+              titleClassName="uppercase"
+            />
           )}
 
           {showCityName && (
-            <div className={postalCodeTitleContainer()}>
-              <Title
-                as="h1"
-                size="h2"
-                align="center"
-                className="text-km0-success-500"
-              >
-                {cityName}
-              </Title>
-            </div>
+            <TitleSubtitle
+              title={cityName}
+              size="sm"
+              titleClassName="text-km0-success-500"
+            />
           )}
 
           <div className={postalCodeInputContainer()}>

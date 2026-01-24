@@ -4,7 +4,13 @@ export const logoHeaderVariants = cva('flex items-center justify-center shrink-0
   variants: {
     scale: {
       none: '', // Sin padding - modo simple como AppHeader
-      sm: 'pb-[clamp(8px,1.5vh,12px)]',
+      sm: [
+        'pt-[clamp(8px,1.5vh,16px)]',
+        'pb-[clamp(8px,1.5vh,12px)]',
+        'mobile-p:pt-[clamp(12px,2vh,20px)]',
+        'tablet:pt-[clamp(16px,2.5vh,24px)]',
+        'desktop:pt-[clamp(20px,3vh,32px)]',
+      ].join(' '),
       md: [
         'pb-[clamp(8px,1.2vh,16px)]',
         'mobile-p:pb-[clamp(10px,1.5vh,20px)]',
