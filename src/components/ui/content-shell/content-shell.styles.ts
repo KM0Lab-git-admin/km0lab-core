@@ -12,9 +12,8 @@ import { cva } from 'class-variance-authority';
 export const contentShellVariants = cva(
   [
     // Layout base
-    'flex-1 min-h-0 flex flex-col items-center justify-center w-full overflow-hidden',
+    'flex-1 min-h-0 flex flex-col items-center justify-start w-full overflow-hidden',
     'max-w-[570px] mx-auto',
-    'short-landscape:justify-start',
 
     // === CSS VARIABLES - FUENTE DE VERDAD PARA SPACING ===
     // Base (xs/mobile pequeño)
