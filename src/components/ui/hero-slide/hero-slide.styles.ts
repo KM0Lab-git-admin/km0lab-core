@@ -5,11 +5,11 @@ export const heroSlideVariants = cva(
   {
     variants: {
       layout: {
-        /** Stack: Vertical por defecto (portrait). En landscape se convierte en side automáticamente. */
+        /** Stack: Vertical por defecto. En short-landscape (altura ≤ 550px) se convierte en side. */
         stack: [
           'flex-col items-center justify-start',
           'portrait:flex-col portrait:items-center portrait:text-center portrait:justify-start',
-          'landscape:flex-row landscape:items-start landscape:text-left',
+          'short-landscape:flex-row short-landscape:items-start short-landscape:text-left',
         ].join(' '),
         /** Side: Siempre horizontal. */
         side: 'flex-row items-start text-left',

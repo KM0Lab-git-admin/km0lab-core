@@ -32,6 +32,10 @@ export const contentShellVariants = cva(
     'desktop:[--shell-padding:32px]',
     'desktop:[--shell-gap:48px]',
 
+    // ultra-wide (1920px+ con altura 1080px+) - pantallas grandes
+    'ultra-wide:[--shell-padding:48px]',
+    'ultra-wide:[--shell-gap:96px]',
+
     // short-landscape (landscape con altura ≤ 550px) - más compacto
     'short-landscape:[--shell-padding:8px]',
     'short-landscape:[--shell-gap:4px]',
