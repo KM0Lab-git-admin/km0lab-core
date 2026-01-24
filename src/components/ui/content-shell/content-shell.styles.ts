@@ -36,23 +36,8 @@ export const contentShellVariants = cva(
     'p-[var(--shell-padding)]',
     'gap-[var(--shell-gap)]',
 
-    // === ESTILOS VISUALES (absorbidos de PageContainer) ===
-    'bg-gradient-white-beige',
+    // === ESTILOS VISUALES ===
+    // Fondo movido al Layout para cubrir todo el viewport
     'font-ui',
   ].join(' '),
-  {
-    variants: {
-      /**
-       * Variante de fondo - permite diferentes fondos por página.
-       * Por defecto usa bg-gradient-white-beige.
-       */
-      background: {
-        gradient: '', // default, ya está en base
-        none: '!bg-transparent',
-      },
-    },
-    defaultVariants: {
-      background: 'gradient',
-    },
-  },
 );

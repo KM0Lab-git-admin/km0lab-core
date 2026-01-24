@@ -1338,23 +1338,11 @@ const MediaFrameDemo = () => {
 };
 
 const ContentShellDemo = () => {
-  const [background, setBackground] = useState<'gradient' | 'none'>('gradient');
   const [as, setAs] = useState<'div' | 'main' | 'section'>('div');
 
   return (
     <div className="space-y-4">
       <div className="grid gap-2 sm:grid-cols-2">
-        <label className="text-sm text-slate-600">
-          Fondo
-          <select
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={background}
-            onChange={e => setBackground(e.target.value as 'gradient' | 'none')}
-          >
-            <option value="gradient">gradient (degradado blanco-beige)</option>
-            <option value="none">none (transparente)</option>
-          </select>
-        </label>
         <label className="text-sm text-slate-600">
           Elemento HTML
           <select
@@ -1369,21 +1357,20 @@ const ContentShellDemo = () => {
         </label>
       </div>
 
-      <div className="rounded-lg border border-slate-200 bg-slate-100 p-4">
+      <div className="rounded-lg border border-slate-200 bg-gradient-white-beige p-4">
         <div className="mx-auto max-w-2xl overflow-hidden rounded-lg border-2 border-dashed border-slate-300" style={{ height: '300px' }}>
-          <ContentShell background={background} as={as} className="h-full">
+          <ContentShell as={as} className="h-full">
             <div className="flex h-full flex-col items-center justify-center gap-4">
               <Badge variant="secondary">ContentShell</Badge>
               <p className="text-sm text-slate-700">
-                Fondo:
-                {background}
-              </p>
-              <p className="text-xs text-slate-500">
                 Elemento:
                 {as}
               </p>
               <p className="text-xs text-slate-400">
                 CSS Variables: --shell-padding, --shell-gap
+              </p>
+              <p className="text-xs text-slate-400">
+                Fondo: en Layout (cubre todo el viewport)
               </p>
             </div>
           </ContentShell>

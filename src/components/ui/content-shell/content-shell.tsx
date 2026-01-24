@@ -1,4 +1,3 @@
-import type { VariantProps } from 'class-variance-authority';
 import type React from 'react';
 
 import { cn } from '@/components/ui/primitives/utils';
@@ -6,8 +5,7 @@ import { cn } from '@/components/ui/primitives/utils';
 import { contentShellVariants } from './content-shell.styles';
 
 export interface ContentShellProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof contentShellVariants> {
+  extends React.HTMLAttributes<HTMLDivElement> {
   /** Elemento HTML a renderizar (default: 'div'). */
   as?: 'div' | 'main' | 'section';
 }
@@ -18,17 +16,16 @@ export interface ContentShellProps
  * Define CSS Variables (--shell-padding, --shell-gap) que los componentes hijos
  * pueden heredar para mantener consistencia en toda la página.
  *
- * Absorbe los estilos de PageContainer (bg-gradient, font-ui) para reducir anidación.
+ * El fondo (bg-gradient-white-beige) está en el Layout para cubrir todo el viewport.
  */
 const ContentShell = ({
   as: Component = 'div',
-  background = 'gradient',
   className,
   ...props
 }: ContentShellProps) => {
   return (
     <Component
-      className={cn(contentShellVariants({ background }), className)}
+      className={cn(contentShellVariants(), className)}
       {...props}
     />
   );
