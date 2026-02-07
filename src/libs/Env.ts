@@ -8,6 +8,7 @@ export const Env = createEnv({
     DATABASE_URL: z.string().optional(),
     LOGTAIL_SOURCE_TOKEN: z.string().optional(),
     OPENAI_API_KEY: z.string().min(1).optional(),
+    OPENAI_TRANSCRIBE_MODEL: z.string().min(1).optional(),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().optional(),
@@ -24,6 +25,7 @@ export const Env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     LOGTAIL_SOURCE_TOKEN: process.env.LOGTAIL_SOURCE_TOKEN,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    OPENAI_TRANSCRIBE_MODEL: process.env.OPENAI_TRANSCRIBE_MODEL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
