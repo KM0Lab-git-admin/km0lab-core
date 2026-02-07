@@ -89,6 +89,10 @@ git stash pop
 
 **This rule applies to ALL code changes, file modifications, and any git operations performed by the agent.**
 
+**Commits – NO trailers de co-autoría:**
+- NUNCA añadir el trailer `Co-authored-by: Cursor <cursoragent@cursor.com>` (ni ningún otro Co-authored-by del agente) al hacer commits.
+- Los commits deben ser mensajes simples, sin trailers de co-autoría generados por el agente.
+
 ### Reference Documentation
 - **`.cursorrules`** (this file): General coding standards, Git workflow, and implementation guidelines
 - **`CONTRIBUTING.md`**: Project-specific standards, component structure, responsive design, and extension patterns
