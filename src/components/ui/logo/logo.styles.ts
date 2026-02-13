@@ -4,6 +4,8 @@ export const logoVariants = cva('logo-1', {
   variants: {
     scale: {
       none: '', // Sin escalado - tamaño por defecto del logo-1
+      xxs: '[--scale:0.25]', // Header: logo mas pequeno que el nombre del pueblo
+      xs: 'scale-[clamp(0.4,6vw,0.5)]',
       sm: 'scale-[clamp(0.5,8vw,0.65)]',
       md: [
         'scale-[clamp(0.55,8.5vw,0.65)]',

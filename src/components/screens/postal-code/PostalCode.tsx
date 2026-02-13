@@ -12,7 +12,7 @@ import { LogoHeader } from '@/components/ui/logo-header';
 import { ContentCard } from '@/components/ui/content-card';
 import { ContentShell } from '@/components/ui/content-shell';
 import { cn } from '@/components/ui/primitives/utils';
-import { checkPostalCodeAvailability } from '@/features/postal-code';
+import { checkPostalCodeAvailability, isTownEnabled } from '@/features/postal-code';
 import { getValidatorById } from '@/validation/validators';
 import {
   postalCodeButton,
@@ -130,7 +130,11 @@ export default function PostalCode() {
   const handleContinue = () => {
     if (!isAvailable) return;
     if (!locale) return;
-    router.push(`/${locale}/chat`);
+    if (isTownEnabled(trimmedPostalCode)) {
+      router.push(`/${locale}/town?cp=${trimmedPostalCode}`);
+    } else {
+      router.push(`/${locale}/chat`);
+    }
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
