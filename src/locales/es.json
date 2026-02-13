@@ -212,6 +212,29 @@
       "xpBadge": "+ 10 XP"
     }
   },
+  "TownHome": {
+    "defaultTown": "Tu municipio",
+    "chatLabel": "Chat",
+    "chatLogo_alt": "Logo de KM0 Chat",
+    "notifications_aria": "Notificaciones",
+    "townHall": {
+      "title": "Ayuntamiento",
+      "description": "Informacion y servicios de tu ayuntamiento"
+    },
+    "products": {
+      "title": "Productos",
+      "description": "Descubre productos locales cerca de ti"
+    },
+    "services": {
+      "title": "Servicios",
+      "description": "Encuentra servicios disponibles en tu zona"
+    },
+    "nav": {
+      "home": "Inicio",
+      "info": "Info",
+      "profile": "Perfil"
+    }
+  },
   "ComponentRegistry": {
     "server_only_notice": "es Server Component / depende de backend. No se renderiza aquí; revisa el import y úsalo en un entorno server.",
     "pending_demo": "Demo pendiente para",

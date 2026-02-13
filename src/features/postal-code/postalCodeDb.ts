@@ -4,6 +4,7 @@ export const postalCodeDb = new Map<string, string>([
   ['08003', 'Barcelona'],
   ['08004', 'Barcelona'],
   ['08005', 'Barcelona'],
+  ['08380', 'Malgrat de Mar'],
   ['28001', 'Madrid'],
   ['28002', 'Madrid'],
   ['28003', 'Madrid'],

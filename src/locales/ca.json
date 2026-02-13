@@ -212,6 +212,29 @@
     "subtitle": "Anquim idioma vos cum ansa",
     "flag_alt": "Bandera de Catalunya"
   },
+  "TownHome": {
+    "defaultTown": "El teu municipi",
+    "chatLabel": "Chat",
+    "chatLogo_alt": "Logo de KM0 Chat",
+    "notifications_aria": "Notificacions",
+    "townHall": {
+      "title": "Ajuntament",
+      "description": "Informacio i serveis del teu ajuntament"
+    },
+    "products": {
+      "title": "Productes",
+      "description": "Descobreix productes locals a prop teu"
+    },
+    "services": {
+      "title": "Serveis",
+      "description": "Troba serveis disponibles a la teva zona"
+    },
+    "nav": {
+      "home": "Inici",
+      "info": "Info",
+      "profile": "Perfil"
+    }
+  },
   "ComponentRegistry": {
     "server_only_notice": "és Server Component / depèn del backend. No es renderitza aquí; revisa l'import i úsalo en un entorn server.",
     "pending_demo": "Demo pendent per a",
