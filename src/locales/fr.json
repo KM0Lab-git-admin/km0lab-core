@@ -212,15 +212,21 @@
     "notifications_aria": "Notifications",
     "townHall": {
       "title": "Mairie",
-      "description": "Informations et services de votre mairie"
+      "bullet0": "Assistance 24/7 pour démarches, produits et services",
+      "bullet1": "Achetez et réservez dans les commerces locaux",
+      "bullet2": "Gagnez des points et coupons à chaque achat"
     },
     "products": {
       "title": "Produits",
-      "description": "Decouvrez les produits locaux pres de chez vous"
+      "bullet0": "Produits de proximité et km0",
+      "bullet1": "Marchés et foires locales",
+      "bullet2": "Offres de saison"
     },
     "services": {
       "title": "Services",
-      "description": "Trouvez les services disponibles dans votre zone"
+      "bullet0": "Professionnels et services locaux",
+      "bullet1": "Commerces et boutiques de la commune",
+      "bullet2": "Loisirs, culture et activités"
     },
     "nav": {
       "home": "Accueil",

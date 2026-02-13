@@ -212,15 +212,21 @@
     "notifications_aria": "Notifications",
     "townHall": {
       "title": "Town Hall",
-      "description": "Information and services from your town hall"
+      "bullet0": "24/7 support for procedures, products and services",
+      "bullet1": "Buy and book at local shops",
+      "bullet2": "Earn points and coupons with every purchase"
     },
     "products": {
       "title": "Products",
-      "description": "Discover local products near you"
+      "bullet0": "Local and km0 products",
+      "bullet1": "Markets and local fairs",
+      "bullet2": "Seasonal offers"
     },
     "services": {
       "title": "Services",
-      "description": "Find services available in your area"
+      "bullet0": "Local professionals and services",
+      "bullet1": "Shops and stores in your town",
+      "bullet2": "Leisure, culture and activities"
     },
     "nav": {
       "home": "Home",

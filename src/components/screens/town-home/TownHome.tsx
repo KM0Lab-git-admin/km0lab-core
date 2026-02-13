@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
@@ -29,41 +29,54 @@ import {
   townHomeHero,
   townHomeHeroTitle,
   townHomeChatLogo,
-  townHomeCardsContainer,
-  townHomeCategoryCard,
-  townHomeCategoryIcon,
-  townHomeCategoryText,
-  townHomeCategoryTitle,
-  townHomeCategoryDescription,
+  townHomeTabBar,
+  townHomeTabButton,
+  townHomeTabIcon,
+  townHomeTabLabel,
+  townHomeBulletPanel,
+  townHomeBulletItem,
+  townHomeBulletDot,
+  townHomeIndicator,
 } from './town-home.styles';
+
+type CategoryId = 'townHall' | 'products' | 'services';
 
 function TownHomeContent() {
   const t = useTranslations('TownHome');
   const searchParams = useSearchParams();
+  const [activeTab, setActiveTab] = useState<CategoryId>('townHall');
 
   const postalCode = searchParams.get('cp') || '';
   const townName = getPostalCodeCity(postalCode) || t('defaultTown');
 
+  const getBullets = (key: CategoryId) => [
+    t(`${key}.bullet0`),
+    t(`${key}.bullet1`),
+    t(`${key}.bullet2`),
+  ];
+
   const categories = [
     {
-      id: 'townHall',
+      id: 'townHall' as CategoryId,
       icon: <TownHallIcon />,
       title: t('townHall.title'),
-      description: t('townHall.description'),
+      bullets: getBullets('townHall'),
     },
     {
-      id: 'products',
+      id: 'products' as CategoryId,
       icon: <ProductsIcon />,
       title: t('products.title'),
-      description: t('products.description'),
+      bullets: getBullets('products'),
     },
     {
-      id: 'services',
+      id: 'services' as CategoryId,
       icon: <ServicesIcon />,
       title: t('services.title'),
-      description: t('services.description'),
+      bullets: getBullets('services'),
     },
   ];
+
+  const activeCategory = categories.find((c) => c.id === activeTab)!;
 
   return (
     <ContentShell>
@@ -96,27 +109,42 @@ function TownHomeContent() {
           </div>
         </div>
 
-        {/* Tarjetas de categoria */}
-        <div className={townHomeCardsContainer()}>
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              className={townHomeCategoryCard()}
-              aria-label={cat.title}
-              onClick={() => {}}
-            >
-              <div className={townHomeCategoryIcon()}>
-                {cat.icon}
+        {/* Tab selector con degradado + panel de bullets */}
+        <div className="w-full overflow-hidden rounded-xl shadow-sm">
+          {/* Barra de tabs con degradado amarillo → blanco */}
+          <div className={townHomeTabBar()} role="tablist">
+            {categories.map((cat) => {
+              const isActive = cat.id === activeTab;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={townHomeTabButton({ active: isActive })}
+                  onClick={() => setActiveTab(cat.id)}
+                >
+                  <div className={townHomeTabIcon({ active: isActive })}>
+                    {cat.icon}
+                  </div>
+                  <span className={townHomeTabLabel({ active: isActive })}>
+                    {cat.title}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Panel de bullets (solo categoria activa) */}
+          <div className={townHomeBulletPanel()} role="tabpanel">
+            {activeCategory.bullets.map((bullet, i) => (
+              <div key={i} className={townHomeBulletItem()}>
+                <span className={townHomeBulletDot()} />
+                <span>{bullet}</span>
               </div>
-              <div className={townHomeCategoryText()}>
-                <span className={townHomeCategoryTitle()}>{cat.title}</span>
-                <span className={townHomeCategoryDescription()}>
-                  {cat.description}
-                </span>
-              </div>
-            </button>
-          ))}
+            ))}
+            <div className={townHomeIndicator()} />
+          </div>
         </div>
       </ContentCard>
 

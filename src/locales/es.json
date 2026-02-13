@@ -220,15 +220,21 @@
     "notifications_aria": "Notificaciones",
     "townHall": {
       "title": "Ayuntamiento",
-      "description": "Informacion y servicios de tu ayuntamiento"
+      "bullet0": "Atención 24/7 para trámites, productos y servicios",
+      "bullet1": "Compra y reserva en comercios locales",
+      "bullet2": "Gana puntos y cupones con cada compra"
     },
     "products": {
       "title": "Productos",
-      "description": "Descubre productos locales cerca de ti"
+      "bullet0": "Productos de proximidad y km0",
+      "bullet1": "Mercados y ferias locales",
+      "bullet2": "Ofertas de temporada"
     },
     "services": {
       "title": "Servicios",
-      "description": "Encuentra servicios disponibles en tu zona"
+      "bullet0": "Profesionales y servicios locales",
+      "bullet1": "Comercios y tiendas del municipio",
+      "bullet2": "Ocio, cultura y actividades"
     },
     "nav": {
       "home": "Inicio",

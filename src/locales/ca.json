@@ -220,15 +220,21 @@
     "notifications_aria": "Notificacions",
     "townHall": {
       "title": "Ajuntament",
-      "description": "Informacio i serveis del teu ajuntament"
+      "bullet0": "Atenció 24/7 per a tràmits, productes i serveis",
+      "bullet1": "Compra i reserva en comerços locals",
+      "bullet2": "Guanya punts i cupons amb cada compra"
     },
     "products": {
       "title": "Productes",
-      "description": "Descobreix productes locals a prop teu"
+      "bullet0": "Productes de proximitat i km0",
+      "bullet1": "Mercats i fires locals",
+      "bullet2": "Ofertes de temporada"
     },
     "services": {
       "title": "Serveis",
-      "description": "Troba serveis disponibles a la teva zona"
+      "bullet0": "Professionals i serveis locals",
+      "bullet1": "Comerços i botigues del municipi",
+      "bullet2": "Oci, cultura i activitats"
     },
     "nav": {
       "home": "Inici",

@@ -81,84 +81,89 @@ export const townHomeChatLogo = cva(
   },
 );
 
-/** Contenedor de tarjetas de categoria */
-export const townHomeCardsContainer = cva(
-  'w-full flex flex-col',
+/** Barra de tabs con degradado amarillo corporativo → blanco */
+export const townHomeTabBar = cva(
+  'w-full flex items-end justify-around rounded-t-xl bg-gradient-white-beige px-4 pt-4 pb-3',
+);
+
+/** Boton de tab individual (icono + label) */
+export const townHomeTabButton = cva(
+  'flex flex-col items-center gap-1.5 cursor-pointer transition-opacity',
   {
     variants: {
-      scale: {
-        sm: 'gap-2',
-        md: 'gap-3',
-        lg: 'gap-4',
+      active: {
+        true: 'opacity-100',
+        false: 'opacity-50',
       },
     },
-    defaultVariants: { scale: 'md' },
+    defaultVariants: { active: false },
   },
 );
 
-/** Tarjeta de categoria individual */
-export const townHomeCategoryCard = cva(
-  [
-    'w-full flex items-center gap-3 rounded-xl p-4',
-    'bg-km0-beige-50 border border-km0-beige-100',
-    'cursor-pointer hover:bg-km0-beige-100 transition-colors',
-  ].join(' '),
+/** Circulo del icono dentro de un tab */
+export const townHomeTabIcon = cva(
+  'flex items-center justify-center rounded-full bg-white text-km0-blue-700 shrink-0 transition-shadow',
   {
     variants: {
+      active: {
+        true: 'shadow-md ring-2 ring-km0-beige-300',
+        false: 'shadow-sm',
+      },
       scale: {
-        sm: 'p-3 gap-2',
-        md: 'p-4 gap-3',
-        lg: 'p-5 gap-4',
+        sm: 'w-12 h-12',
+        md: 'w-14 h-14 mobile-p:w-16 mobile-p:h-16',
+        lg: 'w-18 h-18',
       },
     },
-    defaultVariants: { scale: 'md' },
+    defaultVariants: { active: false, scale: 'md' },
   },
 );
 
-/** Contenedor del icono de categoria */
-export const townHomeCategoryIcon = cva(
-  'flex items-center justify-center rounded-lg bg-km0-beige-100 text-km0-blue-700 shrink-0',
+/** Label debajo del icono del tab */
+export const townHomeTabLabel = cva(
+  'font-brand text-brand text-center',
   {
     variants: {
+      active: {
+        true: 'font-bold',
+        false: 'font-normal',
+      },
       scale: {
-        sm: 'w-10 h-10',
-        md: 'w-12 h-12',
-        lg: 'w-14 h-14',
+        sm: 'text-xs',
+        md: 'text-xs mobile-p:text-sm',
+        lg: 'text-sm',
       },
     },
-    defaultVariants: { scale: 'md' },
+    defaultVariants: { active: false, scale: 'md' },
   },
 );
 
-/** Contenedor de texto de categoria */
-export const townHomeCategoryText = cva('flex flex-col gap-0.5');
-
-/** Titulo de la tarjeta de categoria */
-export const townHomeCategoryTitle = cva(
-  'font-brand font-bold text-brand',
-  {
-    variants: {
-      scale: {
-        sm: 'text-sm',
-        md: 'text-base',
-        lg: 'text-lg',
-      },
-    },
-    defaultVariants: { scale: 'md' },
-  },
+/** Panel de contenido (bullets) debajo de la barra de tabs */
+export const townHomeBulletPanel = cva(
+  'w-full flex flex-col gap-3 rounded-b-xl bg-white px-5 py-4',
 );
 
-/** Descripcion de la tarjeta de categoria */
-export const townHomeCategoryDescription = cva(
-  'font-body text-km0-blue-500',
+/** Item individual de bullet */
+export const townHomeBulletItem = cva(
+  'flex items-start gap-2.5 font-body text-km0-blue-700',
   {
     variants: {
       scale: {
         sm: 'text-xs',
-        md: 'text-sm',
+        md: 'text-sm mobile-p:text-base',
         lg: 'text-base',
       },
     },
     defaultVariants: { scale: 'md' },
   },
+);
+
+/** Dot decorativo del bullet */
+export const townHomeBulletDot = cva(
+  'shrink-0 mt-1.5 w-2 h-2 rounded-full bg-km0-beige-400',
+);
+
+/** Linea indicadora decorativa roja al final del panel */
+export const townHomeIndicator = cva(
+  'w-full h-0.5 rounded-full bg-km0-coral-400 mt-2',
 );
