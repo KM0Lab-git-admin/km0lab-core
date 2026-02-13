@@ -216,6 +216,7 @@
     "defaultTown": "El teu municipi",
     "chatLabel": "Chat",
     "chatLogo_alt": "Logo de KM0 Chat",
+    "chatLogo_src": "/assets/logos/chat_blue.png",
     "notifications_aria": "Notificacions",
     "townHall": {
       "title": "Ajuntament",

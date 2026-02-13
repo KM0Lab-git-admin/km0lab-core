@@ -208,6 +208,7 @@
     "defaultTown": "Your Town",
     "chatLabel": "Chat",
     "chatLogo_alt": "KM0 Chat logo",
+    "chatLogo_src": "/assets/logos/chat_blue.png",
     "notifications_aria": "Notifications",
     "townHall": {
       "title": "Town Hall",

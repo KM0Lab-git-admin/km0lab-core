@@ -1,6 +1,12 @@
 import { cva } from 'class-variance-authority';
 
-/** Header personalizado: campanita | nombre poblacion | logo KM0 */
+/** Bloque izquierdo del header: nombre + logo apilados (font-brand para Antique Olive) */
+export const townHomeHeaderLeft = cva('flex flex-col items-start gap-0.5 font-brand');
+
+/** Wrapper del logo en header: clase para override de --scale en globals (al final del archivo) */
+export const townHomeHeaderLogo = cva('town-home-header-logo');
+
+/** Header: izquierda (nombre + logo apilados) | derecha (campanilla) */
 export const townHomeHeader = cva(
   'w-full flex items-center justify-between px-4 py-2',
   {
@@ -15,15 +21,15 @@ export const townHomeHeader = cva(
   },
 );
 
-/** Nombre de la poblacion en el header (pequeno) */
+/** Nombre de la poblacion en el header (tipo + color brand) */
 export const townHomeHeaderTitle = cva(
-  'font-brand text-km0-blue-700 uppercase tracking-wide',
+  'font-brand font-bold text-brand uppercase tracking-wide',
   {
     variants: {
       scale: {
-        sm: 'text-sm',
-        md: 'text-base',
-        lg: 'text-lg',
+        sm: 'text-lg',
+        md: 'text-xl mobile-p:text-2xl tablet:text-2xl',
+        lg: 'text-2xl mobile-p:text-3xl tablet:text-3xl',
       },
     },
     defaultVariants: { scale: 'md' },
@@ -45,9 +51,9 @@ export const townHomeHero = cva(
   },
 );
 
-/** Nombre grande de la poblacion en hero */
+/** Nombre grande de la poblacion en hero (tipo + color brand) */
 export const townHomeHeroTitle = cva(
-  'font-brand text-km0-blue-700 uppercase text-center leading-tight',
+  'font-brand font-bold text-brand uppercase text-center leading-tight',
   {
     variants: {
       scale: {
@@ -60,30 +66,15 @@ export const townHomeHeroTitle = cva(
   },
 );
 
-/** Label "Chat" bajo el nombre */
-export const townHomeChatLabel = cva(
-  'font-ui text-km0-blue-500 uppercase tracking-widest',
-  {
-    variants: {
-      scale: {
-        sm: 'text-xs',
-        md: 'text-sm',
-        lg: 'text-base',
-      },
-    },
-    defaultVariants: { scale: 'md' },
-  },
-);
-
-/** Contenedor circular del logo de chat */
+/** Contenedor del logo KMØ CHAT (rectangular con bordes redondeados, tipo pill) */
 export const townHomeChatLogo = cva(
-  'rounded-full overflow-hidden shadow-md',
+  'overflow-hidden shadow-md rounded-2xl',
   {
     variants: {
       scale: {
-        sm: 'w-16 h-16',
-        md: 'w-20 h-20 mobile-p:w-24 mobile-p:h-24',
-        lg: 'w-28 h-28',
+        sm: 'w-24 h-10',
+        md: 'w-32 h-14 mobile-p:w-40 mobile-p:h-16',
+        lg: 'w-44 h-20',
       },
     },
     defaultVariants: { scale: 'md' },
@@ -144,7 +135,7 @@ export const townHomeCategoryText = cva('flex flex-col gap-0.5');
 
 /** Titulo de la tarjeta de categoria */
 export const townHomeCategoryTitle = cva(
-  'font-brand font-bold text-km0-blue-700',
+  'font-brand font-bold text-brand',
   {
     variants: {
       scale: {

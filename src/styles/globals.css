@@ -87,6 +87,9 @@
 
 /* === KM0 LAB THEME - Colores y extensiones para Tailwind v4 === */
 @theme {
+  /* Brand (semantico: tipo + color KM0) */
+  --color-brand: #174094;
+
   /* KM0 Blue */
   --color-km0-blue-50: #f0f4fd;
   --color-km0-blue-100: #dadef8;
@@ -242,12 +245,14 @@
 
   /* Width */
   --width-logo: 9.1875rem;
+  --width-logo-header: 4.125rem; /* TownHome header: logo escalado 0.25 */
   --width-slide: 20rem;
   --width-slider-count-lg: 28rem;
   --width-slider-count-xl: 32rem;
 
   /* Height */
   --height-logo: 2.125rem;
+  --height-logo-header: 0.75rem; /* TownHome header: logo escalado 0.25 */
   --height-slide-container: 475px;
 
   /* Max Width */
@@ -396,6 +401,7 @@
       --scale: 0.45720703125; /* xl: igual a XS */
     }
   }
+
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -825,4 +831,10 @@
   .max-h-dvh-fallback {
     max-height: 100dvh;
   }
+}
+
+/* === OVERRIDES POR CONTEXTO (al final para ganar por cascada) === */
+/* TownHome header: logo mas pequeno que el nombre del pueblo */
+.town-home-header-logo .logo-1 {
+  --scale: 0.25;
 }

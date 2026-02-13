@@ -3,7 +3,6 @@
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
 
 import { ContentShell } from '@/components/ui/content-shell';
 import { ContentCard } from '@/components/ui/content-card';
@@ -12,8 +11,8 @@ import { Logo } from '@/components/ui/logo';
 import { Button } from '@/components/ui/primitives/button';
 import { getPostalCodeCity } from '@/features/postal-code';
 
+import { NotificationBellButton } from '@/components/ui/notification-bell';
 import {
-  NotificationBellIcon,
   TownHallIcon,
   ProductsIcon,
   ServicesIcon,
@@ -24,10 +23,11 @@ import {
 
 import {
   townHomeHeader,
+  townHomeHeaderLeft,
+  townHomeHeaderLogo,
   townHomeHeaderTitle,
   townHomeHero,
   townHomeHeroTitle,
-  townHomeChatLabel,
   townHomeChatLogo,
   townHomeCardsContainer,
   townHomeCategoryCard,
@@ -67,27 +67,31 @@ function TownHomeContent() {
 
   return (
     <ContentShell>
-      {/* Header: campanita | nombre poblacion | logo KM0 */}
+      {/* Header: izquierda (nombre + logo apilados) | derecha (campanilla) */}
       <header className={townHomeHeader()}>
-        <button type="button" aria-label={t('notifications_aria')}>
-          <NotificationBellIcon />
-        </button>
-        <h2 className={townHomeHeaderTitle()}>{townName}</h2>
-        <Logo scale="sm" alt="KM0 LAB" />
+        <div className={townHomeHeaderLeft()}>
+          <h2 className={townHomeHeaderTitle()}>{townName}</h2>
+          <div className={townHomeHeaderLogo()}>
+            <Logo alt="KM0 LAB" />
+          </div>
+        </div>
+        <NotificationBellButton
+          size="md"
+          dotColor="coral"
+          hasNotification
+          aria-label={t('notifications_aria')}
+        />
       </header>
 
       <ContentCard>
         {/* Seccion hero */}
         <div className={townHomeHero()}>
           <h1 className={townHomeHeroTitle()}>{townName}</h1>
-          <span className={townHomeChatLabel()}>{t('chatLabel')}</span>
           <div className={townHomeChatLogo()}>
-            <Image
-              src="/assets/logos/chat_blue.png"
+            <img
+              src={t('chatLogo_src')}
               alt={t('chatLogo_alt')}
-              width={96}
-              height={96}
-              className="w-full h-full object-cover"
+              className="size-full object-contain"
             />
           </div>
         </div>

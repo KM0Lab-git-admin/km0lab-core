@@ -208,6 +208,7 @@
     "defaultTown": "Votre commune",
     "chatLabel": "Chat",
     "chatLogo_alt": "Logo KM0 Chat",
+    "chatLogo_src": "/assets/logos/chat_blue.png",
     "notifications_aria": "Notifications",
     "townHall": {
       "title": "Mairie",
