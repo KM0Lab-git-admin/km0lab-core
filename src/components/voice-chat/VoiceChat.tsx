@@ -8,12 +8,38 @@ import { ChatInput } from './ChatInput';
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
 
-export interface ChatMessage {
+export interface ChatEventListItem {
   id: string;
-  role: 'user' | 'assistant';
-  content: string;
-  timestamp: Date;
+  title: string;
+  subtitle?: string;
 }
+
+export type AssistantReply =
+  | string
+  | {
+      type: 'text';
+      content: string;
+    }
+  | {
+      type: 'event-list';
+      events: ChatEventListItem[];
+    };
+
+export type ChatMessage =
+  | {
+      id: string;
+      role: 'user' | 'assistant';
+      type: 'text';
+      content: string;
+      timestamp: Date;
+    }
+  | {
+      id: string;
+      role: 'assistant';
+      type: 'event-list';
+      events: ChatEventListItem[];
+      timestamp: Date;
+    };
 
 export interface VoiceChatProps {
   /**
@@ -31,21 +57,24 @@ export interface VoiceChatProps {
    */
   onUserMessage?: (
     text: string,
-    addAssistantReply: (reply: string) => void,
+    addAssistantReply: (reply: AssistantReply) => void,
   ) => Promise<void> | void;
+  onEventClick?: (eventId: string) => void;
   /** Initial greeting shown in the chat. */
   welcomeMessage?: string;
-  /** Title shown in the header. */
-  title?: string;
-  /** Subtitle shown under the title. */
-  subtitle?: string;
 }
 
 /* ------------------------------------------------------------------ */
 /*  Message bubble                                                     */
 /* ------------------------------------------------------------------ */
 
-function MessageBubble({ message }: { message: ChatMessage }) {
+function MessageBubble({
+  message,
+  onEventClick,
+}: {
+  message: ChatMessage;
+  onEventClick?: (eventId: string) => void;
+}) {
   const isUser = message.role === 'user';
 
   return (
@@ -61,17 +90,42 @@ function MessageBubble({ message }: { message: ChatMessage }) {
       </div>
 
       {/* Bubble */}
-      <div
-        className={`
-          max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed
-          ${isUser
-            ? 'rounded-br-sm bg-foreground text-background'
-            : 'rounded-bl-sm bg-muted text-foreground'
-          }
-        `}
-      >
-        {message.content}
-      </div>
+      {message.type === 'text' ? (
+        <div
+          className={`
+            max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed
+            ${isUser
+              ? 'rounded-br-sm bg-foreground text-background'
+              : 'rounded-bl-sm bg-muted text-foreground'
+            }
+          `}
+        >
+          {message.content}
+        </div>
+      ) : (
+        <div className="max-w-[75%] rounded-2xl rounded-bl-sm bg-muted px-4 py-3 text-foreground">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Eventos encontrados
+          </p>
+          <div className="mt-2 flex flex-col gap-2">
+            {message.events.map((event) => (
+              <button
+                key={event.id}
+                type="button"
+                onClick={() => onEventClick?.(event.id)}
+                className="rounded-lg border border-border bg-background px-3 py-2 text-left text-sm font-medium text-km0-blue-700 transition hover:bg-km0-blue-50"
+              >
+                <span className="block">{event.title}</span>
+                {event.subtitle ? (
+                  <span className="mt-1 block text-xs font-normal text-muted-foreground">
+                    {event.subtitle}
+                  </span>
+                ) : null}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -87,9 +141,9 @@ function TypingIndicator() {
         <Bot size={16} />
       </div>
       <div className="flex gap-1 rounded-2xl rounded-bl-sm bg-muted px-4 py-3">
-        <span className="size-2 animate-bounce rounded-full bg-muted-foreground/50 [animation-delay:0ms]" />
-        <span className="size-2 animate-bounce rounded-full bg-muted-foreground/50 [animation-delay:150ms]" />
-        <span className="size-2 animate-bounce rounded-full bg-muted-foreground/50 [animation-delay:300ms]" />
+        <span className="size-2 animate-pulse rounded-full bg-muted-foreground/50" />
+        <span className="size-2 animate-pulse rounded-full bg-muted-foreground/50" />
+        <span className="size-2 animate-pulse rounded-full bg-muted-foreground/50" />
       </div>
     </div>
   );
@@ -107,14 +161,14 @@ function genId() {
 
 export function VoiceChat({
   onUserMessage,
+  onEventClick,
   welcomeMessage = '¡Hola! Soy tu asistente de voz. Puedes escribirme o usar el micrófono para hablar. ¿En qué puedo ayudarte?',
-  title = 'Asistente de Voz',
-  subtitle = 'Whisper · En línea',
 }: VoiceChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
     {
       id: genId(),
       role: 'assistant',
+      type: 'text',
       content: welcomeMessage,
       timestamp: new Date(),
     },
@@ -136,19 +190,38 @@ export function VoiceChat({
       const userMsg: ChatMessage = {
         id: genId(),
         role: 'user',
+        type: 'text',
         content: text,
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, userMsg]);
       setIsLoading(true);
 
-      const addReply = (reply: string) => {
-        const assistantMsg: ChatMessage = {
-          id: genId(),
-          role: 'assistant',
-          content: reply,
-          timestamp: new Date(),
-        };
+      const addReply = (reply: AssistantReply) => {
+        const assistantMsg: ChatMessage =
+          typeof reply === 'string'
+            ? {
+                id: genId(),
+                role: 'assistant',
+                type: 'text',
+                content: reply,
+                timestamp: new Date(),
+              }
+            : reply.type === 'event-list'
+              ? {
+                  id: genId(),
+                  role: 'assistant',
+                  type: 'event-list',
+                  events: reply.events,
+                  timestamp: new Date(),
+                }
+              : {
+                  id: genId(),
+                  role: 'assistant',
+                  type: 'text',
+                  content: reply.content,
+                  timestamp: new Date(),
+                };
         setMessages((prev) => [...prev, assistantMsg]);
         setIsLoading(false);
       };
@@ -171,21 +244,10 @@ export function VoiceChat({
 
   return (
     <div className="flex h-full flex-col overflow-hidden bg-background">
-      {/* ═══════ Header ═══════ */}
-      <header className="flex items-center gap-3 border-b border-border bg-background px-6 py-4">
-        <div className="flex size-10 items-center justify-center rounded-xl bg-foreground text-background">
-          <Bot size={20} />
-        </div>
-        <div>
-          <h2 className="text-sm font-semibold text-foreground">{title}</h2>
-          <p className="text-xs text-muted-foreground">{subtitle}</p>
-        </div>
-      </header>
-
       {/* ═══════ Messages ═══════ */}
       <div ref={scrollRef} className="flex-1 space-y-4 overflow-y-auto px-6 py-6">
         {messages.map((msg) => (
-          <MessageBubble key={msg.id} message={msg} />
+          <MessageBubble key={msg.id} message={msg} onEventClick={onEventClick} />
         ))}
         {isLoading && <TypingIndicator />}
       </div>

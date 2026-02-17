@@ -21,10 +21,10 @@ export const contentCardVariants = cva(
     'p-[var(--shell-padding)]',
     'gap-[var(--shell-gap)]',
 
-    // max-h específico de ContentCard (reserva espacio para header + footer)
-    'max-h-[calc(100dvh-clamp(160px,22vh,200px))]',
-    'mobile-p:max-h-[calc(100dvh-clamp(150px,20vh,180px))]',
-    'tablet:max-h-[calc(100dvh-clamp(180px,25vh,220px))]',
-    'desktop:max-h-[calc(100dvh-clamp(200px,28vh,240px))]',
+    // max-h: reserva mínima para header/footer reducida para dar más altura al contenido (sin scroll)
+    'max-h-[calc(100dvh-clamp(100px,18vh,140px))]',
+    'mobile-p:max-h-[calc(100dvh-clamp(90px,16vh,120px))]',
+    'tablet:max-h-[calc(100dvh-clamp(120px,20vh,160px))]',
+    'desktop:max-h-[calc(100dvh-clamp(140px,24vh,180px))]',
   ].join(' '),
 );

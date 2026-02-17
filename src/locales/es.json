@@ -238,6 +238,7 @@
     },
     "nav": {
       "home": "Inicio",
+      "chat": "Chat",
       "info": "Info",
       "profile": "Perfil"
     }

@@ -230,6 +230,7 @@
     },
     "nav": {
       "home": "Home",
+      "chat": "Chat",
       "info": "Info",
       "profile": "Profile"
     }

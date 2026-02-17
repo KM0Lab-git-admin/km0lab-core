@@ -10,6 +10,8 @@ import { NavigationFooter } from '@/components/ui/navigation-footer';
 import { Logo } from '@/components/ui/logo';
 import { Button } from '@/components/ui/primitives/button';
 import { getPostalCodeCity } from '@/features/postal-code';
+import { ChatScreen } from '@/components/screens/chat';
+import { useChatStore } from '@/stores/chatStore';
 
 import { NotificationBellButton } from '@/components/ui/notification-bell';
 import {
@@ -17,7 +19,7 @@ import {
   ProductsIcon,
   ServicesIcon,
   HomeIcon,
-  InfoIcon,
+  ChatBubbleIcon,
   ProfileIcon,
 } from './icons';
 
@@ -45,6 +47,9 @@ function TownHomeContent() {
   const t = useTranslations('TownHome');
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<CategoryId>('townHall');
+
+  const activeChatType = useChatStore((s) => s.activeChatType);
+  const openChat = useChatStore((s) => s.openChat);
 
   const postalCode = searchParams.get('cp') || '';
   const townName = getPostalCodeCity(postalCode) || t('defaultTown');
@@ -78,6 +83,16 @@ function TownHomeContent() {
 
   const activeCategory = categories.find((c) => c.id === activeTab)!;
 
+  /* ---- Vista chat: ocupa toda la pantalla, sin header ni footer ---- */
+  if (activeChatType) {
+    return (
+      <ContentShell>
+        <ChatScreen />
+      </ContentShell>
+    );
+  }
+
+  /* ---- Vista pueblo (por defecto) ---- */
   return (
     <ContentShell>
       {/* Header: izquierda (nombre + logo apilados) | derecha (campanilla) */}
@@ -96,7 +111,7 @@ function TownHomeContent() {
         />
       </header>
 
-      <ContentCard>
+      <ContentCard className="gap-2 tablet:gap-3">
         {/* Seccion hero */}
         <div className={townHomeHero()}>
           <h1 className={townHomeHeroTitle()}>{townName}</h1>
@@ -110,7 +125,7 @@ function TownHomeContent() {
         </div>
 
         {/* Tab selector con degradado + panel de bullets */}
-        <div className="w-full overflow-hidden rounded-xl shadow-sm">
+        <div className="flex min-h-0 w-full flex-1 flex-col overflow-hidden rounded-xl shadow-sm">
           {/* Barra de tabs con degradado amarillo → blanco */}
           <div className={townHomeTabBar()} role="tablist">
             {categories.map((cat) => {
@@ -135,37 +150,55 @@ function TownHomeContent() {
             })}
           </div>
 
-          {/* Panel de bullets (solo categoria activa) */}
+          {/* Panel de bullets (sin scroll: contenedor ampliado para que todo el texto quepa) */}
           <div className={townHomeBulletPanel()} role="tabpanel">
-            {activeCategory.bullets.map((bullet, i) => (
-              <div key={i} className={townHomeBulletItem()}>
-                <span className={townHomeBulletDot()} />
-                <span>{bullet}</span>
-              </div>
-            ))}
+            <div className="flex min-h-0 flex-1 flex-col gap-3">
+              {activeCategory.bullets.map((bullet, i) => (
+                <div key={i} className={townHomeBulletItem()}>
+                  <span className={townHomeBulletDot()} />
+                  <span className="min-w-0 flex-1 break-words">{bullet}</span>
+                </div>
+              ))}
+            </div>
             <div className={townHomeIndicator()} />
           </div>
         </div>
-      </ContentCard>
 
-      {/* Navegacion inferior */}
-      <NavigationFooter
-        left={
-          <Button variant="ghost" size="icon" aria-label={t('nav.home')}>
-            <HomeIcon />
-          </Button>
-        }
-        center={
-          <Button variant="ghost" size="icon" aria-label={t('nav.info')}>
-            <InfoIcon />
-          </Button>
-        }
-        right={
-          <Button variant="ghost" size="icon" aria-label={t('nav.profile')}>
-            <ProfileIcon />
-          </Button>
-        }
-      />
+        {/* Navegacion inferior: iconos grandes y azul del design system */}
+        <NavigationFooter
+          left={
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={t('nav.home')}
+              className="size-12 text-km0-blue-700 [&_svg]:!size-8"
+            >
+              <HomeIcon />
+            </Button>
+          }
+          center={
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={t('nav.chat')}
+              className="size-12 text-km0-blue-700 [&_svg]:!size-8"
+              onClick={() => openChat(activeTab)}
+            >
+              <ChatBubbleIcon />
+            </Button>
+          }
+          right={
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={t('nav.profile')}
+              className="size-12 text-km0-blue-700 [&_svg]:!size-8"
+            >
+              <ProfileIcon />
+            </Button>
+          }
+        />
+      </ContentCard>
     </ContentShell>
   );
 }

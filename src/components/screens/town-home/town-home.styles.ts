@@ -36,15 +36,15 @@ export const townHomeHeaderTitle = cva(
   },
 );
 
-/** Seccion hero central */
+/** Seccion hero central (menos padding inferior para acercar logo a la barra de tabs) */
 export const townHomeHero = cva(
   'w-full flex flex-col items-center',
   {
     variants: {
       scale: {
-        sm: 'gap-2 py-3',
-        md: 'gap-3 py-4 mobile-p:py-5',
-        lg: 'gap-4 py-6',
+        sm: 'gap-2 pt-3 pb-1.5',
+        md: 'gap-3 pt-4 pb-2 mobile-p:pt-5 mobile-p:pb-3',
+        lg: 'gap-4 pt-6 pb-3',
       },
     },
     defaultVariants: { scale: 'md' },
@@ -66,9 +66,9 @@ export const townHomeHeroTitle = cva(
   },
 );
 
-/** Contenedor del logo KMØ CHAT (rectangular con bordes redondeados, tipo pill) */
+/** Contenedor del logo KMØ CHAT (rectangular con bordes redondeados, sin sombra) */
 export const townHomeChatLogo = cva(
-  'overflow-hidden shadow-md rounded-2xl',
+  'overflow-hidden rounded-2xl',
   {
     variants: {
       scale: {
@@ -83,7 +83,7 @@ export const townHomeChatLogo = cva(
 
 /** Barra de tabs con degradado amarillo corporativo → blanco */
 export const townHomeTabBar = cva(
-  'w-full flex items-end justify-around rounded-t-xl bg-gradient-white-beige px-4 pt-4 pb-3',
+  'w-full flex items-end justify-around rounded-t-xl bg-gradient-white-beige px-4 pt-5 pb-4',
 );
 
 /** Boton de tab individual (icono + label) */
@@ -140,12 +140,12 @@ export const townHomeTabLabel = cva(
 
 /** Panel de contenido (bullets) debajo de la barra de tabs */
 export const townHomeBulletPanel = cva(
-  'w-full flex flex-col gap-3 rounded-b-xl bg-white px-5 py-4',
+  'w-full flex flex-1 min-h-0 flex-col gap-3 rounded-b-xl bg-white px-5 py-4 overflow-hidden',
 );
 
-/** Item individual de bullet */
+/** Item individual de bullet (min-w-0 para que el texto haga wrap) */
 export const townHomeBulletItem = cva(
-  'flex items-start gap-2.5 font-body text-km0-blue-700',
+  'flex min-w-0 items-start gap-2.5 font-body text-km0-blue-700',
   {
     variants: {
       scale: {
@@ -163,7 +163,7 @@ export const townHomeBulletDot = cva(
   'shrink-0 mt-1.5 w-2 h-2 rounded-full bg-km0-beige-400',
 );
 
-/** Linea indicadora decorativa roja al final del panel */
+/** Linea indicadora decorativa coral al final del panel (siempre visible) */
 export const townHomeIndicator = cva(
-  'w-full h-0.5 rounded-full bg-km0-coral-400 mt-2',
+  'w-full h-0.5 shrink-0 rounded-full bg-km0-coral-400 mt-2',
 );
