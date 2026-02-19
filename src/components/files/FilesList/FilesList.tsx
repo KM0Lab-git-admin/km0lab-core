@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 type OpenAIFile = {
@@ -16,6 +17,7 @@ type FilesListProps = {
 };
 
 const FilesList: React.FC<FilesListProps> = ({ className }) => {
+  const t = useTranslations('FilesList');
   const [files, setFiles] = useState<OpenAIFile[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,34 +26,35 @@ const FilesList: React.FC<FilesListProps> = ({ className }) => {
     const fetchFiles = async () => {
       try {
         const res = await fetch('/api/files/list');
-        
+
         if (!res.ok) {
-          throw new Error('Error al cargar archivos');
+          throw new Error(t('error_loading'));
         }
 
         const data = await res.json();
         setFiles(data.data || []);
-      }
-      catch (err) {
-        setError(err instanceof Error ? err.message : 'Error desconocido');
-      }
-      finally {
+      } catch (err) {
+        setError(err instanceof Error ? err.message : t('unknown_error'));
+      } finally {
         setIsLoading(false);
       }
     };
 
     fetchFiles();
-  }, []);
+  }, [t]);
 
   const handleCopyId = (fileId: string) => {
     navigator.clipboard.writeText(fileId);
-    alert('ID copiado al portapapeles');
+    // eslint-disable-next-line no-alert
+    alert(t('id_copied'));
   };
 
   const formatBytes = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
+    if (bytes === 0) {
+      return `0 ${t('bytes')}`;
+    }
     const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const sizes = [t('bytes'), t('kb'), t('mb'), t('gb')];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return `${Math.round(bytes / k ** i * 100) / 100} ${sizes[i]}`;
   };
@@ -75,7 +78,7 @@ const FilesList: React.FC<FilesListProps> = ({ className }) => {
             <div className="w-2 h-2 bg-km0-blue rounded-full animate-bounce animate-delay-200" />
             <div className="w-2 h-2 bg-km0-blue rounded-full animate-bounce animate-delay-400" />
           </div>
-          <p className="text-neutral-500 text-sm">Cargando archivos...</p>
+          <p className="text-neutral-500 text-sm">{t('loading')}</p>
         </div>
       </div>
     );
@@ -85,7 +88,7 @@ const FilesList: React.FC<FilesListProps> = ({ className }) => {
     return (
       <div className={`${className} p-4`}>
         <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-red-700 text-sm">
-          <p className="font-medium">Error</p>
+          <p className="font-medium">{t('error')}</p>
           <p>{error}</p>
         </div>
       </div>
@@ -95,7 +98,7 @@ const FilesList: React.FC<FilesListProps> = ({ className }) => {
   if (files.length === 0) {
     return (
       <div className={`${className} p-8 text-center`}>
-        <p className="text-neutral-500">No hay archivos disponibles</p>
+        <p className="text-neutral-500">{t('no_files')}</p>
       </div>
     );
   }
@@ -108,27 +111,27 @@ const FilesList: React.FC<FilesListProps> = ({ className }) => {
             <thead className="bg-neutral-50 border-b border-neutral-200">
               <tr>
                 <th className="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">
-                  Nombre
+                  {t('name')}
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">
-                  Tamaño
+                  {t('size')}
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">
-                  Propósito
+                  {t('purpose')}
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">
-                  Fecha
+                  {t('date')}
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">
-                  ID
+                  {t('id')}
                 </th>
                 <th className="px-4 py-3 text-right text-xs font-medium text-neutral-600 uppercase tracking-wider">
-                  Acción
+                  {t('action')}
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-neutral-200">
-              {files.map((file) => (
+              {files.map(file => (
                 <tr key={file.id} className="hover:bg-neutral-50 transition-colors">
                   <td className="px-4 py-3 text-sm text-neutral-900 font-medium">
                     {file.filename}
@@ -137,11 +140,13 @@ const FilesList: React.FC<FilesListProps> = ({ className }) => {
                     {formatBytes(file.bytes)}
                   </td>
                   <td className="px-4 py-3 text-sm">
-                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                      file.purpose === 'assistants' 
-                        ? 'bg-orange-100 text-orange-800' 
-                        : 'bg-green-100 text-green-800'
-                    }`}>
+                    <span
+                      className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                        file.purpose === 'assistants'
+                          ? 'bg-orange-100 text-orange-800'
+                          : 'bg-green-100 text-green-800'
+                      }`}
+                    >
                       {file.purpose}
                     </span>
                   </td>
@@ -160,7 +165,7 @@ const FilesList: React.FC<FilesListProps> = ({ className }) => {
                       <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                       </svg>
-                      <span>Copiar ID</span>
+                      <span>{t('copy_id')}</span>
                     </button>
                   </td>
                 </tr>
@@ -174,4 +179,3 @@ const FilesList: React.FC<FilesListProps> = ({ className }) => {
 };
 
 export default FilesList;
-

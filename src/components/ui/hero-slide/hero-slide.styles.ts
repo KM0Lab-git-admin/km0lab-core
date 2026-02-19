@@ -5,14 +5,14 @@ export const heroSlideVariants = cva(
   {
     variants: {
       layout: {
-        /** Stack: Vertical por defecto (portrait). En landscape se convierte en side automáticamente. */
+        /** Stack: Vertical por defecto. En short-landscape (altura ≤ 550px) se convierte en side. */
         stack: [
-          'flex-col items-center',
-          'portrait:flex-col portrait:items-center portrait:text-center',
-          'landscape:flex-row landscape:items-center landscape:text-left',
+          'flex-col items-center justify-start',
+          'portrait:flex-col portrait:items-center portrait:text-center portrait:justify-start',
+          'short-landscape:flex-row short-landscape:items-start short-landscape:text-left',
         ].join(' '),
         /** Side: Siempre horizontal. */
-        side: 'flex-row items-center text-left',
+        side: 'flex-row items-start text-left',
       },
       density: {
         default: '',
@@ -25,7 +25,6 @@ export const heroSlideVariants = cva(
           'landscape:gap-[clamp(6px,1.2vh,16px)]',
         ].join(' '),
         md: [
-          // Gaps más ajustados que se reducen cuando hay poco espacio
           'gap-[clamp(8px,1.5vh,24px)]',
           'portrait:gap-[clamp(10px,2vh,32px)]',
           'landscape:gap-[clamp(8px,1.5vh,24px)]',
@@ -53,58 +52,52 @@ export const heroSlideVariants = cva(
   },
 );
 
-export const heroContentVariants = cva(
-  // flex-1 min-w-0 min-h-0: permite que el texto tome el espacio restante y haga wrap, sin cortarse
-  'flex flex-1 flex-col min-w-0 min-h-0 overflow-visible',
+/**
+ * heroTextVariants - Fusiona heroContentVariants + heroTextWrapperVariants.
+ * Reduce 2 divs a 1 solo contenedor para título y subtítulo.
+ */
+export const heroTextVariants = cva(
+  // Base: flex column + permite que el texto tome espacio y haga wrap
+  // justify-start fija el título arriba para que no se mueva según el contenido
+  'flex flex-1 flex-col min-w-0 min-h-0 overflow-visible justify-start',
   {
     variants: {
       align: {
-        center: 'items-center text-center',
-        left: 'items-start text-left',
+        center: [
+          'items-center text-center',
+          'landscape:items-center landscape:text-center',
+        ].join(' '),
+        left: [
+          'items-start text-left',
+          'landscape:items-start landscape:text-left',
+        ].join(' '),
       },
       layout: {
-        // Stack: centrado en portrait, left en landscape
         stack: [
           'portrait:items-center portrait:text-center',
-          'landscape:items-start landscape:text-left landscape:justify-center',
         ].join(' '),
-        // Side: siempre left
-        side: 'items-start text-left justify-center',
+        side: 'items-start text-left',
+      },
+      scale: {
+        sm: 'gap-[clamp(2px,0.5vh,8px)]',
+        md: [
+          'gap-[clamp(4px,0.8vh,16px)]',
+          'portrait:gap-[clamp(6px,1vh,20px)]',
+          'tablet:gap-[clamp(8px,1.5vh,24px)]',
+          'desktop:gap-[clamp(12px,2vh,32px)]',
+        ].join(' '),
+        lg: [
+          'gap-[clamp(6px,1.2vh,20px)]',
+          'portrait:gap-[clamp(8px,1.5vh,24px)]',
+          'tablet:gap-[clamp(12px,2vh,32px)]',
+          'desktop:gap-[clamp(16px,2.5vh,40px)]',
+        ].join(' '),
       },
     },
     defaultVariants: {
       align: 'center',
       layout: 'stack',
+      scale: 'md',
     },
   },
 );
-
-export const heroTextWrapperVariants = cva('flex flex-col', {
-  variants: {
-    density: {
-      default: '',
-      compact: '',
-    },
-    scale: {
-      sm: [
-        'gap-[clamp(2px,0.5vh,8px)]',
-      ].join(' '),
-      md: [
-        'gap-[clamp(4px,0.8vh,16px)]',
-        'portrait:gap-[clamp(6px,1vh,20px)]',
-        'tablet:gap-[clamp(8px,1.5vh,24px)]',
-        'desktop:gap-[clamp(12px,2vh,32px)]',
-      ].join(' '),
-      lg: [
-        'gap-[clamp(6px,1.2vh,20px)]',
-        'portrait:gap-[clamp(8px,1.5vh,24px)]',
-        'tablet:gap-[clamp(12px,2vh,32px)]',
-        'desktop:gap-[clamp(16px,2.5vh,40px)]',
-      ].join(' '),
-    },
-  },
-  defaultVariants: {
-    density: 'default',
-    scale: 'md',
-  },
-});

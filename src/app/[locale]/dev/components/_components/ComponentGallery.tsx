@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import type { ComponentEntry } from '../registry';
 import { componentRegistry } from '../registry';
@@ -24,6 +25,7 @@ const buildUsageSnippet = (entry: ComponentEntry) => {
 };
 
 export default function ComponentGallery({ screenshots }: ComponentGalleryProps) {
+  const t = useTranslations('ComponentRegistry');
   const [search, setSearch] = useState('');
   const [selectedId, setSelectedId] = useState(componentRegistry[0]?.id ?? '');
 
@@ -61,7 +63,7 @@ export default function ComponentGallery({ screenshots }: ComponentGalleryProps)
 
       {filtered.length === 0 ? (
         <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6 text-sm text-slate-600">
-          No hay componentes que coincidan con la búsqueda.
+          {t('no_results')}
         </div>
       ) : selectedEntry ? (
         <PreviewPanel

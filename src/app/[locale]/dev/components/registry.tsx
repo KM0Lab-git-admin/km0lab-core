@@ -1,5 +1,6 @@
 'use client';
 
+import type { Locale } from '@/utils/languageConfig';
 import type React from 'react';
 import ChatKitComponent from '@/components/chat/ChatKit/ChatKit';
 import BreakpointIndicator from '@/components/devtools/BreakpointIndicator';
@@ -21,19 +22,19 @@ import {
   CarouselViewport,
   useCarousel,
 } from '@/components/ui/carousel';
+import { ContentCard } from '@/components/ui/content-card';
+import { ContentShell } from '@/components/ui/content-shell';
 import { HeroSlide } from '@/components/ui/hero-slide';
 import { MobileFrame } from '@/components/ui/layout/MobileFrame';
 import { StatusBar } from '@/components/ui/layout/StatusBar';
-import { ContentCard } from '@/components/ui/content-card';
-import { ContentShell } from '@/components/ui/content-shell';
 import { LogoHeader } from '@/components/ui/logo-header';
 import { MediaFrame } from '@/components/ui/media-frame';
 import { NavigationFooter } from '@/components/ui/navigation-footer';
-import { PageContainer } from '@/components/ui/page-container';
 import { Badge } from '@/components/ui/primitives/badge';
 import { Button } from '@/components/ui/primitives/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/primitives/card';
 import { CheckIcon, DateIcon, EmailIcon, Input, PhoneIcon, XIcon, ZipCodeIcon } from '@/components/ui/primitives/input';
+import { LanguageButton } from '@/components/ui/primitives/language-button';
 import { Progress } from '@/components/ui/primitives/progress';
 import { Separator } from '@/components/ui/primitives/separator';
 import { Subtitle } from '@/components/ui/primitives/subtitle';
@@ -45,7 +46,9 @@ import {
   SliderCount,
   SliderDots,
 } from '@/components/ui/slider';
+import { getLanguageConfig } from '@/utils/languageConfig';
 import { getValidatorById, validators } from '@/validation/validators';
+import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 /**
@@ -72,6 +75,8 @@ export type ComponentEntry = {
 const badgeVariants = ['default', 'secondary', 'destructive', 'outline'] as const;
 const buttonVariants = ['default', 'secondary', 'outline', 'destructive', 'ghost', 'link'] as const;
 const buttonSizes = ['default', 'sm', 'lg', 'icon'] as const;
+const languageButtonVariants = ['default', 'secondary', 'outline', 'destructive', 'ghost', 'link', 'fold'] as const;
+const languageButtonSizes = ['default', 'sm', 'lg', 'xs'] as const;
 const titleSizes = ['h1', 'h2', 'h3', 'xl', 'lg', 'md', 'sm'] as const;
 const titleTones = ['default', 'muted', 'brand'] as const;
 const titleAlignments = ['left', 'center'] as const;
@@ -79,13 +84,16 @@ const subtitleSizes = ['lg', 'md', 'sm', 'xs'] as const;
 const subtitleTones = ['default', 'muted'] as const;
 const subtitleAlignments = ['left', 'center'] as const;
 
-const ServerOnlyNotice = ({ label }: { label: string }) => (
-  <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900">
-    {label}
-    {' '}
-    es Server Component / depende de backend. No se renderiza aquí; revisa el import y úsalo en un entorno server.
-  </div>
-);
+const ServerOnlyNotice = ({ label }: { label: string }) => {
+  const t = useTranslations('ComponentRegistry');
+  return (
+    <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900">
+      {label}
+      {' '}
+      {t('server_only_notice')}
+    </div>
+  );
+};
 
 const BadgeDemo = () => {
   const [variant, setVariant] = useState<(typeof badgeVariants)[number]>('default');
@@ -175,6 +183,80 @@ const ButtonDemo = () => {
             onChange={e => setSize(e.target.value as (typeof buttonSizes)[number])}
           >
             {buttonSizes.map(item => (
+              <option key={item} value={item}>{item}</option>
+            ))}
+          </select>
+        </label>
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <input
+            type="checkbox"
+            className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+            checked={disabled}
+            onChange={e => setDisabled(e.target.checked)}
+          />
+          Disabled
+        </label>
+      </div>
+    </div>
+  );
+};
+
+const LanguageButtonDemo = () => {
+  const locale = useLocale() as Locale;
+  const [variant, setVariant] = useState<(typeof languageButtonVariants)[number]>('default');
+  const [size, setSize] = useState<(typeof languageButtonSizes)[number]>('default');
+  const [disabled, setDisabled] = useState(false);
+  const [selectedLocale, setSelectedLocale] = useState<Locale>(locale);
+
+  const languageConfig = getLanguageConfig(selectedLocale);
+
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap items-center gap-2">
+        <LanguageButton
+          variant={variant}
+          size={size}
+          disabled={disabled}
+          flagSrc={languageConfig.flagSrc}
+          flagAlt={languageConfig.flagAlt}
+          title={languageConfig.title}
+          subtitle={languageConfig.subtitle}
+        />
+      </div>
+      <div className="grid gap-2 sm:grid-cols-2">
+        <label className="text-sm text-slate-600">
+          Idioma
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={selectedLocale}
+            onChange={e => setSelectedLocale(e.target.value as Locale)}
+          >
+            <option value="es">Español</option>
+            <option value="ca">Català</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Variante
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={variant}
+            onChange={e => setVariant(e.target.value as (typeof languageButtonVariants)[number])}
+          >
+            {languageButtonVariants.map(item => (
+              <option key={item} value={item}>{item}</option>
+            ))}
+          </select>
+        </label>
+        <label className="text-sm text-slate-600">
+          Tamaño
+          <select
+            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
+            value={size}
+            onChange={e => setSize(e.target.value as (typeof languageButtonSizes)[number])}
+          >
+            {languageButtonSizes.map(item => (
               <option key={item} value={item}>{item}</option>
             ))}
           </select>
@@ -662,7 +744,6 @@ const SeparatorDemo = () => (
     </div>
   </div>
 );
-
 
 const MobileFrameDemo = () => (
   <MobileFrame>
@@ -1256,62 +1337,12 @@ const MediaFrameDemo = () => {
   );
 };
 
-const PageContainerDemo = () => {
-  const [as, setAs] = useState<'div' | 'main' | 'section'>('div');
-
-  return (
-    <div className="space-y-4">
-      <div className="grid gap-2 sm:grid-cols-2">
-        <label className="text-sm text-slate-600">
-          Elemento HTML
-          <select
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={as}
-            onChange={e => setAs(e.target.value as 'div' | 'main' | 'section')}
-          >
-            <option value="div">div</option>
-            <option value="main">main</option>
-            <option value="section">section</option>
-          </select>
-        </label>
-      </div>
-
-      <div className="rounded-lg border border-slate-200 bg-white p-4">
-        <div className="mx-auto max-w-md overflow-hidden rounded-lg border-2 border-dashed border-slate-300" style={{ height: '300px' }}>
-          <PageContainer as={as} className="h-full">
-            <div className="flex h-full items-center justify-center p-4">
-              <div className="text-center">
-                <p className="text-sm font-semibold text-slate-700">PageContainer</p>
-                <p className="mt-1 text-xs text-slate-500">Fondo degradado blanco-beige</p>
-                <p className="mt-1 text-xs text-slate-400">Elemento: {as}</p>
-              </div>
-            </div>
-          </PageContainer>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const ContentShellDemo = () => {
-  const [scale, setScale] = useState<'sm' | 'md' | 'lg'>('md');
   const [as, setAs] = useState<'div' | 'main' | 'section'>('div');
 
   return (
     <div className="space-y-4">
       <div className="grid gap-2 sm:grid-cols-2">
-        <label className="text-sm text-slate-600">
-          Escala
-          <select
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={scale}
-            onChange={e => setScale(e.target.value as 'sm' | 'md' | 'lg')}
-          >
-            <option value="sm">sm (pequeño)</option>
-            <option value="md">md (mediano)</option>
-            <option value="lg">lg (grande)</option>
-          </select>
-        </label>
         <label className="text-sm text-slate-600">
           Elemento HTML
           <select
@@ -1328,11 +1359,19 @@ const ContentShellDemo = () => {
 
       <div className="rounded-lg border border-slate-200 bg-gradient-white-beige p-4">
         <div className="mx-auto max-w-2xl overflow-hidden rounded-lg border-2 border-dashed border-slate-300" style={{ height: '300px' }}>
-          <ContentShell scale={scale} as={as} className="h-full">
+          <ContentShell as={as} className="h-full">
             <div className="flex h-full flex-col items-center justify-center gap-4">
               <Badge variant="secondary">ContentShell</Badge>
-              <p className="text-sm text-slate-700">Escala: {scale}</p>
-              <p className="text-xs text-slate-500">Elemento: {as}</p>
+              <p className="text-sm text-slate-700">
+                Elemento:
+                {as}
+              </p>
+              <p className="text-xs text-slate-400">
+                CSS Variables: --shell-padding, --shell-gap
+              </p>
+              <p className="text-xs text-slate-400">
+                Fondo: en Layout (cubre todo el viewport)
+              </p>
             </div>
           </ContentShell>
         </div>
@@ -1404,9 +1443,18 @@ const LogoHeaderDemo = () => {
         <div className="mx-auto max-w-md overflow-hidden rounded-lg border-2 border-dashed border-slate-300 bg-gradient-white-beige p-4">
           <LogoHeader scale={scale} logoScale={logoScale} logoAlt={logoAlt} as={as} />
           <div className="mt-4 text-center">
-            <p className="text-xs text-slate-500">Header scale: {scale}</p>
-            <p className="text-xs text-slate-500">Logo scale: {logoScale}</p>
-            <p className="text-xs text-slate-500">Elemento: {as}</p>
+            <p className="text-xs text-slate-500">
+              Header scale:
+              {scale}
+            </p>
+            <p className="text-xs text-slate-500">
+              Logo scale:
+              {logoScale}
+            </p>
+            <p className="text-xs text-slate-500">
+              Elemento:
+              {as}
+            </p>
           </div>
         </div>
       </div>
@@ -1415,24 +1463,11 @@ const LogoHeaderDemo = () => {
 };
 
 const ContentCardDemo = () => {
-  const [scale, setScale] = useState<'sm' | 'md' | 'lg'>('md');
   const [as, setAs] = useState<'section' | 'div' | 'article' | 'aside'>('section');
 
   return (
     <div className="space-y-4">
       <div className="grid gap-2 sm:grid-cols-2">
-        <label className="text-sm text-slate-600">
-          Escala
-          <select
-            className="mt-1 w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-200"
-            value={scale}
-            onChange={e => setScale(e.target.value as 'sm' | 'md' | 'lg')}
-          >
-            <option value="sm">sm (pequeño)</option>
-            <option value="md">md (mediano)</option>
-            <option value="lg">lg (grande)</option>
-          </select>
-        </label>
         <label className="text-sm text-slate-600">
           Elemento HTML
           <select
@@ -1448,35 +1483,31 @@ const ContentCardDemo = () => {
         </label>
       </div>
 
-      <div className="rounded-lg border border-slate-200 bg-gradient-white-beige p-4">
-        <div className="mx-auto max-w-2xl">
-          <ContentCard scale={scale} as={as}>
+      <div className="rounded-lg border border-slate-200 p-4">
+        <ContentShell className="max-w-2xl mx-auto">
+          <ContentCard as={as}>
             <div className="flex flex-col gap-4">
               <Title size="h2">Título de ejemplo</Title>
               <Subtitle size="md">
-                Este es un ejemplo de ContentCard con escala
-                {' '}
-                {scale}
-                {' '}
-                y elemento
+                ContentCard hereda spacing de ContentShell via CSS Variables.
+                Elemento:
                 {' '}
                 {as}
                 .
               </Subtitle>
               <div className="rounded-lg bg-km0-blue-50 p-4">
                 <p className="text-sm text-slate-700">
-                  El componente ContentCard proporciona un contenedor con estilos responsivos,
-                  sombra personalizada y variantes de escala para diferentes contextos.
+                  El componente ContentCard hereda --shell-padding y --shell-gap de ContentShell.
+                  Solo define estilos visuales propios (fondo blanco, sombra, border-radius).
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                <Badge variant="secondary">Reutilizable</Badge>
-                <Badge variant="secondary">Responsive</Badge>
-                <Badge variant="secondary">Flexible</Badge>
+                <Badge variant="secondary">Hereda spacing</Badge>
+                <Badge variant="secondary">CSS Variables</Badge>
               </div>
             </div>
           </ContentCard>
-        </div>
+        </ContentShell>
       </div>
     </div>
   );
@@ -1733,6 +1764,18 @@ export const componentRegistry: ComponentEntry[] = [
     Demo: ButtonDemo,
   },
   {
+    id: 'language-button',
+    title: 'LanguageButton',
+    description: 'Botón especializado para selección de idioma con bandera, título, subtítulo y flecha.',
+    group: 'ui',
+    filePath: 'src/components/ui/primitives/language-button/language-button.tsx',
+    importPath: '@/components/ui/primitives/language-button',
+    exportName: 'LanguageButton',
+    exportType: 'named',
+    Component: LanguageButton,
+    Demo: LanguageButtonDemo,
+  },
+  {
     id: 'input',
     title: 'Input',
     description: 'Campo de entrada con variantes, iconos y mensajes de validación.',
@@ -1943,7 +1986,7 @@ export const componentRegistry: ComponentEntry[] = [
   {
     id: 'content-card',
     title: 'ContentCard',
-    description: 'Tarjeta de contenido genérica con estilos responsivos, sombra y variantes de escala.',
+    description: 'Tarjeta de contenido que hereda spacing de ContentShell via CSS Variables.',
     group: 'ui',
     filePath: 'src/components/ui/content-card/content-card.tsx',
     importPath: '@/components/ui/content-card',
@@ -1952,32 +1995,15 @@ export const componentRegistry: ComponentEntry[] = [
     Component: ContentCard,
     Demo: ContentCardDemo,
     notes: [
-      'Variantes de escala (sm, md, lg) con padding y max-width responsivos usando clamp().',
+      'Hereda --shell-padding y --shell-gap de ContentShell.',
+      'Solo define estilos visuales: fondo blanco, sombra km0-card-shadow, border-radius.',
       'Soporta diferentes elementos HTML (section, div, article, aside).',
-      'Incluye sombra km0-card-shadow y fondo blanco por defecto.',
-    ],
-  },
-  {
-    id: 'page-container',
-    title: 'PageContainer',
-    description: 'Contenedor de página genérico con fondo degradado y altura completa.',
-    group: 'ui',
-    filePath: 'src/components/ui/page-container/page-container.tsx',
-    importPath: '@/components/ui/page-container',
-    exportName: 'PageContainer',
-    exportType: 'named',
-    Component: PageContainer,
-    Demo: PageContainerDemo,
-    notes: [
-      'Fondo degradado blanco-beige del sistema de diseño.',
-      'Altura completa con fallback para navegadores que no soportan dvh.',
-      'Soporta diferentes elementos HTML (div, main, section).',
     ],
   },
   {
     id: 'content-shell',
     title: 'ContentShell',
-    description: 'Contenedor de contenido con padding y gap responsivos y variantes de escala.',
+    description: 'Contenedor principal - Fuente de verdad para spacing via CSS Variables.',
     group: 'ui',
     filePath: 'src/components/ui/content-shell/content-shell.tsx',
     importPath: '@/components/ui/content-shell',
@@ -1986,8 +2012,10 @@ export const componentRegistry: ComponentEntry[] = [
     Component: ContentShell,
     Demo: ContentShellDemo,
     notes: [
-      'Variantes de escala (sm, md, lg) con padding y gap responsivos usando clamp().',
-      'Layout flexible con items-center y justify-start.',
+      'Define CSS Variables (--shell-padding, --shell-gap) por breakpoint.',
+      'Los componentes hijos heredan estas variables automáticamente.',
+      'Absorbe los estilos de PageContainer (bg-gradient, font-ui).',
+      'Variante background: gradient (default) o none (transparente).',
       'Soporta diferentes elementos HTML (div, main, section).',
     ],
   },

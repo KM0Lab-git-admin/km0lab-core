@@ -1,9 +1,10 @@
 import type { VariantProps } from 'class-variance-authority';
 import type React from 'react';
 
+import { Logo } from '@/components/ui/logo';
 import { cn } from '@/components/ui/primitives/utils';
 
-import { logoHeaderVariants, logoVariants } from './logo-header.styles';
+import { logoHeaderVariants } from './logo-header.styles';
 
 export interface LogoHeaderProps
   extends React.HTMLAttributes<HTMLElement>,
@@ -15,7 +16,9 @@ export interface LogoHeaderProps
   /** Escala del header padding (default: 'none' para compatibilidad con AppHeader). */
   scale?: VariantProps<typeof logoHeaderVariants>['scale'];
   /** Escala del logo (default: 'none' para compatibilidad con AppHeader). */
-  logoScale?: VariantProps<typeof logoVariants>['scale'];
+  logoScale?: 'none' | 'sm' | 'md' | 'lg';
+  /** Elemento a mostrar a la izquierda del logo (ej: botón atrás) */
+  leftAction?: React.ReactNode;
 }
 
 /**
@@ -28,19 +31,30 @@ const LogoHeader = ({
   scale = 'none',
   logoAlt = 'KMØ LAB®',
   logoScale = 'none',
+  leftAction,
   className,
   ...props
 }: LogoHeaderProps) => {
   return (
     <Component
-      className={cn(logoHeaderVariants({ scale }), className)}
+      className={cn(
+        logoHeaderVariants({ scale }),
+        leftAction ? 'relative !justify-between' : '',
+        className
+      )}
       {...props}
     >
-      <div
-        className={logoVariants({ scale: logoScale })}
-        role="img"
-        aria-label={logoAlt}
+      {leftAction && (
+        <div className="flex-shrink-0">
+          {leftAction}
+        </div>
+      )}
+      <Logo
+        scale={logoScale}
+        alt={logoAlt}
+        className={leftAction ? 'absolute left-1/2 -translate-x-1/2' : undefined}
       />
+      {leftAction && <div className="flex-shrink-0 w-9" />}
     </Component>
   );
 };

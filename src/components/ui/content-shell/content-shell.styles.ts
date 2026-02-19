@@ -1,40 +1,51 @@
 import { cva } from 'class-variance-authority';
 
+/**
+ * ContentShell - Fuente de verdad para spacing por breakpoint.
+ *
+ * Define CSS Variables que los componentes hijos pueden heredar:
+ * - --shell-padding: padding del contenedor
+ * - --shell-gap: gap entre elementos
+ *
+ * Los hijos pueden usar: p-[var(--shell-padding)], gap-[var(--shell-gap)]
+ */
 export const contentShellVariants = cva(
-  'flex-1 min-h-0 flex flex-col items-center justify-start w-full overflow-hidden',
-  {
-    variants: {
-      scale: {
-        sm: [
-          'p-[clamp(8px,1.5vw,16px)]',
-          'gap-[clamp(8px,1.5vh,16px)]',
-        ].join(' '),
-        md: [
-          // Padding adaptativo
-          'p-[clamp(8px,2vw,24px)]',
-          'gap-[clamp(8px,2vh,24px)]',
-          // Mobile-P: más ajustado
-          'mobile-p:p-[clamp(8px,1.5vw,20px)]',
-          'mobile-p:gap-[clamp(6px,1.5vh,20px)]',
-          // Tablet: intermedio
-          'tablet:p-[clamp(16px,2.5vw,32px)]',
-          'tablet:gap-[clamp(12px,2vh,32px)]',
-          // Desktop: generoso
-          'desktop:p-[clamp(24px,3.5vw,48px)]',
-          'desktop:gap-[clamp(20px,3vh,40px)]',
-        ].join(' '),
-        lg: [
-          'p-[clamp(12px,2.5vw,32px)]',
-          'gap-[clamp(12px,2.5vh,28px)]',
-          'tablet:p-[clamp(24px,3.5vw,48px)]',
-          'tablet:gap-[clamp(20px,3vh,40px)]',
-          'desktop:p-[clamp(32px,4.5vw,64px)]',
-          'desktop:gap-[clamp(24px,3.5vh,56px)]',
-        ].join(' '),
-      },
-    },
-    defaultVariants: {
-      scale: 'md',
-    },
-  },
+  [
+    // Layout base
+    'flex-1 min-h-0 flex flex-col items-center justify-start w-full overflow-hidden',
+    'max-w-[570px] mx-auto',
+
+    // === CSS VARIABLES - FUENTE DE VERDAD PARA SPACING ===
+    // Base (xs/mobile pequeño)
+    '[--shell-padding:12px]',
+    '[--shell-gap:12px]',
+
+    // mobile-p (375px+)
+    'mobile-p:[--shell-padding:16px]',
+    'mobile-p:[--shell-gap:16px]',
+
+    // tablet (768px+)
+    'tablet:[--shell-padding:24px]',
+    'tablet:[--shell-gap:16px]',
+
+    // desktop (1280px+)
+    'desktop:[--shell-padding:32px]',
+    'desktop:[--shell-gap:48px]',
+
+    // ultra-wide (1920px+ con altura 1080px+) - pantallas grandes
+    'ultra-wide:[--shell-padding:48px]',
+    'ultra-wide:[--shell-gap:96px]',
+
+    // short-landscape (landscape con altura ≤ 550px) - más compacto
+    'short-landscape:[--shell-padding:8px]',
+    'short-landscape:[--shell-gap:4px]',
+
+    // Aplicar las variables
+    'p-[var(--shell-padding)]',
+    'gap-[var(--shell-gap)]',
+
+    // === ESTILOS VISUALES ===
+    // Fondo movido al Layout para cubrir todo el viewport
+    'font-ui',
+  ].join(' '),
 );

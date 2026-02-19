@@ -12,7 +12,6 @@ import {
 import { Badge } from '@/components/ui/primitives/badge';
 import { Button } from '@/components/ui/primitives/button';
 import { Card } from '@/components/ui/primitives/card';
-import '@/styles/globals.css';
 
 function ColorScale({
   title,

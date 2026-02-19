@@ -135,5 +135,126 @@
     "subtitle": "Your postal code is available. You can continue.",
     "cta": "Go to onboarding",
     "cta_aria": "Go to onboarding"
+  },
+  "Onboarding": {
+    "start": "START",
+    "skip": "SKIP",
+    "start_aria": "Start",
+    "skip_aria": "Skip"
+  },
+  "FilesList": {
+    "loading": "Loading files...",
+    "error": "Error",
+    "error_loading": "Error loading files",
+    "unknown_error": "Unknown error",
+    "no_files": "No files available",
+    "name": "Name",
+    "size": "Size",
+    "purpose": "Purpose",
+    "date": "Date",
+    "id": "ID",
+    "action": "Action",
+    "copy_id": "Copy ID",
+    "id_copied": "ID copied to clipboard",
+    "bytes": "Bytes",
+    "kb": "KB",
+    "mb": "MB",
+    "gb": "GB"
+  },
+  "ChatKit": {
+    "loading": "Loading assistant...",
+    "error": "Error loading ChatKit",
+    "unknown_error": "Unknown error",
+    "session_error": "Could not create ChatKit session"
+  },
+  "LanguageButton": {
+    "title": "English",
+    "subtitle": "Anquim idioma vos cum ansa",
+    "flag_alt": "Flag of England"
+  },
+  "OnboardingSlides": {
+    "welcome": {
+      "titleLine1": "WELCOME",
+      "titleLine2": "TO KM0 LAB",
+      "subtitle": "Your local commerce, closer than ever. Discover a new way to interact with your neighbors and support local commerce in your neighborhood, all from a single platform designed for you.",
+      "xpBadge": "+ 10 XP"
+    },
+    "discover": {
+      "titleLine1": "DISCOVER",
+      "titleLine2": "STORES",
+      "subtitle": "Explore the best products in your neighborhood.",
+      "xpBadge": "+ 10 XP"
+    },
+    "connect": {
+      "titleLine1": "CONNECT WITH",
+      "titleLine2": "NEIGHBORS",
+      "subtitle": "Be part of an active and supportive community.",
+      "xpBadge": "+ 10 XP"
+    },
+    "spaces": {
+      "titleLine1": "PUBLIC",
+      "titleLine2": "SPACES",
+      "subtitle": "Enjoy and take care of everyone's spaces.",
+      "xpBadge": "+ 10 XP"
+    },
+    "start": {
+      "titleLine1": "START",
+      "titleLine2": "NOW",
+      "subtitle": "Join the local commerce revolution.",
+      "xpBadge": "+ 10 XP"
+    }
+  },
+  "TownHome": {
+    "defaultTown": "Your Town",
+    "chatLabel": "Chat",
+    "chatLogo_alt": "KM0 Chat logo",
+    "chatLogo_src": "/assets/logos/chat_blue.png",
+    "notifications_aria": "Notifications",
+    "townHall": {
+      "title": "Town Hall",
+      "bullet0": "24/7 support for procedures, products and services",
+      "bullet1": "Buy and book at local shops",
+      "bullet2": "Earn points and coupons with every purchase"
+    },
+    "products": {
+      "title": "Products",
+      "bullet0": "Local and km0 products",
+      "bullet1": "Markets and local fairs",
+      "bullet2": "Seasonal offers"
+    },
+    "services": {
+      "title": "Services",
+      "bullet0": "Local professionals and services",
+      "bullet1": "Shops and stores in your town",
+      "bullet2": "Leisure, culture and activities"
+    },
+    "nav": {
+      "home": "Home",
+      "chat": "Chat",
+      "info": "Info",
+      "profile": "Profile"
+    }
+  },
+  "ComponentRegistry": {
+    "server_only_notice": "is Server Component / depends on backend. Not rendered here; check the import and use it in a server environment.",
+    "pending_demo": "Pending demo for",
+    "pending_demo_description": "Component rendered with minimal props.",
+    "ui_primitives": "UI / Primitives",
+    "features": "Features",
+    "screens": "Screens",
+    "copy_import": "Copy import",
+    "import": "Import",
+    "snippet": "Snippet",
+    "export": "Export",
+    "path": "Path",
+    "named": "named",
+    "default": "default",
+    "screenshots": "Screenshots",
+    "assets": "assets",
+    "search_placeholder": "Search by name or path...",
+    "no_results": "No components match the search.",
+    "copied": "Copied",
+    "copy": "Copy",
+    "usage": "Usage"
   }
 }

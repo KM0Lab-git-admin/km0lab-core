@@ -1,0 +1,269 @@
+{
+  "RootLayout": {
+    "home_link": "Inici",
+    "about_link": "Sobre nosaltres",
+    "counter_link": "Comptador",
+    "portfolio_link": "Portafoli",
+    "sign_in_link": "Iniciar sessió",
+    "sign_up_link": "Registrar-se"
+  },
+  "BaseTemplate": {
+    "description": "Codi inicial per al teu Boilerplate de Next.js amb Tailwind CSS",
+    "made_with": "Creat amb <author></author>."
+  },
+  "Index": {
+    "meta_title": "Presentació del Boilerplate de Next.js",
+    "meta_description": "Next.js Boilerplate és el codi inicial perfecte per al teu projecte. Construeix la teva aplicació React amb el framework Next.js.",
+    "sponsors_title": "Patrocinadors",
+    "boilerplate_title": "Codi Boilerplate per al teu projecte Next.js amb Tailwind CSS"
+  },
+  "Counter": {
+    "meta_title": "Comptador",
+    "meta_description": "Un exemple d'operació de base de dades",
+    "loading_counter": "Carregant comptador...",
+    "security_powered_by": "Seguretat, detecció de bots i limitació de velocitat impulsats per"
+  },
+  "CounterForm": {
+    "presentation": "El comptador s'emmagatzema a la base de dades i s'incrementa segons el valor que proporcions.",
+    "label_increment": "Incrementar en",
+    "button_increment": "Incrementar"
+  },
+  "CurrentCount": {
+    "count": "Comptador: {count}"
+  },
+  "About": {
+    "meta_title": "Sobre nosaltres",
+    "meta_description": "Descripció de la pàgina Sobre nosaltres",
+    "about_title": "La nostra història",
+    "about_subtitle": "Construint el futur junts",
+    "our_mission": "La nostra missió",
+    "about_paragraph": "Benvingut a la nostra pàgina Sobre nosaltres! Som un equip de persones apassionades dedicades a crear programari increïble.",
+    "translation_powered_by": "Traducció impulsada per",
+    "hero_image_alt": "Equip treballant junts en solucions innovadores",
+    "crowdin_link_aria": "Visitar la plataforma de traducció Crowdin",
+    "crowdin_logo_aria": "Logo del Sistema de Gestió de Traduccions Crowdin"
+  },
+  "Portfolio": {
+    "meta_title": "Portafoli",
+    "meta_description": "Benvingut a la meva pàgina de portafoli!",
+    "presentation": "Benvingut a la meva pàgina de portafoli! Aquí trobaràs una col·lecció acuradament seleccionada del meu treball i assoliments. A través d'aquest portafoli, vull mostrar la meva experiència, creativitat i el valor que puc aportar als teus projectes.",
+    "portfolio_name": "Portafoli {name}",
+    "error_reporting_powered_by": "Informe d'errors impulsat per",
+    "coverage_powered_by": "Cobertura de codi impulsada per"
+  },
+  "PortfolioSlug": {
+    "meta_title": "Portafoli {slug}",
+    "meta_description": "Descripció del portafoli {slug}",
+    "header": "Portafoli {slug}",
+    "content": "Vaig crear un conjunt de materials promocionals i elements de marca per a un esdeveniment corporatiu. Vaig dissenyar una temàtica visualment unificada, que abasta un logotip, pòsters, pancartes i recursos digitals. Vaig integrar la identitat de marca del client incorporant un enfocament contemporani i innovador. Vaig obtenir respostes favorables dels assistents, resultant en un esdeveniment exitós amb major compromís dels participants i major visibilitat de la marca.",
+    "log_management_powered_by": "Gestió de registres impulsada per"
+  },
+  "SignIn": {
+    "meta_title": "Iniciar sessió",
+    "meta_description": "Inicia sessió sense inconvenients al teu compte amb el nostre procés d'accés fàcil d'usar."
+  },
+  "SignUp": {
+    "meta_title": "Registrar-se",
+    "meta_description": "Crea un compte sense esforç gràcies al nostre procés de registre intuitiu."
+  },
+  "Dashboard": {
+    "meta_title": "Panell",
+    "hello_message": "Hola {email}!",
+    "alternative_message": "Vols desenvolupar el teu SaaS més ràpid usant la mateixa tecnologia? Prova <url></url>."
+  },
+  "UserProfile": {
+    "meta_title": "Perfil d'usuari"
+  },
+  "DashboardLayout": {
+    "dashboard_link": "Panell",
+    "user_profile_link": "Gestionar el teu compte",
+    "sign_out": "Tancar sessió"
+  },
+  "App": {
+    "meta_title": "Benvingut a l'aplicació",
+    "meta_description": "Pàgina principal de l'aplicació.",
+    "welcome_title": "Benvingut a la teva nova aplicació!",
+    "welcome_message": "Aquesta és la pàgina principal de la teva aplicació. Des d'aquí podràs accedir a totes les funcionalitats importants. Personalitza aquest contingut per adaptar-lo a les necessitats del teu projecte.",
+    "quick_start": "Primers passos",
+    "help_resources": "Recursos d'ajuda"
+  },
+  "Welcome": {
+    "skip": "Saltar",
+    "prev": "Anterior",
+    "next": "Següent",
+    "slides": {
+      "0": {
+        "title": "COMPRA A <i>300 M</i> DE CASA SENSE MOURE'T DE CASA",
+        "subtitle": "Títol Intro 1",
+        "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa"
+      },
+      "1": {
+        "title": "Descobreix productes locals exclusius",
+        "subtitle": "Títol Intro 2",
+        "description": "Explora una selecció única de productes a prop de tu i dona suport als comerços locals."
+      },
+      "2": {
+        "title": "Guanya recompenses per cada compra",
+        "subtitle": "Títol Intro 3",
+        "description": "Acumula punts i canvia recompenses exclusives mentre compres al teu barri."
+      },
+      "3": {
+        "title": "Comparteix la teva experiència amb la comunitat",
+        "subtitle": "Títol Intro 4",
+        "description": "Deixa ressenyes i ajuda altres usuaris a descobrir els millors productes locals."
+      },
+      "4": {
+        "title": "Comença ara i forma part del canvi!",
+        "subtitle": "Títol Intro 5",
+        "description": "Uneix-te a KM0 LAB i transforma la forma en què compres i dones suport a la teva comunitat."
+      }
+    }
+  },
+  "PostalCode": {
+    "form_aria": "Formulari de codi postal",
+    "image_alt": "Il·lustració de comerç local",
+    "xp_badge": "+ 20 XP",
+    "title": "Introdueix el teu codi postal",
+    "subtitle": "Així et mostrem comerç i serveis a prop de tu.",
+    "input_label": "Codi postal",
+    "input_aria": "Introdueix el teu codi postal",
+    "placeholder": "Ex. 08001",
+    "helper": "5 números, sense lletres",
+    "format_error": "Codi postal no vàlid. Usa 5 números.",
+    "unavailable_error": "Encara no estem a la teva zona.",
+    "success": "Correcte.",
+    "checking": "Comprovant...",
+    "continue": "Continuar",
+    "continue_aria": "Continuar amb el codi postal",
+    "notify": "Avisa'm quan estigui disponible",
+    "notify_aria": "Avisa'm quan estigui disponible"
+  },
+  "PostalCodeWelcome": {
+    "title": "Benvingut!",
+    "subtitle": "El teu codi postal està disponible. Ja pots continuar.",
+    "cta": "Anar a l'onboarding",
+    "cta_aria": "Anar a l'onboarding"
+  },
+  "Onboarding": {
+    "start": "COMENÇAR",
+    "skip": "SALTAR",
+    "start_aria": "Començar",
+    "skip_aria": "Saltar"
+  },
+  "OnboardingSlides": {
+    "welcome": {
+      "titleLine1": "BENVINGUT",
+      "titleLine2": "A KM0 LAB",
+      "subtitle": "El teu comerç local, més a prop que mai. Descobreix una nova forma d'interactuar amb els teus veïns i donar suport al comerç de proximitat al teu barri, tot des d'una única plataforma dissenyada per a tu.",
+      "xpBadge": "+ 10 XP"
+    },
+    "discover": {
+      "titleLine1": "DESCOBREIX",
+      "titleLine2": "BOTIGUES",
+      "subtitle": "Explora els millors productes del teu barri.",
+      "xpBadge": "+ 10 XP"
+    },
+    "connect": {
+      "titleLine1": "CONNECTA AMB",
+      "titleLine2": "VEÏNS",
+      "subtitle": "Forma part d'una comunitat activa i solidària.",
+      "xpBadge": "+ 10 XP"
+    },
+    "spaces": {
+      "titleLine1": "ESPAIS",
+      "titleLine2": "PÚBLICS",
+      "subtitle": "Gaudeix i cuida els espais de tothom.",
+      "xpBadge": "+ 10 XP"
+    },
+    "start": {
+      "titleLine1": "COMENÇA",
+      "titleLine2": "ARA",
+      "subtitle": "Uneix-te a la revolució del comerç local.",
+      "xpBadge": "+ 10 XP"
+    }
+  },
+  "FilesList": {
+    "loading": "Carregant fitxers...",
+    "error": "Error",
+    "error_loading": "Error en carregar fitxers",
+    "unknown_error": "Error desconegut",
+    "no_files": "No hi ha fitxers disponibles",
+    "name": "Nom",
+    "size": "Mida",
+    "purpose": "Propòsit",
+    "date": "Data",
+    "id": "ID",
+    "action": "Acció",
+    "copy_id": "Copiar ID",
+    "id_copied": "ID copiat al porta-retalls",
+    "bytes": "Bytes",
+    "kb": "KB",
+    "mb": "MB",
+    "gb": "GB"
+  },
+  "ChatKit": {
+    "loading": "Carregant assistent...",
+    "error": "Error en carregar ChatKit",
+    "unknown_error": "Error desconegut",
+    "session_error": "No s'ha pogut crear la sessió ChatKit"
+  },
+  "LanguageButton": {
+    "title": "Català",
+    "subtitle": "Anquim idioma vos cum ansa",
+    "flag_alt": "Bandera de Catalunya"
+  },
+  "TownHome": {
+    "defaultTown": "El teu municipi",
+    "chatLabel": "Chat",
+    "chatLogo_alt": "Logo de KM0 Chat",
+    "chatLogo_src": "/assets/logos/chat_blue.png",
+    "notifications_aria": "Notificacions",
+    "townHall": {
+      "title": "Ajuntament",
+      "bullet0": "Atenció 24/7 per a tràmits, productes i serveis",
+      "bullet1": "Compra i reserva en comerços locals",
+      "bullet2": "Guanya punts i cupons amb cada compra"
+    },
+    "products": {
+      "title": "Productes",
+      "bullet0": "Productes de proximitat i km0",
+      "bullet1": "Mercats i fires locals",
+      "bullet2": "Ofertes de temporada"
+    },
+    "services": {
+      "title": "Serveis",
+      "bullet0": "Professionals i serveis locals",
+      "bullet1": "Comerços i botigues del municipi",
+      "bullet2": "Oci, cultura i activitats"
+    },
+    "nav": {
+      "home": "Inici",
+      "chat": "Xat",
+      "info": "Info",
+      "profile": "Perfil"
+    }
+  },
+  "ComponentRegistry": {
+    "server_only_notice": "és Server Component / depèn del backend. No es renderitza aquí; revisa l'import i úsalo en un entorn server.",
+    "pending_demo": "Demo pendent per a",
+    "pending_demo_description": "Component renderitzat amb props mínimes.",
+    "ui_primitives": "UI / Primitives",
+    "features": "Features",
+    "screens": "Screens",
+    "copy_import": "Copiar import",
+    "import": "Import",
+    "snippet": "Snippet",
+    "export": "Export",
+    "path": "Path",
+    "named": "named",
+    "default": "default",
+    "screenshots": "Screenshots",
+    "assets": "assets",
+    "search_placeholder": "Buscar per nom o ruta...",
+    "no_results": "No hi ha components que coincideixin amb la cerca.",
+    "copied": "Copiat",
+    "copy": "Copiar",
+    "usage": "Ús"
+  }
+}
+

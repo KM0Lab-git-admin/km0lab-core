@@ -1,63 +1,180 @@
 {
-  "editor.tabSize": 2,
-  "editor.detectIndentation": false,
-  "search.exclude": {
-    "package-lock.json": true
+  // ============================================
+  // OPTIMIZACIONES DE RENDIMIENTO
+  // ============================================
+  
+  // Excluir carpetas del file watcher (reduce procesos de monitoreo)
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/out/**": true,
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/coverage/**": true,
+    "**/.turbo/**": true,
+    "**/.swc/**": true,
+    "**/test-results/**": true,
+    "**/playwright-report/**": true,
+    "**/playwright/.cache/**": true,
+    "**/storybook-static/**": true,
+    "**/.vercel/**": true,
+    "**/migrations/**": true,
+    "**/local/**": true,
+    "**/*.db": true,
+    "**/*.log": true
   },
 
-  // TypeScript
-  "typescript.tsdk": "node_modules/typescript/lib", // Use the workspace version of TypeScript
-  "typescript.enablePromptUseWorkspaceTsdk": true, // For security reasons it's require that users opt into using the workspace version of typescript
-  "typescript.preferences.autoImportFileExcludePatterns": [
-    // useRouter should be imported from `next/navigation` instead of `next/router`
-    "next/router.d.ts",
-    "next/dist/client/router.d.ts",
-    // give priority for Link to next/link instead of lucide-react
-    "lucide-react"
-  ],
-  "typescript.preferences.preferTypeOnlyAutoImports": true, // Prefer type-only imports
+  // Excluir de búsquedas (reduce procesos de indexación)
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/out": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/coverage": true,
+    "**/.turbo": true,
+    "**/.swc": true,
+    "**/test-results": true,
+    "**/playwright-report": true,
+    "**/playwright/.cache": true,
+    "**/storybook-static": true,
+    "**/.vercel": true,
+    "**/migrations": true,
+    "**/local": true,
+    "**/*.db": true,
+    "**/*.log": true,
+    "**/package-lock.json": true
+  },
 
-  // Vitest
-  "testing.automaticallyOpenTestResults": "neverOpen", // Don't open the test results automatically
+  // ============================================
+  // OPTIMIZACIONES DE TYPESCRIPT
+  // ============================================
+  
+  // Reducir el análisis automático de TypeScript
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "typescript.tsserver.watchOptions": {
+    "excludeDirectories": [
+      "**/node_modules",
+      "**/.next",
+      "**/out",
+      "**/dist",
+      "**/build",
+      "**/coverage",
+      "**/.turbo",
+      "**/test-results",
+      "**/playwright-report"
+    ]
+  },
+  
+  // Desactivar validación en archivos que no estás editando
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+  
+  // Usar el servidor de TypeScript del workspace
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
 
-  // I18n
-  "i18n-ally.localesPaths": ["src/locales"],
-  "i18n-ally.keystyle": "nested",
+  // ============================================
+  // OPTIMIZACIONES DE JAVASCRIPT
+  // ============================================
+  
+  // Reducir análisis de JavaScript
+  "javascript.validate.enable": true,
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
 
-  // Disable the default formatter, use ESLint instead
-  "prettier.enable": false,
-  "editor.formatOnSave": false,
+  // ============================================
+  // OPTIMIZACIONES DE ARCHIVOS
+  // ============================================
+  
+  // Limitar el número de archivos abiertos
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 10,
+  "workbench.editor.limit.perEditorGroup": true,
+  
+  // Desactivar seguimiento de archivos recientes en carpetas grandes
+  "files.exclude": {
+    "**/.git": false,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
 
-  // Auto fix with ESLint on save
-  "editor.codeActionsOnSave": [
-    "source.addMissingImports",
-    "source.fixAll.eslint"
-  ],
+  // ============================================
+  // OPTIMIZACIONES DE EXTENSIONES
+  // ============================================
+  
+  // Desactivar extensiones que no necesitas constantemente
+  // (Ajusta según tus necesidades)
+  "extensions.autoCheckUpdates": false,
+  "extensions.autoUpdate": false,
 
-  // Enable eslint for all supported languages
-  "eslint.format.enable": true,
+  // ============================================
+  // OPTIMIZACIONES DE EDITOR
+  // ============================================
+  
+  // Reducir procesamiento de código en tiempo real
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  
+  // Desactivar sugerencias en strings y comentarios
+  "editor.suggest.showWords": false,
+  "editor.wordBasedSuggestions": "off",
+  
+  // Optimizar renderizado
+  "editor.renderWhitespace": "none",
+  "editor.renderControlCharacters": false,
+
+  // ============================================
+  // OPTIMIZACIONES DE ESLINT
+  // ============================================
+  
+  // Reducir validación de ESLint
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact",
-    "vue",
-    "html",
-    "markdown",
-    "json",
-    "jsonc",
-    "yaml",
-    "toml",
-    "xml",
-    "gql",
-    "graphql",
-    "astro",
-    "css",
-    "less",
-    "scss",
-    "pcss",
-    "postcss",
-    "github-actions-workflow"
+    "typescriptreact"
   ],
-  "chatgpt.openOnStartup": true
+  "eslint.lintTask.enable": true,
+  "eslint.run": "onType",
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+
+  // ============================================
+  // OPTIMIZACIONES DE NEXT.JS
+  // ============================================
+  
+  // Configuración específica para Next.js
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  // ============================================
+  // OPTIMIZACIONES GENERALES
+  // ============================================
+  
+  // Reducir telemetría y procesos en segundo plano
+  "telemetry.telemetryLevel": "off",
+  
+  // Optimizar actualizaciones
+  "update.mode": "manual",
+  
+  // Reducir procesos de Git
+  "git.enabled": true,
+  "git.autorefresh": false,
+  "git.autoRepositoryDetection": false,
+  
+  // Limitar procesos de terminal
+  "terminal.integrated.maxPersistentProcessesPerWorkspace": 3,
+  "i18n-ally.localesPaths": [
+    "src/locales"
+  ],
+  "editor.guides.indentation": false
 }

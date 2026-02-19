@@ -60,7 +60,7 @@ const BreakpointIndicator = () => {
   }
 
   return (
-    <div className="pointer-events-none fixed top-2 left-2 z-[999999] flex flex-col gap-1 rounded-lg border border-white/70 bg-red-700 px-3 py-2 font-mono text-xs text-white shadow-xl">
+    <div className="pointer-events-none fixed top-2 left-2 z-[999999] flex flex-col gap-1 rounded-lg border border-white/70 bg-red-700/50 px-3 py-2 font-mono text-xs text-white shadow-xl opacity-50">
       <div className="flex gap-2">
         <span className="font-semibold">{label}</span>
         <span className="text-white/80">{`${viewport.width}×${viewport.height}`}</span>

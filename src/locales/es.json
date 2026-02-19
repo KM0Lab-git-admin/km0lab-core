@@ -143,5 +143,126 @@
     "subtitle": "Tu código postal está disponible. Ya puedes continuar.",
     "cta": "Ir al onboarding",
     "cta_aria": "Ir al onboarding"
+  },
+  "Onboarding": {
+    "start": "EMPEZAR",
+    "skip": "SALTAR",
+    "start_aria": "Empezar",
+    "skip_aria": "Saltar"
+  },
+  "FilesList": {
+    "loading": "Cargando archivos...",
+    "error": "Error",
+    "error_loading": "Error al cargar archivos",
+    "unknown_error": "Error desconocido",
+    "no_files": "No hay archivos disponibles",
+    "name": "Nombre",
+    "size": "Tamaño",
+    "purpose": "Propósito",
+    "date": "Fecha",
+    "id": "ID",
+    "action": "Acción",
+    "copy_id": "Copiar ID",
+    "id_copied": "ID copiado al portapapeles",
+    "bytes": "Bytes",
+    "kb": "KB",
+    "mb": "MB",
+    "gb": "GB"
+  },
+  "ChatKit": {
+    "loading": "Cargando asistente...",
+    "error": "Error al cargar ChatKit",
+    "unknown_error": "Error desconocido",
+    "session_error": "No se pudo crear la sesión ChatKit"
+  },
+  "LanguageButton": {
+    "title": "Español",
+    "subtitle": "Anquim idioma vos cum ansa",
+    "flag_alt": "Bandera de España"
+  },
+  "OnboardingSlides": {
+    "welcome": {
+      "titleLine1": "BIENVENIDO",
+      "titleLine2": "A KM0 LAB",
+      "subtitle": "Tu comercio local, más cerca que nunca. Descubre una nueva forma de interactuar con tus vecinos y apoyar el comercio de proximidad en tu barrio, todo desde una única plataforma diseñada para ti.",
+      "xpBadge": "+ 10 XP"
+    },
+    "discover": {
+      "titleLine1": "DESCUBRE",
+      "titleLine2": "TIENDAS",
+      "subtitle": "Explora los mejores productos de tu barrio.",
+      "xpBadge": "+ 10 XP"
+    },
+    "connect": {
+      "titleLine1": "CONECTA CON",
+      "titleLine2": "VECINOS",
+      "subtitle": "Forma parte de una comunidad activa y solidaria.",
+      "xpBadge": "+ 10 XP"
+    },
+    "spaces": {
+      "titleLine1": "ESPACIOS",
+      "titleLine2": "PÚBLICOS",
+      "subtitle": "Disfruta y cuida los espacios de todos.",
+      "xpBadge": "+ 10 XP"
+    },
+    "start": {
+      "titleLine1": "EMPIEZA",
+      "titleLine2": "AHORA",
+      "subtitle": "Únete a la revolución del comercio local.",
+      "xpBadge": "+ 10 XP"
+    }
+  },
+  "TownHome": {
+    "defaultTown": "Tu municipio",
+    "chatLabel": "Chat",
+    "chatLogo_alt": "Logo de KM0 Chat",
+    "chatLogo_src": "/assets/logos/chat_blue.png",
+    "notifications_aria": "Notificaciones",
+    "townHall": {
+      "title": "Ayuntamiento",
+      "bullet0": "Atención 24/7 para trámites, productos y servicios",
+      "bullet1": "Compra y reserva en comercios locales",
+      "bullet2": "Gana puntos y cupones con cada compra"
+    },
+    "products": {
+      "title": "Productos",
+      "bullet0": "Productos de proximidad y km0",
+      "bullet1": "Mercados y ferias locales",
+      "bullet2": "Ofertas de temporada"
+    },
+    "services": {
+      "title": "Servicios",
+      "bullet0": "Profesionales y servicios locales",
+      "bullet1": "Comercios y tiendas del municipio",
+      "bullet2": "Ocio, cultura y actividades"
+    },
+    "nav": {
+      "home": "Inicio",
+      "chat": "Chat",
+      "info": "Info",
+      "profile": "Perfil"
+    }
+  },
+  "ComponentRegistry": {
+    "server_only_notice": "es Server Component / depende de backend. No se renderiza aquí; revisa el import y úsalo en un entorno server.",
+    "pending_demo": "Demo pendiente para",
+    "pending_demo_description": "Se renderiza el componente con props mínimas.",
+    "ui_primitives": "UI / Primitives",
+    "features": "Features",
+    "screens": "Screens",
+    "copy_import": "Copiar import",
+    "import": "Import",
+    "snippet": "Snippet",
+    "export": "Export",
+    "path": "Path",
+    "named": "named",
+    "default": "default",
+    "screenshots": "Screenshots",
+    "assets": "assets",
+    "search_placeholder": "Buscar por nombre o ruta...",
+    "no_results": "No hay componentes que coincidan con la búsqueda.",
+    "copied": "Copiado",
+    "copy": "Copiar",
+    "usage": "Uso"
   }
 }

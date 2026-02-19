@@ -1,4 +1,5 @@
 import type { ComponentEntry } from '../registry';
+import { useTranslations } from 'next-intl';
 import CodeSnippet from './CodeSnippet';
 import ErrorBoundary from './ErrorBoundary';
 
@@ -10,14 +11,17 @@ type PreviewPanelProps = {
   onCopyImport: () => void | Promise<void>;
 };
 
-const PendingDemoMessage = ({ title }: { title: string }) => (
-  <div className="rounded-lg border border-dashed border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-    Demo pendiente para
-    {' '}
-    <span className="font-semibold">{title}</span>
-    . Se renderiza el componente con props mínimas.
-  </div>
-);
+const PendingDemoMessage = ({ title }: { title: string }) => {
+  const t = useTranslations('ComponentRegistry');
+  return (
+    <div className="rounded-lg border border-dashed border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+      {t('pending_demo')}
+      {' '}
+      <span className="font-semibold">{title}</span>
+      . {t('pending_demo_description')}
+    </div>
+  );
+};
 
 export default function PreviewPanel({
   entry,
@@ -26,14 +30,28 @@ export default function PreviewPanel({
   usageSnippet,
   onCopyImport,
 }: PreviewPanelProps) {
+  const t = useTranslations('ComponentRegistry');
   const DemoComponent = entry.Demo ?? entry.Component;
+
+  const getGroupLabel = (group: ComponentEntry['group']) => {
+    switch (group) {
+      case 'ui':
+        return t('ui_primitives');
+      case 'features':
+        return t('features');
+      case 'screens':
+        return t('screens');
+      default:
+        return group;
+    }
+  };
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <header className="flex flex-col gap-2 border-b border-slate-100 pb-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-indigo-600">
-            {entry.group === 'ui' ? 'UI / Primitives' : entry.group === 'features' ? 'Features' : 'Screens'}
+            {getGroupLabel(entry.group)}
           </p>
           <h2 className="text-2xl font-bold text-slate-900">{entry.title}</h2>
           {entry.description && (
@@ -48,7 +66,7 @@ export default function PreviewPanel({
           onClick={onCopyImport}
           className="h-9 rounded-md border border-slate-200 bg-indigo-50 px-3 text-sm font-semibold text-indigo-700 transition hover:border-indigo-300 hover:bg-indigo-100"
         >
-          Copiar import
+          {t('copy_import')}
         </button>
       </header>
 
@@ -75,16 +93,16 @@ export default function PreviewPanel({
 
         {/* Import y Snippet - debajo en grid horizontal */}
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <CodeSnippet code={importStatement} label="Import" />
-          <CodeSnippet code={usageSnippet} label="Snippet" />
+          <CodeSnippet code={importStatement} label={t('import')} />
+          <CodeSnippet code={usageSnippet} label={t('snippet')} />
           <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">
             <p>
-              <span className="font-semibold">Export:</span>
+              <span className="font-semibold">{t('export')}:</span>
               {' '}
-              {entry.exportType === 'named' ? 'named' : 'default'}
+              {entry.exportType === 'named' ? t('named') : t('default')}
             </p>
             <p>
-              <span className="font-semibold">Path:</span>
+              <span className="font-semibold">{t('path')}:</span>
               {' '}
               {entry.importPath}
             </p>
@@ -95,8 +113,8 @@ export default function PreviewPanel({
       {screenshots.length > 0 && (
         <div className="mt-4 space-y-2 border-t border-slate-100 pt-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-800">Screenshots</h3>
-            <span className="text-[11px] text-slate-500">{screenshots.length} assets</span>
+            <h3 className="text-sm font-semibold text-slate-800">{t('screenshots')}</h3>
+            <span className="text-[11px] text-slate-500">{screenshots.length} {t('assets')}</span>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {screenshots.map(src => (

@@ -12,14 +12,14 @@ export const carouselSlideVariants = cva(
        */
       layout: {
         stack: [
-          'flex flex-col items-center',
+          'flex flex-col items-center justify-start',
           'px-3 py-2',
           'mobile-p:px-4 mobile-p:py-4',
           'tablet:px-8 tablet:py-6',
           'desktop:px-12 desktop:py-10',
           'ultra-wide:px-16 ultra-wide:py-14',
           // En short-landscape cambia a horizontal
-          'short-landscape:flex-row short-landscape:items-center short-landscape:px-4 short-landscape:py-2 short-landscape:gap-4',
+          'short-landscape:flex-row short-landscape:items-start short-landscape:px-4 short-landscape:py-2 short-landscape:gap-4',
         ].join(' '),
         side: [
           'flex flex-row items-center',
