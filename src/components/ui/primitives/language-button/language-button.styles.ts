@@ -73,3 +73,5 @@ export const languageButtonFlagVariants = cva('relative shrink-0');
 
 export const languageButtonIconVariants = cva('shrink-0 ml-2 flex items-center');
 
+export const languageButtonSelectedClass =
+  'border-km0-blue-700 bg-km0-blue-50 ring-2 ring-km0-blue-700/30';
