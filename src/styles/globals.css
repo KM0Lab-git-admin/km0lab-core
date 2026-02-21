@@ -293,6 +293,12 @@
   --animation-delay-200: 0.2s;
   --animation-delay-400: 0.4s;
 
+  /* Floating Dots sizes */
+  --width-dot-sm: 6px;
+  --width-dot-md: 8px;
+  --width-dot-lg: 10px;
+  --width-dot-xl: 12px;
+
   /* Colores semánticos para componentes UI */
   --color-primary: #174094;
   --color-primary-foreground: #ffffff;
@@ -754,6 +760,39 @@
 
   .animate-delay-400 {
     animation-delay: 0.4s;
+  }
+
+  /* Language Selection animations */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.4s ease-out both;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
   }
 
   /* === SISTEMA ANTI-RECORTE: Altura disponible calculada === */

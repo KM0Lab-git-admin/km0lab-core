@@ -12,25 +12,25 @@ const languageConfigMap: Record<Locale, LanguageConfig> = {
     flagSrc: '/assets/images/spanish_flag.png',
     flagAlt: 'Bandera de España',
     title: 'Español',
-    subtitle: 'Anquim idioma vos cum ansa',
+    subtitle: 'Empieza en español',
   },
   ca: {
     flagSrc: '/assets/images/catalan_flag.png',
     flagAlt: 'Bandera de Cataluña',
     title: 'Català',
-    subtitle: 'Anquim idioma vos cum ansa',
+    subtitle: 'Comença en català',
   },
   en: {
     flagSrc: '/assets/images/spanish_flag.png', // TODO: Add English flag when available
     flagAlt: 'Flag of England',
     title: 'English',
-    subtitle: 'Anquim idioma vos cum ansa',
+    subtitle: 'Start in English',
   },
   fr: {
     flagSrc: '/assets/images/spanish_flag.png', // TODO: Add French flag when available
     flagAlt: 'Drapeau de la France',
     title: 'Français',
-    subtitle: 'Anquim idioma vos cum ansa',
+    subtitle: 'Commencez en français',
   },
 };
 

@@ -14,6 +14,7 @@ import {
   languageButtonSubtitleVariants,
   languageButtonFlagVariants,
   languageButtonIconVariants,
+  languageButtonSelectedClass,
 } from './language-button.styles';
 
 export type LanguageButtonProps = React.ComponentProps<'button'> &
@@ -30,6 +31,8 @@ export type LanguageButtonProps = React.ComponentProps<'button'> &
     flagWidth?: number;
     /** Alto de la bandera en píxeles */
     flagHeight?: number;
+    /** Estado visual de selección */
+    selected?: boolean;
   };
 
 const ChevronRightIcon = ({ className }: { className?: string }) => (
@@ -63,6 +66,7 @@ const LanguageButton = React.forwardRef<HTMLButtonElement, LanguageButtonProps>(
       flagWidth = 24,
       flagHeight = 24,
       disabled,
+      selected = false,
       ...props
     },
     ref,
@@ -72,7 +76,9 @@ const LanguageButton = React.forwardRef<HTMLButtonElement, LanguageButtonProps>(
         ref={ref}
         type="button"
         disabled={disabled}
-        className={cn(languageButtonVariants({ variant, size }), className)}
+        data-selected={selected || undefined}
+        aria-pressed={selected}
+        className={cn(languageButtonVariants({ variant, size }), selected && languageButtonSelectedClass, className)}
         {...props}
       >
         <div className={languageButtonContentVariants()}>
