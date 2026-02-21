@@ -9,7 +9,7 @@ import { ContentCard } from '@/components/ui/content-card';
 import { NavigationFooter } from '@/components/ui/navigation-footer';
 import { Logo } from '@/components/ui/logo';
 import { Button } from '@/components/ui/primitives/button';
-import { getPostalCodeCity } from '@/features/postal-code';
+import { getPostalCodeCity } from '@/components/screens/postal-code/postalCodeDb';
 import { ChatScreen } from '@/components/screens/chat';
 import { useChatStore } from '@/stores/chatStore';
 

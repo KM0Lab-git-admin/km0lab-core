@@ -12,7 +12,8 @@ import { LogoHeader } from '@/components/ui/logo-header';
 import { ContentCard } from '@/components/ui/content-card';
 import { ContentShell } from '@/components/ui/content-shell';
 import { cn } from '@/components/ui/primitives/utils';
-import { checkPostalCodeAvailability, isTownEnabled } from '@/features/postal-code';
+import { checkPostalCodeAvailability } from './checkPostalCodeAvailability';
+import { isTownEnabled } from './townEnabledPostalCodes';
 import { getValidatorById } from '@/validation/validators';
 import {
   postalCodeButton,

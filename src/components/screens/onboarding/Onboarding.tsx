@@ -15,7 +15,7 @@ import { NavigationFooter } from '@/components/ui/navigation-footer';
 import { Button } from '@/components/ui/primitives/button';
 import { cn } from '@/components/ui/primitives/utils';
 import { SimpleSliderNavigation } from '@/components/ui/slider';
-import { getOnboardingSlides } from '@/features/onboarding/slides';
+import { getOnboardingSlides } from './slides';
 import { useTranslations } from 'next-intl';
 import { useParams, useRouter } from 'next/navigation';
 import { onboardingCounter } from './onboarding.styles';
@@ -88,7 +88,7 @@ export default function Onboarding() {
   };
 
   const handleBack = () => {
-    router.push('/language-selection');
+    router.push('/');
   };
 
   return (

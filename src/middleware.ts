@@ -65,9 +65,9 @@ export default function middleware(
     return NextResponse.next();
   }
 
-  // Allow direct access to language-selection page without i18n middleware processing
-  // This page is the entry point and doesn't require a locale
-  if (path === '/language-selection' || path.startsWith('/language-selection/')) {
+  // Allow direct access to entry page (root /) without i18n middleware processing
+  // This is the app entry point (language selection) and doesn't require a locale
+  if (path === '/') {
     return NextResponse.next();
   }
 

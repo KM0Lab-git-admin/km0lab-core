@@ -6,16 +6,16 @@ import ChatKitComponent from '@/components/chat/ChatKit/ChatKit';
 import BreakpointIndicator from '@/components/devtools/BreakpointIndicator';
 import FilesList from '@/components/files/FilesList/FilesList';
 import OnboardingScreen from '@/components/screens/onboarding/Onboarding';
-import ColorPaletteGuide from '@/components/screens/welcome/Colour';
-import { CounterForm } from '@/components/screens/welcome/CounterForm';
-import { DemoBanner } from '@/components/screens/welcome/DemoBanner';
-import DesignSystemShowcase from '@/components/screens/welcome/DesignSystemShowcase';
-import { LocaleSwitcher } from '@/components/screens/welcome/LocaleSwitcher';
-import WelcomeOnboarding from '@/components/screens/welcome/Onboarding';
-import SafeHydration from '@/components/screens/welcome/SafeHydration';
-import Slide from '@/components/screens/welcome/Slide';
-import { Sponsors } from '@/components/screens/welcome/Sponsors';
-import { XPBadge } from '@/components/screens/welcome/XPBadge';
+import ColorPaletteGuide from '@/components/screens/design-system/Colour';
+import { CounterForm } from '@/components/screens/counter/CounterForm';
+import { DemoBanner } from '@/components/screens/marketing/DemoBanner';
+import DesignSystemShowcase from '@/components/screens/design-system/DesignSystemShowcase';
+import { LocaleSwitcher } from '@/components/ui/locale-switcher/LocaleSwitcher';
+import WelcomeOnboarding from '@/components/screens/onboarding/OnboardingLegacy';
+import SafeHydration from '@/components/ui/safe-hydration/SafeHydration';
+import Slide from '@/components/screens/onboarding/Slide';
+import { Sponsors } from '@/components/screens/marketing/Sponsors';
+import { XPBadge } from '@/components/ui/xp-badge/XPBadge';
 import {
   CarouselSlide,
   CarouselTrack,
@@ -2111,8 +2111,8 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'Onboarding (Welcome)',
     description: 'Onboarding alternativo con scroll interno.',
     group: 'screens',
-    filePath: 'src/components/screens/welcome/Onboarding.tsx',
-    importPath: '@/components/screens/welcome/Onboarding',
+    filePath: 'src/components/screens/onboarding/OnboardingLegacy.tsx',
+    importPath: '@/components/screens/onboarding/OnboardingLegacy',
     exportType: 'default',
     exportName: 'Onboarding',
     Component: WelcomeOnboarding,
@@ -2123,8 +2123,8 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'Colour Palette Guide',
     description: 'Guía de colores KM0 con escalas completas.',
     group: 'screens',
-    filePath: 'src/components/screens/welcome/Colour.tsx',
-    importPath: '@/components/screens/welcome/Colour',
+    filePath: 'src/components/screens/design-system/Colour.tsx',
+    importPath: '@/components/screens/design-system/Colour',
     exportType: 'default',
     exportName: 'Colour',
     Component: ColorPaletteGuide,
@@ -2135,8 +2135,8 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'DesignSystemShowcase',
     description: 'Showcase tipográfico y de estilos.',
     group: 'screens',
-    filePath: 'src/components/screens/welcome/DesignSystemShowcase.tsx',
-    importPath: '@/components/screens/welcome/DesignSystemShowcase',
+    filePath: 'src/components/screens/design-system/DesignSystemShowcase.tsx',
+    importPath: '@/components/screens/design-system/DesignSystemShowcase',
     exportType: 'default',
     exportName: 'DesignSystemShowcase',
     Component: DesignSystemShowcase,
@@ -2147,8 +2147,8 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'CounterForm',
     description: 'Formulario con react-hook-form + zod.',
     group: 'screens',
-    filePath: 'src/components/screens/welcome/CounterForm.tsx',
-    importPath: '@/components/screens/welcome/CounterForm',
+    filePath: 'src/components/screens/counter/CounterForm.tsx',
+    importPath: '@/components/screens/counter/CounterForm',
     exportType: 'named',
     exportName: 'CounterForm',
     Component: CounterForm,
@@ -2159,8 +2159,8 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'CurrentCount',
     description: 'Server component que lee contador en DB.',
     group: 'screens',
-    filePath: 'src/components/screens/welcome/CurrentCount.tsx',
-    importPath: '@/components/screens/welcome/CurrentCount',
+    filePath: 'src/components/screens/counter/CurrentCount.tsx',
+    importPath: '@/components/screens/counter/CurrentCount',
     exportType: 'named',
     exportName: 'CurrentCount',
     Demo: () => <ServerOnlyNotice label="CurrentCount" />,
@@ -2171,8 +2171,8 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'Hello',
     description: 'Server component con Clerk y next-intl.',
     group: 'screens',
-    filePath: 'src/components/screens/welcome/Hello.tsx',
-    importPath: '@/components/screens/welcome/Hello',
+    filePath: 'src/components/screens/dashboard/Hello.tsx',
+    importPath: '@/components/screens/dashboard/Hello',
     exportType: 'named',
     exportName: 'Hello',
     Demo: () => <ServerOnlyNotice label="Hello" />,
@@ -2183,8 +2183,8 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'LocaleSwitcher',
     description: 'Selector de idioma usando next-intl navigation.',
     group: 'screens',
-    filePath: 'src/components/screens/welcome/LocaleSwitcher.tsx',
-    importPath: '@/components/screens/welcome/LocaleSwitcher',
+    filePath: 'src/components/ui/locale-switcher/LocaleSwitcher.tsx',
+    importPath: '@/components/ui/locale-switcher/LocaleSwitcher',
     exportType: 'named',
     exportName: 'LocaleSwitcher',
     Component: LocaleSwitcher,
@@ -2195,8 +2195,8 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'SafeHydration',
     description: 'Renderiza niños solo en cliente para evitar mismatch.',
     group: 'screens',
-    filePath: 'src/components/screens/welcome/SafeHydration.tsx',
-    importPath: '@/components/screens/welcome/SafeHydration',
+    filePath: 'src/components/ui/safe-hydration/SafeHydration.tsx',
+    importPath: '@/components/ui/safe-hydration/SafeHydration',
     exportType: 'default',
     exportName: 'SafeHydration',
     Component: SafeHydration,
@@ -2207,8 +2207,8 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'Slide',
     description: 'Slide con imagen y badge de XP.',
     group: 'screens',
-    filePath: 'src/components/screens/welcome/Slide.tsx',
-    importPath: '@/components/screens/welcome/Slide',
+    filePath: 'src/components/screens/onboarding/Slide.tsx',
+    importPath: '@/components/screens/onboarding/Slide',
     exportType: 'default',
     exportName: 'Slide',
     Component: Slide,
@@ -2219,8 +2219,8 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'Sponsors',
     description: 'Tabla de sponsors con Next/Image.',
     group: 'screens',
-    filePath: 'src/components/screens/welcome/Sponsors.tsx',
-    importPath: '@/components/screens/welcome/Sponsors',
+    filePath: 'src/components/screens/marketing/Sponsors.tsx',
+    importPath: '@/components/screens/marketing/Sponsors',
     exportType: 'named',
     exportName: 'Sponsors',
     Component: Sponsors,
@@ -2231,8 +2231,8 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'XPBadge',
     description: 'Badge de puntos gamificado.',
     group: 'screens',
-    filePath: 'src/components/screens/welcome/XPBadge.tsx',
-    importPath: '@/components/screens/welcome/XPBadge',
+    filePath: 'src/components/ui/xp-badge/XPBadge.tsx',
+    importPath: '@/components/ui/xp-badge/XPBadge',
     exportType: 'named',
     exportName: 'XPBadge',
     Component: XPBadge,
@@ -2243,8 +2243,8 @@ export const componentRegistry: ComponentEntry[] = [
     title: 'DemoBanner',
     description: 'Banner fijo con CTA a auth.',
     group: 'screens',
-    filePath: 'src/components/screens/welcome/DemoBanner.tsx',
-    importPath: '@/components/screens/welcome/DemoBanner',
+    filePath: 'src/components/screens/marketing/DemoBanner.tsx',
+    importPath: '@/components/screens/marketing/DemoBanner',
     exportType: 'named',
     exportName: 'DemoBanner',
     Component: DemoBanner,

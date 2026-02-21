@@ -1,4 +1,4 @@
-import ColourComponent from '@/components/screens/welcome/Colour';
+import ColourComponent from '@/components/screens/design-system/Colour';
 
 export default function Colour() {
   return (

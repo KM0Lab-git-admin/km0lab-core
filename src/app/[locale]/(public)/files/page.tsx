@@ -1,4 +1,4 @@
-import SafeHydration from '@/components/screens/welcome/SafeHydration';
+import SafeHydration from '@/components/ui/safe-hydration/SafeHydration';
 import { LogoHeader } from '@/components/ui/logo-header';
 import FilesList from '@/components/files/FilesList/FilesList';
 
