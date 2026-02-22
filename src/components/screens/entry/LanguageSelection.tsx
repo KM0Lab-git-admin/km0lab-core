@@ -36,7 +36,7 @@ export default function LanguageSelection() {
         {/* Header: Logo centrado (referencia: h-9, justify-between, espaciadores w-11) */}
         <div className="flex h-11 items-center justify-between">
           <div className="w-11" />
-          <Logo scale="entry" alt="KM0 LAB" />
+          <Logo context="entry" alt="KM0 LAB" />
           <div className="w-11" />
         </div>
 

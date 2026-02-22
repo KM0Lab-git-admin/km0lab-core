@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { ChevronLeft, MapPin, AlertTriangle, Loader2 } from 'lucide-react';
 
-import { LogoHeader } from '@/components/ui/logo-header';
+import { Logo } from '@/components/ui/logo';
 import { ContentShell } from '@/components/ui/content-shell';
 import { cn } from '@/components/ui/primitives/utils';
 import { checkPostalCodeAvailability } from './checkPostalCodeAvailability';
@@ -105,16 +105,18 @@ export default function PostalCode() {
       <div className="flex w-full max-w-[390px] flex-col gap-6">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <button
-            type="button"
-            onClick={handleBack}
-            className="flex size-11 items-center justify-center rounded-xl border-[2px] border-dashed border-km0-yellow-500 text-km0-yellow-600 transition-all duration-200 hover:scale-105 hover:bg-km0-yellow-50"
-            aria-label="Back"
-          >
-            <ChevronLeft size={22} strokeWidth={2.5} />
-          </button>
-          <LogoHeader scale="sm" logoScale="md" />
-          <div className="w-11" />
+          <div className="flex-1 flex justify-start">
+            <button
+              type="button"
+              onClick={handleBack}
+              className="flex size-11 items-center justify-center rounded-xl border-[2px] border-dashed border-km0-yellow-500 text-km0-yellow-600 transition-all duration-200 hover:scale-105 hover:bg-km0-yellow-50"
+              aria-label="Back"
+            >
+              <ChevronLeft size={22} strokeWidth={2.5} />
+            </button>
+          </div>
+          <Logo context="onboarding" alt="KM0 LAB" />
+          <div className="flex-1" />
         </div>
 
         {/* City illustration: max-w para reducir tamaño sin alterar posición de la cabecera */}
