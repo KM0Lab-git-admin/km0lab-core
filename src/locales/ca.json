@@ -264,6 +264,16 @@
     "copied": "Copiat",
     "copy": "Copiar",
     "usage": "Ús"
+  },
+  "Chat": {
+    "defaultCity": "La teva ciutat",
+    "greeting": "Hola! Sóc el teu assistent local de {city}. En què et puc ajudar avui?",
+    "mockReply": "Gràcies per la teva pregunta. Estic buscant informació sobre això a la teva zona.",
+    "placeholder": "Escriu un missatge...",
+    "back": "Tornar",
+    "notifications": "Notificacions",
+    "agenda": "Agenda",
+    "robotAlt": "Assistent KM0"
   }
 }
 
