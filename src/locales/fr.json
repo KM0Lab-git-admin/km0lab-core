@@ -256,5 +256,15 @@
     "copied": "Copié",
     "copy": "Copier",
     "usage": "Utilisation"
+  },
+  "Chat": {
+    "defaultCity": "Votre ville",
+    "greeting": "Bonjour ! Je suis votre assistant local de {city}. Comment puis-je vous aider aujourd'hui ?",
+    "mockReply": "Merci pour votre question. Je cherche des informations à ce sujet dans votre zone.",
+    "placeholder": "Écrivez un message...",
+    "back": "Retour",
+    "notifications": "Notifications",
+    "agenda": "Agenda",
+    "robotAlt": "Assistant KM0"
   }
 }

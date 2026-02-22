@@ -1,157 +1,185 @@
 'use client';
 
-import { useCallback } from 'react';
-import { X } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { ChevronLeft } from 'lucide-react';
 
-import { VoiceChat } from '@/components/voice-chat';
-import type { AssistantReply } from '@/components/voice-chat';
-import { Button } from '@/components/ui/primitives/button';
-import { useEventQueryStore } from '@/stores/eventQueryStore';
-import { useChatStore, chatConfigs } from '@/stores/chatStore';
-import type {
-  EventQueryEvent,
-  EventQueryResponse,
-} from '@/types/event-query';
+import { Logo } from '@/components/ui/logo';
+import { NotificationBell } from '@/components/ui/notification-bell';
+import { ChatInput } from '@/components/voice-chat/ChatInput';
+import { getPostalCodeCity } from '@/components/screens/postal-code/postalCodeDb';
 
-const MIN_PREGUNTA_LENGTH = 3;
-const MAX_PREGUNTA_LENGTH = 500;
-const CP_REGEX = /^\d{5}$/;
-const TOP_EVENTS_IN_CHAT = 5;
+type Message = {
+  id: number;
+  role: 'assistant' | 'user';
+  content: string;
+};
 
-/**
- * ChatScreen – Pantalla principal del chat.
- *
- * Se renderiza a pantalla completa cuando el usuario abre un chat
- * desde TownHome. Recibe la tipología activa del store y muestra
- * VoiceChat con la configuración correspondiente.
- *
- * De momento todos los chats usan Event Query (POST /api/event-query)
- * con el código postal de la URL (?cp=08380).
- *
- * Sin header de TownHome ni footer: ocupa todo el espacio disponible.
- */
 export function ChatScreen() {
   const router = useRouter();
   const params = useParams<{ locale?: string }>();
   const searchParams = useSearchParams();
-  const activeChatType = useChatStore((s) => s.activeChatType);
-  const closeChat = useChatStore((s) => s.closeChat);
-  const setEvents = useEventQueryStore((s) => s.setEvents);
+  const t = useTranslations('Chat');
 
   const locale = params?.locale ?? 'es';
   const cp = (searchParams.get('cp') ?? '').trim();
+  const cityName = getPostalCodeCity(cp) ?? t('defaultCity');
 
-  const handleEventQueryMessage = useCallback(
-    async (text: string, addReply: (reply: AssistantReply) => void) => {
-      const trimmed = text.trim();
-      if (trimmed.length < MIN_PREGUNTA_LENGTH || trimmed.length > MAX_PREGUNTA_LENGTH) {
-        addReply(
-          `Escribe una pregunta entre ${MIN_PREGUNTA_LENGTH} y ${MAX_PREGUNTA_LENGTH} caracteres.`,
-        );
-        return;
-      }
-      if (!CP_REGEX.test(cp)) {
-        addReply(
-          'Para consultar actividades necesitas indicar un código postal válido (5 dígitos). Entra al pueblo desde la pantalla principal con el parámetro ?cp=08380.',
-        );
-        return;
-      }
-      try {
-        const res = await fetch('/api/event-query', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            pregunta: trimmed,
-            cp_usuario: cp,
-            limit: 20,
-          }),
-        });
-        const data = (await res.json()) as EventQueryResponse;
-        if (!res.ok) {
-          const msg =
-            typeof data.message === 'string'
-              ? data.message
-              : 'No se pudo obtener la respuesta. Inténtalo de nuevo.';
-          addReply(msg);
-          return;
-        }
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-        const respuestaTexto =
-          typeof data.respuesta_texto === 'string' && data.respuesta_texto.length > 0
-            ? data.respuesta_texto
-            : 'No hay respuesta disponible para esta consulta.';
+  const [messages, setMessages] = useState<Message[]>(() => [
+    { id: 1, role: 'assistant', content: t('greeting', { city: cityName }) },
+  ]);
+  const [isLoading, setIsLoading] = useState(false);
 
-        addReply({
-          type: 'text',
-          content: respuestaTexto,
-        });
+  const scrollToBottom = useCallback(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
 
-        const eventos = Array.isArray(data.eventos) ? data.eventos : [];
-        if (eventos.length === 0) {
-          addReply('No he encontrado eventos para esta consulta.');
-          return;
-        }
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, scrollToBottom]);
 
-        setEvents(eventos);
-        const topEventos = eventos.slice(0, TOP_EVENTS_IN_CHAT);
-        addReply({
-          type: 'event-list',
-          events: topEventos.map((event: EventQueryEvent) => ({
-            id: event.id_unico_evento,
-            title: event.titulo,
-            subtitle: [event.poblacion_nombre, event.fecha_inicio]
-              .filter(Boolean)
-              .join(' · '),
-          })),
-        });
-      } catch {
-        addReply(
-          'Error de conexión. Comprueba tu red e inténtalo de nuevo.',
-        );
-      }
+  const handleSend = useCallback(
+    (text: string) => {
+      const userMsg: Message = {
+        id: Date.now(),
+        role: 'user',
+        content: text,
+      };
+      setMessages((prev) => [...prev, userMsg]);
+      setIsLoading(true);
+
+      setTimeout(() => {
+        const assistantMsg: Message = {
+          id: Date.now() + 1,
+          role: 'assistant',
+          content: t('mockReply'),
+        };
+        setMessages((prev) => [...prev, assistantMsg]);
+        setIsLoading(false);
+      }, 1200);
     },
-    [cp, setEvents],
+    [t],
   );
 
-  const handleEventClick = useCallback(
-    (eventId: string) => {
-      const cpQuery = cp ? `?cp=${encodeURIComponent(cp)}` : '';
-      router.push(`/${locale}/event/${encodeURIComponent(eventId)}${cpQuery}`);
-    },
-    [cp, locale, router],
-  );
+  const handleBack = () => {
+    router.push(`/${locale}/postal-code`);
+  };
 
-  // Si no hay chat activo, no renderiza nada
-  if (!activeChatType) return null;
-
-  const config = chatConfigs[activeChatType];
+  const dateLabel = new Date().toLocaleDateString(locale, {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
-      {/* Barra superior mínima: título + botón cerrar */}
-      <div className="flex shrink-0 items-center justify-between px-4 py-2">
-        <span className="text-sm font-semibold text-km0-blue-700">
-          {config.title}
-        </span>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={closeChat}
-          aria-label="Cerrar chat"
-          className="text-km0-blue-700"
-        >
-          <X size={20} />
-        </Button>
-      </div>
+    <div className="flex h-dvh w-full items-center justify-center bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
+      <div className="flex h-full w-full max-w-md flex-col">
+        {/* Header */}
+        <header className="flex shrink-0 items-center gap-3 px-4 pt-3 pb-2">
+          {/* Back button */}
+          <button
+            type="button"
+            onClick={handleBack}
+            className="flex size-10 shrink-0 items-center justify-center rounded-xl border-2 border-dashed border-km0-yellow-500 text-km0-yellow-600 transition-all hover:bg-km0-yellow-50"
+            aria-label={t('back')}
+          >
+            <ChevronLeft size={20} strokeWidth={2.5} />
+          </button>
 
-      {/* VoiceChat ocupa el resto del espacio */}
-      <div className="flex min-h-0 flex-1 overflow-hidden">
-        <VoiceChat
-          welcomeMessage={config.welcomeMessage}
-          onUserMessage={handleEventQueryMessage}
-          onEventClick={handleEventClick}
-        />
+          {/* City name + KM0 LAB logo */}
+          <div className="flex min-w-0 flex-1 items-center gap-2">
+            <div className="min-w-0">
+              <h1 className="truncate font-brand text-xl font-black leading-tight text-km0-blue-700">
+                {cityName}
+              </h1>
+              <Logo scale="xxs" alt="KM0 LAB" className="mt-0.5" />
+            </div>
+          </div>
+
+          {/* Agenda badge + Notification bell */}
+          <div className="flex shrink-0 items-center gap-2">
+            <span className="rounded-full bg-km0-teal-500 px-3 py-1 font-body text-xs font-semibold text-white">
+              {t('agenda')}
+            </span>
+            <button
+              type="button"
+              className="text-km0-yellow-600 transition-opacity hover:opacity-70"
+              aria-label={t('notifications')}
+            >
+              <NotificationBell hasAlerts />
+            </button>
+          </div>
+        </header>
+
+        {/* Date banner */}
+        <div className="shrink-0 px-4 py-1">
+          <div className="flex items-center justify-center rounded-full bg-km0-yellow-500 px-4 py-1.5">
+            <span className="font-body text-xs font-semibold text-km0-blue-800">
+              {dateLabel}
+            </span>
+          </div>
+        </div>
+
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto px-4 py-3">
+          <div className="flex flex-col gap-3">
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`flex items-end gap-2.5 animate-fade-in-up ${
+                  msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'
+                }`}
+              >
+                {msg.role === 'assistant' && (
+                  <img
+                    src="/assets/images/km0_robot_icon_v2.png"
+                    alt={t('robotAlt')}
+                    className="size-9 shrink-0 rounded-full object-cover shadow-md"
+                  />
+                )}
+
+                <div
+                  className={`max-w-[80%] rounded-2xl px-4 py-3 font-body text-sm leading-relaxed shadow-sm ${
+                    msg.role === 'user'
+                      ? 'bg-km0-blue-700 text-white'
+                      : 'bg-white text-neutral-800'
+                  }`}
+                >
+                  {msg.content}
+                </div>
+              </div>
+            ))}
+
+            {isLoading && (
+              <div className="flex items-end gap-2.5 animate-fade-in-up">
+                <img
+                  src="/assets/images/km0_robot_icon_v2.png"
+                  alt={t('robotAlt')}
+                  className="size-9 shrink-0 rounded-full object-cover shadow-md"
+                />
+                <div className="flex gap-1.5 rounded-2xl bg-white px-4 py-3 shadow-sm">
+                  <span className="size-2 animate-bounce rounded-full bg-neutral-400" />
+                  <span className="size-2 animate-bounce rounded-full bg-neutral-400 animate-delay-100" />
+                  <span className="size-2 animate-bounce rounded-full bg-neutral-400 animate-delay-200" />
+                </div>
+              </div>
+            )}
+
+            <div ref={messagesEndRef} />
+          </div>
+        </div>
+
+        {/* Input bar */}
+        <div className="shrink-0 px-4 pb-4 pt-2">
+          <ChatInput
+            onSend={handleSend}
+            isLoading={isLoading}
+            placeholder={t('placeholder')}
+          />
+        </div>
       </div>
     </div>
   );

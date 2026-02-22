@@ -256,5 +256,15 @@
     "copied": "Copied",
     "copy": "Copy",
     "usage": "Usage"
+  },
+  "Chat": {
+    "defaultCity": "Your city",
+    "greeting": "Hello! I'm your local assistant for {city}. How can I help you today?",
+    "mockReply": "Thanks for your question. I'm looking for information about this in your area.",
+    "placeholder": "Write a message...",
+    "back": "Back",
+    "notifications": "Notifications",
+    "agenda": "Agenda",
+    "robotAlt": "KM0 Assistant"
   }
 }

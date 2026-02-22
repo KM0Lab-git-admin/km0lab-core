@@ -1,4 +1,4 @@
-import { LocaleSwitcher } from '@/components/screens/welcome/LocaleSwitcher';
+import { LocaleSwitcher } from '@/components/ui/locale-switcher/LocaleSwitcher';
 import { BaseTemplate } from '@/templates/BaseTemplate';
 import { SignOutButton } from '@clerk/nextjs';
 import { getTranslations, setRequestLocale } from 'next-intl/server';

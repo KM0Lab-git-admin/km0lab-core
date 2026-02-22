@@ -5,7 +5,7 @@ export const floatingDotsContainerVariants = cva(
 );
 
 export const dotVariants = cva(
-  'absolute rounded-full bg-km0-blue-300 animate-float',
+  'absolute rounded-full bg-km0-teal-500 animate-float',
   {
     variants: {
       size: {

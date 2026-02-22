@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Bot, User } from 'lucide-react';
 import { ChatInput } from './ChatInput';
 
 /* ------------------------------------------------------------------ */
@@ -78,33 +77,32 @@ function MessageBubble({
   const isUser = message.role === 'user';
 
   return (
-    <div className={`flex gap-3 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
-      {/* Avatar */}
-      <div
-        className={`
-          flex size-8 shrink-0 items-center justify-center rounded-full
-          ${isUser ? 'bg-muted text-muted-foreground' : 'bg-foreground text-background'}
-        `}
-      >
-        {isUser ? <User size={16} /> : <Bot size={16} />}
-      </div>
+    <div className={`flex items-end gap-2 ${isUser ? 'justify-end' : 'justify-start'}`}>
+      {/* Avatar - assistant only */}
+      {!isUser && (
+        <img
+          src="/assets/images/km0_robot_icon_v2.png"
+          alt="Bot"
+          className="size-9 shrink-0 rounded-full border-2 border-km0-teal-400 object-contain"
+        />
+      )}
 
       {/* Bubble */}
       {message.type === 'text' ? (
         <div
           className={`
-            max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed
+            max-w-[75%] rounded-2xl px-4 py-3 font-body text-sm leading-relaxed
             ${isUser
-              ? 'rounded-br-sm bg-foreground text-background'
-              : 'rounded-bl-sm bg-muted text-foreground'
+              ? 'rounded-br-md bg-km0-blue-700 text-white'
+              : 'rounded-bl-md bg-white text-neutral-800 shadow-sm'
             }
           `}
         >
           {message.content}
         </div>
       ) : (
-        <div className="max-w-[75%] rounded-2xl rounded-bl-sm bg-muted px-4 py-3 text-foreground">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <div className="max-w-[75%] rounded-2xl rounded-bl-md bg-white px-4 py-3 text-neutral-800 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
             Eventos encontrados
           </p>
           <div className="mt-2 flex flex-col gap-2">
@@ -113,11 +111,11 @@ function MessageBubble({
                 key={event.id}
                 type="button"
                 onClick={() => onEventClick?.(event.id)}
-                className="rounded-lg border border-border bg-background px-3 py-2 text-left text-sm font-medium text-km0-blue-700 transition hover:bg-km0-blue-50"
+                className="rounded-lg border border-km0-beige-200 bg-km0-beige-50 px-3 py-2 text-left text-sm font-medium text-km0-blue-700 transition hover:bg-km0-blue-50"
               >
                 <span className="block">{event.title}</span>
                 {event.subtitle ? (
-                  <span className="mt-1 block text-xs font-normal text-muted-foreground">
+                  <span className="mt-1 block text-xs font-normal text-neutral-500">
                     {event.subtitle}
                   </span>
                 ) : null}
@@ -136,14 +134,16 @@ function MessageBubble({
 
 function TypingIndicator() {
   return (
-    <div className="flex items-center gap-3">
-      <div className="flex size-8 items-center justify-center rounded-full bg-foreground text-background">
-        <Bot size={16} />
-      </div>
-      <div className="flex gap-1 rounded-2xl rounded-bl-sm bg-muted px-4 py-3">
-        <span className="size-2 animate-pulse rounded-full bg-muted-foreground/50" />
-        <span className="size-2 animate-pulse rounded-full bg-muted-foreground/50" />
-        <span className="size-2 animate-pulse rounded-full bg-muted-foreground/50" />
+    <div className="flex items-end gap-2">
+      <img
+        src="/assets/images/km0_robot_icon_v2.png"
+        alt="Bot"
+        className="size-9 shrink-0 rounded-full border-2 border-km0-teal-400 object-contain"
+      />
+      <div className="flex gap-1 rounded-2xl rounded-bl-md bg-white px-4 py-3 shadow-sm">
+        <span className="size-2 animate-pulse rounded-full bg-neutral-400" />
+        <span className="size-2 animate-pulse rounded-full bg-neutral-400" />
+        <span className="size-2 animate-pulse rounded-full bg-neutral-400" />
       </div>
     </div>
   );
@@ -243,17 +243,17 @@ export function VoiceChat({
   );
 
   return (
-    <div className="flex h-full flex-col overflow-hidden bg-background">
-      {/* ═══════ Messages ═══════ */}
-      <div ref={scrollRef} className="flex-1 space-y-4 overflow-y-auto px-6 py-6">
+    <div className="flex h-full flex-col overflow-hidden bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
+      {/* Messages */}
+      <div ref={scrollRef} className="flex-1 space-y-4 overflow-y-auto px-4 py-4">
         {messages.map((msg) => (
           <MessageBubble key={msg.id} message={msg} onEventClick={onEventClick} />
         ))}
         {isLoading && <TypingIndicator />}
       </div>
 
-      {/* ═══════ Input ═══════ */}
-      <div className="border-t border-border bg-background px-6 py-4">
+      {/* Input */}
+      <div className="px-3 pb-4 pt-2">
         <ChatInput onSend={handleSend} isLoading={isLoading} />
       </div>
     </div>

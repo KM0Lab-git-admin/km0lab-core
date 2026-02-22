@@ -3,51 +3,15 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { ChevronLeft, MapPin, AlertTriangle, Loader2 } from 'lucide-react';
 
-import { MediaFrame } from '@/components/ui/media-frame';
-import { Button } from '@/components/ui/primitives/button';
-import { Input, ZipCodeIcon } from '@/components/ui/primitives/input';
-import { TitleSubtitle } from '@/components/ui/title-subtitle';
 import { LogoHeader } from '@/components/ui/logo-header';
-import { ContentCard } from '@/components/ui/content-card';
 import { ContentShell } from '@/components/ui/content-shell';
 import { cn } from '@/components/ui/primitives/utils';
-import { checkPostalCodeAvailability, isTownEnabled } from '@/features/postal-code';
+import { checkPostalCodeAvailability } from './checkPostalCodeAvailability';
 import { getValidatorById } from '@/validation/validators';
-import {
-  postalCodeButton,
-  postalCodeButtonContainer,
-  postalCodeForm,
-  postalCodeInputContainer,
-  postalCodeNotifyButton,
-} from './postal-code.styles';
 
 type AvailabilityStatus = 'idle' | 'checking' | 'available' | 'unavailable';
-
-const LoadingSpinner = ({ className }: { className?: string }) => {
-  return (
-    <svg
-      className={cn('size-4 animate-spin', className)}
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-        fill="none"
-      />
-      <path
-        className="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-      />
-    </svg>
-  );
-};
 
 export default function PostalCode() {
   const t = useTranslations('PostalCode');
@@ -113,15 +77,8 @@ export default function PostalCode() {
 
   const hasFormatError = formatValidation.message && !formatValidation.isValid;
   const shouldShowFormatError = hasFormatError;
-  const inputError = shouldShowFormatError || isUnavailable;
-
-  const inputMessage = (() => {
-    if (!hasValue) return t('helper');
-    if (shouldShowFormatError) return formatValidation.message || t('format_error');
-    if (isUnavailable) return t('unavailable_error');
-    if (isAvailable) return t('success');
-    return t('helper');
-  })();
+  const showNotFound = isUnavailable;
+  const showCityName = isAvailable && cityName;
 
   const handlePostalCodeChange = (nextValue: string) => {
     setPostalCode(nextValue);
@@ -130,11 +87,7 @@ export default function PostalCode() {
   const handleContinue = () => {
     if (!isAvailable) return;
     if (!locale) return;
-    if (isTownEnabled(trimmedPostalCode)) {
-      router.push(`/${locale}/town?cp=${trimmedPostalCode}`);
-    } else {
-      router.push(`/${locale}/chat`);
-    }
+    router.push(`/${locale}/chat?cp=${trimmedPostalCode}`);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -147,116 +100,123 @@ export default function PostalCode() {
     router.push(`/${locale}/onboarding`);
   };
 
-  const showCityName = isAvailable && cityName;
-
   return (
-    <ContentShell>
-      <LogoHeader
-        scale="sm"
-        logoScale="md"
-        leftAction={(
-          <Button
-            size="icon"
-            variant="ghost"
+    <ContentShell className="items-center justify-start bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
+      <div className="flex w-full max-w-[390px] flex-col gap-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
             onClick={handleBack}
-            aria-label="Volver al onboarding"
+            className="flex size-11 items-center justify-center rounded-xl border-[2px] border-dashed border-km0-yellow-500 text-km0-yellow-600 transition-all duration-200 hover:scale-105 hover:bg-km0-yellow-50"
+            aria-label="Back"
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </Button>
-        )}
-      />
+            <ChevronLeft size={22} strokeWidth={2.5} />
+          </button>
+          <LogoHeader scale="sm" logoScale="md" />
+          <div className="w-11" />
+        </div>
 
-      <ContentCard>
+        {/* City illustration: max-w para reducir tamaño sin alterar posición de la cabecera */}
+        <div className="mx-auto w-full max-w-64 overflow-hidden rounded-3xl shadow-lg">
+          <img
+            src="/assets/images/km0_city_map.png"
+            alt={t('image_alt')}
+            className="h-auto w-full object-cover"
+          />
+        </div>
+
+        {/* Title + subtitle / City name */}
+        <div className="flex h-[52px] items-center justify-center px-2 text-center">
+          {showCityName ? (
+            <h1 className="font-brand text-3xl font-medium leading-tight text-km0-teal-600">
+              📍 {cityName}
+            </h1>
+          ) : (
+            <div>
+              <h1 className="mb-1 font-brand text-2xl font-bold uppercase leading-tight text-km0-blue-700">
+                {t('title')}
+              </h1>
+              <p className="font-body text-sm text-neutral-500">
+                {t('subtitle')}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Input */}
         <form
-          className={postalCodeForm()}
+          className="flex flex-col gap-2 px-2"
           onSubmit={handleSubmit}
           aria-label={t('form_aria')}
         >
-          <MediaFrame
-            src="/images/glovo-style-discover.png"
-            alt={t('image_alt')}
-            badgeText={t('xp_badge')}
-            className="w-full"
-          />
-
-          {!showCityName && (
-            <TitleSubtitle
-              title={t('title')}
-              subtitle={t('subtitle')}
-              size="sm"
-              titleClassName="uppercase"
-            />
-          )}
-
-          {showCityName && (
-            <TitleSubtitle
-              title={cityName}
-              size="sm"
-              titleClassName="text-km0-success-500"
-            />
-          )}
-
-          <div className={postalCodeInputContainer()}>
+          <div
+            className={cn(
+              'flex items-center gap-3 rounded-2xl border bg-white px-4 py-3.5 shadow-sm transition-colors',
+              isAvailable ? 'border-km0-teal-400' : 'border-km0-beige-200',
+            )}
+          >
+            <MapPin className="shrink-0 text-km0-teal-500" size={22} />
             <label htmlFor={inputId} className="sr-only">
               {t('input_label')}
             </label>
-            <Input
+            <input
               id={inputId}
-              value={postalCode}
-              onChange={(event) => handlePostalCodeChange(event.target.value)}
-              placeholder={t('placeholder')}
-              iconLeft={<ZipCodeIcon />}
+              type="text"
               inputMode="numeric"
-              autoComplete="postal-code"
+              pattern="[0-9]*"
               maxLength={5}
-              error={inputError}
-              variant={isAvailable ? 'success' : undefined}
-              message={inputMessage}
-              aria-label={t('input_aria')}
+              placeholder={t('placeholder')}
+              value={postalCode}
+              onChange={(e) => handlePostalCodeChange(e.target.value)}
+              autoComplete="postal-code"
+              className="flex-1 bg-transparent font-ui text-lg text-neutral-900 outline-none placeholder:text-neutral-400"
             />
           </div>
 
-          <div className={postalCodeButtonContainer()}>
-            <Button
+          {shouldShowFormatError && (
+            <div className="flex items-center gap-1.5 px-1 font-ui text-sm text-km0-coral-500">
+              <AlertTriangle size={14} />
+              <span>{formatValidation.message || t('format_error')}</span>
+            </div>
+          )}
+
+          {showNotFound && (
+            <div className="flex items-center gap-1.5 px-1 font-ui text-sm text-km0-coral-500">
+              <AlertTriangle size={14} />
+              <span>{t('unavailable_error')}</span>
+            </div>
+          )}
+
+          {/* CTA button */}
+          <div className="mt-2">
+            <button
               type="submit"
               onClick={handleContinue}
               disabled={!isAvailable || isChecking}
+              className="flex w-full items-center justify-center gap-2 rounded-2xl bg-km0-blue-700 px-5 py-2.5 font-ui text-sm font-semibold text-white transition-all duration-200 hover:scale-[1.03] hover:bg-km0-blue-600 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
               aria-label={t('continue_aria')}
-              className={postalCodeButton()}
             >
               {isChecking ? (
-                <>
-                  <LoadingSpinner className="text-white" />
-                  {t('checking')}
-                </>
+                <Loader2 size={18} className="animate-spin" />
               ) : (
                 t('continue')
               )}
-            </Button>
+            </button>
 
             {isUnavailable && (
               <button
                 type="button"
                 aria-label={t('notify_aria')}
                 onClick={() => {}}
-                className={postalCodeNotifyButton()}
+                className="mt-2 w-full text-center font-ui text-sm text-km0-blue-500 underline transition-colors hover:text-km0-blue-700"
               >
                 {t('notify')}
               </button>
             )}
           </div>
         </form>
-      </ContentCard>
+      </div>
     </ContentShell>
   );
 }
