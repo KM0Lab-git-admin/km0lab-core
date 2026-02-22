@@ -145,9 +145,9 @@ export default function Onboarding() {
         >
           {/* Sliding track: oculto hasta tener medida real para evitar salto en Mobile-P */}
           <div
-            className="absolute top-0 flex items-start"
+            className="absolute top-1/2 flex items-start"
             style={{
-              transform: `translateX(${trackX + dragOffset}px)`,
+              transform: `translateX(${trackX + dragOffset}px) translateY(-58%)`,
               opacity: containerWidth !== null ? 1 : 0,
               transition:
                 containerWidth === null
@@ -242,7 +242,7 @@ export default function Onboarding() {
             onPointerDown={(e) => e.stopPropagation()}
             disabled={isFirst}
             className={cn(
-              'absolute left-[6px] top-[90px] z-20 flex size-10 items-center justify-center rounded-full border-[2px] bg-white shadow-lg transition-all duration-200',
+              'absolute left-[6px] top-1/2 -translate-y-1/2 z-20 flex size-10 items-center justify-center rounded-full border-[2px] bg-white shadow-lg transition-all duration-200',
               isFirst
                 ? 'cursor-not-allowed border-km0-beige-200 text-km0-beige-300 opacity-40'
                 : 'cursor-pointer border-km0-yellow-400 text-km0-blue-700 hover:scale-110 hover:bg-km0-yellow-50',
@@ -259,7 +259,7 @@ export default function Onboarding() {
             onPointerDown={(e) => e.stopPropagation()}
             disabled={isLast}
             className={cn(
-              'absolute right-[6px] top-[90px] z-20 flex size-10 items-center justify-center rounded-full border-[2px] bg-white shadow-lg transition-all duration-200',
+              'absolute right-[6px] top-1/2 -translate-y-1/2 z-20 flex size-10 items-center justify-center rounded-full border-[2px] bg-white shadow-lg transition-all duration-200',
               isLast
                 ? 'cursor-not-allowed border-km0-beige-200 text-km0-beige-300 opacity-40'
                 : 'cursor-pointer border-km0-yellow-400 text-km0-blue-700 hover:scale-110 hover:bg-km0-yellow-50',
