@@ -3,6 +3,7 @@
 import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { ChevronLeft } from 'lucide-react';
 
 import { ContentShell } from '@/components/ui/content-shell';
 import { ContentCard } from '@/components/ui/content-card';
@@ -13,7 +14,6 @@ import { getPostalCodeCity } from '@/components/screens/postal-code/postalCodeDb
 import { ChatScreen } from '@/components/screens/chat';
 import { useChatStore } from '@/stores/chatStore';
 
-import { NotificationBellButton } from '@/components/ui/notification-bell';
 import {
   TownHallIcon,
   ProductsIcon,
@@ -24,10 +24,6 @@ import {
 } from './icons';
 
 import {
-  townHomeHeader,
-  townHomeHeaderLeft,
-  townHomeHeaderLogo,
-  townHomeHeaderTitle,
   townHomeHero,
   townHomeHeroTitle,
   townHomeChatLogo,
@@ -92,24 +88,46 @@ function TownHomeContent() {
     );
   }
 
+  /* ---- Formatted date for banner ---- */
+  const dateLabel = (() => {
+    const d = new Date();
+    try {
+      return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+    } catch {
+      return d.toLocaleDateString();
+    }
+  })();
+
   /* ---- Vista pueblo (por defecto) ---- */
   return (
     <ContentShell>
-      {/* Header: izquierda (nombre + logo apilados) | derecha (campanilla) */}
-      <header className={townHomeHeader()}>
-        <div className={townHomeHeaderLeft()}>
-          <h2 className={townHomeHeaderTitle()}>{townName}</h2>
-          <div className={townHomeHeaderLogo()}>
-            <Logo alt="KM0 LAB" />
-          </div>
-        </div>
-        <NotificationBellButton
-          size="md"
-          dotColor="coral"
-          hasNotification
-          aria-label={t('notifications_aria')}
+      {/* Header: back + city name + logo + robot avatar */}
+      <header className="flex items-center gap-3 px-4 pb-2 pt-3">
+        <button
+          type="button"
+          onClick={() => window.history.back()}
+          className="flex size-10 items-center justify-center rounded-xl border-2 border-dashed border-km0-yellow-500 text-km0-yellow-600 transition-all hover:bg-km0-yellow-50"
+          aria-label="Back"
+        >
+          <ChevronLeft size={20} strokeWidth={2.5} />
+        </button>
+        <h1 className="flex-1 font-brand text-2xl leading-none text-km0-blue-700">
+          {townName}
+        </h1>
+        <Logo alt="KM0 LAB" />
+        <img
+          src="/assets/images/km0_robot_icon_v2.png"
+          alt="KM0 Bot"
+          className="size-10 rounded-full object-contain"
         />
       </header>
+
+      {/* Date banner */}
+      <div className="bg-km0-yellow-500 py-1.5 text-center">
+        <span className="font-ui text-sm font-semibold text-km0-blue-800">
+          {dateLabel}
+        </span>
+      </div>
 
       <ContentCard className="gap-2 tablet:gap-3">
         {/* Seccion hero */}

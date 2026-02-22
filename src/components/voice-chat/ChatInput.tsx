@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Mic, X, Check, ArrowUp, Loader2 } from 'lucide-react';
+import { Plus, Mic, Send, X, Check, Loader2 } from 'lucide-react';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -290,51 +290,51 @@ export function ChatInput({
 
       <div
         className={`
-          flex items-center gap-2.5 rounded-3xl border bg-white px-5 py-2
+          flex items-center gap-2 rounded-full border bg-white px-3 py-2 shadow-sm
           transition-colors duration-200
-          ${voiceState === 'recording' ? 'border-red-400' : 'border-black/10'}
+          ${voiceState === 'recording' ? 'border-red-400' : 'border-km0-beige-200'}
         `}
       >
-        {/* ═══════ IDLE / DONE: textarea + mic + send ═══════ */}
+        {/* IDLE / DONE: plus + input + mic + send */}
         {(voiceState === 'idle' || voiceState === 'done') && (
           <>
-            <textarea
-              ref={textareaRef}
+            <button
+              type="button"
+              className="flex size-9 shrink-0 items-center justify-center rounded-full text-neutral-400 transition-colors hover:bg-neutral-100"
+              aria-label="Attach"
+            >
+              <Plus size={20} />
+            </button>
+            <input
+              type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={placeholder}
-              rows={1}
-              className="flex-1 resize-none border-none bg-transparent text-sm leading-relaxed text-foreground placeholder:text-muted-foreground focus:outline-none"
+              className="flex-1 bg-transparent font-body text-sm text-neutral-900 outline-none placeholder:text-neutral-400"
             />
             <button
               type="button"
               onClick={startRecording}
               disabled={isLoading}
-              className="flex size-10 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-40"
-              title="Grabar voz"
+              className="flex size-10 shrink-0 items-center justify-center rounded-full bg-km0-teal-500 text-white transition-opacity hover:opacity-90 disabled:opacity-40"
+              aria-label="Voice"
             >
-              <Mic size={20} />
+              <Mic size={18} />
             </button>
             <button
               type="button"
               onClick={handleSend}
               disabled={!canSend}
-              className={`
-                flex size-10 shrink-0 items-center justify-center rounded-full transition-all
-                ${canSend
-                  ? 'bg-foreground text-background hover:opacity-90'
-                  : 'bg-muted text-muted-foreground'
-                }
-              `}
-              title="Enviar mensaje"
+              className="flex size-10 shrink-0 items-center justify-center rounded-full bg-km0-blue-700 text-white transition-opacity hover:opacity-90 disabled:opacity-40"
+              aria-label="Send"
             >
-              <ArrowUp size={20} />
+              <Send size={18} />
             </button>
           </>
         )}
 
-        {/* ═══════ RECORDING: dot + time + waveform + cancel/confirm ═══════ */}
+        {/* RECORDING: dot + time + waveform + cancel/confirm */}
         {voiceState === 'recording' && (
           <>
             <div className="flex flex-1 items-center gap-3">
@@ -347,7 +347,7 @@ export function ChatInput({
             <button
               type="button"
               onClick={cancelRecording}
-              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors hover:bg-red-100 hover:text-red-600"
+              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-400 transition-colors hover:bg-red-100 hover:text-red-600"
               title="Cancelar grabación"
             >
               <X size={18} />
@@ -355,7 +355,7 @@ export function ChatInput({
             <button
               type="button"
               onClick={confirmRecording}
-              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-foreground text-background transition-colors hover:opacity-90"
+              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-km0-blue-700 text-white transition-colors hover:opacity-90"
               title="Confirmar grabación"
             >
               <Check size={18} />
@@ -363,31 +363,27 @@ export function ChatInput({
           </>
         )}
 
-        {/* ═══════ PROCESSING: frozen waveform + spinner ═══════ */}
+        {/* PROCESSING: frozen waveform + spinner */}
         {voiceState === 'processing' && (
           <>
             <div className="flex flex-1 items-center gap-3">
               <WaveformCanvas analyser={null} isActive={false} />
-              <span className="text-xs text-muted-foreground">Transcribiendo…</span>
+              <span className="text-xs text-neutral-500">Transcribiendo…</span>
             </div>
             <button
               type="button"
               onClick={cancelRecording}
-              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors hover:bg-red-100 hover:text-red-600"
+              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-400 transition-colors hover:bg-red-100 hover:text-red-600"
               title="Cancelar"
             >
               <X size={18} />
             </button>
             <div className="flex size-9 items-center justify-center">
-              <Loader2 size={20} className="animate-spin text-muted-foreground" />
+              <Loader2 size={20} className="animate-spin text-neutral-400" />
             </div>
           </>
         )}
       </div>
-
-      <p className="text-center text-[11px] text-muted-foreground">
-        Pulsa el micrófono para grabar · Enter para enviar
-      </p>
     </div>
   );
 }
