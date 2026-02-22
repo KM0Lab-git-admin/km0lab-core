@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const Env = createEnv({
   server: {
     ARCJET_KEY: z.string().startsWith('ajkey_').optional(),
-    CLERK_SECRET_KEY: z.string().min(1),
+    CLERK_SECRET_KEY: z.string().min(1).optional(),
     DATABASE_URL: z.string().optional(),
     EVENT_QUERY_API_URL: z.string().url().optional(),
     LOGTAIL_SOURCE_TOKEN: z.string().optional(),
@@ -13,8 +13,8 @@ export const Env = createEnv({
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().optional(),
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
-    NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().min(1),
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1).optional(),
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().min(1).optional(),
   },
   shared: {
     NODE_ENV: z.enum(['test', 'development', 'production']).optional(),
