@@ -2,6 +2,7 @@
 
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 import BreakpointIndicator from '@/components/devtools/BreakpointIndicator';
 import { ContentShell } from '@/components/ui/content-shell';
@@ -119,7 +120,12 @@ export default function Onboarding() {
 
       <div className="flex w-full max-w-[390px] flex-col gap-3 flex-1 overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <motion.div
+          className="flex items-center justify-between"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut', delay: 0.1 }}
+        >
           <div className="flex-1 flex justify-start">
             <button
               type="button"
@@ -132,16 +138,19 @@ export default function Onboarding() {
           </div>
           <Logo context="onboarding" alt="KM0 LAB" />
           <div className="flex-1" />
-        </div>
+        </motion.div>
 
         {/* Carousel */}
-        <div
+        <motion.div
           ref={carouselRef}
           className="relative flex-1 min-h-[300px] cursor-grab select-none overflow-visible active:cursor-grabbing"
           style={{ touchAction: 'none' }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
+          initial={{ opacity: 0, y: 16, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.4, ease: 'easeOut', delay: 0.2 }}
         >
           {/* Sliding track: oculto hasta tener medida real para evitar salto en Mobile-P */}
           <div
@@ -268,10 +277,15 @@ export default function Onboarding() {
           >
             <ChevronRight size={20} strokeWidth={2.5} />
           </button>
-        </div>
+        </motion.div>
 
         {/* Thumbnails */}
-        <div className="flex justify-center gap-2">
+        <motion.div
+          className="flex justify-center gap-2"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut', delay: 0.3 }}
+        >
           {slides.map((s, i) => (
             <button
               key={s.id}
@@ -289,10 +303,15 @@ export default function Onboarding() {
               {s.emoji}
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-1">
+        <motion.div
+          className="flex items-center justify-between px-1"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut', delay: 0.4 }}
+        >
           <span className="w-12 font-ui text-lg font-bold text-km0-blue-700">
             {current + 1}/{total}
           </span>
@@ -325,7 +344,7 @@ export default function Onboarding() {
           >
             {isLast ? t('start') : t('skip')}
           </button>
-        </div>
+        </motion.div>
       </div>
     </ContentShell>
   );

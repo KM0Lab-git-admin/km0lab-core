@@ -4,6 +4,7 @@ import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { ChevronLeft, MapPin, AlertTriangle, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 import { Logo } from '@/components/ui/logo';
 import { ContentShell } from '@/components/ui/content-shell';
@@ -104,7 +105,12 @@ export default function PostalCode() {
     <ContentShell className="items-center justify-start bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
       <div className="flex w-full max-w-[390px] flex-col gap-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <motion.div
+          className="flex items-center justify-between"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut', delay: 0.1 }}
+        >
           <div className="flex-1 flex justify-start">
             <button
               type="button"
@@ -117,44 +123,57 @@ export default function PostalCode() {
           </div>
           <Logo context="onboarding" alt="KM0 LAB" />
           <div className="flex-1" />
-        </div>
+        </motion.div>
 
         {/* City illustration: max-w para reducir tamaño sin alterar posición de la cabecera */}
-        <div className="mx-auto w-full max-w-64 overflow-hidden rounded-3xl shadow-lg">
+        <motion.div
+          className="mx-auto w-full max-w-64 overflow-hidden rounded-3xl shadow-lg"
+          initial={{ opacity: 0, y: 16, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.4, ease: 'easeOut', delay: 0.2 }}
+        >
           <img
             src="/assets/images/km0_city_map.png"
             alt={t('image_alt')}
             className="h-auto w-full object-cover"
           />
-        </div>
+        </motion.div>
 
         {/* Title + subtitle / City name */}
-        <div className="flex h-[52px] items-center justify-center px-2 text-center">
+        <motion.div
+          className="flex h-[52px] items-center justify-center px-2 text-center"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut', delay: 0.3 }}
+        >
           {showCityName ? (
             <h1 className="font-brand text-3xl font-medium leading-tight text-km0-teal-600">
               📍 {cityName}
             </h1>
           ) : (
             <div>
-              <h1 className="mb-1 font-brand text-2xl font-bold uppercase leading-tight text-km0-blue-700">
+              <h1 className="mb-1 font-brand text-2xl font-bold leading-tight text-primary">
                 {t('title')}
               </h1>
-              <p className="font-body text-sm text-neutral-500">
+              <p className="font-body text-sm text-muted-foreground">
                 {t('subtitle')}
               </p>
             </div>
           )}
-        </div>
+        </motion.div>
 
         {/* Input */}
-        <form
+        <motion.form
           className="flex flex-col gap-2 px-2"
           onSubmit={handleSubmit}
           aria-label={t('form_aria')}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut', delay: 0.4 }}
         >
           <div
             className={cn(
-              'flex items-center gap-3 rounded-2xl border bg-white px-4 py-3.5 shadow-sm transition-colors',
+              'flex items-center gap-3 rounded-2xl border bg-white px-4 py-3.5 shadow-sm transition-colors focus-within:border-km0-teal-400',
               isAvailable ? 'border-km0-teal-400' : 'border-km0-beige-200',
             )}
           >
@@ -196,7 +215,7 @@ export default function PostalCode() {
               type="submit"
               onClick={handleContinue}
               disabled={!isAvailable || isChecking}
-              className="flex w-full items-center justify-center gap-2 rounded-2xl bg-km0-blue-700 px-5 py-2.5 font-ui text-sm font-semibold text-white transition-all duration-200 hover:scale-[1.03] hover:bg-km0-blue-600 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+              className="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-2.5 font-ui text-sm font-semibold uppercase text-primary-foreground transition-all duration-200 hover:scale-[1.03] hover:bg-km0-blue-600 active:scale-95 disabled:pointer-events-none disabled:opacity-40"
               aria-label={t('continue_aria')}
             >
               {isChecking ? (
@@ -217,7 +236,7 @@ export default function PostalCode() {
               </button>
             )}
           </div>
-        </form>
+        </motion.form>
       </div>
     </ContentShell>
   );
