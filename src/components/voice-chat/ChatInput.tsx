@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Plus, Mic, Send, X, Check, Loader2 } from 'lucide-react';
+import { Mic, Send, X, Check, Loader2 } from 'lucide-react';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -88,7 +88,7 @@ function WaveformCanvas({
       const x = i * (barW + gap);
       const y = (height - h) / 2;
 
-      ctx.fillStyle = isActive ? '#1a1a2e' : '#9ca3af';
+      ctx.fillStyle = isActive ? '#00b8a9' : '#9ca3af';
       ctx.beginPath();
       ctx.roundRect(x, y, barW, h, 1.5);
       ctx.fill();
@@ -295,16 +295,9 @@ export function ChatInput({
           ${voiceState === 'recording' ? 'border-red-400' : 'border-km0-beige-200'}
         `}
       >
-        {/* IDLE / DONE: plus + input + mic + send */}
+        {/* IDLE / DONE: input + mic + send */}
         {(voiceState === 'idle' || voiceState === 'done') && (
           <>
-            <button
-              type="button"
-              className="flex size-9 shrink-0 items-center justify-center rounded-full text-neutral-400 transition-colors hover:bg-neutral-100"
-              aria-label="Attach"
-            >
-              <Plus size={20} />
-            </button>
             <input
               type="text"
               value={text}
@@ -317,7 +310,7 @@ export function ChatInput({
               type="button"
               onClick={startRecording}
               disabled={isLoading}
-              className="flex size-10 shrink-0 items-center justify-center rounded-full bg-km0-teal-500 text-white transition-opacity hover:opacity-90 disabled:opacity-40"
+              className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
               aria-label="Voice"
             >
               <Mic size={18} />
@@ -326,7 +319,7 @@ export function ChatInput({
               type="button"
               onClick={handleSend}
               disabled={!canSend}
-              className="flex size-10 shrink-0 items-center justify-center rounded-full bg-km0-blue-700 text-white transition-opacity hover:opacity-90 disabled:opacity-40"
+              className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
               aria-label="Send"
             >
               <Send size={18} />
@@ -334,12 +327,14 @@ export function ChatInput({
           </>
         )}
 
-        {/* RECORDING: dot + time + waveform + cancel/confirm */}
+        {/* RECORDING: Escuchando… + waveform + cancel/confirm (como VoiceRecorder remoto) */}
         {voiceState === 'recording' && (
           <>
             <div className="flex flex-1 items-center gap-3">
-              <span className="size-2.5 shrink-0 animate-pulse rounded-full bg-red-500" />
-              <span className="min-w-[2.25rem] text-xs font-medium text-red-600">
+              <span className="shrink-0 text-xs font-medium text-primary">
+                Escuchando…
+              </span>
+              <span className="min-w-[2.25rem] shrink-0 text-xs font-medium text-neutral-500">
                 {formatTime(recordingTime)}
               </span>
               <WaveformCanvas analyser={analyserRef.current} isActive />
@@ -355,7 +350,7 @@ export function ChatInput({
             <button
               type="button"
               onClick={confirmRecording}
-              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-km0-blue-700 text-white transition-colors hover:opacity-90"
+              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-colors hover:opacity-90"
               title="Confirmar grabación"
             >
               <Check size={18} />
@@ -368,7 +363,7 @@ export function ChatInput({
           <>
             <div className="flex flex-1 items-center gap-3">
               <WaveformCanvas analyser={null} isActive={false} />
-              <span className="text-xs text-neutral-500">Transcribiendo…</span>
+              <span className="text-xs text-primary">Transcribiendo…</span>
             </div>
             <button
               type="button"
