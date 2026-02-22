@@ -18,6 +18,12 @@ export type SlideData = {
   bgColor: string;
   /** Optional XP badge text. */
   xpBadge?: string;
+  /** XP numeric value for badge display. */
+  xp: number;
+  /** Emoji visual placeholder for the slide. */
+  emoji: string;
+  /** CSS color value for the emoji area background. */
+  color: string;
 };
 
 type OnboardingSlidesTranslations = {
@@ -62,6 +68,9 @@ export const getOnboardingSlides = (t: OnboardingSlidesTranslations): SlideData[
     imageSrc: '/images/glovo-style-welcome.png',
     bgColor: 'bg-km0-yellow-100',
     xpBadge: t.welcome.xpBadge,
+    xp: 10,
+    emoji: '🤝',
+    color: '#f9dd8e',
   },
   {
     id: 'discover',
@@ -71,6 +80,9 @@ export const getOnboardingSlides = (t: OnboardingSlidesTranslations): SlideData[
     imageSrc: '/images/glovo-style-discover.png',
     bgColor: 'bg-km0-blue-100',
     xpBadge: t.discover.xpBadge,
+    xp: 20,
+    emoji: '🛒',
+    color: '#40D9D0',
   },
   {
     id: 'connect',
@@ -80,6 +92,9 @@ export const getOnboardingSlides = (t: OnboardingSlidesTranslations): SlideData[
     imageSrc: '/images/glovo-style-connect.png',
     bgColor: 'bg-km0-coral-100',
     xpBadge: t.connect.xpBadge,
+    xp: 30,
+    emoji: '🎯',
+    color: '#ff8570',
   },
   {
     id: 'spaces',
@@ -89,6 +104,9 @@ export const getOnboardingSlides = (t: OnboardingSlidesTranslations): SlideData[
     imageSrc: '/images/glovo-style-public.png',
     bgColor: 'bg-km0-success-100',
     xpBadge: t.spaces.xpBadge,
+    xp: 40,
+    emoji: '🏆',
+    color: '#b5c3f0',
   },
   {
     id: 'start',
@@ -98,5 +116,8 @@ export const getOnboardingSlides = (t: OnboardingSlidesTranslations): SlideData[
     imageSrc: '/images/glovo-style-start.png',
     bgColor: 'bg-km0-yellow-100',
     xpBadge: t.start.xpBadge,
+    xp: 50,
+    emoji: '📚',
+    color: '#fdeea9',
   },
 ];

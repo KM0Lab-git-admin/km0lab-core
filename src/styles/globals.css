@@ -237,6 +237,18 @@
   /* Gaming Gold */
   --color-gaming-gold: #ffd700;
 
+  /* KM0 Teal */
+  --color-km0-teal-50: #F0FFFE;
+  --color-km0-teal-100: #CCFAF8;
+  --color-km0-teal-200: #80EAE4;
+  --color-km0-teal-300: #40D9D0;
+  --color-km0-teal-400: #00C7BC;
+  --color-km0-teal-500: #00B8A9;
+  --color-km0-teal-600: #009A8E;
+  --color-km0-teal-700: #007C72;
+  --color-km0-teal-800: #005E56;
+  --color-km0-teal-900: #00403B;
+
   /* Spacing */
   --spacing-header: 3rem;
   --spacing-header-gap: 3rem;

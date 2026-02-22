@@ -9,25 +9,25 @@ export type LanguageConfig = {
 
 const languageConfigMap: Record<Locale, LanguageConfig> = {
   es: {
-    flagSrc: '/assets/images/spanish_flag.png',
+    flagSrc: '/assets/flags/flag-es.svg',
     flagAlt: 'Bandera de España',
     title: 'Español',
     subtitle: 'Empieza en español',
   },
   ca: {
-    flagSrc: '/assets/images/catalan_flag.png',
+    flagSrc: '/assets/flags/flag-ca.svg',
     flagAlt: 'Bandera de Cataluña',
     title: 'Català',
     subtitle: 'Comença en català',
   },
   en: {
-    flagSrc: '/assets/images/spanish_flag.png', // TODO: Add English flag when available
+    flagSrc: '/assets/flags/flag-en.svg',
     flagAlt: 'Flag of England',
     title: 'English',
     subtitle: 'Start in English',
   },
   fr: {
-    flagSrc: '/assets/images/spanish_flag.png', // TODO: Add French flag when available
+    flagSrc: '/assets/flags/flag-es.svg',
     flagAlt: 'Drapeau de la France',
     title: 'Français',
     subtitle: 'Commencez en français',
