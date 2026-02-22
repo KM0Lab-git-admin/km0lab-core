@@ -9,7 +9,6 @@ import { LogoHeader } from '@/components/ui/logo-header';
 import { ContentShell } from '@/components/ui/content-shell';
 import { cn } from '@/components/ui/primitives/utils';
 import { checkPostalCodeAvailability } from './checkPostalCodeAvailability';
-import { isTownEnabled } from './townEnabledPostalCodes';
 import { getValidatorById } from '@/validation/validators';
 
 type AvailabilityStatus = 'idle' | 'checking' | 'available' | 'unavailable';
@@ -88,11 +87,7 @@ export default function PostalCode() {
   const handleContinue = () => {
     if (!isAvailable) return;
     if (!locale) return;
-    if (isTownEnabled(trimmedPostalCode)) {
-      router.push(`/${locale}/town?cp=${trimmedPostalCode}`);
-    } else {
-      router.push(`/${locale}/chat`);
-    }
+    router.push(`/${locale}/chat?cp=${trimmedPostalCode}`);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -106,7 +101,7 @@ export default function PostalCode() {
   };
 
   return (
-    <ContentShell className="items-center justify-center bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
+    <ContentShell className="items-center justify-start bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
       <div className="flex w-full max-w-[390px] flex-col gap-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -122,8 +117,8 @@ export default function PostalCode() {
           <div className="w-11" />
         </div>
 
-        {/* City illustration */}
-        <div className="overflow-hidden rounded-3xl shadow-lg">
+        {/* City illustration: max-w para reducir tamaño sin alterar posición de la cabecera */}
+        <div className="mx-auto w-full max-w-64 overflow-hidden rounded-3xl shadow-lg">
           <img
             src="/assets/images/km0_city_map.png"
             alt={t('image_alt')}

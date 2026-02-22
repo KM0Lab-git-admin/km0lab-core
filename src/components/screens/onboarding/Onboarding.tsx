@@ -55,7 +55,7 @@ export default function Onboarding() {
   const total = slides.length;
   const [current, setCurrent] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
-  const [containerWidth, setContainerWidth] = useState(390);
+  const [containerWidth, setContainerWidth] = useState<number | null>(null);
   const touchStartX = useRef<number | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -110,7 +110,8 @@ export default function Onboarding() {
     router.push('/');
   };
 
-  const trackX = containerWidth / 2 - current * SLOT - SLOT / 2;
+  const trackX =
+    containerWidth !== null ? containerWidth / 2 - current * SLOT - SLOT / 2 : 0;
 
   return (
     <ContentShell className="items-center justify-center bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
@@ -140,12 +141,18 @@ export default function Onboarding() {
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
         >
-          {/* Sliding track */}
+          {/* Sliding track: oculto hasta tener medida real para evitar salto en Mobile-P */}
           <div
             className="absolute top-0 flex items-start"
             style={{
               transform: `translateX(${trackX + dragOffset}px)`,
-              transition: dragOffset !== 0 ? 'none' : 'transform 420ms cubic-bezier(0.4, 0, 0.2, 1)',
+              opacity: containerWidth !== null ? 1 : 0,
+              transition:
+                containerWidth === null
+                  ? 'none'
+                  : dragOffset !== 0
+                    ? 'none'
+                    : 'transform 420ms cubic-bezier(0.4, 0, 0.2, 1)',
               width: `${total * SLOT}px`,
             }}
           >
