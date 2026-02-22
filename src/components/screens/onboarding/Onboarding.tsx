@@ -11,7 +11,7 @@ import { getOnboardingSlides } from './slides';
 import { useTranslations } from 'next-intl';
 import { useParams, useRouter } from 'next/navigation';
 
-const SLOT = 240;
+const SLOT = 260;
 
 export default function Onboarding() {
   const router = useRouter();
@@ -114,10 +114,10 @@ export default function Onboarding() {
     containerWidth !== null ? containerWidth / 2 - current * SLOT - SLOT / 2 : 0;
 
   return (
-    <ContentShell className="items-center justify-center bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
+    <ContentShell className="min-h-dvh-fallback items-stretch justify-start bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
       <BreakpointIndicator />
 
-      <div className="flex w-full max-w-[390px] flex-col gap-3 min-h-0 flex-1 overflow-hidden">
+      <div className="flex w-full max-w-[390px] flex-col gap-3 flex-1 overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex-1 flex justify-start">
@@ -137,7 +137,7 @@ export default function Onboarding() {
         {/* Carousel */}
         <div
           ref={carouselRef}
-          className="relative h-[340px] cursor-grab select-none overflow-visible active:cursor-grabbing"
+          className="relative flex-1 min-h-[300px] cursor-grab select-none overflow-visible active:cursor-grabbing"
           style={{ touchAction: 'none' }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
@@ -161,9 +161,9 @@ export default function Onboarding() {
             {slides.map((s, i) => {
               const dist = Math.abs(i - current);
               const isActive = i === current;
-              const scale = isActive ? 1 : dist === 1 ? 0.82 : 0.68;
-              const opacity = isActive ? 1 : dist === 1 ? 0.65 : 0.35;
-              const topOffset = isActive ? 0 : dist === 1 ? 28 : 48;
+              const scale = isActive ? 1 : dist === 1 ? 0.92 : 0.76;
+              const opacity = isActive ? 1 : dist === 1 ? 0.85 : 0.45;
+              const topOffset = isActive ? 0 : dist === 1 ? 12 : 32;
 
               return (
                 <div
@@ -209,7 +209,7 @@ export default function Onboarding() {
                   <div className={`overflow-hidden rounded-3xl bg-white ${isActive ? 'shadow-2xl' : 'shadow-none'}`}>
                     {/* Emoji area */}
                     <div
-                      className="relative mx-3 mt-3 flex h-[160px] items-center justify-center overflow-hidden rounded-2xl"
+                      className="relative mx-3 mt-3 flex h-[180px] items-center justify-center overflow-hidden rounded-2xl"
                       style={{ background: s.color }}
                     >
                       <span className="select-none text-[70px]">{s.emoji}</span>
