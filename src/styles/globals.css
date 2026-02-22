@@ -258,6 +258,7 @@
   /* Width */
   --width-logo: 9.1875rem;
   --width-logo-header: 4.125rem; /* TownHome header: logo escalado 0.25 */
+  --width-logo-entry: 12.25rem; /* Selección de idioma: h-9 (36px) con proporción sprite */
   --width-slide: 20rem;
   --width-slider-count-lg: 28rem;
   --width-slider-count-xl: 32rem;
@@ -596,6 +597,13 @@
   }
 }
 
+/* === LOGO ENTRY (selección de idioma: h-9) === */
+@layer utilities {
+  .w-logo-entry {
+    width: var(--width-logo-entry);
+  }
+}
+
 /* === TYPOGRAPHY UTILITIES === */
 @layer utilities {
   /* Weight utilities */
@@ -803,7 +811,7 @@
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-8px);
+      transform: translateY(-10px);
     }
   }
 

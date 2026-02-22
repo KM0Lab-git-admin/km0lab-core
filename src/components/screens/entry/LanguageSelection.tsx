@@ -3,7 +3,7 @@
 import BreakpointIndicator from '@/components/devtools/BreakpointIndicator';
 import { ContentShell } from '@/components/ui/content-shell';
 import { FloatingDots } from '@/components/ui/floating-dots';
-import { LogoHeader } from '@/components/ui/logo-header';
+import { Logo } from '@/components/ui/logo';
 import { LanguageCard } from '@/components/ui/language-card';
 import { getLanguageConfig, type Locale } from '@/utils/languageConfig';
 import Image from 'next/image';
@@ -33,10 +33,10 @@ export default function LanguageSelection() {
       <BreakpointIndicator />
 
       <div className="flex w-full max-w-[390px] flex-col gap-8">
-        {/* Header: Logo centered */}
+        {/* Header: Logo centrado (referencia: h-9, justify-between, espaciadores w-11) */}
         <div className="flex h-11 items-center justify-between">
           <div className="w-11" />
-          <LogoHeader scale="sm" logoScale="md" />
+          <Logo scale="entry" alt="KM0 LAB" />
           <div className="w-11" />
         </div>
 

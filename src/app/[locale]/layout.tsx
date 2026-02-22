@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import arcjet, { detectBot, request } from '@/libs/Arcjet';
 import { Env } from '@/libs/Env';
 import { routing } from '@/libs/i18nNavigation';
+import { TopLoadingBar } from '@/components/ui/top-loading-bar';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
@@ -97,8 +98,8 @@ export default async function RootLayout(props: {
           locale={locale}
           messages={messages}
         >
+          <TopLoadingBar />
           {props.children}
-
         </NextIntlClientProvider>
         <Script
           src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"

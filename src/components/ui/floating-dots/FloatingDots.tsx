@@ -1,40 +1,36 @@
-import type { VariantProps } from 'class-variance-authority';
-
-import { cn } from '../primitives/utils';
-import { dotVariants, floatingDotsContainerVariants } from './floating-dots.styles';
-
-type DotConfig = {
-  size: NonNullable<VariantProps<typeof dotVariants>['size']>;
-  position: NonNullable<VariantProps<typeof dotVariants>['position']>;
-  delay: NonNullable<VariantProps<typeof dotVariants>['delay']>;
-  opacity: string;
-};
-
-const dots: DotConfig[] = [
-  { size: 'lg', position: 'top-left', delay: 'none', opacity: 'opacity-70' },
-  { size: 'sm', position: 'bottom-left', delay: '400', opacity: 'opacity-50' },
-  { size: 'xl', position: 'mid-left', delay: 'none', opacity: 'opacity-60' },
-  { size: 'sm', position: 'bottom-right', delay: 'none', opacity: 'opacity-40' },
-  { size: 'md', position: 'mid-right', delay: '200', opacity: 'opacity-55' },
-  { size: 'md', position: 'top-right', delay: 'none', opacity: 'opacity-45' },
-];
-
 interface FloatingDotsProps {
   className?: string;
 }
 
-export default function FloatingDots({ className }: FloatingDotsProps) {
+const dots = [
+  { size: 10, top: '10%', left: '8%', delay: '0s', opacity: 0.7 },
+  { size: 7, top: '25%', left: '88%', delay: '0.4s', opacity: 0.5 },
+  { size: 12, top: '60%', left: '5%', delay: '0.8s', opacity: 0.6 },
+  { size: 6, top: '75%', left: '90%', delay: '1.2s', opacity: 0.4 },
+  { size: 9, top: '45%', left: '92%', delay: '0.2s', opacity: 0.55 },
+  { size: 8, top: '5%', left: '70%', delay: '1s', opacity: 0.45 },
+];
+
+const FloatingDots = ({ className }: FloatingDotsProps) => {
   return (
-    <div className={cn(floatingDotsContainerVariants(), className)}>
-      {dots.map((dot) => (
-        <div
-          key={`${dot.position}-${dot.size}`}
-          className={cn(
-            dotVariants({ size: dot.size, position: dot.position, delay: dot.delay }),
-            dot.opacity,
-          )}
+    <div className={`absolute inset-0 pointer-events-none ${className ?? ''}`}>
+      {dots.map((dot, i) => (
+        <span
+          key={i}
+          className="absolute rounded-full bg-km0-teal-500 animate-float"
+          style={{
+            width: dot.size,
+            height: dot.size,
+            top: dot.top,
+            left: dot.left,
+            animationDelay: dot.delay,
+            animationDuration: `${3 + i * 0.4}s`,
+            opacity: dot.opacity,
+          }}
         />
       ))}
     </div>
   );
-}
+};
+
+export default FloatingDots;
