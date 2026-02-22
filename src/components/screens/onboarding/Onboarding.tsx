@@ -5,13 +5,13 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import BreakpointIndicator from '@/components/devtools/BreakpointIndicator';
 import { ContentShell } from '@/components/ui/content-shell';
-import { LogoHeader } from '@/components/ui/logo-header';
+import { Logo } from '@/components/ui/logo';
 import { cn } from '@/components/ui/primitives/utils';
 import { getOnboardingSlides } from './slides';
 import { useTranslations } from 'next-intl';
 import { useParams, useRouter } from 'next/navigation';
 
-const SLOT = 270;
+const SLOT = 240;
 
 export default function Onboarding() {
   const router = useRouter();
@@ -117,25 +117,27 @@ export default function Onboarding() {
     <ContentShell className="items-center justify-center bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
       <BreakpointIndicator />
 
-      <div className="flex w-full max-w-[390px] flex-col gap-5 overflow-hidden">
+      <div className="flex w-full max-w-[390px] flex-col gap-3 min-h-0 flex-1 overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <button
-            type="button"
-            onClick={handleBack}
-            className="flex size-11 items-center justify-center rounded-xl border-[2px] border-dashed border-km0-yellow-500 text-km0-yellow-600 transition-all duration-200 hover:scale-105 hover:bg-km0-yellow-50"
-            aria-label="Back"
-          >
-            <ChevronLeft size={22} strokeWidth={2.5} />
-          </button>
-          <LogoHeader scale="sm" logoScale="md" />
-          <div className="w-11" />
+          <div className="flex-1 flex justify-start">
+            <button
+              type="button"
+              onClick={handleBack}
+              className="flex size-11 items-center justify-center rounded-xl border-[2px] border-dashed border-km0-yellow-500 text-km0-yellow-600 transition-all duration-200 hover:scale-105 hover:bg-km0-yellow-50"
+              aria-label="Back"
+            >
+              <ChevronLeft size={22} strokeWidth={2.5} />
+            </button>
+          </div>
+          <Logo context="onboarding" alt="KM0 LAB" />
+          <div className="flex-1" />
         </div>
 
         {/* Carousel */}
         <div
           ref={carouselRef}
-          className="relative h-[410px] cursor-grab select-none overflow-visible active:cursor-grabbing"
+          className="relative h-[340px] cursor-grab select-none overflow-visible active:cursor-grabbing"
           style={{ touchAction: 'none' }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
@@ -207,10 +209,10 @@ export default function Onboarding() {
                   <div className={`overflow-hidden rounded-3xl bg-white ${isActive ? 'shadow-2xl' : 'shadow-none'}`}>
                     {/* Emoji area */}
                     <div
-                      className="relative mx-3 mt-3 flex h-[220px] items-center justify-center overflow-hidden rounded-2xl"
+                      className="relative mx-3 mt-3 flex h-[160px] items-center justify-center overflow-hidden rounded-2xl"
                       style={{ background: s.color }}
                     >
-                      <span className="select-none text-[90px]">{s.emoji}</span>
+                      <span className="select-none text-[70px]">{s.emoji}</span>
                       {isActive && (
                         <span className="absolute right-3 top-3 rounded-xl bg-km0-coral-400 px-3 py-1 font-ui text-sm font-bold text-white shadow-md">
                           +{s.xp} XP
@@ -219,8 +221,8 @@ export default function Onboarding() {
                     </div>
 
                     {/* Text */}
-                    <div className="px-5 pb-6 pt-4 text-center">
-                      <h2 className="mb-2 font-brand text-xl font-bold leading-tight text-km0-blue-700">
+                    <div className="px-4 pb-4 pt-3 text-center">
+                      <h2 className="mb-1 font-brand text-lg font-bold leading-tight text-km0-blue-700">
                         {s.titleLine1} {s.titleLine2}
                       </h2>
                       <p className="font-body text-sm leading-relaxed text-neutral-500">
@@ -240,7 +242,7 @@ export default function Onboarding() {
             onPointerDown={(e) => e.stopPropagation()}
             disabled={isFirst}
             className={cn(
-              'absolute left-[14px] top-[112px] z-20 flex size-11 items-center justify-center rounded-full border-[2px] bg-white shadow-lg transition-all duration-200',
+              'absolute left-[6px] top-[90px] z-20 flex size-10 items-center justify-center rounded-full border-[2px] bg-white shadow-lg transition-all duration-200',
               isFirst
                 ? 'cursor-not-allowed border-km0-beige-200 text-km0-beige-300 opacity-40'
                 : 'cursor-pointer border-km0-yellow-400 text-km0-blue-700 hover:scale-110 hover:bg-km0-yellow-50',
@@ -257,7 +259,7 @@ export default function Onboarding() {
             onPointerDown={(e) => e.stopPropagation()}
             disabled={isLast}
             className={cn(
-              'absolute right-[14px] top-[112px] z-20 flex size-11 items-center justify-center rounded-full border-[2px] bg-white shadow-lg transition-all duration-200',
+              'absolute right-[6px] top-[90px] z-20 flex size-10 items-center justify-center rounded-full border-[2px] bg-white shadow-lg transition-all duration-200',
               isLast
                 ? 'cursor-not-allowed border-km0-beige-200 text-km0-beige-300 opacity-40'
                 : 'cursor-pointer border-km0-yellow-400 text-km0-blue-700 hover:scale-110 hover:bg-km0-yellow-50',
@@ -276,7 +278,7 @@ export default function Onboarding() {
               type="button"
               onClick={() => goTo(i)}
               className={cn(
-                'flex size-14 items-center justify-center rounded-2xl border-[2px] text-2xl transition-all duration-200',
+                'flex size-12 items-center justify-center rounded-xl border-[2px] text-xl transition-all duration-200',
                 i === current
                   ? 'scale-110 border-km0-yellow-500 shadow-md'
                   : 'border-km0-beige-200 bg-white opacity-70 hover:scale-105 hover:opacity-100',

@@ -19,12 +19,13 @@ export interface LogoProps
 const Logo = ({
   alt = 'KMØ LAB®',
   scale = 'none',
+  context = 'none',
   className,
   ...props
 }: LogoProps) => {
   return (
     <div
-      className={cn(logoVariants({ scale }), className)}
+      className={cn(logoVariants({ scale, context }), className)}
       role="img"
       aria-label={alt}
       {...props}

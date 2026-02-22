@@ -95,7 +95,7 @@ export function ChatScreen() {
               <h1 className="truncate font-brand text-xl font-black leading-tight text-km0-blue-700">
                 {cityName}
               </h1>
-              <Logo scale="xxs" alt="KM0 LAB" className="mt-0.5" />
+              <Logo context="chat" alt="KM0 LAB" className="mt-0.5" />
             </div>
           </div>
 

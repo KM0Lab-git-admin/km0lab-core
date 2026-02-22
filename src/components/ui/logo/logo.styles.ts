@@ -3,9 +3,9 @@ import { cva } from 'class-variance-authority';
 export const logoVariants = cva('logo-1', {
   variants: {
     scale: {
-      none: '', // Sin escalado - tamaño por defecto del logo-1
-      xxs: '[--scale:0.25]', // Header: logo mas pequeno que el nombre del pueblo
-      entry: '[--scale:0.3466]', // Selección de idioma: h-9 (36px) ≈ 36/103.87
+      none: '',
+      xxs: '[--scale:0.25]',
+      entry: '[--scale:0.3466]',
       xs: 'scale-[clamp(0.4,6vw,0.5)]',
       sm: 'scale-[clamp(0.5,8vw,0.65)]',
       md: [
@@ -26,9 +26,16 @@ export const logoVariants = cva('logo-1', {
         'ultra-wide:scale-100',
       ].join(' '),
     },
+    context: {
+      none: '',
+      onboarding: 'logo-context-onboarding',
+      entry: 'logo-context-entry',
+      chat: 'logo-context-chat',
+    },
   },
   defaultVariants: {
-    scale: 'none', // Por defecto sin escalado para compatibilidad con AppHeader
+    scale: 'none',
+    context: 'none',
   },
 });
 
