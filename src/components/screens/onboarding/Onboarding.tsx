@@ -2,6 +2,7 @@
 
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 import BreakpointIndicator from '@/components/devtools/BreakpointIndicator';
 import { ContentShell } from '@/components/ui/content-shell';
@@ -11,7 +12,7 @@ import { getOnboardingSlides } from './slides';
 import { useTranslations } from 'next-intl';
 import { useParams, useRouter } from 'next/navigation';
 
-const SLOT = 240;
+const SLOT = 260;
 
 export default function Onboarding() {
   const router = useRouter();
@@ -114,12 +115,17 @@ export default function Onboarding() {
     containerWidth !== null ? containerWidth / 2 - current * SLOT - SLOT / 2 : 0;
 
   return (
-    <ContentShell className="items-center justify-center bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
+    <ContentShell className="min-h-dvh-fallback items-stretch justify-start bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
       <BreakpointIndicator />
 
-      <div className="flex w-full max-w-[390px] flex-col gap-3 min-h-0 flex-1 overflow-hidden">
+      <div className="flex w-full max-w-[390px] flex-col gap-3 flex-1 overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <motion.div
+          className="flex items-center justify-between"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut', delay: 0.1 }}
+        >
           <div className="flex-1 flex justify-start">
             <button
               type="button"
@@ -132,22 +138,25 @@ export default function Onboarding() {
           </div>
           <Logo context="onboarding" alt="KM0 LAB" />
           <div className="flex-1" />
-        </div>
+        </motion.div>
 
         {/* Carousel */}
-        <div
+        <motion.div
           ref={carouselRef}
-          className="relative h-[340px] cursor-grab select-none overflow-visible active:cursor-grabbing"
+          className="relative flex-1 min-h-[300px] cursor-grab select-none overflow-visible active:cursor-grabbing"
           style={{ touchAction: 'none' }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
+          initial={{ opacity: 0, y: 16, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.4, ease: 'easeOut', delay: 0.2 }}
         >
           {/* Sliding track: oculto hasta tener medida real para evitar salto en Mobile-P */}
           <div
-            className="absolute top-0 flex items-start"
+            className="absolute top-1/2 flex items-start"
             style={{
-              transform: `translateX(${trackX + dragOffset}px)`,
+              transform: `translateX(${trackX + dragOffset}px) translateY(-58%)`,
               opacity: containerWidth !== null ? 1 : 0,
               transition:
                 containerWidth === null
@@ -161,9 +170,9 @@ export default function Onboarding() {
             {slides.map((s, i) => {
               const dist = Math.abs(i - current);
               const isActive = i === current;
-              const scale = isActive ? 1 : dist === 1 ? 0.82 : 0.68;
-              const opacity = isActive ? 1 : dist === 1 ? 0.65 : 0.35;
-              const topOffset = isActive ? 0 : dist === 1 ? 28 : 48;
+              const scale = isActive ? 1 : dist === 1 ? 0.92 : 0.76;
+              const opacity = isActive ? 1 : dist === 1 ? 0.85 : 0.45;
+              const topOffset = isActive ? 0 : dist === 1 ? 12 : 32;
 
               return (
                 <div
@@ -209,7 +218,7 @@ export default function Onboarding() {
                   <div className={`overflow-hidden rounded-3xl bg-white ${isActive ? 'shadow-2xl' : 'shadow-none'}`}>
                     {/* Emoji area */}
                     <div
-                      className="relative mx-3 mt-3 flex h-[160px] items-center justify-center overflow-hidden rounded-2xl"
+                      className="relative mx-3 mt-3 flex h-[180px] items-center justify-center overflow-hidden rounded-2xl"
                       style={{ background: s.color }}
                     >
                       <span className="select-none text-[70px]">{s.emoji}</span>
@@ -242,7 +251,7 @@ export default function Onboarding() {
             onPointerDown={(e) => e.stopPropagation()}
             disabled={isFirst}
             className={cn(
-              'absolute left-[6px] top-[90px] z-20 flex size-10 items-center justify-center rounded-full border-[2px] bg-white shadow-lg transition-all duration-200',
+              'absolute left-[6px] top-1/2 -translate-y-1/2 z-20 flex size-10 items-center justify-center rounded-full border-[2px] bg-white shadow-lg transition-all duration-200',
               isFirst
                 ? 'cursor-not-allowed border-km0-beige-200 text-km0-beige-300 opacity-40'
                 : 'cursor-pointer border-km0-yellow-400 text-km0-blue-700 hover:scale-110 hover:bg-km0-yellow-50',
@@ -259,7 +268,7 @@ export default function Onboarding() {
             onPointerDown={(e) => e.stopPropagation()}
             disabled={isLast}
             className={cn(
-              'absolute right-[6px] top-[90px] z-20 flex size-10 items-center justify-center rounded-full border-[2px] bg-white shadow-lg transition-all duration-200',
+              'absolute right-[6px] top-1/2 -translate-y-1/2 z-20 flex size-10 items-center justify-center rounded-full border-[2px] bg-white shadow-lg transition-all duration-200',
               isLast
                 ? 'cursor-not-allowed border-km0-beige-200 text-km0-beige-300 opacity-40'
                 : 'cursor-pointer border-km0-yellow-400 text-km0-blue-700 hover:scale-110 hover:bg-km0-yellow-50',
@@ -268,10 +277,15 @@ export default function Onboarding() {
           >
             <ChevronRight size={20} strokeWidth={2.5} />
           </button>
-        </div>
+        </motion.div>
 
         {/* Thumbnails */}
-        <div className="flex justify-center gap-2">
+        <motion.div
+          className="flex justify-center gap-2"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut', delay: 0.3 }}
+        >
           {slides.map((s, i) => (
             <button
               key={s.id}
@@ -289,10 +303,15 @@ export default function Onboarding() {
               {s.emoji}
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-1">
+        <motion.div
+          className="flex items-center justify-between px-1"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut', delay: 0.4 }}
+        >
           <span className="w-12 font-ui text-lg font-bold text-km0-blue-700">
             {current + 1}/{total}
           </span>
@@ -325,7 +344,7 @@ export default function Onboarding() {
           >
             {isLast ? t('start') : t('skip')}
           </button>
-        </div>
+        </motion.div>
       </div>
     </ContentShell>
   );

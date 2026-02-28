@@ -1,7 +1,9 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Plus, Mic, Send, X, Check, Loader2 } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChatInputBar } from '@/components/screens/chat/ChatInputBar';
+import { VoiceRecorder } from '@/components/screens/chat/VoiceRecorder';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -32,92 +34,6 @@ function getSupportedMimeType(): string {
   return 'audio/webm';
 }
 
-function formatTime(seconds: number): string {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return `${m}:${String(s).padStart(2, '0')}`;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Waveform visualiser (canvas-based, real mic data)                  */
-/* ------------------------------------------------------------------ */
-
-function WaveformCanvas({
-  analyser,
-  isActive,
-}: {
-  analyser: AnalyserNode | null;
-  isActive: boolean;
-}) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animRef = useRef<number | null>(null);
-  const barsRef = useRef<number[]>(Array.from({ length: 40 }, () => 0.05));
-
-  const draw = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const { width, height } = canvas;
-    ctx.clearRect(0, 0, width, height);
-
-    if (analyser && isActive) {
-      const data = new Uint8Array(analyser.frequencyBinCount);
-      analyser.getByteFrequencyData(data);
-
-      // Downsample to 40 bars
-      const step = Math.floor(data.length / 40);
-      for (let i = 0; i < 40; i++) {
-        const val = (data[i * step] ?? 0) / 255;
-        // Smooth transition
-        barsRef.current[i] = barsRef.current[i]! * 0.6 + val * 0.4;
-      }
-    } else {
-      // Frozen / decaying bars
-      for (let i = 0; i < 40; i++) {
-        barsRef.current[i] = barsRef.current[i]! * 0.95;
-      }
-    }
-
-    const barW = Math.max(2, (width / 40) * 0.65);
-    const gap = (width - barW * 40) / 39;
-
-    for (let i = 0; i < 40; i++) {
-      const h = Math.max(3, barsRef.current[i]! * height * 0.85);
-      const x = i * (barW + gap);
-      const y = (height - h) / 2;
-
-      ctx.fillStyle = isActive ? '#1a1a2e' : '#9ca3af';
-      ctx.beginPath();
-      ctx.roundRect(x, y, barW, h, 1.5);
-      ctx.fill();
-    }
-
-    animRef.current = requestAnimationFrame(draw);
-  }, [analyser, isActive]);
-
-  useEffect(() => {
-    animRef.current = requestAnimationFrame(draw);
-    return () => {
-      if (animRef.current != null) cancelAnimationFrame(animRef.current);
-    };
-  }, [draw]);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      width={200}
-      height={36}
-      className="h-9 w-full max-w-[200px]"
-    />
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Main component                                                     */
-/* ------------------------------------------------------------------ */
-
 export function ChatInput({
   onSend,
   isLoading = false,
@@ -127,6 +43,7 @@ export function ChatInput({
   const [voiceState, setVoiceState] = useState<VoiceState>('idle');
   const [recordingTime, setRecordingTime] = useState(0);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [voicePreview, setVoicePreview] = useState('');
 
   const streamRef = useRef<MediaStream | null>(null);
   const recorderRef = useRef<MediaRecorder | null>(null);
@@ -134,15 +51,6 @@ export function ChatInput({
   const audioCtxRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  /* ---- auto-resize textarea ---- */
-  useEffect(() => {
-    const ta = textareaRef.current;
-    if (!ta) return;
-    ta.style.height = 'auto';
-    ta.style.height = `${Math.min(ta.scrollHeight, 150)}px`;
-  }, [text]);
 
   /* ---- cleanup on unmount ---- */
   useEffect(() => {
@@ -157,6 +65,7 @@ export function ChatInput({
   const startRecording = useCallback(async () => {
     setErrorMsg(null);
     setText('');
+    setVoicePreview('');
     chunksRef.current = [];
 
     try {
@@ -203,20 +112,8 @@ export function ChatInput({
     }
   }, []);
 
-  /* ---- cancel recording ---- */
-  const cancelRecording = useCallback(() => {
-    if (recorderRef.current?.state === 'recording') {
-      recorderRef.current.stop();
-    }
-    recorderRef.current = null;
-    chunksRef.current = [];
-    stopHardware();
-    setVoiceState('idle');
-    setRecordingTime(0);
-  }, [stopHardware]);
-
-  /* ---- confirm recording → transcribe ---- */
-  const confirmRecording = useCallback(async () => {
+  /* ---- stop recording → transcribe ---- */
+  const stopAndTranscribe = useCallback(async () => {
     if (!recorderRef.current) return;
 
     // Wrap onstop in a promise to wait for final chunks
@@ -256,6 +153,7 @@ export function ChatInput({
       }
 
       const transcribed = typeof data?.text === 'string' ? data.text : '';
+      setVoicePreview(transcribed);
       setText(transcribed);
       setVoiceState('done');
     } catch {
@@ -273,7 +171,7 @@ export function ChatInput({
     setVoiceState('idle');
   }, [text, isLoading, onSend]);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -287,103 +185,44 @@ export function ChatInput({
       {errorMsg && (
         <p className="px-4 text-xs text-red-600">{errorMsg}</p>
       )}
-
-      <div
-        className={`
-          flex items-center gap-2 rounded-full border bg-white px-3 py-2 shadow-sm
-          transition-colors duration-200
-          ${voiceState === 'recording' ? 'border-red-400' : 'border-km0-beige-200'}
-        `}
-      >
-        {/* IDLE / DONE: plus + input + mic + send */}
-        {(voiceState === 'idle' || voiceState === 'done') && (
-          <>
-            <button
-              type="button"
-              className="flex size-9 shrink-0 items-center justify-center rounded-full text-neutral-400 transition-colors hover:bg-neutral-100"
-              aria-label="Attach"
-            >
-              <Plus size={20} />
-            </button>
-            <input
-              type="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              onKeyDown={handleKeyDown}
+      <AnimatePresence mode="wait" initial={false}>
+        {(voiceState === 'idle' || voiceState === 'done') ? (
+          <motion.div
+            key="chat-input-bar"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18 }}
+          >
+            <ChatInputBar
+              text={text}
               placeholder={placeholder}
-              className="flex-1 bg-transparent font-body text-sm text-neutral-900 outline-none placeholder:text-neutral-400"
+              canSend={canSend}
+              isLoading={isLoading}
+              onTextChange={setText}
+              onKeyDown={handleKeyDown}
+              onStartRecording={startRecording}
+              onSend={handleSend}
             />
-            <button
-              type="button"
-              onClick={startRecording}
-              disabled={isLoading}
-              className="flex size-10 shrink-0 items-center justify-center rounded-full bg-km0-teal-500 text-white transition-opacity hover:opacity-90 disabled:opacity-40"
-              aria-label="Voice"
-            >
-              <Mic size={18} />
-            </button>
-            <button
-              type="button"
-              onClick={handleSend}
-              disabled={!canSend}
-              className="flex size-10 shrink-0 items-center justify-center rounded-full bg-km0-blue-700 text-white transition-opacity hover:opacity-90 disabled:opacity-40"
-              aria-label="Send"
-            >
-              <Send size={18} />
-            </button>
-          </>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="voice-recorder"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18 }}
+          >
+            <VoiceRecorder
+              analyser={analyserRef.current}
+              recordingTime={recordingTime}
+              previewText={voicePreview}
+              isProcessing={voiceState === 'processing'}
+              onStop={stopAndTranscribe}
+            />
+          </motion.div>
         )}
-
-        {/* RECORDING: dot + time + waveform + cancel/confirm */}
-        {voiceState === 'recording' && (
-          <>
-            <div className="flex flex-1 items-center gap-3">
-              <span className="size-2.5 shrink-0 animate-pulse rounded-full bg-red-500" />
-              <span className="min-w-[2.25rem] text-xs font-medium text-red-600">
-                {formatTime(recordingTime)}
-              </span>
-              <WaveformCanvas analyser={analyserRef.current} isActive />
-            </div>
-            <button
-              type="button"
-              onClick={cancelRecording}
-              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-400 transition-colors hover:bg-red-100 hover:text-red-600"
-              title="Cancelar grabación"
-            >
-              <X size={18} />
-            </button>
-            <button
-              type="button"
-              onClick={confirmRecording}
-              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-km0-blue-700 text-white transition-colors hover:opacity-90"
-              title="Confirmar grabación"
-            >
-              <Check size={18} />
-            </button>
-          </>
-        )}
-
-        {/* PROCESSING: frozen waveform + spinner */}
-        {voiceState === 'processing' && (
-          <>
-            <div className="flex flex-1 items-center gap-3">
-              <WaveformCanvas analyser={null} isActive={false} />
-              <span className="text-xs text-neutral-500">Transcribiendo…</span>
-            </div>
-            <button
-              type="button"
-              onClick={cancelRecording}
-              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-400 transition-colors hover:bg-red-100 hover:text-red-600"
-              title="Cancelar"
-            >
-              <X size={18} />
-            </button>
-            <div className="flex size-9 items-center justify-center">
-              <Loader2 size={20} className="animate-spin text-neutral-400" />
-            </div>
-          </>
-        )}
-      </div>
+      </AnimatePresence>
     </div>
   );
 }

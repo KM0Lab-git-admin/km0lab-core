@@ -288,10 +288,10 @@
   --max-height-slider-img: 65vh;
   --max-height-slider-img-tall: 75vh;
 
-  /* Font Families */
-  --font-brand: 'Antique Olive', 'Antique Olive Std', Georgia, serif;
-  --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-body: 'Oakes Grotesk', 'Oakes', Helvetica, Arial, sans-serif;
+  /* Font Families: brand = Antique Olive (local en public/fonts/); fallback sistema. UI/body = sistema. */
+  --font-brand: 'Antique Olive', Impact, 'Arial Black', sans-serif;
+  --font-ui: 'Inter', system-ui, sans-serif;
+  --font-body: 'DM Sans', 'Inter', system-ui, sans-serif;
 
   /* Background Image */
   --background-image-gradient-app: linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%);
@@ -319,7 +319,7 @@
   --color-destructive-foreground: #ffffff;
   --color-secondary: #f5f5f5;
   --color-secondary-foreground: #1a1a1a;
-  --color-accent: #ff664d;
+  --color-accent: #00b8a9;
   --color-accent-foreground: #ffffff;
   --color-background: #ffffff;
   --color-foreground: #1a1a1a;
@@ -330,10 +330,9 @@
 
 :root {
   /* === KM0 LAB TYPOGRAPHY SYSTEM === */
-  /* Fuentes originales del diseño de Figma */
-  --font-family-brand: 'Antique Olive', 'Antique Olive Std', Georgia, serif; /* Para headlines y brand */
-  --font-family-ui: 'Inter', system-ui, -apple-system, sans-serif; /* Para interface y navigation */
-  --font-family-body: 'Oakes Grotesk', 'Oakes', Helvetica, Arial, sans-serif; /* Para body text */
+  --font-family-brand: 'Antique Olive', Impact, 'Arial Black', sans-serif;
+  --font-family-ui: 'Inter', system-ui, sans-serif;
+  --font-family-body: 'DM Sans', 'Inter', system-ui, sans-serif;
 
   /* === KM0 LAB BACKGROUND SYSTEM === */
   --gradient-app: linear-gradient(135deg, rgba(144, 169, 232, 0.4) 0%, rgba(255, 236, 210, 0.4) 100%);
@@ -822,6 +821,21 @@
     50% {
       transform: translateY(-10px);
     }
+  }
+
+  @keyframes dot-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.9;
+    }
+  }
+
+  .animate-dot-pulse {
+    animation: dot-pulse 1.5s ease-in-out infinite;
   }
 
   /* === SISTEMA ANTI-RECORTE: Altura disponible calculada === */

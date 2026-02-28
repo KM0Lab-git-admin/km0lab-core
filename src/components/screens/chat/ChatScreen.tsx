@@ -3,10 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { ChevronLeft } from 'lucide-react';
-
-import { Logo } from '@/components/ui/logo';
-import { NotificationBell } from '@/components/ui/notification-bell';
+import { ChatHeader } from '@/components/screens/chat/ChatHeader';
 import { ChatInput } from '@/components/voice-chat/ChatInput';
 import { getPostalCodeCity } from '@/components/screens/postal-code/postalCodeDb';
 
@@ -35,6 +32,10 @@ export function ChatScreen() {
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -75,53 +76,17 @@ export function ChatScreen() {
   });
 
   return (
-    <div className="flex h-dvh w-full items-center justify-center bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
-      <div className="flex h-full w-full max-w-md flex-col">
-        {/* Header */}
-        <header className="flex shrink-0 items-center gap-3 px-4 pt-3 pb-2">
-          {/* Back button */}
-          <button
-            type="button"
-            onClick={handleBack}
-            className="flex size-10 shrink-0 items-center justify-center rounded-xl border-2 border-dashed border-km0-yellow-500 text-km0-yellow-600 transition-all hover:bg-km0-yellow-50"
-            aria-label={t('back')}
-          >
-            <ChevronLeft size={20} strokeWidth={2.5} />
-          </button>
-
-          {/* City name + KM0 LAB logo */}
-          <div className="flex min-w-0 flex-1 items-center gap-2">
-            <div className="min-w-0">
-              <h1 className="truncate font-brand text-xl font-black leading-tight text-km0-blue-700">
-                {cityName}
-              </h1>
-              <Logo context="chat" alt="KM0 LAB" className="mt-0.5" />
-            </div>
-          </div>
-
-          {/* Agenda badge + Notification bell */}
-          <div className="flex shrink-0 items-center gap-2">
-            <span className="rounded-full bg-km0-teal-500 px-3 py-1 font-body text-xs font-semibold text-white">
-              {t('agenda')}
-            </span>
-            <button
-              type="button"
-              className="text-km0-yellow-600 transition-opacity hover:opacity-70"
-              aria-label={t('notifications')}
-            >
-              <NotificationBell hasAlerts />
-            </button>
-          </div>
-        </header>
-
-        {/* Date banner */}
-        <div className="shrink-0 px-4 py-1">
-          <div className="flex items-center justify-center rounded-full bg-km0-yellow-500 px-4 py-1.5">
-            <span className="font-body text-xs font-semibold text-km0-blue-800">
-              {dateLabel}
-            </span>
-          </div>
-        </div>
+    <div className="fixed inset-0 w-full flex justify-center bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
+      <div className="w-full max-w-[390px] h-full flex flex-col overflow-hidden">
+        <ChatHeader
+          locale={locale}
+          backLabel={t('back')}
+          onBack={handleBack}
+          cityName={cityName}
+          notificationsLabel={t('notifications')}
+          dateLabel={dateLabel}
+          hasAlerts
+        />
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto px-4 py-3">
