@@ -35,6 +35,10 @@ export function ChatScreen() {
   }, []);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     scrollToBottom();
   }, [messages, scrollToBottom]);
 
@@ -72,13 +76,13 @@ export function ChatScreen() {
   });
 
   return (
-    <div className="flex h-dvh w-full items-center justify-center bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
-      <div className="flex h-full w-full max-w-md flex-col">
+    <div className="fixed inset-0 w-full flex justify-center bg-gradient-to-b from-km0-beige-50 to-km0-beige-100">
+      <div className="w-full max-w-[390px] h-full flex flex-col overflow-hidden">
         <ChatHeader
+          locale={locale}
           backLabel={t('back')}
           onBack={handleBack}
           cityName={cityName}
-          agendaLabel={t('agenda')}
           notificationsLabel={t('notifications')}
           dateLabel={dateLabel}
           hasAlerts
